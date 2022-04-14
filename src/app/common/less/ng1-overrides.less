@@ -1,0 +1,195 @@
+// Angular 1 room styles leak into things like pl-components-ng2, so tweak accordingly.
+// AND we want to custom style some pl-components-ng2 to match the room.
+@import './main.less';
+
+@pl-button-disabled-background: @gray;
+@pl-button-disabled-color: @gray-darker;
+@pl-button-disabled-color-hover: @gray-darker;
+
+// NG1 changes
+input, textarea {
+    &::placeholder {
+        color: @gray !important;
+    }
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: @gray !important;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+        color: @gray !important;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+        color: @gray !important;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+        color: @gray !important;
+    }
+}
+
+// INPUTS
+
+.pl-input-multi-select, .pl-input-select {
+    .select-and-options .label {
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+        text-align: inherit;
+    }
+
+    .select-button {
+        // CSS specificity did not seem to work, had to use important..
+        background-color: inherit !important;
+        border-color: @gray-light !important;
+
+        .label {
+            border-right: none !important;
+            color: @gray-light;
+        }
+        pl-icon {
+            fill: @gray-light !important;
+            margin-right: 12px;
+        }
+    }
+
+    .pl-input-text input {
+        background-color: inherit !important;
+        color: inherit !important;
+    }
+}
+
+.pl-input-text {
+    border-color: @gray-light !important;
+    background-color: inherit !important;
+    input {
+        background-color: @gray-darker !important;
+        color: @gray-lighter !important;
+        padding: 0 4px !important;
+    }
+    &.border.focused {
+        border-left-width: 1px !important;
+        border-color: @gray-light !important;
+
+        .icon-left {
+            fill: @gray-light !important;
+            color: @gray-light !important;
+        }
+    }
+}
+
+.documentation-no-border {
+    .pl-input-text {
+        input {
+            padding: 0 !important;
+            padding-left: 4px !important;
+            height: 20px;
+        }
+        &.border {
+            border-width: 0;
+        }
+        &.border.focused {
+            border-left-width: 0 !important;
+        }
+    }
+}
+
+.pl-input-textarea {
+    &.border.focused {
+        border-left-width: 1px !important;
+        border-color: @gray-dark !important;
+    }
+    textarea {
+        background-color: @gray-darker !important;
+        color: @gray-lighter !important;
+        &::placeholder {
+            color: @gray !important;
+        }
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: @gray !important;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+            color: @gray !important;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+            color: @gray !important;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+            color: @gray !important;
+        }
+    }
+}
+
+.pl-input-checkbox {
+    .label-checkbox {
+        font-weight: normal !important;
+        color: @gray-light !important;
+    }
+}
+
+.pl-input-multi-select {
+    .pl-input-checkbox {
+        .label-checkbox {
+            font-weight: normal !important;
+            color: inherit !important;
+        }
+    }
+}
+
+// BUTTONS
+
+@pl-button-room-gray-color: @gray-light;
+@pl-button-room-gray-border: @gray-light;
+@pl-button-room-gray-background: @gray-darkest;
+@pl-button-room-gray-color-hover: @white;
+@pl-button-room-gray-border-hover: @white;
+@pl-button-room-gray-background-hover: @gray-darkest;
+
+// Copied from pl-components
+.btn-style (@color, @border, @background, @color-hover, @border-hover, @background-hover, @burst-color: lighten(@background, 20%)) {
+    color: @color;
+    border-color: @border;
+    background-color: @background;
+    figure svg { fill: @color }
+
+    pl-icon {
+        fill: @color;
+    }
+
+    [burst] { background-color: @burst-color }
+    &.hover, &:hover {
+        color: @color-hover;
+        border-color: @border-hover;
+        background-color: @background-hover;
+
+        pl-icon {
+            fill: @color-hover;
+        }
+    }
+}
+
+[pl-button] {
+    &.room-gray {
+        .btn-style(@pl-button-room-gray-color, @pl-button-room-gray-border, @pl-button-room-gray-background, @pl-button-room-gray-color-hover, @pl-button-room-gray-border-hover, @pl-button-room-gray-background-hover);
+    }
+    &.link {
+        color: @blue-lighter;
+        pl-icon { fill: @blue-lighter }
+    }
+}
+
+a, .a-link {
+    color: @blue-lighter;
+}
+
+.pl-input-checkbox.disabled {
+    input:checked + .icon-container {
+        background-color: @gray-dark !important;
+    }
+    .icon-container,
+    input:hover + .icon-container,
+    input:focus + .icon-container {
+        border-color: @gray-darker !important;
+        background-color: @gray-dark !important;
+    }
+    svg {
+        fill: @gray-darker;
+    }
+}

@@ -1,0 +1,23 @@
+<div class="video-form-container">
+  <h3 class="margin-large-tb">Secondary Camera</h3>
+  <ng-container
+    *ngIf="!(shouldRequestPermissions$ | async); else requestPermissions"
+  >
+    <pl-secondary-video-device
+      *ngIf="canUpdateVideoDevice$ | async"
+    ></pl-secondary-video-device>
+    <pl-video-settings-container
+      *ngIf="streamId$ | async as id" [streamId]="id"
+      class="video-form-container"
+    >
+      <pl-settings-video-box class="margin-large-b"></pl-settings-video-box>
+      <pl-video-label *ngIf="canUpdateVideoLabel$ | async"></pl-video-label>
+      <pl-mirror-video></pl-mirror-video>
+      <pl-cover-video *ngIf="canCover$ | async"></pl-cover-video>
+    </pl-video-settings-container>
+  </ng-container>
+</div>
+
+<ng-template #requestPermissions>
+  <pl-request-permissions></pl-request-permissions>
+</ng-template>

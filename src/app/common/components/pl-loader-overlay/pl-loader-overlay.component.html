@@ -1,0 +1,15 @@
+<div class="overlay-container" [class.is-loading]="isLoading">
+    <div class="loader-overlay" [hidden]="!isLoading">
+        <div class="loader-container">
+            <div class="loader-label center" *ngIf="loadingLabel">
+                {{ loadingLabel }}
+            </div>
+            <div>
+                <pl-dot-loader></pl-dot-loader>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-content">
+        <ng-content></ng-content>
+    </div>
+</div>

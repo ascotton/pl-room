@@ -1,0 +1,18 @@
+<span [ngSwitch]="status">
+    <pl-dot-loader *ngSwitchCase="PERMISSION_STATUS.LOADING"></pl-dot-loader>
+    <mat-icon 
+        *ngSwitchCase="PERMISSION_STATUS.FAILED"
+        class="yellow-icon">
+        error
+    </mat-icon>
+    <mat-icon 
+        *ngSwitchCase="PERMISSION_STATUS.PENDING"
+        class="gray-icon">
+        check_circle
+    </mat-icon>
+    <mat-icon 
+        *ngSwitchCase="PERMISSION_STATUS.SUCCEED"
+        class="green-icon">
+        check_circle
+    </mat-icon>
+</span>

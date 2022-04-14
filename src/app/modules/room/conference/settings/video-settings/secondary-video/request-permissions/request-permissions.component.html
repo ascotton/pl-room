@@ -1,0 +1,15 @@
+<p>
+  If you have a secondary camera, make sure it is plugged in and press the Request Permission button to grant access to the camera.
+</p>
+<div
+  *ngIf="{ isLoading: isLoading$ | async } as vm"
+  class="margin-large-t"
+>
+  <button
+    [disabled]="vm.isLoading"
+    mat-stroked-button
+    (click)="requestPermissions()"
+  >
+    Request Permission
+  </button>
+</div>

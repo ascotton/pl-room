@@ -1,0 +1,19 @@
+<div class="pl-documentation-metrics">
+    <div *ngIf="loading" class="margin-large-t">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+    <div *ngIf="!loading">
+        <div *ngIf="!metricPoints || metricPoints.length < 1" class="center margin-large-tb">
+            <a href="{{ urls.eduClientsFE }}/client/{{ clientId }}/iep-goals" target="_blank" class="heap-add-metric">Add Metrics</a>
+            <div (click)="reGetMetrics()" class="pointer center margin-large-t heap-refresh-documentation-metric-panel">
+                <pl-icon [svg]="'rotate'" [scale]="0.6" [verticalAlign]="'-1px'" class="gray-light"></pl-icon> Refresh
+            </div>
+        </div>
+        <div *ngIf="metricPoints && metricPoints.length">
+            <pl-input-multi-select class="form-input" [placeholder]="'Select Metrics'" [(model)]="selectedMetricPointsIds" [options]="selectOptsMetricPoints" [disabled]="!isEditable()" (change)="selectMetricPoints()"></pl-input-multi-select>
+            <div *ngFor="let metricPoint of metricPoints" [hidden]="!metricPoint.xSelected">
+                <pl-documentation-metric-point [metricPoint]="metricPoint" [clientId]="clientId" [record]="record" [event]="event" [providerUserId]="providerUserId" (onMetricPointUpdated)="onMetricPointUpdated()"></pl-documentation-metric-point>
+            </div>
+        </div>
+    </div>
+</div>

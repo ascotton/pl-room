@@ -1,0 +1,17 @@
+.animations-container {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(2, 80px);
+    grid-column-gap: 25px;
+    grid-row-gap: 25px;
+    justify-content: center;
+}
+
+.animations-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .mat-paginator-range-label {
+        margin-right: 10px;
+    }
+}

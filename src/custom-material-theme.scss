@@ -1,0 +1,249 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$PL-brand: (
+    50 : #e6e7e9,
+    100 : #c0c4c7,
+    200 : #969da2,
+    300 : #6c757d,
+    400 : #4d5861,
+    500 : #2d3a45,
+    600 : #28343e,
+    700 : #222c36,
+    800 : #1c252e,
+    900 : #11181f,
+    A100 : #62b8ff,
+    A200 : #2fa0ff,
+    A400 : #0089fb,
+    A700 : #007be1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$PL-warn: (
+    50 : #f9e1e4,
+    100 : #f1b3bb,
+    200 : #e8818d,
+    300 : #de4e5f,
+    400 : #d7283d,
+    500 : #d0021b,
+    600 : #cb0218,
+    700 : #c40114,
+    800 : #be0110,
+    900 : #b30108,
+    A100 : #ffdcdd,
+    A200 : #ffa9aa,
+    A400 : #ff7678,
+    A700 : #ff5d5f,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$pl-primary-palette: mat-palette($PL-brand);
+$pl-accent-palette: mat-palette($PL-brand);
+$pl-warn-palette: mat-palette($PL-warn, 500);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$pl-theme: mat-light-theme($pl-primary-palette, $pl-accent-palette, $pl-warn-palette);
+
+// $pl-dark-theme: mat-dark-theme($pl-primary-palette, $pl-accent-palette, $pl-warn-palette);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($pl-theme);
+
+// Mat-Progress
+.mat-progress-bar {
+    &.inline {
+        display: inline-block !important;
+    }
+    &.rounded {
+        height: 10px !important;
+        border-radius: 5px;
+    }
+    &-buffer {
+        background-color: #95AABB;
+    }
+    &-fill {
+        &:after {
+            background-color: #2d3a45;
+        }
+    }
+}
+
+// Mat-spinner
+button.mat-accent {
+    mat-progress-spinner {
+        display: inline-block;
+        circle {
+            stroke: #FFF !important;
+        }
+    }
+}
+
+// Mat custom button colors
+.mat-icon-button.mat-white {
+    color: white;
+ }
+
+
+// Mat-Menu
+.mat-menu-panel {
+    .mat-menu-item {
+        color: #4c4f52;
+        fill: #4c4f52;
+        &:hover {
+            pl-icon {
+                color: #46b1e1;
+                fill: #46b1e1;
+            }
+        }
+    }
+    a.mat-menu-item {
+        text-decoration: none;
+    }
+    &.dense {
+        .mat-menu-item {
+            height: 32px;
+            line-height: 32px;
+        }
+    }
+}
+
+// Mat-Slider
+.mat-slider {
+    &:hover .mat-slider-track-background {
+        background-color: #b6b8ba;
+    }
+    .mat-slider-track-background {
+        background-color: #b6b8ba;
+    }
+}
+.mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb,
+.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb,
+.mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label,
+.mat-slider-min-value.mat-slider-thumb-label-showing.cdk-focused .mat-slider-thumb-label {
+    background-color: #85d4f7 !important;
+    border: none;
+}
+.mat-slider-thumb-label {
+    width: 18px !important;
+    height: 18px !important;
+    top: -30px !important;
+    right: -10px !important;
+}
+
+// Mat-FormFields
+.mat-form-field-appearance-outline .mat-form-field-outline,
+.mat-hint,
+.mat-form-field-label,
+.mat-select-arrow {
+    color: #b6b8ba;
+}
+
+// CDK Overlay
+.cdk-overlay-container {
+    z-index: 9999;
+}
+
+// TODO: Move these classes to somewhere else
+.text-center {
+    text-align: center;
+}
+.bold {
+    font-weight: bold;
+}
+.upper {
+    text-transform: uppercase;
+}
+.h-100 {
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mat-form-field {
+    &.dark {
+        .mat-form-field-appearance-fill {
+            .mat-form-field {
+                &-label {
+                    color: #FFF !important;
+                }
+                &-infix {
+                    width: 167px;
+                }
+                &-prefix {
+                    margin-right: 5px;
+                }
+                &-flex {
+                    background-color: #2D3A45;
+                    color: #FFF;
+                    .mat-select {
+                        &-arrow, &-value {
+                            color: #FFF !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+$warn: map-get($pl-theme, warn);
+.pl-warning {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    background-color: mat-color($warn, 50);
+    border: solid 1px mat-color($warn);
+    &-text {
+        text-align: left;
+    }
+}
+
+.pl-dialog-container {
+    .mat-dialog-container {
+        padding: 0px;
+    }
+}

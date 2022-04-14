@@ -1,0 +1,25 @@
+<div (window:blur)="blurEventEnabled && handleBlur()" (window:pagehide)="cancelAwaitness()" (window:beforeunload)="cancelAwaitness()" class="waitingroom">
+    <div class="container">
+        <pl-icon [svg]="'logo-white-no-tm'" class="logo white" [width]="'355px'" [height]="'60px'"></pl-icon>
+        <div class="message-wrapper">
+            <div class="message">
+                <pl-icon class="elephant" [svg]="'elephant'" [width]="'355px'" [height]="'60px'"></pl-icon>
+                <p class="wait">Please Wait</p>
+                <p class="msg">The clinician will admit you shortly.</p>
+                <div class="mic-toggle">
+                    <div class="title">
+                        Microphone Access
+                    </div>
+                    <div class="mic-question">
+                        Do you want to start your session with your microphone on or off?
+                        <mat-slide-toggle
+                            color="primary"
+                            [(ngModel)]="micEnabled">
+                            {{ micEnabled ? 'On' : 'Off' }}
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

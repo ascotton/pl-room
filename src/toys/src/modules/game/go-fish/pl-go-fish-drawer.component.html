@@ -1,0 +1,21 @@
+<div class="pl-go-fish-drawer padding">
+    <div *ngIf="!showChooseDeck">
+        <div class="center">
+            <div>{{ deck.title }}</div>
+            <button pl-button class="reverse" (click)="chooseDeck()">Choose Cards</button>
+        </div>
+        <div *ngIf="deckImages && deckImages.length">
+            <div class="center margin-b">
+                <button pl-button class="primary" (click)="newGame()">New Game</button>
+            </div>
+            <pl-input-checkbox class="form-input" [label]="'X Ray Vision'" [(model)]="viewAllPlayers" (onChange)="changeViewAllPlayers()"></pl-input-checkbox>
+            <pl-input-select class="form-input" [(model)]="dealCount" [options]="dealCountOpts" (onChange)="changeDealCount()"></pl-input-select>
+            <pl-input-select class="form-input" [(model)]="cardDisplay" [options]="cardDisplayOpts" (onChange)="changeCardDisplay()"></pl-input-select>
+            <!-- <pl-input-checkbox class="form-input" [label]="'Players May End Turn'" [(model)]="mayEndSelfTurn" (onChange)="changeMayEndSelfTurn()"></pl-input-checkbox>
+            <pl-input-checkbox class="form-input" [label]="'May Move Cards Off Turn'" [(model)]="mayMoveCardsOffTurn" (onChange)="changeMayMoveCardsOffTurn()"></pl-input-checkbox> -->
+        </div>
+    </div>
+    <!-- <div *ngIf="showChooseDeck">
+        <pl-image-decks (onUseDeck)="onUseDeck($event)" (onCancel)="cancelChooseDeck($event)"></pl-image-decks>
+    </div> -->
+</div>

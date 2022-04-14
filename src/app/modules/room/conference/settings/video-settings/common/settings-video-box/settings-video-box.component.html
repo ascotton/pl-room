@@ -1,0 +1,8 @@
+<ng-container *ngIf="mediaStream$ | async as mediaStream">
+  <pl-conference-video
+    [src]="mediaStream"
+    [isMirrored]="isMirrored$ | async"
+    [isRotated]="isRotated$ | async"
+  ></pl-conference-video>
+</ng-container>
+<pl-rotate-video class="rotate-btn"></pl-rotate-video>

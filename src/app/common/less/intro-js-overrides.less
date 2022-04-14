@@ -1,0 +1,56 @@
+.intro-js-override {
+    &.introjs-tooltip {
+        background-color: @white;
+    }
+    .introjs-tooltipbuttons {
+        .introjs-button {
+            outline: 0;
+            border: solid 1px @gray-darkest;
+        }
+        .introjs-nextbutton {
+            background-color: @orange;
+            color: white;
+            background-image: none;
+            text-shadow: none;
+
+            &:hover {
+                background-color: @orange-dark;
+            }
+        }
+        .introjs-skipbutton {
+            color: @gray-darkest;
+            margin-right: 50px;
+        }
+        .introjs-prevbutton, .introjs-skipbutton {
+            &:hover {
+                border: solid 1px @blue-medium;
+                color: @blue-medium;
+            }
+        }
+    }
+    .introjs-tooltiptext {
+        color: @black;
+    }
+    .introjs-arrow.left {
+        border-right-color: @white;
+    }
+    .introjs-arrow.right {
+        border-left-color: @white;
+    }
+    .introjs-arrow.top {
+        border-bottom-color: @white;
+    }
+    .introjs-arrow.bottom {
+        border-top-color: @white;
+    }
+    .introjs-progressbar {
+        background-color: @blue-medium;
+    }
+}
+
+.intro-js-highlight-override {
+    &.introjs-helperLayer {
+        background-color: rgba(255,255,255,0.1);
+        border: 1px solid @blue-medium;
+    }
+}

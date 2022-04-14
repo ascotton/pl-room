@@ -1,0 +1,39 @@
+@import "colors.less";
+
+@button-width: 58px;
+@button-height: 48px;
+
+button {
+    padding: 0;
+    min-width: @button-width;
+    min-height: @button-height;
+    width: @button-width;
+    height: @button-height;
+    background-color: transparent;
+    color: @gray-darkest;
+
+    .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            font-size: 10px;
+            line-height: 16px;
+            text-transform: capitalize;
+        }
+    }
+
+    &.toggled {
+        mat-icon {
+            color: @red;
+        }
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}

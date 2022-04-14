@@ -1,0 +1,86 @@
+.drawer-guesswho {
+
+    .subtitle {
+        background-color: @gray-darkest;
+
+        &.toggle {
+            cursor: pointer;
+        }
+
+        &.toggle-closed button svg {
+            transform: rotate(-90deg);
+        }
+
+        &.toggle-open button svg {
+            transform: rotate(0deg);
+        }
+
+        button {
+            position: absolute;
+            width: 40px;
+            height: 24px;
+            svg {
+                width: 13px;
+                height: 18px;
+                vertical-align: top;
+                transition: all 200ms ease;
+                path {
+                    fill: @gray-lighter;
+                }
+            }
+        }
+
+        h5 {
+            display: table-cell;
+            vertical-align: middle;
+            height: 32px;
+            padding-left: 32px;
+        }
+    }
+
+    .subgroup {
+        overflow: hidden;
+        transition: max-height 200ms ease;
+
+        &.toggle-open {
+            // Should consider container height
+            max-height: 355px;
+        }
+
+        &.toggle-closed {
+            max-height: 0;
+        }
+
+        span {
+            display: inline-block;
+            margin: 1em 0 0 0;
+        }
+
+        //TODO: move this class to directive
+        .settings-button {
+            padding: 5px 0px 5px 15px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            height: 38px;
+            border-bottom: solid 1px #646669;
+
+            color: @gray-lighter;
+            font-size: 14px;
+
+            color: @gray-lightest;
+            svg path {
+                fill: @gray-lightest;
+            }
+
+            button {
+                label {
+                    font-weight: normal;
+                }
+            }
+        }
+
+    }
+}

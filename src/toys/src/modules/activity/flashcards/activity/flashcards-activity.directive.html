@@ -1,0 +1,62 @@
+<div class="flashcard-board"
+     ng-mousedown="!presentationMode && startLasso($event)"
+     ng-touchstart="!presentationMode && startLasso($event)"
+     pl-drop="dropCard"
+     pl-dragover="dragCard"
+     ng-class="{'fade-in':!isDisplayNone(), 'is-dragging':dragoverCard}">
+
+    <div class="flashcard-scale-wrapper">
+        <div id="card{{card.$id}}"
+             flashcard="card"
+             ng-repeat="card in cards"
+             ng-mousedown="!presentationMode ? startMove($event, card) : clickPresentationCard($index)"
+             ng-touchstart="!presentationMode ? startMove($event, card) : clickPresentationCard($index)"
+             ng-class="getCardClasses(card)"
+             ng-style="getCardStyle(card)">
+            <img ng-src="{{::card.url}}">
+            <div class="title"><label>{{::card.title}}</label></div>
+        </div>
+
+        <div class="select"
+             tabindex="0"
+             ng-style="getSelectorStyle()"
+             ng-class="getSelectorClass()"
+             ng-mousedown="startMove($event, selectedCard)"
+             ng-touchstart="startMove($event, selectedCard)">
+
+            <div class="rotate" ng-mousedown="startRotate($event, selectedCard)" ng-touchstart="startRotate($event, selectedCard)"></div>
+            <div class="resize-lt" ng-mousedown="startResize($event, selectedCard)" ng-touchstart="startResize($event, selectedCard, 'lt')"></div>
+            <div class="resize-rt" ng-mousedown="startResize($event, selectedCard)" ng-touchstart="startResize($event, selectedCard, 'rt')"></div>
+            <div class="resize-lb" ng-mousedown="startResize($event, selectedCard)" ng-touchstart="startResize($event, selectedCard, 'lb')"></div>
+            <div class="resize-rb" ng-mousedown="startResize($event, selectedCard)" ng-touchstart="startResize($event, selectedCard, 'rb')"></div>
+
+        </div>
+
+        <div class="lasso dashed-border"></div>
+
+        <div class="card card-{{dragoverCard.type}} dragover card-shadow">
+            <img src="{{dragoverCard.url}}">
+            <div><label>{{dragoverCard.title}}</label></div>
+        </div>
+
+        <div class="cards-presentation-instruction"
+             ng-show="presentationMode"
+             ng-class="{'hide-slowly':cardsPresentationInstructionHidden}">
+            Arrow keys move flashcards forward and backward
+        </div>
+        <div class="cards-presentation-buttons" ng-show="presentationMode">
+            <div class="button"
+                 ng-click="clickPresentationCard(prevCard)"
+                 ng-class="{disabled:(prevCard === null || prevCard === undefined)}">
+                <pl-icon [svg]="'chevron-left'" [width]="60" [height="60"]></pl-icon>
+            </div>
+            <div class="button"
+                 ng-click="clickPresentationCard(nextCard)"
+                 ng-class="{disabled:(nextCard === null || nextCard === undefined)}">
+                <pl-icon [svg]="'chevron-right'" [width]="60" [height="60"]></pl-icon>
+            </div>
+        </div>
+
+    </div>
+
+</div>

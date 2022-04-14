@@ -1,0 +1,25 @@
+.workspace {
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.show-assessment-instructions-jumbotron-overlay {
+    z-index: 1111;
+}
+//so mouse events pass through to the workspace
+.non-interactive {
+    pointer-events: none;
+}
+
+.interactive {
+    pointer-events: auto;
+}
+
+.block-interactive {
+  z-index : 0;
+  pointer-events: none;
+}

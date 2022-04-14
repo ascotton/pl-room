@@ -1,0 +1,11 @@
+<div class="pdf-holder" ng-mousedown="onMouseDown($event)" >
+    <div ng-show="rendering" class="rendering">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+    <div class="pageHolder">
+        <canvas class="pdf-holder-canvas"></canvas>
+        <canvas ng-show="bookMode > 1 && !soloPage" class="page2-canvas"></canvas>
+        <canvas class="pdf-offscreen"></canvas>
+        <canvas class="pdf-offscreen pdf-offscreen-2"></canvas>
+    </div>
+</div>

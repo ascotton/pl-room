@@ -1,0 +1,38 @@
+@import "colors.less";
+@import "core/spacing.less";
+:host {
+    display: block;
+    .padding;
+    .box {
+        display: flex;
+        align-items: center;
+        align-content: stretch;
+        background-color: #FBFBFB;
+        border-radius: 4px;
+        min-height: 32px;
+
+        .padding;
+
+        color: @gray-dark;
+
+        & > input {
+            width: 100%;
+            font-weight: 400;
+            outline: none;
+            border: none;
+            background-color: transparent;
+
+        }
+
+        ::placeholder {
+            color: @gray;
+            opacity: 1; /* Firefox */
+        }
+
+        pl-icon {
+            fill: @gray-dark;
+            margin-right: @spacing-normal-large;
+        }
+    }
+}
+

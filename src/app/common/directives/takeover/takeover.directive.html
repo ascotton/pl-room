@@ -1,0 +1,10 @@
+<div class="takeover">
+    <div class="modal {{classBody}}">
+        <div class="dismiss" ng-if="dismissable">
+            <button ng-click="closePopup()">
+                <pl-icon [svg]="'cross'" [width]="10" height="10"></pl-icon>
+            </button>
+        </div>
+        <div ng-transclude ng-resize="on-resize"></div>
+    </div>
+</div>

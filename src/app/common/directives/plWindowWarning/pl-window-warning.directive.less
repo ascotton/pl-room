@@ -1,0 +1,43 @@
+#maximize-window {
+    width: 254px;
+    height: 48px;
+    margin: auto;
+    background-image: url('/assets/images/maximize-window.png');
+}
+#browser-zoom {
+    width: 271px;
+    height: 53px;
+    margin: auto;
+    background-image: url('/assets/images/browser-zoom.png');
+}
+
+.examples {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 10px;
+    .example {
+        width: 144px;
+        height: 144px;
+        margin: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        &#incorrect-ipad {
+            background-image: url('/assets/images/ipad-incorrect.png');
+        }
+        &#correct-ipad {
+            background-image: url('/assets/images/ipad-correct.png');
+        }
+    }
+    .separator {
+        height: 150px;
+        width: 2px;
+        border: 1px solid #E5E5E5;
+    }
+}
+.heading-2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #747678;
+}

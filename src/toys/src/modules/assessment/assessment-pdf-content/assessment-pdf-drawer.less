@@ -1,0 +1,262 @@
+assessment-pdf-drawer {
+    width: 100%;
+    height: 100%;
+    .assessment-drawer {
+        .controls {
+            .instructionsToggleContainer {
+              display: inline-block;
+              width: 70px;
+              height: 44px;
+
+              button {
+                  width: 70px;
+                  &.enabled {
+                      &.selected svg {
+                          fill: @brand-blue-light;
+                      }
+                      &.selected span {
+                          color: @brand-blue-light;
+                      }
+                  }
+
+                  &.disabled {
+                      display: none;
+                      &:hover {
+                          cursor: default;
+                          svg {
+                              fill: @gray-dark;
+                          }
+                      }
+                  }
+
+                .instructions-svg {
+                  position: absolute;
+                  height: 21px;
+                  width: 14.3px;
+                  top: 3px;
+                  margin-top: 2px;
+                  left: 24px;
+                  fill: @gray;
+                  transition: fill 100ms;
+                }
+
+                span {
+                  position: absolute;
+                  display: block;
+                  width: 60px;
+                  bottom: 3px;
+                  line-height: 1em;
+                  left: 2px;
+                }
+              }
+            }
+
+            @grey-unk: #5b5e62;
+            .opacitySliderContainer {
+                border: none;
+                width: 55px;
+                height: 44px;
+                text-align: center;
+                margin: 0;
+                color: @gray-lighter;
+                &.disabled {
+                  display: none;
+                }
+
+                .figureContainer {
+
+                  &:focus {
+                    color: @gray-lighter;
+                    outline: none;
+                  }
+
+                  &:hover {
+                    color: @gray-lighter;
+                  }
+
+                  position: relative;
+
+                  figure {
+
+                  }
+
+                  .opacityFigure {
+                    position: absolute;
+                    width: 24px;
+                    left: 17px;
+                    top: 5px;
+                    height: 24px;
+                    border: 1px solid #5b5e62;
+                    border-radius: 50%;
+                    background: @gray-lighter;
+                  }
+
+                  .opacityBackground {
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    left: 17px;
+                    top: 5px;
+                    border-radius: 10px;
+                    border: 1px solid #5b5e62;
+                    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIyNHB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8dGl0bGU+R3JvdXAgMTE8L3RpdGxlPg0KICAgIDxkZXNjPjwvZGVzYz4NCiAgICA8ZGVmcz4NCiAgICAgICAgPGNpcmNsZSBpZD0icGF0aC0xIiBjeD0iMTAuOTIwMDcwOSIgY3k9IjEwLjgwNDYyNjgiIHI9IjEwLjc1NTk0ODIiPjwvY2lyY2xlPg0KICAgIDwvZGVmcz4NCiAgICA8ZyBpZD0iQXNzZXNzbWVudC0tLUF1ZGlvIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgaWQ9Im9wYWNpdHktcGF0dGVybiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTI4Ni4wMDAwMDAsIC0yMzcuMDAwMDAwKSI+DQogICAgICAgICAgICA8ZyBpZD0iR3JvdXAtMTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4Ni4wMDAwMDAsIDIzNy42Nzc3MzQpIj4NCiAgICAgICAgICAgICAgICA8bWFzayBpZD0ibWFzay0yIiBmaWxsPSJ3aGl0ZSI+DQogICAgICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+DQogICAgICAgICAgICAgICAgPC9tYXNrPg0KICAgICAgICAgICAgICAgIDx1c2UgaWQ9Ik1hc2siIGZpbGwtb3BhY2l0eT0iMC45IiBmaWxsPSIjRkZGRkZGIiB4bGluazpocmVmPSIjcGF0aC0xIj48L3VzZT4NCiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMS4yMzk3MTc1NiwxLjEyNDI3MzUgTDcuNjkzMjg2NDUsMS4xMjQyNzM1IEw3LjY5MzI4NjQ1LDcuNTc3ODQyMzkgTDEuMjM5NzE3NTYsNy41Nzc4NDIzOSBMMS4yMzk3MTc1NiwxLjEyNDI3MzUgWiBNMS4yMzk3MTc1NiwxNC4wMzE0MTEzIEw3LjY5MzI4NjQ1LDE0LjAzMTQxMTMgTDcuNjkzMjg2NDUsMjAuNDg0OTgwMiBMMS4yMzk3MTc1NiwyMC40ODQ5ODAyIEwxLjIzOTcxNzU2LDE0LjAzMTQxMTMgWiBNNy42OTMyODY0NSw3LjU3Nzg0MjM5IEwxNC4xNDY4NTUzLDcuNTc3ODQyMzkgTDE0LjE0Njg1NTMsMTQuMDMxNDExMyBMNy42OTMyODY0NSwxNC4wMzE0MTEzIEw3LjY5MzI4NjQ1LDcuNTc3ODQyMzkgWiBNNy42OTMyODY0NSwyMC40ODQ5ODAyIEwxNC4xNDY4NTUzLDIwLjQ4NDk4MDIgTDE0LjE0Njg1NTMsMjYuOTM4NTQ5MSBMNy42OTMyODY0NSwyNi45Mzg1NDkxIEw3LjY5MzI4NjQ1LDIwLjQ4NDk4MDIgWiBNNy42OTMyODY0NSwtNS4zMjkyOTUzOSBMMTQuMTQ2ODU1MywtNS4zMjkyOTUzOSBMMTQuMTQ2ODU1MywxLjEyNDI3MzUgTDcuNjkzMjg2NDUsMS4xMjQyNzM1IEw3LjY5MzI4NjQ1LC01LjMyOTI5NTM5IFogTTE0LjE0Njg1NTMsMS4xMjQyNzM1IEwyMC42MDA0MjQyLDEuMTI0MjczNSBMMjAuNjAwNDI0Miw3LjU3Nzg0MjM5IEwxNC4xNDY4NTUzLDcuNTc3ODQyMzkgTDE0LjE0Njg1NTMsMS4xMjQyNzM1IFogTTIwLjYwMDQyNDIsNy41Nzc4NDIzOSBMMjcuMDUzOTkzMSw3LjU3Nzg0MjM5IEwyNy4wNTM5OTMxLDE0LjAzMTQxMTMgTDIwLjYwMDQyNDIsMTQuMDMxNDExMyBMMjAuNjAwNDI0Miw3LjU3Nzg0MjM5IFogTS01LjIxMzg1MTMzLDcuNTc3ODQyMzkgTDEuMjM5NzE3NTYsNy41Nzc4NDIzOSBMMS4yMzk3MTc1NiwxNC4wMzE0MTEzIEwtNS4yMTM4NTEzMywxNC4wMzE0MTEzIEwtNS4yMTM4NTEzMyw3LjU3Nzg0MjM5IFogTTE0LjE0Njg1NTMsMTQuMDMxNDExMyBMMjAuNjAwNDI0MiwxNC4wMzE0MTEzIEwyMC42MDA0MjQyLDIwLjQ4NDk4MDIgTDE0LjE0Njg1NTMsMjAuNDg0OTgwMiBMMTQuMTQ2ODU1MywxNC4wMzE0MTEzIFoiIGlkPSJDb21iaW5lZC1TaGFwZSIgZmlsbD0iI0Q4RDhEOCIgbWFzaz0idXJsKCNtYXNrLTIpIj48L3BhdGg+DQogICAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICA8L2c+DQo8L3N2Zz4=');
+                  }
+
+                  .opacityLabel {
+                    position: absolute;
+                    height: 11px;
+                    left: 12px;
+                    top: 27px;
+                  }
+                }
+            }
+
+            @left-offset: 12px;
+            .pl-dropdown-content .slider-control {
+              .guideline {
+                position: relative;
+
+                /* First the checkboard pattern */
+                &:before {
+                  left: @left-offset;
+                  position: absolute;
+                  content: ' ';
+                  display: block;
+                  height: 100%;
+                  width: 20px;
+                  margin: 0 auto;
+                  background-color: #d8d8d8;
+                  background-image: linear-gradient(45deg, #edeeef 25%, transparent 25%, transparent 75%, #edeeef 75%, #edeeef), linear-gradient(45deg, #edeeef 25%, transparent 25%, transparent 75%, #edeeef 75%, #edeeef);
+                  background-size: 13px 13px;
+                  background-position: 0 0, 6px 6px;
+                }
+                /* Then the gradient alpha */
+                &:after {
+                  left: @left-offset;
+                  position: absolute;
+                  content: ' ';
+                  display: block;
+                  height: 100%;
+                  width: 20px;
+                  margin: 0 auto;
+                  background-image: linear-gradient(to bottom, #d8d8d8, rgba(215, 215, 215, 0));
+                  border: solid 1px #b6b8ba;
+                }
+              }
+            }
+
+            .handle {
+              &:after {
+                width: 22px;
+                left: 11px;
+                height: 24px;
+                border-radius: 4px;
+                background-color: transparent;
+                border: none;
+                background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnIHdpZHRoPSIyMXB4IiBoZWlnaHQ9IjI0cHgiIHZpZXdCb3g9IjAgMCAyMSAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4NCiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDMuNy4yICgyODI3NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+DQogICAgPHRpdGxlPkdyb3VwIDM8L3RpdGxlPg0KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPg0KICAgIDxkZWZzPjwvZGVmcz4NCiAgICA8ZyBpZD0iQXNzZXNzbWVudC0tLUF1ZGlvIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4NCiAgICAgICAgPGcgaWQ9Im9wYWNpdHktcGF0dGVybiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMyMi4wMDAwMDAsIC0yNDEuMDAwMDAwKSI+DQogICAgICAgICAgICA8ZyBpZD0iR3JvdXAtMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjAwMDAwMCwgMjQxLjAwMDAwMCkiPg0KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNS40NzEwMzU0LDAuODY3NzA2MjM2IEMxNy42NzU0MDIzLDAuODY3NzA2MjM2IDE5LjQ2MjM5NDgsMi42NTA2NTAyOCAxOS40NjIzOTQ4LDQuODY3MjQ3NjQgTDE5LjQ2MjM5NDgsMTguODgzMzE2MyBDMTkuNDYyMzk0OCwyMS4wOTIyMDIxIDE3LjY2NzQ1MjUsMjIuODgyODU3OCAxNS40NzEwMzU0LDIyLjg4Mjg1NzggTDQuMTkwNDk2NjMsMjIuODgyODU3OCBDMS45ODYxMjk2OSwyMi44ODI4NTc4IDAuMTk5MTM3MjA4LDIxLjA5OTkxMzcgMC4xOTkxMzcyMDgsMTguODgzMzE2MyBMMC4xOTkxMzcyMDgsNC44NjcyNDc2NCBDMC4xOTkxMzcyMDgsMi42NTgzNjE5MiAxLjk5NDA3OTQ5LDAuODY3NzA2MjM2IDQuMTkwNDk2NjMsMC44Njc3MDYyMzYgTDE1LjQ3MTAzNTQsMC44Njc3MDYyMzYgTDE1LjQ3MTAzNTQsMC44Njc3MDYyMzYgWiIgaWQ9IlRyaWFuZ2xlLTEtQ29weSIgc3Ryb2tlPSIjQjZCOEJBIiBmaWxsPSIjRURFRUVGIj48L3BhdGg+DQogICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0zNiIgZmlsbD0iI0QyRDNENSIgeD0iNC45NzI3OTY3MiIgeT0iOC40NzcxNzAwMSIgd2lkdGg9IjkuNzE1OTM4NTUiIGhlaWdodD0iMS4xNTk3MDAxNyIgcng9IjQwIj48L3JlY3Q+DQogICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0zNi1Db3B5IiBmaWxsPSIjRDJEM0Q1IiB4PSI0Ljk3Mjc5NjcyIiB5PSIxMS41Njk3MDM4IiB3aWR0aD0iOS43MTU5Mzg1NSIgaGVpZ2h0PSIxLjE1OTcwMDE3IiByeD0iNDAiPjwvcmVjdD4NCiAgICAgICAgICAgICAgICA8cmVjdCBpZD0iUmVjdGFuZ2xlLTM2LUNvcHktMiIgZmlsbD0iI0QyRDNENSIgeD0iNC45NzI3OTY3MiIgeT0iMTQuNjYyMjM3NiIgd2lkdGg9IjkuNzE1OTM4NTUiIGhlaWdodD0iMS4xNTk3MDAxNyIgcng9IjQwIj48L3JlY3Q+DQogICAgICAgICAgICA8L2c+DQogICAgICAgIDwvZz4NCiAgICA8L2c+DQo8L3N2Zz4=');
+              }
+            }
+
+
+            .zoomMenu {
+              width: 65px;
+              background-color: #4C4F52;
+              border-color: #3C3F43;
+              height: 30px;
+              border-radius: 0;
+            }
+
+            .zoom-label {
+                vertical-align: 3px;
+            }
+        }
+
+        main {
+            padding: 11px;
+
+            #pdfThumbnails {
+
+                .loader {
+                    position: relative;
+                    text-align: center;
+                    top: 45px;
+                    left: 50px;
+                    div {
+                        background-color: inherit;
+                    }
+                    // svg {
+                    //     width: 44px;
+                    //     height: 44px;
+                    // }
+                }
+
+                svg path,
+                svg rect {
+                }
+
+                .instructionsThumb {
+                    position: relative;
+                    svg {
+                        width: 30px;
+                        height: 30px;
+                        position: absolute;
+                        left: 110px;
+                        top: -137px;
+                    }
+                }
+
+                canvas {
+                    position: relative;
+                    top: 7px;
+                    left: 7px;
+                }
+
+                .thumb-img {
+                    height: 97px;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: 7px;
+                }
+
+                div {
+                    cursor: pointer;
+                    height: 124px !important;
+                    overflow: hidden !important;
+
+                    &.activePage {
+                        background-color: #4C4F52;
+                    }
+                    .pageNum {
+                        color: @gray-light;
+                        text-align: center;
+                        padding-bottom: 6px;
+                    }
+                }
+            }
+        }
+
+        footer {
+            button {
+                position: relative;
+
+                &.disabled svg {
+                    fill: @gray-dark;
+                    cursor: default;
+                }
+                &.disabled span {
+                    color: @gray-dark;
+                    cursor: default;
+                }
+            }
+            .chevron-up-two {
+                // Could not seem to move this without using position absolute..
+                position: absolute;
+                top: 4px;
+                left: 22px;
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,24 @@
+<h1
+  class="display-name"
+>
+  <mat-icon
+    class="status-icon"
+    *ngIf="showMuted$ | async"
+  >
+    mic_off
+  </mat-icon>
+  <mat-icon
+    class="status-icon"
+    *ngIf="showCovered$ | async"
+  >
+    videocam_off
+  </mat-icon>
+  <mat-icon
+    class="status-icon-custom"
+    *ngIf="showClickMuted$ | async"
+    [svgIcon]="'mouse_click_muted'"
+  >
+  </mat-icon>
+
+   {{ displayName$ | async }}
+</h1>

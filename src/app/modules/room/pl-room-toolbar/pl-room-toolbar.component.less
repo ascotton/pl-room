@@ -1,0 +1,100 @@
+@import 'core/spacing.less';
+@import 'colors.less';
+
+.pl-top-toolbar {
+    &.mat-toolbar {
+        position: fixed;
+        z-index: 10001; // On top toolbar dialogs
+        display: flex;
+        justify-content: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: @white;
+        border-bottom: 1px solid #C4C4C4;
+    }
+    .user-container {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        padding-right: 10px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 300;
+        color: @gray-darkest;
+        cursor: pointer;
+        .profile-icon {
+            color: @gray;
+        }
+    }
+    .menu-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 10px;
+    }
+    .room-toolbar-btns {
+        display: flex;
+        .mat-divider {
+            height: 48px;
+            border-color: #C4C4C4;
+        }
+        .mat-badge.empty-badge .mat-badge-content {
+            color: transparent;
+        }
+    }
+}
+
+.bottom-sheet-dialog {
+    padding-top: 65px;
+    .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dialog-title {
+        font-weight: 400;
+    }
+    .mat-divider {
+        height: 100%;
+        border-color: #C4C4C4;
+    }
+}
+.sheet-dialog {
+    background-color: @white;
+    color: @gray-darker;
+    box-shadow: 0px 0px 4px 0px #00000040;
+    border-radius: 0 0 4px 4px;
+}
+.sheet-small {
+    min-width: 250px !important;
+}
+.sheet-medium {
+    min-width: 380px !important;
+}
+
+@keyframes slideDown{
+    0%{ opacity: 0 }
+    100%{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+.toolbar-overlay {
+    z-index: 10000 !important; // On top of widgets
+    .bottom-sheet-pane {
+        top: 0 !important;
+        position: absolute !important;
+        animation: none;
+        transform: translateY(-250%);
+        animation: slideDown 0.5s forwards 0s ease-out;
+        transition: all .5s ease-out;
+    }
+}
+
+.snackbar-big {
+    max-width: 450px !important;
+}

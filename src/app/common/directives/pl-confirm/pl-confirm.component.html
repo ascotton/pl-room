@@ -1,0 +1,23 @@
+<div>
+    <takeover activated="$ctrl.activated" class-body="pl-confirm">
+        <header>
+            {{$ctrl.header}}
+            <button class="btn-close" ng-click="$ctrl.close()">
+                <pl-icon class="icon" [svg]="'cross'" [width]="10" [height]="10"></pl-icon>
+            </button>
+        </header>
+        <div class="content">
+            <main>
+                {{$ctrl.bodyText}}
+            </main>
+            <footer>
+                <button class="confirm" ng-click="$ctrl.confirm()">
+                    {{$ctrl.confirmText}}
+                </button>
+                <button class="cancel" ng-click="$ctrl.close()">
+                    Cancel
+                </button>
+            </footer>
+        </div>
+    </takeover>
+</div>

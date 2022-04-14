@@ -1,0 +1,13 @@
+<button
+  mat-icon-button
+  aria-label="settings"
+  class="settings"
+  [matMenuTriggerFor]="settingsMenu"
+>
+  <mat-icon>settings</mat-icon>
+</button>
+<mat-menu #settingsMenu="matMenu">
+  <button mat-menu-item (click)="toggleProxy()">
+    {{ isProxyActive ? 'Disable' : 'Enable' }} Fallback Connection
+  </button>
+</mat-menu>

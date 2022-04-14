@@ -1,0 +1,15 @@
+<div class="assessment-pdf-content-viewer">
+    <div class="instructions-holder" ng-show="showInstructions">
+        <canvas class="instructionsCanvas"></canvas>
+        <canvas class="offscreenInstructionsCanvas"></canvas>
+    </div>
+    <div ng-show="rendering" class="rendering">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+    <pdf-viewer
+            ng-mousedown="contentOnMouseDown($event)"
+            ng-mousemove="onMouseMove($event)"
+            ng-mouseup="onMouseUp($event)"
+            ng-hide="hidePDFViewer()">
+    </pdf-viewer>
+</div>

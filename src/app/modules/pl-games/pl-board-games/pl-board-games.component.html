@@ -1,0 +1,24 @@
+<div *ngIf="active" class="pl-board-games">
+    <div>
+        <div class="background">
+            <img *ngIf="currentGameId && gameBoardImgSrc" [src]="gameBoardImgSrc"/>
+            <img *ngIf="!currentGameId && gameSplashScreenSrc" [src]="gameSplashScreenSrc"/>
+        </div>
+        <div #boardgame class="foreground">
+            <pl-board-game-piece
+                *ngFor="let piece of pieces;"
+                [piece]="piece"
+                (pieceUpdated)="pieceUpdated($event)"
+                (pieceDragged)="pieceDragEnded($event)"
+            ></pl-board-game-piece>
+            <!-- <pl-board-game-piece
+                [piece]="trashPiece"
+                (pieceUpdated)="pieceUpdated($event)"
+                (pieceDragged)="pieceDragEnded($event)"
+                (hoverOn)="trashHoverOn($event)"
+                (hoverOff)="trashHoverOff($event)"
+            ></pl-board-game-piece> -->
+        </div>
+    </div>
+</div>
+

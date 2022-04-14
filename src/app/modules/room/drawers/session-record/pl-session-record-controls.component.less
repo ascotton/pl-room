@@ -1,0 +1,40 @@
+
+@import '../../../../common/less/main.less';
+
+#session-record-controls {
+    font-size: 13px;
+    .info {
+        text-align: left;
+        color: @slate-lightest;
+    }
+    .warning {
+        font-style: italic;
+    }
+
+    .recording-message {
+        margin: 10px;
+    }
+
+    button {
+        border-style: solid;
+        border-color: @green;
+        border-width: 1px;
+        border-radius: 4px;
+        padding: 0px 12px 0px 12px;    
+        font-size: 14px;
+        margin: 0px 10px 3px 10px;
+        width: 90%;
+        &:hover:enabled {
+            background-color: #4c4f52;
+        }
+        &:disabled {
+            border-color: @gray-darkest;
+            color: @gray-darkest;
+        }
+    }
+
+    #screenshare-preview {
+        width: 192px;
+        height: 144px;
+    }
+}

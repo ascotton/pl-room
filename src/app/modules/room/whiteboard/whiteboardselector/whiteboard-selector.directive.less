@@ -1,0 +1,44 @@
+.selector {
+  .rotationHandle {
+    left: 50%;
+    top: unit(-40 / 212, em);
+    margin-left: -3px;
+    cursor: url("/assets/cursors/rotate-cursor.png") 15 5, pointer !important;
+
+    &::before {
+      display: block;
+      content: '';
+      width: 1px;
+      height: unit(40 / 212, em);
+      background: #000000;
+      margin-left: 3px;
+    }
+  }
+
+  .moveHandle {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+  }
+
+  .sizeHandle {
+    &.nw, &.se {
+      cursor: nwse-resize;
+    }
+    &.ne, &.sw {
+      cursor: nesw-resize;
+    }
+  }
+}
+
+.cursor-rotate * {
+  cursor: url("/assets/cursors/rotate-cursor.png") 15 5, pointer !important;
+}
+
+.cursor-resize-nwse * {
+  cursor: nwse-resize !important;
+}
+
+.cursor-resize-nesw * {
+  cursor: nesw-resize !important;
+}

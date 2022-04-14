@@ -1,0 +1,82 @@
+@import 'main.less';
+@import 'common-styles.less';
+
+.pl-gametable-blokd-drawer {
+    .section-header {
+        background-color: @gray-darkest;
+        .padding;
+        .padding-large-tb;
+        .pointer;
+        margin: 0;
+        border-bottom: solid 1px @gray-dark;
+        span {
+            margin-left: 5px;
+        }
+    }
+
+    .form {
+        &.disabled {
+            opacity: .3;
+        }
+    }
+    .refresh-button-disabled {
+        margin: 14px 0 13px 0;
+    }
+    .section-body {
+        .padding-small;
+    }
+
+    .show-moves-checkbox {
+        display: inline-block;
+    }
+    .button-new-game {
+        background-color: @green;
+        &.new-game-override {
+            background-color: @purple;
+        }
+    }
+    .button-end-game {
+        background-color: @red;
+    }
+    .button-new-game, .button-end-game {
+        &.disabled {
+            background-color: @gray;
+        }
+    }
+    .align-center {
+        text-align: center;
+    }
+    .configuration-header {
+        color: @white;
+        background-color: @gray-darkest;
+    }
+
+    .actions {
+        margin: 10px 0;
+        padding: 10px 0;
+        border-top: 2px solid @gray-darkest;
+        border-bottom: 2px solid @gray-darkest;
+    }
+
+    .checkbox-mute {
+        text-align: center;
+    }
+}
+
+::ng-deep .pl-gametable-blokd-drawer {
+    [pl-button].bare pl-icon.refresh-icon,
+    .section-players pl-icon {
+        svg {
+            fill: @gray-lightest;
+        }
+    }
+    .refresh-button-disabled pl-icon.refresh-icon {
+        svg {
+            fill: @gray-lightest;
+        }
+    }
+
+    pl-input-checkbox {
+        display: inline-block;
+    }
+}

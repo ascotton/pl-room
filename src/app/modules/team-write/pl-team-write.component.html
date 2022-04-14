@@ -1,0 +1,11 @@
+<div id="TeamWrite" ng-show="teamWriteActive" ng-class="{ 'observer-mode': isObserver }">
+	    <pl-confirm class="confirm-exit"
+                activated="$ctrl.showClearConfirm"
+                header="'Clear TeamWrite'" 
+                body-text="'Are you sure you want to clear your document? This cannot be undone.'" 
+                confirm-text="'Clear'" 
+                on-confirm="$ctrl.confirmClear" 
+                on-cancel="$ctrl.closeConfirm" 
+    ></pl-confirm>
+	<div id="firepad-container"></div>
+</div>

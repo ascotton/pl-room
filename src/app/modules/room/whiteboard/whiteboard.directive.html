@@ -1,0 +1,14 @@
+<div class="whiteboard-container" id="whiteboard-container" tabindex="0"
+    ng-show="whiteboardActive" ng-keydown="wbKeyDown($event)" ng-keyup="wbKeyUp($event)">
+    <svg class="whiteboard"
+         ng-class="{ 'handle-pointer': boardInteractionMode }"
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0, 0, 1080, 583"
+         preserveAspectRatio="xMinYMin meet"
+    >
+        <g class="whiteboard-content"></g>
+        <whiteboard-selector></whiteboard-selector>
+    </svg>
+    <!-- directive for editing text shapes -->
+    <whiteboard-text-editor></whiteboard-text-editor>
+</div>

@@ -1,0 +1,30 @@
+<div class="drawer drawer-right drawer-games" [ngClass]="{ in: active, 'panel-2-active': detailView}">
+    <div class="panel-1">
+        <header class="game-header">
+            <h4>Game Shelf</h4>
+        </header>
+        <main>
+            <div class="game-shelf-list">
+                <pl-board-game-select-button 
+                    *ngFor="let game of boardGamesList;"
+                    [game]="game"
+                    (boardGameSelectClicked)="loadBoardGame($event)" >
+                </pl-board-game-select-button>
+            </div>
+        </main>
+    </div>
+    
+    <div class="panel-2">
+        <header class="game-header">
+            <div (click)="leaveDetail()" class="pointer margin-lr icon-div">
+                <div class="spacer">&nbsp;</div>
+                <pl-icon [svg]="'chevron-left'" [scale]="0.8" class="gray-lightest"></pl-icon>
+            </div>
+            <h4>{{currentGame ? currentGame.displayName : "Game Controls"}}</h4>
+        </header>
+        <main class="drawer-ui">
+            <pl-board-game-controls [gameName]="currentGame ? currentGame.name : null"></pl-board-game-controls>
+        </main>
+    </div>
+
+</div>

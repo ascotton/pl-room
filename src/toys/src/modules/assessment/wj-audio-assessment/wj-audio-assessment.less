@@ -1,0 +1,319 @@
+.wjaudio-assessment-viewer {
+    height: 100%;
+}
+
+.audio-holder {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1001;
+
+
+    .audio-player {
+
+        &.collapsed {
+            width: 64px;
+            &.hasScroller {
+                width: 80px;
+            }
+        }
+
+        .audio-controls-container {
+            width: inherit;
+            height: inherit;
+            opacity: 0.7;
+            background-color: #fafafa;
+            border: solid 1px #eeeeee;
+
+            .audio-header {
+                position: relative;
+                padding-top: 10px;
+                height: 39.1px;
+
+                .collapse-toggle {
+                    position: absolute;
+                    display: inline-block;
+                    top: 9.5px;
+                    left: 9.7px;
+                    cursor: pointer;
+                    .close-btn,
+                    .open-btn{
+                        width: 20px;
+                        height: 20px;
+                        padding-top: 2px;
+                        margin: 0 auto;
+                    }
+                    .open-btn { display: none; }
+                    :hover svg {
+                        fill: white;
+                    }
+                    &:active svg {
+                        fill: white;
+                    }
+                    &.collapsed {
+                        left: 21.9px;
+                        .open-btn { display: block; }
+                        .close-btn { display: none; }
+                    }
+                }
+
+                .audio-title {
+                    position: absolute;
+                    display: inline-block;
+                    top: 10.8px;
+                    left: 40.5px;
+                    height: 16px;
+                    font-family: @headings-font-family;
+                    font-weight: @headings-font-weight;
+                    font-size: 14px;
+                    color: #4d8bbe;
+                    &.collapsed {
+                        display: none;
+                    }
+                }
+
+            }
+
+            .audio-controls {
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                &.collapsed {
+                    width: 64px;
+                    &.hasScroller {
+                        width: 80px;
+                    }
+                }
+
+                &.hasScroller {
+                    width: 154px;
+                }
+
+                .audio-player-item {
+                    position: relative;
+                    width: 140px;
+                    height: 60px;
+                    background-color: #fafafa;
+                    border: solid 1px #eeeeee;
+                    margin: -1px;
+
+                    &.playing {
+                        background-color: #eeeeee;
+                    }
+
+                    &.collapsed {
+                        width: 64px;
+                        &.hasScroller {
+                            width: 50px;
+                        }
+                    }
+
+                    .audio-player-item-content {
+                        position: relative;
+                        width: 108px;
+                        height: 40px;
+                        margin: auto;
+                        padding: 0;
+
+                        &.collapsed {
+                            width: 40px;
+                        }
+                    }
+
+                    .track-name {
+                        position: absolute;
+                        width: 64px;
+                        /*left: 8.5px;*/
+                        top:6px;
+                        height: 15px;
+                        font-family: @font-family-sans-serif;
+                        font-weight: normal;
+                        font-size: 12px;
+                        color: #808080;
+                        cursor: default;
+                        &.collapsed {
+                            left: 1.5px;
+                            font-size: 11px;
+                        }
+                    }
+
+                    .controls {
+                        position: absolute;
+                        /*left: 8px;*/
+                        top: 24.6px;
+                        .seekbar {
+                            display: inline-block;
+                            height: 16px;
+                            margin: 0 0 0 5px;
+                            padding: 0;
+                            &.collapsed {
+                                display: none;
+                                margin: auto;
+                            }
+                        }
+                        &.collapsed {
+                            display: none;
+                        }
+                    }
+
+                    .play-pause {
+                        display: inline-block;
+                        .play-btn,
+                        .pause-btn {
+                            width: 20px;
+                            height: 20px;
+                            padding-top: 2px;
+                            margin: 0 auto;
+                        }
+                        .pause-btn { display: none; }
+                        :hover svg {
+                            fill: white;
+                        }
+                        &:active svg {
+                            fill: white;
+                        }
+                        &.playing {
+                            .pause-btn { display: block; }
+                            .play-btn { display: none; }
+                        }
+                        &.collapsed {
+                            margin-left: 10px;
+                        }
+                    }
+
+                    @timer-top: 37px;
+
+                    .timers {
+                        position: relative;
+                        .duration-timer,
+                        .current-timer {
+                            display: inline-block;
+                            position: absolute;
+                            font-size: 12px;
+                        }
+                        .duration-timer {
+                            top: @timer-top;
+                            left: 80px;
+                            cursor: default;
+                        }
+                        .current-timer {
+                            top: @timer-top;
+                            left: 29px;
+                            cursor: default;
+                        }
+                        &.collapsed {
+                            display: none;
+                        }
+                    }
+
+                    /** custom input range **/
+                    @track-color: #d1d2d4;
+                    @thumb-color: #76ACEB;
+
+                    @thumb-radius: 10px;
+                    @thumb-height: 10px;
+                    @thumb-width: 10px;
+                    @thumb-shadow-size: 0px;
+                    @thumb-shadow-blur: 0px;
+                    @thumb-shadow-color: #FFF;
+                    @thumb-border-width: 3px;
+                    @thumb-border-color: #4D8BBE;
+
+                    @track-width: 80px;
+                    @track-height: 3px;
+                    @track-shadow-size: 0px;
+                    @track-shadow-blur: 0px;
+                    @track-shadow-color: #FFF;
+                    @track-border-width: 0px;
+                    @track-border-color: #FFF;
+
+                    @track-radius: 5px;
+                    @contrast: 5%;
+
+                    .shadow(@shadow-size,@shadow-blur,@shadow-color) {
+                        box-shadow: @shadow-size @shadow-size @shadow-blur @shadow-color, 0px 0px @shadow-size lighten(@shadow-color,5%);
+                    }
+
+                    .track() {
+                        width: @track-width;
+                        height: @track-height;
+                        cursor: pointer;
+                        animate: 0.2s;
+                    }
+
+                    .thumb-webkit() {
+                        .shadow(@thumb-shadow-size,@thumb-shadow-blur,@thumb-shadow-color);
+                        border: @thumb-border-width solid @thumb-border-color;
+                        height: @thumb-height;
+                        width: @thumb-width;
+                        border-radius: @thumb-radius;
+                        background: @thumb-color;
+                        cursor: pointer;
+                    }
+
+                    .thumb-moz() {
+                        .shadow(@thumb-shadow-size,@thumb-shadow-blur,@thumb-shadow-color);
+                        border: @thumb-border-width solid @thumb-border-color;
+                        height: @thumb-height;
+                        width: @thumb-width;
+                        border-radius: @thumb-radius;
+                        background: @thumb-color;
+                        cursor: pointer;
+                    }
+
+                    input[type=range] {
+                        -webkit-appearance: none;
+                        margin: @thumb-height/2 0;
+                        width: @track-width;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::-webkit-slider-runnable-track {
+                            .track();
+                            .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+                            background: @track-color;
+                            border-radius: @track-radius;
+                            border: @track-border-width solid @track-border-color;
+                        }
+
+                        &::-webkit-slider-thumb {
+                            cursor: pointer;
+                            margin-top: ((-@track-border-width * 2 + @track-height) / 2) - (@thumb-height / 2);
+                            height: @thumb-height;
+                            width: @thumb-width;
+                            -webkit-appearance: none;
+                            background-image: url('/assets/controls/scrubber.svg');
+                        }
+
+                        &:focus::-webkit-slider-runnable-track {
+                            background: lighten(@track-color, @contrast);
+                        }
+
+                        &::-moz-range-track {
+                            .track();
+                            .shadow(@track-shadow-size,@track-shadow-blur,@track-shadow-color);
+                            background: @track-color;
+                            border-radius: @track-radius;
+                            border: @track-border-width solid @track-border-color;
+                        }
+                        &::-moz-range-thumb {
+                            border: @thumb-border-width @thumb-border-color;
+                            cursor: pointer;
+                            height: @thumb-height;
+                            width: @thumb-width;
+                            background-image: url('/assets/controls/scrubber.svg');
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

@@ -1,0 +1,39 @@
+.colorpicker {
+	overflow: visible;
+
+	//The "button" increases the specificy just enough to let this win.
+	button.toolbar-btn {
+		figure {
+			width: 18px;
+			height: 18px;
+			margin-top: 2px;
+			margin-bottom: 7px;
+			border-radius: 3px;
+			border: 1px solid @gray;
+			transition: background-color 200ms;
+			overflow: visible;
+		}
+	}
+	.picker {
+		position: relative;
+		top: 44px;
+		left: -75px;
+		width: 200px;
+		height: 211px;
+		background-image: url('/assets/images/colorpicker.png');
+		z-index: 3000;
+		cursor: url('/assets/cursors/EyeDropper.cur'), default;
+		@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+			background-image: url('/assets/images/colorpicker-retina.png');
+			background-size: 200px 211px;
+		}
+
+		canvas {
+			width: 200px;
+			height: 200px;
+			margin-top: -39px;
+			box-shadow: none;
+			border: none;
+		}
+	}
+}

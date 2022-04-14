@@ -1,0 +1,24 @@
+<div class="board-game-piece"
+    [ngStyle]="{'left': piece.x + '%', 'top':  piece.y + '%', 'width': piece.width + '%'}"
+    [ngClass]="{'remoteChange': piece.remoteChange}"
+    >
+    <div 
+        class="piece"
+        [ngClass]="{'selectedPiece': piece.selected, 'draggedPiece': piece.dragging && !piece.selected, 'fadeOut': piece.fadeOut, 'hovering': hovering}"
+        [id]="piece.name"
+        (mouseover)="mouseOver($event)" 
+        (mouseout)="mouseOut($event)"
+        (mousedown)="mousedDown()"
+        (mouseup)="mouseUp()"
+        (touchstart)="mousedDown()"
+        (touchend)="mouseUp()"
+        cdkDrag
+        (cdkDragStarted) = "dragStarted($event)"
+        (cdkDragEnded) = "dragEnded($event)"
+        (cdkDragMoved) = "dragMoved($event)"
+        [cdkDragDisabled] = "piece.dragging && !piece.selected">
+        <img [src]="piece.imageSrc"/>
+        <div class="image-copy-block">&nbsp;</div>
+        <!-- <div>{{piece.name}}</div> -->
+    </div>
+</div>

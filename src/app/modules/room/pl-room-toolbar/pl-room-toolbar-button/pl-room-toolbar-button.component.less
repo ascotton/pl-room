@@ -1,0 +1,39 @@
+@import 'colors.less';
+
+.room-toolbar-btn {
+    width: 58px;
+    height: 46px;
+    color: @gray-darkest;
+    font-weight: 300;
+    font-size: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div {
+        display: flex;
+        line-height: 20px;
+    }
+    & .mat-icon {
+        margin-top: 4px;
+        font-size: 23px;
+        height: 23px;
+    }
+    &:disabled {
+        cursor: not-allowed;
+    }
+    &.active, &:hover:not(:disabled) {
+        color: #2d3a45;
+        background-color: lighten(#2d3a45, 60%);
+        .mat-icon {
+            svg path {
+                fill: #2d3a45;
+            }
+        }
+    }
+    &.mat-badge .mat-badge-content {
+        margin-top: 4px;
+        color: transparent;
+    }
+}

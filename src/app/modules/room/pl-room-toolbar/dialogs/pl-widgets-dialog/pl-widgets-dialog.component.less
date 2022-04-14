@@ -1,0 +1,69 @@
+@import 'colors.less';
+
+.pl-widgets-dialog {
+    .instructions {
+        width: 500px;
+        padding: 10px;
+    }
+
+    .widget-toolbar-list {
+        padding-bottom: 14px;
+        display: flex;
+        flex-flow: row wrap;
+
+        .widget-toolbar-element {
+            width: 85px;
+            text-align: center;
+            margin: 0px 10px 0px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .widget-icon-holder {
+                width: 85px;
+                height: 75px;
+            }
+            .widget-icon {
+                cursor: move; /* fallback if grab cursor is unsupported */
+                cursor: grab;
+                cursor: -moz-grab;
+                cursor: -webkit-grab;
+                fill: @gray-lightest;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    height: 75px;
+                }
+            }
+
+            /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+            .widget-icon:active, .widget-icon:focus {
+                cursor: grabbing;
+                cursor: -moz-grabbing;
+                cursor: -webkit-grabbing;
+            }
+        }
+
+        .widget-caption {
+            margin: 4px 0 0 0;
+            cursor: move; /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+        }
+    }
+}
+
+.cdk-drag-preview {
+    filter: grayscale(1);
+    z-index: 99999 !important;
+    cursor: grab !important;
+}
+
+.cdk-drag-placeholder {
+    display: none;
+    cursor: grab !important;
+}

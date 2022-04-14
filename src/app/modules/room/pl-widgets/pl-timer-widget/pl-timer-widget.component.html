@@ -1,0 +1,31 @@
+<div class="pl-countdown-timer draggable-cursor">
+    <div class="pl-countdown-timer-container" plTimerWidgetEdit>
+        <div class="pl-countdown-timer-time">
+            <div class="pl-countdown-timer-spacer" *ngIf="!isClinitian()"></div>
+            <pl-timer-widget-digits [dragging]="dragging">
+            </pl-timer-widget-digits>
+        </div>
+        <div class="pl-timer-line" *ngIf="isClinitian()"></div>
+        <div class="pl-timer-buttons" *ngIf="isClinitian()">
+            <button [ngClass]="{timerStartButton: status === 'initial', timerResumeButton: status === 'suspended'}"
+                    [hidden]="status !== 'initial' && status !== 'suspended'"
+                    (click)="!dragging && start()">
+                Start
+            </button>
+    
+            <button class="timerStopButton"
+                    [hidden]="status !== 'running'"
+                    (click)="!dragging && stop()">
+                Stop
+            </button>
+        
+            <button class="timerResetButton"
+                    [hidden]="status === 'initial'"
+                    width="100"
+                    (click)="!dragging && reset()">
+                Reset
+            </button>
+        </div>
+        
+    </div>
+</div>

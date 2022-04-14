@@ -1,0 +1,63 @@
+<div class="drawer drawer-right drawer-cobrowse" ng-class="{'in':$ctrl.appModel.app.activeDrawer === 'cobrowse' && !$ctrl.appModel.drawerIsHidden}">
+    <header>
+        <h4>Site Share & Screen Share</h4>
+    </header>
+
+    <main>
+        <div class="controls">
+
+            <button class="start-button heap-start-remoteHQ" ng-click="$ctrl.toggleRemoteHQ()" 
+                ng-disabled="$ctrl.remoteHQLoading || $ctrl.firebaseAppModel.app.screenshareActive || $ctrl.firebaseAppModel.app.siteshareActive">
+                <span ng-if="!$ctrl.firebaseAppModel.app.remoteHQActive">Start Site Share</span>
+                <span ng-if="$ctrl.firebaseAppModel.app.remoteHQActive">Stop Site Share</span>
+            </button>
+
+            <div class="info">
+                <button ng-class="{'info-button-show': !$ctrl.showSiteshareInfo, 'info-button-hide': $ctrl.showSiteshareInfo}" ng-click="$ctrl.showSiteshareInfo = !$ctrl.showSiteshareInfo">
+                    <span>What's Site Share?</span>
+					<pl-icon class="icon" [svg]="'chevron-up'" [width]="10" [height]="10" ng-if="!$ctrl.showSiteshareInfo"></pl-icon>
+					<pl-icon class="icon" [svg]="'chevron-down'" [width]="10" [height]="10" ng-if="$ctrl.showSiteshareInfo"></pl-icon>
+                </button>
+                <div class="info-view" ng-if="$ctrl.showSiteshareInfo">
+                    <div>
+                        Share websites and games with the ability to pass mouse control to student.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="controls">
+            <button class="start-button heap-start-screenshare" ng-click="$ctrl.toggleScreenshare()"
+                ng-disabled="$ctrl.firebaseAppModel.app.siteshareActive || $ctrl.firebaseAppModel.app.remoteHQActive || $ctrl.appModel.app.updatingScreenshareVideo">
+                <span ng-if="!$ctrl.firebaseAppModel.app.screenshareActive">Start Screen Share</span>
+                <span ng-if="$ctrl.firebaseAppModel.app.screenshareActive">Stop Screen Share</span>
+            </button>
+            <div class="info">
+                <button  ng-class="{'info-button-show': !$ctrl.showScreenshareInfo, 'info-button-hide': $ctrl.showScreenshareInfo}" ng-click="$ctrl.showScreenshareInfo = !$ctrl.showScreenshareInfo">
+                    <span>What's Screen Share?</span>
+					<pl-icon class="icon" [svg]="'chevron-up'" [width]="10" [height]="10" ng-if="!$ctrl.showScreenshareInfo"></pl-icon>
+					<pl-icon class="icon" [svg]="'chevron-down'" [width]="10" [height]="10" ng-if="$ctrl.showScreenshareInfo"></pl-icon>
+                </button>
+                <div class="info-view" ng-if="$ctrl.showScreenshareInfo">
+                    <div>
+                        <span>Share from your desktop:</span>
+                        <ul>
+                            <li>PDFs</li>
+                            <li>Documents</li>
+                            <li>Images</li>
+                            <li>Web Browser Content</li>
+                        </ul>
+                    </div>
+                    <div>For best results with browser content, open a <em>new browser</em> before starting this app.</div>
+                    <div class="warning">
+                        <div>Screen sharing does not support audio or video.</div>
+                        <div>Be sure not to show any HIPAA protected or other sensitive information that may be on your screen.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>

@@ -1,0 +1,392 @@
+<div class="pl-results-step" *ngIf="resultsReady">
+    <div class="flexbox">
+        <div class="flex2">
+            <div class="result-header" *ngIf="isCriticalFail">
+                {{ 'STEPS.RESULTS.HEADER_FAILED' | translate }}
+            </div>
+            <div class="result-header" *ngIf="!isCriticalFail">
+                {{ 'STEPS.RESULTS.HEADER_PASSED' | translate }}
+            </div>
+            <div class="margin-large-t">
+                {{ 'STEPS.RESULTS.DATE_COMPLETED' | translate }} {{resultsDate | date:'short'}}
+            </div>
+            <div class="margin-large-t flexbox results-container">
+                <pl-check-result [checkName]="('STEPS.STEP_PERMISSIONS' | translate)" icon="lock" [result]="stepResults.Permissions" class="margin-t"></pl-check-result>
+                <pl-check-result [checkName]="('STEPS.STEP_AUDIO' | translate)" icon="headset" [result]="stepResults.AudioPlayback" class="margin-t"></pl-check-result>
+                <pl-check-result [checkName]="('STEPS.STEP_MIC' | translate)" icon="mic" [result]="stepResults.Microphone" class="margin-t"></pl-check-result>
+                <pl-check-result [checkName]="('STEPS.STEP_CAMERA' | translate)" icon="videocam" [result]="stepResults.Camera" class="margin-t"></pl-check-result>
+                <pl-check-result [checkName]="('STEPS.STEP_INTERNET' | translate)" icon="signal_cellular_alt" [result]="stepResults.InternetSpeed" class="margin-t"></pl-check-result>
+            </div>
+            <div class="margin-large-t">
+                <ng-container *ngIf="stepResults.Permissions !== stepResult.PASSED">
+                    <div class="detail-header">
+                        {{ 'STEPS.STEP_PERMISSIONS' | translate }}
+                    </div>
+                    <ng-container *ngIf="getFailedUrlChecks(criticalUrls).length">
+                        <div class="margin-t">
+                            <span class="red">{{ 'STEPS.RESULTS.CONNECTIONS_BLOCKED' | translate }}</span> {{ 'STEPS.RESULTS.DOMAINS_HEADER' | translate }}
+                        </div>
+                        <div class="permission-list">
+                            <div class="permission-item margin-t" *ngFor="let check of getFailedUrlChecks(criticalUrls)">
+                                <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                                {{ check.label }}
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="getFailedUrlChecks(optionalUrls).length">
+                        <div class="margin-t" [innerHTML]="'STEPS.RESULTS.OPTIONAL_HEADER' | translate">
+                            {{ 'STEPS.RESULTS.OPTIONAL_HEADER' | translate }}
+                        </div>
+                        <ng-container *ngIf="getFailedUrlChecks(keyedOptionalUrls['youtube']).length">
+                            <div class="margin-t">
+                                {{ 'STEPS.RESULTS.YOUTUBE_HEADER' | translate }}
+                            </div>
+                            <div class="permission-list margin-t">
+                                <div class="permission-item margin-t" *ngFor="let check of getFailedUrlChecks(keyedOptionalUrls['youtube'])">
+                                    <mat-icon class="warning" [inline]="true">warning</mat-icon>
+                                    {{ check.label }}
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="getFailedUrlChecks(keyedOptionalUrls['siteshare']).length">
+                            <div class="margin-t">
+                                {{ 'STEPS.RESULTS.SITE_SHARE_HEADER' | translate }}
+                            </div>
+                            <div class="permission-list margin-t"  *ngFor="let check of getFailedUrlChecks(keyedOptionalUrls['siteshare'])">
+                                <div class="permission-item margin-t">
+                                    <mat-icon class="warning" [inline]="true">warning</mat-icon>
+                                    {{ check.label }}
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="margin-t" [innerHTML]="'STEPS.RESULTS.REQUIREMENTS_LINK' | translate">
+                        </div>
+                    </ng-container>
+                    <div class="permission-list" *ngIf="isTechCheckUDPBlocked()">
+                        <div class="permission-item margin-t">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.TOKBOX_UDP' | translate }}
+                        </div>
+                    </div>
+                    <div class="permission-list">
+                        <div class="margin-t auto-hide">
+                            {{ 'STEPS.RESULTS.CAMERA_AND_MIC' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" *ngIf="resultDetail.permissions.microphone.error === deviceExceptions.NO_SYSTEM_PERMISSIONS">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.MIC_SYSTEM_DENIED' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" *ngIf="resultDetail.permissions.camera.error === deviceExceptions.NO_SYSTEM_PERMISSIONS">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.CAMERA_SYSTEM_DENIED' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" *ngIf="resultDetail.permissions.camera.error === deviceExceptions.NO_PERMISSIONS || resultDetail.permissions.microphone.error === deviceExceptions.NO_PERMISSIONS">
+                            <mat-icon class="warning" [inline]="true">warning</mat-icon>
+                            {{ 'STEPS.RESULTS.ENSURE_SHARING' | translate }}
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!isCheckPassed(resultDetail.audioPlayback)">
+                    <div class="permission-list margin-t">
+                        <div class="detail-header auto-hide margin-large-t">
+                            {{ 'STEPS.STEP_AUDIO' | translate }}
+                        </div>
+                        <div class="permission-item margin-t">
+                            <mat-icon class="warning" [inline]="true">warning</mat-icon>
+                            {{ 'STEPS.RESULTS.AUDIO_TROUBLESHOOT' | translate }}
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="permission-list">
+                    <div class="detail-header auto-hide margin-large-t">
+                        {{ 'STEPS.STEP_MIC' | translate }}
+                    </div>
+                    <div class="permission-item margin-t" *ngIf="resultDetail.microphone.error === deviceExceptions.NO_AUDIO">
+                        <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                        {{ 'STEPS.RESULTS.MIC_TROUBLESHOOT' | translate }}                  
+                    </div>
+                    <div class="permission-item margin-t" *ngIf="resultDetail.microphone.error === deviceExceptions.NOT_FOUND">
+                        <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                        {{ 'STEPS.RESULTS.NO_MIC_DETECTED' | translate }}                  
+                    </div>
+                </div>
+                <div class="permission-list">
+                    <div class="detail-header auto-hide margin-large-t">
+                        {{ 'STEPS.STEP_CAMERA' | translate }}
+                    </div>
+                    <ng-container [ngSwitch]="resultDetail.camera.error">
+                        <div class="permission-item margin-t"  
+                            *ngSwitchCase="resultDetail.camera.error === deviceExceptions.IN_USE || resultDetail.camera.error === deviceExceptions.ABORT_ERROR ? resultDetail.camera.error : ''">
+                            <mat-icon class="warning" [inline]="true">warning</mat-icon>
+                            {{ 'STEPS.RESULTS.CAMERA_IN_USE' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" *ngSwitchCase="deviceExceptions.NOT_FOUND">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.NO_CAMERA_DETECTED' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" *ngSwitchCase="deviceExceptions.NO_VIDEO">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.NO_VIDEO_TROUBLESHOOT' | translate }}
+                        </div>
+                    </ng-container>
+                </div>
+                <ng-container *ngIf="stepResults.InternetSpeed !== stepResult.PASSED">
+                    <div class="permission-list margin-t">
+                        <div class="detail-header auto-hide margin-large-t">
+                            {{ 'STEPS.STEP_INTERNET' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" 
+                            *ngIf="resultDetail.internetSpeed.internetSpeed.downloadSpeed < networkLimits.MIN_SPEED 
+                            || resultDetail.internetSpeed.internetSpeed.uploadSpeed < networkLimits.MIN_SPEED">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            <span [translate]="'STEPS.RESULTS.SPEED_WARNING'"
+                            [translateParams]="{ UPLOADSPEED: resultDetail.internetSpeed.internetSpeed.uploadSpeed, DOWNLOADSPEED: resultDetail.internetSpeed.internetSpeed.downloadSpeed }">
+                            </span>
+                        </div>
+                        <div class="permission-item margin-t" 
+                        *ngIf="stepResults.Camera === stepResult.PASSED && resultDetail.internetSpeed.video.detail && resultDetail.internetSpeed.video.detail.mos < networkLimits.MIN_MOS">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.VIDEO_FAILURE' | translate }}
+                        </div>
+                        <div class="permission-item margin-t" 
+                        *ngIf="stepResults.Microphone === stepResult.PASSED && resultDetail.internetSpeed.audio.detail && resultDetail.internetSpeed.audio.detail.mos < networkLimits.MIN_MOS">
+                            <mat-icon class="failed" [inline]="true">cancel</mat-icon>
+                            {{ 'STEPS.RESULTS.AUDIO_FAILURE' | translate }}
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="margin-large-t show-more" (click)="toggleDetails()">
+                <ng-container *ngIf="!detailsExpanded">
+                    <mat-icon class="margin-r">expand_more</mat-icon> {{ 'STEPS.RESULTS.SHOW_DETAILS' | translate }}
+                </ng-container>
+                <ng-container *ngIf="detailsExpanded">
+                    <mat-icon class="margin-r">expand_less</mat-icon> {{ 'STEPS.RESULTS.HIDE_DETAILS' | translate }}
+                </ng-container>
+            </div>
+            <div class="margin-large-t result-details permission-list" [class.hidden]="!detailsExpanded">
+                <div class="detail-header">
+                    {{ 'STEPS.RESULTS.DEVICE_ACCESS' | translate }}
+                </div>
+                <div class="permission-list margin-t">
+                    <ng-container *ngTemplateOutlet="checkDetail; context: {result: resultDetail.permissions.camera, label: translate('STEPS.RESULTS.CAMERA_PERMISSIONS')}"></ng-container>
+                    <ng-container *ngTemplateOutlet="checkDetail; context: {result: resultDetail.permissions.microphone, label: translate('STEPS.RESULTS.MIC_PERIMSSIONS')}"></ng-container>
+                </div>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.RESULTS.SERVICE_ACCESS' | translate }}
+                </div>
+                <div class="permission-list margin-t flexbox row">
+                    <div class="flexbox column margin-large-l margin-large-r">
+                        <div class="margin-b">
+                            {{ 'STEPS.RESULTS.CORE_SERVICES' | translate }}
+                        </div>
+                        <div *ngFor="let url of criticalUrls;">
+                            <ng-container 
+                                *ngTemplateOutlet="checkDetail; context: { result: url.status, label: url.label, hideError: true }">
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="flexbox column  margin-large-l">
+                        <div class="margin-b">
+                            {{ 'STEPS.RESULTS.OPTIONAL_SERVICES' | translate }}
+                        </div>
+                        <div *ngFor="let url of optionalUrls;">
+                            <ng-container 
+                                *ngTemplateOutlet="checkDetail; context: { result: url.status, label: url.label, hideError: true }">
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.STEP_AUDIO' | translate }}
+                </div>
+                <ng-container *ngTemplateOutlet="checkDetail; context: {result: resultDetail.audioPlayback, label: translate('STEPS.RESULTS.SPEAKER_TEST')}"></ng-container>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.STEP_MIC' | translate }}
+                </div>
+                <ng-container *ngTemplateOutlet="checkDetail; context: {result: resultDetail.microphone, label: translate('STEPS.RESULTS.MIC_TEST')}"></ng-container>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.STEP_CAMERA' | translate }}
+                </div>
+                <ng-container *ngTemplateOutlet="checkDetail; context: {result: resultDetail.camera, label: translate('STEPS.RESULTS.CAMERA_TEST')}"></ng-container>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.STEP_INTERNET' | translate }}
+                </div>
+                <ul class="margin-large-t">
+                    <li>
+                        {{ 'STEPS.RESULTS.UPLOAD' | translate }} {{ resultDetail.internetSpeed.internetSpeed.uploadSpeed }} Mbps
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.DOWNLOAD' | translate }} {{ resultDetail.internetSpeed.internetSpeed.downloadSpeed }} Mbps
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.JITTER' | translate }} {{ resultDetail.internetSpeed.internetSpeed.jitter }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.LATENCY' | translate }} {{ resultDetail.internetSpeed.internetSpeed.latency }} ms
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.VIDEO_SUPPORTED' | translate }} {{ resultDetail.internetSpeed.video?.detail?.supported ? ('GENERAL.YES' | translate) : ('GENERAL.NO' | translate) + ' - ' + (resultDetail.internetSpeed.video?.detail?.reason || '') }}
+                    </li>
+                    <ul>
+                        <li>
+                            {{ 'STEPS.RESULTS.VIDEO_MOS' | translate }} {{ resultDetail.internetSpeed.video?.detail?.mos | number: '1.0-1' }}
+                        </li>
+                        <li>
+                            {{ 'STEPS.RESULTS.VIDEO_BITRATE' | translate }} {{ (resultDetail.internetSpeed.video.detail?.bitrate / 1000) | number }} kbps
+                        </li>
+                        <li>
+                            {{ 'STEPS.RESULTS.FRAME_RATE' | translate }} {{ resultDetail.internetSpeed.video.detail?.frameRate  | number }} fps
+                        </li>
+                        <li>
+                            {{ 'STEPS.RESULTS.PACKET_LOSS' | translate }} {{ (resultDetail.internetSpeed.video.detail?.packetLossRatio * 100) | number }} %
+                        </li>
+                    </ul>
+                    <li>
+                        {{ 'STEPS.RESULTS.AUDIO_SUPPORTED' | translate }} {{ resultDetail.internetSpeed.audio?.detail?.supported ? ('GENERAL.YES' | translate) : ('GENERAL.NO' | translate) + ' - ' + (resultDetail.internetSpeed.audio?.detail?.reason || '') }}
+                    </li>
+                    <ul>
+                        <li>
+                            {{ 'STEPS.RESULTS.AUDIO_MOS' | translate }} {{ resultDetail.internetSpeed.audio?.detail?.mos | number: '1.0-1' }}
+                        </li>
+                        <li>
+                            {{ 'STEPS.RESULTS.AUDIO_BITRATE' | translate }} {{ (resultDetail.internetSpeed.audio.detail?.bitrate / 1000) | number }} kbps
+                        </li>
+                        <li>
+                            {{ 'STEPS.RESULTS.PACKET_LOSS' | translate }} {{ (resultDetail.internetSpeed.audio.detail?.packetLossRatio * 100) | number }} %
+                        </li>
+                    </ul>
+                </ul>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.RESULTS.OPENTOK_CONNECTIVITY_TEST' | translate }}
+                </div>
+                <ul class="margin-large-t">
+                    <li>
+                        {{ 'STEPS.RESULTS.SUCCESSFUL' | translate }}: {{ isCheckPassed(resultDetail.permissions.networkDetail.opentok.result) ? 'Yes' : 'No' }}
+                    </li>
+                        <ng-container *ngIf="!isCheckPassed(resultDetail.permissions.networkDetail.opentok.result) && resultDetail.permissions.networkDetail.opentok.detail?.failedTests?.length">
+                        <li>
+                            {{ 'STEPS.RESULTS.ERROR_LIST' | translate }}:
+                        </li>
+                        <ul>
+                            <li *ngFor="let fail of resultDetail.permissions.networkDetail.opentok.detail.failedTests">
+                                {{ fail.type }} - {{ fail.error.name }}
+                            </li>
+                        </ul>
+                    </ng-container>
+                </ul>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.RESULTS.DEVICE_INFO' | translate }}
+                </div>
+                <ul>
+                    <li>
+                        {{ 'STEPS.RESULTS.OS_VERSION' | translate }} {{ resultDetail.userInfo.os }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.BROWSER' | translate }} {{ resultDetail.userInfo.browser }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.SCREEN_RESOLUTION' | translate }}: {{ resultDetail.userInfo.screenResolution?.width }} x {{ resultDetail.userInfo.screenResolution?.height }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.WINDOW_SIZE' | translate }}: {{ resultDetail.userInfo.windowSize?.width }} x {{ resultDetail.userInfo.windowSize?.height }}
+                    </li>
+                </ul>
+                <div class="detail-header margin-large-t">
+                    {{ 'STEPS.RESULTS.LOCATION_DETAILS' | translate }}
+                </div>
+                <ul>
+                    <li>
+                        {{ 'STEPS.RESULTS.CITY' | translate }} {{ resultDetail.userInfo.locationDetails.city }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.COUNTRY' | translate }} {{ resultDetail.userInfo.locationDetails.country }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.IP' | translate }} {{ resultDetail.userInfo.locationDetails.ip }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.LOCATION' | translate }} {{ resultDetail.userInfo.locationDetails.loc }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.ORGANIZATION' | translate }} {{ resultDetail.userInfo.locationDetails.org }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.POSTAL' | translate }} {{ resultDetail.userInfo.locationDetails.postal }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.REGION' | translate }} {{ resultDetail.userInfo.locationDetails.region }}
+                    </li>
+                    <li>
+                        {{ 'STEPS.RESULTS.TIMEZONE' | translate }} {{ resultDetail.userInfo.locationDetails.timezone }}
+                    </li>
+                </ul>
+            </div>
+            <div class="margin-large-t">
+                {{ 'STEPS.RESULTS.SHARE_HEADER' | translate }}
+            </div>
+            <div class="margin-t link-sharing">
+                <mat-form-field appearance="outline" class="link-container margin-r">
+                    <input matInput [value]="publicUrl">
+                </mat-form-field>
+                <button [cdkCopyToClipboard]="publicUrl" mat-stroked-button (click)="onCopyLink()">
+                    {{ copyingLink ? ('STEPS.RESULTS.URL_COPIED' | translate) : ('STEPS.RESULTS.BTN_COPY' | translate) }}
+                </button>
+            </div>
+            <div class="result-actions">
+                <button mat-raised-button color="accent" (click)="onEmailResults()">
+                    {{ 'STEPS.RESULTS.BTN_EMAIL' | translate }}
+                </button>
+                <button mat-stroked-button (click)="onRestart()">
+                    {{ 'STEPS.RESULTS.BTN_RUN_AGAIN' | translate }}
+                </button>
+                <button mat-stroked-button [disabled]="!isChatAvailable" (click)="onOpenChat()">
+                    {{ 'STEPS.RESULTS.BTN_CHAT' | translate }}
+                </button>
+            </div>
+        </div>
+        <div class="flex1 cards">
+            <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div class="margin-b">
+                            {{ 'GENERAL.TROUBLESHOOTING' | translate }}
+                        </div>
+                        <mat-divider></mat-divider>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="padding-large">
+                    <div class="flexbox">
+                        <div class="">
+                            <mat-icon>
+                                help
+                            </mat-icon>
+                        </div>
+                        <div class="padding-large-l">
+                            {{ 'STEPS.RESULTS.TROUBLESHOOTING_LINK' | translate }}
+                            <a [href]="'STEPS.RESULTS.REQS_PAGE' | translate" target="_blank">
+                                {{ 'STEPS.RESULTS.REQS_PAGE' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <pl-tech-support-card class="margin-large-t"></pl-tech-support-card>
+        </div>
+    </div>
+</div>
+<ng-template #checkDetail let-result="result" let-label="label" let-hideError="hideError">
+    <div class="permission-item margin-t" [class.passed]="isCheckPassed(result)" [class.optional]="!isCheckPassed(result)">
+        <mat-icon [ngClass]="isCheckPassed(result) ? 'passed' : 'warning'" [inline]="true">
+            {{ isCheckPassed(result) ? 'check_circle' : 'warning'  }}
+        </mat-icon>
+        
+        <ng-container *ngIf="!hideError && !isCheckPassed(result) && result.error; else labelOnly">
+            {{ label }}: {{ getFriendlyError(result) }}
+        </ng-container>
+        <ng-template #labelOnly>
+            {{ label }}
+        </ng-template>
+    </div>
+</ng-template>

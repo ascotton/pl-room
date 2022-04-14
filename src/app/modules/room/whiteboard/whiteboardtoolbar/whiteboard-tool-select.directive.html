@@ -1,0 +1,84 @@
+<nav class="whiteboard-tool-select" ng-class="{'in':$ctrl.firebaseAppModel.app.whiteboardActive}">
+    <button
+            class="toolbar-btn pointer"
+            ng-class="{ 'active': isToolActive(lassoTool) }"
+            ng-click="selectTool(lassoTool)">
+        <figure>
+            <pl-icon [svg]="'pointer'" [width]="18" [height]="38"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Pointer
+        </div>
+    </button>
+    <button
+            class="toolbar-btn pencil"
+            ng-class="{ 'active': isToolActive(pencilTool) }"
+            ng-click="selectTool(pencilTool)">
+        <figure>
+            <pl-icon [svg]="'pencil'" [width]="18" [height]="38"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Pencil
+        </div>
+    </button>
+    <button
+            class="toolbar-btn line"
+            ng-class="{ 'active': isToolActive(lineTool) }"
+            ng-click="selectTool(lineTool)">
+        <figure>
+            <pl-icon [svg]="'line'" [width]="18" [height]="24"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Line
+        </div>
+    </button>
+    <button
+            class="toolbar-btn text"
+            ng-class="{ 'active': isToolActive(textTool) }"
+            ng-click="selectTool(textTool)">
+        <figure>
+            <pl-icon [svg]="'letter-T'" [width]="18" [height]="38"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Text
+        </div>
+    </button>
+    <button pl-dropdown pl-dropdown-content="#shapes-menu" from-top="true"
+            class="toolbar-btn shapes"
+            ng-class="{ 'active': isShapeToolActive() }">
+        <figure>
+            <pl-icon [svg]="'circle-and-square'" [width]="18" [height]="38"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Shapes
+        </div>
+    </button>
+    <div id="shapes-menu" class="pl-dropdown-content">
+        <div class="shape-item rectangle" ng-class="{ 'active': isToolActive(rectTool) }" ng-mousedown="selectShape(rectTool)">
+            <figure></figure>
+            <label>Rectangle</label>
+        </div>
+        <div class="shape-item ellipse" ng-class="{ 'active': isToolActive(ellipseTool) }" ng-mousedown="selectShape(ellipseTool)">
+            <figure></figure>
+            <label>Circle</label>
+        </div>
+    </div>
+    <button
+            class="toolbar-btn stamps"
+            ng-class="{ 'active': isToolActive(stampTool) }"
+            ng-click="selectTool(stampTool)">
+        <figure>
+            <pl-icon [svg]="'stamp'" [width]="18" [height]="38"></pl-icon>
+        </figure>
+        <div class="btn-tooltip">
+            Stamps
+        </div>
+    </button>
+    <button permissions="PERMS_DEFAULT_PROVIDERS"
+            ng-class="{'active': whiteboardModel.whiteboard.elements.length > 0}"
+            class="clear toolbar-btn"
+            ng-click="whiteboardModel.removeAllElements()">
+            <pl-icon [svg]="'cross'" [width]="18" [height]="44"></pl-icon>
+            <label>Clear</label>
+    </button>
+</nav>

@@ -1,0 +1,85 @@
+ <g class="selector selected" ng-show="model.visible"
+    ng-attr-transform="rotate({{ model.angle }}, {{ model.x + model.width/2 }}, {{ model.y + model.height/2 }})">
+     <g class="selectorGroupControls" ng-show="model.visibleControls">
+         <rect class="moveHandle handle selected" handle-type="move"
+               fill="#000000" fill-opacity="0.1" stroke="black"
+               ng-attr-stroke-dasharray="{{ model.dashSize }},{{ model.dashSize }}"
+               ng-attr-y="{{ model.y }}"  ng-attr-x="{{ model.x }}"
+               ng-attr-width="{{ model.width }}" ng-attr-height="{{ model.height }}"
+             ></rect>
+
+         <!--<line stroke="black" stroke-width="2"
+               ng-attr-x1="{{ model.x + model.width/2 }}"
+               ng-attr-y1="{{ model.y - 2 * model.handleSize }}"
+               ng-attr-x2="{{ model.x + model.width/2 }}"
+               ng-attr-y2="{{ model.y }}"
+             ></line>-->
+
+         <rect stroke="black"
+               ng-attr-x="{{ model.x - 0.5 + model.width/2 }}"
+               ng-attr-y="{{ model.y - 10 - model.handleSize}}"
+               width=".5"
+               ng-attr-height="{{ 10 + model.handleSize }}">
+         </rect>
+
+         <rect class="rotationHandle handle" handle-type="rotate"
+               ng-attr-width="{{ model.handleSize }}"
+               ng-attr-height="{{ model.handleSize }}"
+               ng-attr-x="{{ model.x + model.width/2 - model.handleSize/2 }}"
+               ng-attr-y="{{ model.y - 2.5 * model.handleSize }}">
+         </rect>
+
+          <rect class="rotationHandle handle touchHandle" handle-type="rotate"
+               ng-attr-x="{{ model.x + model.width/2 - 22 }}"
+               ng-attr-y="{{ model.y - 1.9 * 22 }}">
+         </rect>
+
+         <rect class="nw sizeHandle handle" handle-type="nw"
+               ng-attr-width="{{ model.handleSize }}"
+               ng-attr-height="{{ model.handleSize }}"
+               ng-attr-x="{{ model.x - model.handleSize }}"
+               ng-attr-y="{{ model.y - model.handleSize }}">
+         </rect>
+
+         <rect class="nw sizeHandle handle touchHandle" handle-type="nw"
+               ng-attr-x="{{ model.x - 22 }}"
+               ng-attr-y="{{ model.y - 22 }}">
+         </rect>
+
+         <rect class="ne sizeHandle handle" handle-type="ne"
+               ng-attr-width="{{ model.handleSize }}"
+               ng-attr-height="{{ model.handleSize }}"
+               ng-attr-x="{{ model.x + model.width }}"
+               ng-attr-y="{{ model.y - model.handleSize }}">
+         </rect>
+
+         <rect class="ne sizeHandle handle touchHandle" handle-type="ne"
+               ng-attr-x="{{ model.x + model.width - 22 }}"
+               ng-attr-y="{{ model.y - 22 }}">
+         </rect>
+
+         <rect class="sw sizeHandle handle" handle-type="sw"
+               ng-attr-width="{{ model.handleSize }}"
+               ng-attr-height="{{ model.handleSize }}"
+               ng-attr-x="{{ model.x - model.handleSize }}"
+               ng-attr-y="{{ model.y + model.height }}">
+         </rect>
+
+          <rect class="sw sizeHandle handle touchHandle" handle-type="sw"
+               ng-attr-x="{{ model.x - 22 }}"
+               ng-attr-y="{{ model.y + model.height - 22 }}">
+         </rect>
+
+         <rect class="se sizeHandle handle" handle-type="se"
+               ng-attr-width="{{ model.handleSize }}"
+               ng-attr-height="{{ model.handleSize }}"
+               ng-attr-x="{{ model.x + model.width }}"
+               ng-attr-y="{{ model.y + model.height }}">
+         </rect>
+
+         <rect class="se sizeHandle handle touchHandle" handle-type="se"
+               ng-attr-x="{{ model.x + model.width - 22 }}"
+               ng-attr-y="{{ model.y + model.height- 22 }}">
+         </rect>
+     </g>
+ </g>

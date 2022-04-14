@@ -1,0 +1,24 @@
+<div
+  class="animation-button"
+  [ngClass]="{ isSelectable: isSelectable$ | async }"
+  (mouseover)="isHovering = true"
+  (mouseleave)="isHovering = false"
+  (click)="playAnimation(animation)"
+>
+  <figure
+    [id]="animation.name + 'AnimationButton'"
+    class="animation-figure"
+  >
+    <img [src]="animation.iconPath" />
+    <mat-icon *ngIf="animation.hasSound" class="has-sound">volume_up</mat-icon>
+  </figure>
+  <div class="play-btn" [ngClass]="{ selected: selected$ | async }"
+    *ngIf="showPlayBtn$ | async">
+    <span *ngIf="showPlayIcon$ | async">
+      <mat-icon [svgIcon]="'play-symbol'"></mat-icon>
+    </span>
+    <span *ngIf="showLoaderIcon$ | async">
+      <mat-icon [svgIcon]="'loader'"></mat-icon>
+    </span>
+  </div>
+</div>

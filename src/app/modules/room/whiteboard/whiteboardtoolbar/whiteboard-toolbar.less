@@ -1,0 +1,529 @@
+.whiteboard-tool-options {
+  position: absolute;
+  width: 100%;
+  height: 44px;
+  top: 44px;
+  left: 0;
+  z-index: 999;
+  padding-right: 7px;
+  background-color: @gray-lightest;
+  transform: translate3d(0, -88px, 0);
+  transition: transform 150ms;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  &.in {
+    transform: translate3d(0, 0px, 0);
+  }
+
+  & > *:not(.pl-dropdown-container) {
+    flex: 1 auto;
+    max-width: 67px;
+  }
+
+  .pl-dropdown-container {
+    border-radius: 0;
+  }
+  .text-input-container {
+    display: flex;
+    padding: 4px;
+  }
+
+  .toolbar-btn {
+    overflow: visible;
+  	display: block;
+  	padding: 0;
+  	fill: @gray-darker;
+  	color: @gray-darker;
+  	line-height: inherit;
+  	margin: 0 3px;
+  	top: 0;
+  	float: left;
+  	figure {
+  		display: block;
+      	top: 4px;
+      	margin: 0 auto;
+        margin-bottom: -1px;
+      	height: 26px;
+      	svg {
+      		margin-right: 2px;
+      	}
+    }
+    label {
+      display: block;
+      text-align: center;
+      font-weight: normal;
+    }
+    &.duplicate figure {
+      top: 0;
+      width: 20px;
+      .doc-1 {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 7px;
+        left: -4px;
+      }
+      .doc-2 {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 4px;
+        right: -1px;
+        fill: @gray;
+      }
+    }
+    &.forward svg,
+    &.back svg {
+      width: 22px;
+      height: 22px;
+    }
+    &.line-style {
+    	figure {
+    		svg {
+		    	margin-top: 6px;
+		    }
+    	}
+    }
+    &.clear {
+      float: right;
+      svg {
+        width: 17px;
+        height: 17px;
+        margin-top: 3px;
+      }
+    }
+    &:disabled {
+      color: @gray-lighter;
+      cursor: default;
+      fill: @gray-lighter;
+    }
+  }
+
+  .popover-menu-container { display: none; }
+
+  .slider-thickness {
+    figure {
+      position: relative;
+      top: 6px;
+      width: 1px;
+      height: 18px;
+      margin: 0 auto 9px auto;
+      background-color: @gray-darkest;
+      &:before { display: none; }
+    }
+  }
+  .slider-transparency {
+    figure {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 7px;
+      border-radius: 10px;
+      border: 1px solid @gray-dark;
+      background-color: white;
+      top: 5px;
+    }
+    .transparency-background {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+      background-color: white;
+      opacity: 1;
+    }
+    .slider-control .handle {
+      top: 0;
+    }
+  }
+  .line-style {
+    .pl-dropdown-container {
+      width: 72px;
+      text-align: center;
+    }
+  }
+  .font-family {
+    width: 124px;
+    max-width: 124px;
+
+    figure {
+      margin-top: 3px;
+      margin-left: 4px;
+      height: 20px;
+    }
+
+    .pl-dropdown-container {
+      width: 222px;
+    }
+  }
+
+  .skinToneLabel {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 8px 10px 0px 10px;
+  }
+
+  .skintone-checkbutton {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.selected {
+      background-color: #d6d6d6;
+    }
+    &.hovering {
+      background-color: #fafafa;
+    }
+  }
+
+  .skintone-oval {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    border: solid 1px #979797;
+  }
+  
+  .skintone-menubutton {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .skintone-toolbutton {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .emoji-menu {
+    width: 384px;
+    z-index: 5000;
+    button {
+      float: left;
+      width: 46px;
+      height: 46px;
+      padding: 7px;
+      figure {
+        width: 32px;
+        height: 32px;
+        background-size: 32px 32px;
+      }
+    }
+  }
+  .emoji-menu-button {
+    background-size: 22px 22px;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+  .stamp-label {
+    margin-top: 3px;
+  }
+}
+
+.whiteboard-tool-select {
+  position: absolute;
+  width: 100%;
+  height: 44px;
+  left: 0;
+  top: 0;
+  text-align: center;
+  background-color: @gray-darkest;
+  border-bottom: 1px solid @gray;
+  transform: translate3d(0, -44px, 0);
+  transition: transform 150ms;
+  z-index: 1000;
+  visibility: hidden;
+  flex-flow: row nowrap;
+  justify-content: center;
+
+  &.in {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    display: flex;
+  }
+
+  .pl-dropdown-container {
+    background-color: #ffffff;
+    border-radius: 0;
+
+    & .arrow .side-2 {
+      border-bottom-color: #ffffff;
+    }
+
+    .shape-item {
+      text-align: center;
+      cursor: pointer;
+      padding: 11px 7px;
+      figure {
+        display: block;
+        width: 21px;
+        height: 21px;
+        margin: 0 auto;
+        background-color: @gray-darker;
+      }
+      label {
+        display: block;
+        line-height: 18px;
+        cursor: pointer;
+        margin: 0;
+        color: @gray-darker;
+        font-weight: 200;
+      }
+      &.ellipse {
+        figure { border-radius: 12px; }
+      }
+      &.active {
+        label {
+          color: @brand-blue-medium;
+        }
+
+        figure {
+          background-color: @brand-blue-medium;
+        }
+      }
+      &:hover {
+        background-color: #e4f5fd;
+        label {
+          color: @brand-blue-medium;
+        }
+
+        figure {
+          background-color: @brand-blue-medium;
+        }
+      }
+    }
+  }
+
+
+  .toolbar-btn {
+    flex: 1 auto;
+    max-width: 44px;
+    line-height: 0;
+    padding: 0;
+    height: 43px;
+
+    &.clear {
+      max-width: 59px;
+      line-height: 44px;
+      position: absolute;
+      right: 13px;
+      top: 0;
+      background-color: transparent !important;
+
+      &.active {
+        background-color: transparent !important;
+
+        &:hover {
+          background-color: transparent !important;
+          svg {
+            fill: #ffffff;
+          }
+          label {
+            color: #ffffff;
+          }
+        }
+
+        svg {
+            fill: @gray-lighter;
+        }
+
+        label {
+          color: @gray-lighter;
+        }
+      }
+
+      label {
+        cursor: pointer;
+        color: @gray-dark;
+        font-weight: normal;
+        margin-left: 5px;
+      }
+
+      svg {
+        cursor: pointer;
+        width: 10px;
+        height: 10px;
+        margin-top: 17px;
+        fill: @gray-dark;
+      }
+    }
+
+    path {
+      transition: none;
+    }
+
+    .btn-tooltip {
+      visibility: hidden;
+      position: fixed;
+      background-color: @blue-medium;
+      width: 44px;
+      height: 35px;
+      line-height: 35px;
+      padding: 0;
+      border-radius: 4px;
+      font-size: 12px;
+      text-align: center;
+      color: #ffffff;
+      bottom: -40px;
+      z-index: 10000;
+
+      &:after {
+        content: "";
+        width: 0;
+        height: 0;
+        top: -11px;
+        left: 15px;
+        position: absolute;
+        border: solid 6px #46b1e1;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+
+    &.active,
+    &.active:hover,
+    &:hover:not(.shapes) {
+      background-color: @blue-medium;
+      svg {
+        fill: #ffffff;
+      }
+    }
+
+    &:hover:not(.active):not(.dropdown-opened) .btn-tooltip {
+      visibility: visible;
+      opacity: 0;
+      -webkit-animation: show-btn-tooltip 150ms ease-out 1s forwards;
+      -moz-animation: show-btn-tooltip 150ms ease-out 1s forwards;
+      animation: show-btn-tooltip 150ms ease-out 1s forwards;
+    }
+
+    &:hover {
+      background-color: @blue-medium;
+      label {
+        color: #ffffff;
+      }
+      svg {
+        fill: #ffffff;
+      }
+    }
+
+    svg {
+      width: 18px;
+      height: 38px;
+      fill: @gray-lighter;
+    }
+  }
+}
+
+
+
+
+@-webkit-keyframes hide-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+}
+@-moz-keyframes hide-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+}
+@-o-keyframes hide-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+}
+@keyframes hide-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+}
+
+
+
+@-webkit-keyframes show-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-moz-keyframes show-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-o-keyframes show-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes show-btn-tooltip {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: translate3d(0, (@animation-offset), 0);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

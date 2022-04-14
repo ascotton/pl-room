@@ -1,0 +1,22 @@
+<div class="pl-activity-view">
+    <div>
+        <button pl-button class="reverse" (click)="cancel()">Cancel</button>
+    </div>
+    <div class="margin-b">
+        Type: {{ activity.activity_type }}
+    </div>
+    <div *ngIf="(activity.activity_type === 'memory' || activity.activity_type === 'flashcards')">
+        <div *ngIf="activity.imageDeck && activity.imageDeck.uuid">
+            <pl-image-deck-view [deck]="activity.imageDeck" [showSave]="false"></pl-image-deck-view>
+        </div>
+        <div *ngIf="(!activity.imageDeck || !activity.imageDeck.uuid)">
+            TODO - non image deck display
+        </div>
+    </div>
+    <div *ngIf="(activity.activity_type === 'youtube')">
+        Youtube TODO
+    </div>
+    <div *ngIf="(activity.activity_type === 'pdfviewer')">
+        PDF TODO
+    </div>
+</div>

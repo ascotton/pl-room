@@ -1,0 +1,11 @@
+<pl-stream-box>
+  <pl-stream-mic-action *ngIf="canMute$ | async"></pl-stream-mic-action>
+  <pl-dismiss-action *ngIf="canDismiss$ | async"></pl-dismiss-action>
+  <pl-stream-screenshot-action *ngIf="canShowScreenshot$ | async"></pl-stream-screenshot-action>
+  <ng-container *ngIf="canShowSettings$ | async">
+    <pl-stream-settings-action
+      *ngIf="participantId$ | async as participantId"
+      [participantId]="participantId"
+    ></pl-stream-settings-action>
+  </ng-container>
+</pl-stream-box>

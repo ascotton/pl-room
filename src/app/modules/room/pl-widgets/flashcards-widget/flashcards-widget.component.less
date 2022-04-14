@@ -1,0 +1,117 @@
+@import 'colors.less';
+
+.flaschards-widget {
+    width: 240px;
+    height: 155px;
+    .flashcard-card {
+        perspective: 1000px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 110px;
+        height: 155px;
+        background-color: transparent;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
+        &.drawn {
+            transform: rotateY(180deg) translate(-120px);
+        }
+        &.animating {
+            z-index: 999 !important;
+        }
+    }
+
+    .empty-deck {
+        border: 1px solid @gray-dark;
+        border-radius: 4px;
+        background-color: @white;
+        display: flex;
+        font-family: Roboto;
+        color: @gray-darker;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 400;
+        flex-direction: column;
+        .card-label {
+            margin-top: -50px;
+        }
+        .card-actions {
+            position: absolute;
+            bottom: 6px;
+            margin-left: 8px;
+            margin-right: 8px;
+            .mat-button {
+                padding-left: 8px;
+                padding-right: 8px;
+                width: 100%;
+                font-size: 10px;
+                line-height: 24px;
+                .mat-button-wrapper {
+                    line-height: 24px;
+                }
+                &:not(:last-child) {
+                    margin-bottom: 6px
+                }
+            }
+        }
+    }
+    .flashcard-front, .flashcard-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -moz-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .no-action {
+        cursor: default;
+    }
+
+    .flashcard-front {
+        background-color: white;
+        padding: 4px;
+        .front-bg {
+            width: 100%;
+            height: 100%;
+            background-image: url('/assets/widgets/flashcards/card_background.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+
+    .flashcard-back {
+        border: 1px solid @gray-dark;
+        border-radius: 4px;
+        transform: rotateY(180deg) translateZ(1px);
+        -moz-transform: rotateY(180deg) translateZ(-1px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        padding-bottom: 12px;
+        background-color: white;
+        border-radius: 4px;
+        
+        .flashcard-image {
+            width: 90px;
+            height: 90px;
+            border: 1px solid @gray-dark;
+            border-radius: 4px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .flashcard-title {
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 20px;
+        }
+    }
+}

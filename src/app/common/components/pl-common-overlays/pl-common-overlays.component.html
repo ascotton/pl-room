@@ -1,0 +1,33 @@
+<div [hidden]="!active" class="pl-common-overlays">
+    <div *ngIf="actives.tour" class="pl-common-overlay-background" (click)="clickBackground()">
+        <div *ngIf="actives.tour" class="overlay-tour">
+            <div class="overlay-header">
+                <!-- <span class="header-text"></span> -->
+                <pl-icon (click)="setNotActive('tour')" class="close-icon" [svg]="'close-inverted'"></pl-icon>
+            </div>
+            <div class="overlay-body">
+                <div class="center margin-large-b">
+                    <pl-icon [svg]="'room-overview'" [width]="252" [height]="203"></pl-icon>
+                </div>
+                <h3 class="margin-b center">Welcome to the Therapy Room!</h3>
+                <div class="margin-large-b center">Let's take a quick look around. We’ll highlight key features and tell you what they do. Let’s get started!</div>
+                <div class="flexbox margin-large-b">
+                    <div class="flex1">&nbsp;</div>
+                    <div>
+                        <button pl-button class="" (click)="setNotActive('tour')">Close</button>
+                        <button pl-button class="primary" (click)="startTour()">Start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [hidden]="!actives.iFrameWhiteboard" class="pl-common-overlay-background" (click)="clickBackground()">
+        <div class="iframe-loader-wrapper">
+            <pl-dot-loader></pl-dot-loader>
+        </div>
+        <iframe *ngIf="iFrameWhiteboardSrc" [src]="iFrameWhiteboardSrc" [ngStyle]="iFrameWhiteboardStyles" class="overlay-iframe-whiteboard-iframe"></iframe>
+        <div class="iframe-close-x pointer" [ngStyle]="iFrameWhiteboardCloseStyles" (click)="clickClose()">
+            <pl-icon class="icon white" [svg]="'cross'" [width]="20" [height]="20"></pl-icon>
+        </div>
+    </div>
+</div>

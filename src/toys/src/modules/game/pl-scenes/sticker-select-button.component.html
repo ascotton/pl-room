@@ -1,0 +1,16 @@
+<div class="sticker-button">
+    <div class="button"
+        [ngClass]="{ active: sticker.buttonSelected, disabled: disabled }"
+        (click)="clickedSticker()">
+        <div class="icon">
+            <!-- <div class="checkbox" *ngIf="sticker.buttonSelected">
+                <pl-icon [svg]="'check-circle'" class="check-icon"></pl-icon>
+            </div> -->
+            <img
+                class="sticker-button-img"
+                [src]="sticker.imageSrc" [id]="sticker.name"
+            />
+        </div>
+    </div>
+    <div class="text">{{sticker.displayName}}</div>
+</div>

@@ -1,0 +1,56 @@
+.student-list {
+    max-height: 250px;
+    overflow-y: auto;
+
+    .student-item {
+        cursor: pointer;
+        padding: 8px;
+        min-height: 60px;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid white;
+        }
+
+        .primary {
+            font-size: 14px;
+            color: #FBFBFB;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+
+            .secondary {
+                font-size: 12px;
+                color: #E6E6E6;
+                margin-right: 10px;
+            }
+
+            .status {
+                padding: 2px 8px;
+                color: white;
+                font-size: 10px;
+                text-transform: capitalize;
+                border-radius: 100px;
+            }
+        }
+
+    }
+
+    .completed {
+        background-color: #9AC61E;
+    }
+
+    .started {
+        background-color: #F9B417;
+    }
+
+    .late {
+        background-color: #D0021B;
+    }
+
+    .reviewed {
+        background-color: #4D8BBE;
+    }
+}

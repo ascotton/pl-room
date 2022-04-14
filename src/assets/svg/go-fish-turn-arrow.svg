@@ -1,0 +1,14 @@
+<svg viewBox="0 0 70 100" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
+    <defs>
+        <clipPath id="clip0">
+            <path d="M369 205 431 205 431 242 369 242Z" fill-rule="evenodd" clip-rule="evenodd"></path>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#clip0)" transform="translate(-369 -205)">
+        <path d="M371.5 223.5 387.5 207.5 387.5 215.5 430.5 215.5 430.5 231.5 387.5 231.5 387.5 239.5Z" stroke="#9AC61E" stroke-miterlimit="8" fill="#EBF6CC" fill-rule="evenodd"></path>
+    </g>
+    <style>
+        .svg-text-1 { font: 15px sans-serif; }
+    </style>
+    <text x="20" y="24" class="svg-text-1">Turn</text>
+</svg>

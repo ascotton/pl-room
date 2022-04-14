@@ -1,0 +1,88 @@
+<div class="drawer drawer-right" permissions="PERMS_DEFAULT_PROVIDERS" [ngClass]="{ 'in': active }">
+    <div [class.hidden]="customizingWidget" class="drawer-widget">
+        <header>
+            <h4>Widgets</h4>
+        </header>
+        <main>
+            <!-- Block with widget setting -->
+            <pl-accordion>
+                <pl-expansion-panel [ngClass]="{ 'active': currentWidget === idx }" class="widget-control" *ngFor="let widget of activeWidgets; let idx = index; trackBy: getId" #panel (opened)="setCurrentWidget(idx)" (closed)="currentWidget === idx && setCurrentWidget(null)">
+                    <pl-expansion-panel-header>
+                        <div class="widget-header">
+                            <button class="delete heap-delete-widget" (click)="deleteWidgetByIndex(widget, idx)">
+                                <figure><pl-icon width="16" height="16" verticalAlign='text-top' [svg]="'trash'"></pl-icon></figure>
+                            </button>
+                            <button class="widget-name heap-current-widget">
+                                <figure class="chevron" *ngIf="widget.settings?.length">
+                                    <div>
+                                        <pl-icon width="12" height="12" verticalAlign="text-top" [svg]="'chevron-right'"></pl-icon>
+                                    </div>
+                                </figure>
+                                <div class="chevron" *ngIf="!widget.settings?.length">&nbsp;</div>
+                                <div class="text" [ngClass]="{ 'no-chevron-margin': !widget.settings?.length }">{{ widget.name }}</div>
+                            </button>
+                        </div>
+                    </pl-expansion-panel-header>
+
+                    <div class="widget-options" [ngSwitch]="widget.type">
+                        <!-- <pl-dice-settings class="widget-options" (customize)="onCustomize()" [paramsModel]="widget.params" (paramsModelChange)="paramsChanged($event, idx)" *ngSwitchCase="'dice-widget'"></pl-dice-settings> -->
+                        <pl-flashcards-settings [id]="widget.$id" (paramsModelChange)="paramsChanged($event, idx)" *ngSwitchCase="'flashcards-widget'"></pl-flashcards-settings>
+                        <ng-container *ngSwitchDefault>
+                            <div *ngFor="let setting of widget.settings">
+                                <input type="text" [ngModel]="widget.params[setting.param]" (ngModelChange)="paramChanged($event, setting.param, idx)" *ngIf="setting.type === 'input'" />
+                                <div class="alert-option block" *ngIf="setting.type === 'range'">
+                                    <div class="option-label">
+                                        Spinner Sections
+                                        <div class="slider-value">
+                                            {{ widget.params[setting.param] }}
+                                        </div>
+                                    </div>
+                                    <mat-slider thumbLabel (input)="paramChanged($event.value, setting.param, idx)" class="slider-control" [min]="setting.min" [max]="setting.max" step="1" [value]="widget.params[setting.param]"></mat-slider>
+                                </div>
+                                <div class="alert-option" *ngIf="setting.type.indexOf('checkbox') !== -1">
+                                    <span>{{ setting.desc }}</span>
+                                    <pl-input-checkbox [model]="widget.params[setting.param]" (modelChange)="paramChanged($event, setting.param, idx)"></pl-input-checkbox>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </pl-expansion-panel>
+            </pl-accordion>
+        </main>
+        <footer>
+            <p class="widget-toolbar-caption">
+                Select a widget and drag it onto
+                <br>the collaborative workspace
+            </p>
+            <div class="widget-toolbar-list">
+                <div class="widget-toolbar-element" *ngFor="let widget of widgets">
+                    <div class="widget-icon"
+                        [dndDraggable]="widget"
+                        [dndType]="widget.type"
+                        [dndEffectAllowed]="'copyMove'"
+                        (dndStart)="startDrag($event)"
+                        (mousedown)="startDrag($event)"
+                        (mouseup)="cancelDrag($event)"
+                        (dndCanceled)="cancelDrag(event)"
+                        [draggable]="true">
+                        <pl-icon [svg]="widget.icon" [scale]="widget.iconScale ? widget.iconScale : 1" width="44" height="48"></pl-icon>
+                    </div>
+                    <p class="widget-caption">{{widget.name}}</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- <div class="subdrawer drawer-widget" *ngIf="customizingWidget">
+        <div class="wrapper">
+            <div class="header">
+                <div (click)="onDoneCustomize()" class="pointer">
+                    <pl-icon [svg]="'chevron-left'" [scale]="0.6" class="white"></pl-icon>
+                    Customize Widget
+                </div>
+            </div>
+            <div class="content">
+                <pl-dice-customize *ngIf="activeWidgets[currentWidget].type === 'dice-widget'" [params]="activeWidgets[currentWidget].params" (sidesChange)="onDiceSidesChanged($event, currentWidget)"></pl-dice-customize>
+            </div>
+        </div>
+    </div> -->
+</div>

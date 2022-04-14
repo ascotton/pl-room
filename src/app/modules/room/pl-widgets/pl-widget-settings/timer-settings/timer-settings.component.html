@@ -1,0 +1,17 @@
+<div class="timer-settings margin-large">
+    <div class="flex-between">
+        <h2>Timer Settings</h2>
+        <button mat-icon-button aria-label="Close Timer Settings">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div class="margin-large flex-between">
+        <span> Alert Sound</span>
+        <mat-slide-toggle 
+            color="primary"
+            [checked]="paramsModel.audioEnabled"
+            (click)="clickedAudioEnabledCheckbox($event)">
+        </mat-slide-toggle>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<p class="chat-block">
+  <ng-container *ngFor="let part of parts" [ngSwitch]="part.type">
+    <a *ngSwitchCase="'link'" [href]="part.href" [target]="part.target">{{part.content}}</a>
+    <ng-container *ngSwitchDefault>{{part.content}}</ng-container>
+  </ng-container>
+</p>

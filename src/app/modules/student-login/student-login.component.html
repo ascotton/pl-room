@@ -1,0 +1,22 @@
+<!-- Angular 2 root component -->
+<pl-app-global></pl-app-global>
+<div class="login-background"></div>
+<div class="announcement row">
+    <div class="col-xs-12 col-sm-10 col-sm-push-1 col-md-8 col-md-push-2">
+        <div class="alert alert-primary">
+            <span class="welcome-banner">Welcome to <span class="username">{{ clinicianUsername }}'s</span> room!</span>
+        </div>
+    </div>
+</div>
+<div class="login-content">
+    <pl-icon [svg]="'logo-white-no-tm'" class="white" [width]="'355px'" [height]="'60px'"></pl-icon>
+    <form novalidate (submit)="login($event)">
+        <p [ngClass]="{ 'alert alert-danger': submitted && !submitting }">Please enter your name then click the button below to get started.</p>
+        <p *ngIf="!isStudent" class="margin-b">Entering the therapy room as a student will sign you out of your <b>{{ userUsername }}</b> account.</p>
+        <div class="form-group" [hidden]="submitting">
+            <input type="text" class="form-control input-lg" id="username" placeholder="First and Last Name" [(ngModel)]="username" [value]="username" required name="username">
+            <input type="submit" class="btn btn-lg heap-login-button" [value]="enterRoomText">
+        </div>
+    </form>
+</div>
+<pl-student-settings></pl-student-settings>

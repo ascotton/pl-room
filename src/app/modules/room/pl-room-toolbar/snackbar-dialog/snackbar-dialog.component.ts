@@ -1,0 +1,22 @@
+import { Component, Inject } from '@angular/core';
+import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+
+@Component({
+    selector: 'pl-snackbar-dialog',
+    templateUrl: './snackbar-dialog.component.html',
+    styleUrls: ['./snackbar-dialog.component.less'],
+})
+export class PLSnackBarDialogComponent {
+
+    constructor(private snackBarRef: MatSnackBarRef<PLSnackBarDialogComponent>,
+                @Inject(MAT_SNACK_BAR_DATA) public data: any) {
+    }
+
+    onClose() {
+        this.snackBarRef.dismiss();
+    }
+
+    onAction() {
+        this.snackBarRef.dismissWithAction();
+    }
+}

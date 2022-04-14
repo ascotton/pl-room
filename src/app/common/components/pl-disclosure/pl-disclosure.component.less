@@ -1,0 +1,47 @@
+@import '../../less/main.less';
+
+.disclosure {
+    min-height: 44px;
+    background-color: @gray-darkest;
+    color: @gray-lightest;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    transition: transform 200ms;
+
+    .disclosure-name {
+        line-height: 44px;
+        width: 125px;
+        text-align: left;
+        .chevron {
+            float: left;
+            margin: -2px 5px 0 7px;
+            svg {
+                fill: @gray;
+                width: 12px;
+                height: 12px;
+                transform: rotate(0);
+                transition: transform 150ms;
+            }
+        }
+        .disclosure-label {
+            font-family: @headings-font-family;
+            font-size: 12px;
+        }
+    }
+    
+    &.active {
+        color: @white;
+    }
+
+    .icon {
+        fill: @gray-lightest;
+        transform: rotate(0deg);
+        transition: transform 200ms;
+    }
+    .icon-active {
+        fill: @white;
+        transform: rotate(90deg);
+        transition: transform 200ms;
+    }
+}
+

@@ -1,0 +1,127 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="-136 145 500 500" enable-background="new -136 145 500 500">
+    <style>
+        .st0{fill:url(#Rectangle-48_2_);} .st1{fill:url(#Rectangle-48_3_);} .st2{filter:url(#filter-3);} .st3{fill:#29B6F6;} .st4{fill:url(#Path-49_1_);fill-opacity:0.15;} .st5{fill:url(#Path-50_1_);fill-opacity:0.15;} .st6{filter:url(#filter-7);} .st7{fill:url(#SVGID_1_);} .st8{filter:url(#filter-8);} .st9{fill:#81D4FA;}
+    </style>
+    <filter width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-8" x="-50%" y="-50%">
+        <feOffset in="SourceAlpha" dy="-1" result="shadowOffsetOuter1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetOuter1" stdDeviation="1" result="shadowBlurOuter1">
+</feGaussianBlur>
+        <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.056 0">
+</feColorMatrix>
+        <feOffset in="SourceAlpha" dy="-1" result="shadowOffsetInner1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetInner1" stdDeviation=".5" result="shadowBlurInner1">
+</feGaussianBlur>
+        <feComposite in2="SourceAlpha" in="shadowBlurInner1" k3="1" result="shadowInnerInner1" operator="arithmetic" k2="-1">
+</feComposite>
+        <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0">
+</feColorMatrix>
+        <feMerge>
+            <feMergeNode in="shadowMatrixOuter1">
+</feMergeNode>
+            <feMergeNode in="SourceGraphic">
+</feMergeNode>
+            <feMergeNode in="shadowMatrixInner1">
+</feMergeNode>
+        </feMerge>
+    </filter>
+    <filter width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-7" x="-50%" y="-50%">
+        <feOffset in="SourceAlpha" dy="1" result="shadowOffsetOuter1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetOuter1" stdDeviation="1" result="shadowBlurOuter1">
+</feGaussianBlur>
+        <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0">
+</feColorMatrix>
+        <feOffset in="SourceAlpha" dy="1" result="shadowOffsetInner1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetInner1" result="shadowBlurInner1">
+</feGaussianBlur>
+        <feComposite in2="SourceAlpha" in="shadowBlurInner1" k3="1" result="shadowInnerInner1" operator="arithmetic" k2="-1">
+</feComposite>
+        <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.35 0">
+</feColorMatrix>
+        <feMerge>
+            <feMergeNode in="shadowMatrixOuter1">
+</feMergeNode>
+            <feMergeNode in="SourceGraphic">
+</feMergeNode>
+            <feMergeNode in="shadowMatrixInner1">
+</feMergeNode>
+        </feMerge>
+    </filter>
+    <filter width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3" x="-50%" y="-50%">
+        <feOffset in="SourceAlpha" dy="-1" result="shadowOffsetOuter1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetOuter1" stdDeviation=".5" result="shadowBlurOuter1">
+</feGaussianBlur>
+        <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.056 0">
+</feColorMatrix>
+        <feOffset in="SourceAlpha" dy="-1" result="shadowOffsetInner1">
+</feOffset>
+        <feGaussianBlur in="shadowOffsetInner1" stdDeviation=".5" result="shadowBlurInner1">
+</feGaussianBlur>
+        <feComposite in2="SourceAlpha" in="shadowBlurInner1" k3="1" result="shadowInnerInner1" operator="arithmetic" k2="-1">
+</feComposite>
+        <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0">
+</feColorMatrix>
+        <feMerge>
+            <feMergeNode in="shadowMatrixOuter1">
+</feMergeNode>
+            <feMergeNode in="SourceGraphic">
+</feMergeNode>
+            <feMergeNode in="shadowMatrixInner1">
+</feMergeNode>
+        </feMerge>
+    </filter>
+    <linearGradient id="Rectangle-48_2_" gradientUnits="userSpaceOnUse" x1="-270.288" y1="500.243" x2="-270.288" y2="499.463" gradientTransform="matrix(224 0 0 -141.1215 60657.402 70845.414)">
+        <stop offset="0" stop-color="#2E5DD5">
+</stop>
+        <stop offset=".886" stop-color="#2C58C1">
+</stop>
+        <stop offset="1" stop-color="#24479A">
+</stop>
+    </linearGradient>
+    <path id="Rectangle-48" class="st0" d="M350 470.6h-474.2V346.8c0-7 4.6-16.1 10.3-20.2L92.4 176.9c11.4-8.2 29.8-8.2 41.2 0l206.2 149.7c5.7 4.1 10.3 13.2 10.3 20.2v123.8z">
+</path>
+    <linearGradient id="Rectangle-48_3_" gradientUnits="userSpaceOnUse" x1="-270.288" y1="498.938" x2="-270.288" y2="499.905" gradientTransform="matrix(224 0 0 -126 60657.406 63339.55)">
+        <stop offset="0" stop-color="#3972EB">
+</stop>
+        <stop offset=".949" stop-color="#3972EB">
+</stop>
+        <stop offset="1" stop-color="#4079F2">
+</stop>
+    </linearGradient>
+    <path id="Rectangle-48_1_" class="st1" d="M-124.2 351.6H350v243.7h-474.2z">
+</path>
+    <path class="st2 st3" d="M-124.2 351.6l450 253.1c14.3 8.1 12.6 14.6-3.8 14.6H-94.4c-16.4 0-29.7-13.3-29.7-29.7v-238z" id="Rectangle-50">
+</path>
+    <linearGradient id="Path-49_1_" gradientUnits="userSpaceOnUse" x1="-267.338" y1="499.411" x2="-270.024" y2="498.06" gradientTransform="matrix(113.673 0 0 -99.392 30758.938 49941.36)">
+        <stop offset="0" stop-opacity="0">
+</stop>
+        <stop offset="1">
+</stop>
+    </linearGradient>
+    <path id="Path-49" class="st4" d="M110.6 408.7l69.5 67.1 172.1-82V347c0-8.2-5.4-18.8-12.1-23.6l-81.7-58.8-147.8 144.1z">
+</path>
+    <linearGradient id="Path-50_1_" gradientUnits="userSpaceOnUse" x1="-268.171" y1="498.239" x2="-269.438" y2="499.762" gradientTransform="matrix(113.673 0 0 -99.392 30758.938 49941.36)">
+        <stop offset="0" stop-opacity="0">
+</stop>
+        <stop offset="1">
+</stop>
+    </linearGradient>
+    <path id="Path-50" class="st5" d="M108.5 408.7l69.5 67.1 172.1-82V347c0-8.2-5.4-18.8-12.1-23.6l-81.7-58.8-147.8 144.1z">
+</path>
+    <g id="Path-48" class="st6">
+        <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-268.198" y1="500.085" x2="-269.948" y2="498.328" gradientTransform="matrix(125.127 0 0 -96.726 33834.352 48575.332)">
+            <stop offset="0" stop-color="#E2E2E2">
+</stop>
+            <stop offset="1" stop-color="#E5E5E5">
+</stop>
+        </linearGradient>
+        <path class="st7" d="M56.2 294.7c-.8-.8-2.2-.8-3 0L26 320.8c-.8.8-.9 2.2 0 3l86.2 86.7c.8.8 2.2.8 3 0l175.4-175.7c.8-.8.8-2.1 0-3l-26.3-25.7c-.8-.8-2.2-.8-3 0L115.2 351c-.8.8-2.2.8-3 0l-56-56.3z">
+</path>
+    </g>
+    <path class="st8 st9" d="M351.8 351.6v238c0 16.4-13.3 29.7-29.8 29.7H-88l439.8-267.7z" id="Rectangle-49">
+</path>
+</svg>

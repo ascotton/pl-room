@@ -1,0 +1,225 @@
+.youtube-player {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	.player-area {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+        font-size: 0;
+        scale: 1;
+		iframe {
+			width: 100%;
+			height: 100%;
+		}
+		.click-trapper {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+            height : 100%;
+			bottom: 44px;
+			cursor: pointer;
+        }
+        .ipad-video-overlay {
+            position: absolute;
+            z-index: 9999999999 !important;
+            background-color: white;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            .treasure-chest {
+                position: relative;
+                top: -50px;
+                margin: auto;
+                display: block;
+                padding: 50px;
+            }
+        }
+    }
+
+    .youtube-verification-message {
+        width: 100%;
+        text-align: center;
+        border: 1px solid silver;
+        font-family: Verdana;
+        padding: 10px;
+        background-color: @gray-lightest;
+        line-height: 16px;
+        .message {
+            font: 13px Arial;
+            color: @slate-darkest;
+            // margin: 0 2px;
+        }
+        .list {
+            font: 14px Verdana;
+            font-weight: 400;
+            color: @purple;
+        }
+    }
+
+    .jiggle {
+        -webkit-animation: jiggle 1.5s infinite;
+        -moz-animation-duration: 1.5s;
+        -moz-animation-name: jiggle;
+        -moz-animation-iteration-count: infinite;
+        -webkit-transform: rotate(-3deg);
+        -moz-transform: rotate(-3deg);
+    }
+
+    @-moz-keyframes jiggle {
+        0% {
+            -moz-transform: rotate(-3deg);
+        }
+        50% {
+            -moz-transform: rotate(3deg);
+        }
+    }
+
+    @-webkit-keyframes jiggle {
+        0% {
+            -webkit-transform: rotate(-3deg);
+            }
+        50% {
+            -webkit-transform: rotate(3deg);
+        }
+    }
+
+	.controls {
+		position: relative;
+		width: 100%;
+		height: 44px;
+		background-color: @gray-darkest;
+		border-top: 1px solid black;
+		overflow: hidden;
+		.play-pause {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			width: 44px;
+			cursor: pointer;
+			.play-btn,
+			.pause-btn {
+				width: 20px;
+				height: 20px;
+				margin: 0 auto;
+				fill: @gray-light;
+			}
+			.pause-btn { display: none; }
+			&:hover svg {
+				fill: white;
+			}
+			&:active svg {
+				fill: white;
+			}
+			&.playing {
+				.pause-btn { display: block; }
+				.play-btn { display: none; }
+			}
+		}
+		.scrubber {
+			position: absolute;
+			top: 0;
+			right: 167px;
+			bottom: 0;
+			left: 52px;
+			cursor: default;
+            .trackClickTarget {
+              height : 100%;
+              background-color: orangered;
+            }
+			.track {
+				position: absolute;
+				left: 11px;
+				top: 18px;
+				bottom: 18px;
+				right: 0;
+				background-color: @gray-light;
+				box-shadow: inset 0 1px 2px @gray-dark;
+				border: 1px solid darken(@gray-darkest, 3%);
+				border-radius: 3px;
+				.progress-fill {
+					height: 100%;
+					width: 0;
+					border-radius: 3px;
+					box-shadow: inset 1px 1px 2px @gray-darkest;
+					background-color: lighten(@brand-red, 10%);
+				}
+				.handle {
+					position: absolute;
+					top: -19px;
+					left: 0;
+					margin-left: -22px;
+					width: 44px;
+					height: 44px;
+					cursor: pointer;
+					&:before {
+						content: ' ';
+						display: block;
+						position: relative;
+						top: 0;
+						left: 11px;
+						width: 22px;
+						height: 22px;
+						border-radius: 11px;
+						background-color: @gray-lighter;
+						border: 2px solid @gray-darker;
+					}
+				}
+			}
+		}
+		.right-nav {
+			position: absolute;
+			top: 0;
+			right: 11px;
+			bottom: 0;
+			width: 144px;
+			line-height: 42px;
+			font-size: 18px;
+			.mutebtn {
+				width: 40px;
+				height: 42px;
+				cursor: pointer;
+				.mute-btn-active { display: none; }
+				svg {
+					position: relative;
+					top: 3px;
+					width: 18px;
+					height: 18px;
+					fill: @gray-light;
+					text-shadow: 1px 2px 3px black;
+				}
+				&:hover svg {
+					fill: white;
+				}
+				&:active svg {
+					fill: white;
+				}
+				&.active {
+					.mute-btn { display: none; }
+					.mute-btn-active { display: inline-block; }
+				}
+			}
+			time {
+				display: inline-block;
+				text-align: center;
+				width: 100px;
+				color: @gray-light;
+				.slash {
+					color: @gray-lighter;
+				}
+			}
+		}
+	}
+}
+
+.youtube-drawer {
+	.description {
+		padding: 15px;
+	}
+}

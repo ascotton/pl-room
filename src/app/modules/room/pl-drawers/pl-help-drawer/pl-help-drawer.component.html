@@ -1,0 +1,53 @@
+<div class="pl-help-drawer">
+    <div class="help-menu-item" (click)="onSupportChat()">
+        <div class="help-item-icon margin">
+            <mat-icon>support_agent</mat-icon>
+        </div>
+        <div class="help-item-text margin-r margin-l">
+            <div class="help-item-title">Support</div>
+            <div class="help-item-subtitle">Chat with PresenceLearning’s support team.</div>
+        </div>
+    </div>
+    <div class="help-menu-item" *ngIf="isProvider$ | async" (click)="onHelpCenter()">
+        <div class="help-item-icon margin">
+            <mat-icon>help</mat-icon>
+        </div>
+        <div class="help-item-text margin-r margin-l">
+            <div class="help-item-title">Help Center</div>
+            <div class="help-item-subtitle">Watch video tutorials and read user guides.</div>
+        </div>
+    </div>
+    <div class="help-menu-item" *ngIf="isProvider$ | async" (click)="onStartTour()">
+        <div class="help-item-icon margin">
+            <mat-icon>lightbulb</mat-icon>
+        </div>
+        <div class="help-item-text margin-r margin-l">
+            <div class="help-item-title">Room Tips</div>
+            <div class="help-item-subtitle">Review therapy room features</div>
+        </div>
+    </div>
+    <div class="help-menu-item" *ngIf="isProvider$ | async" (click)="onTelehealthInstitute()">
+        <div class="help-item-icon margin">
+            <mat-icon>school</mat-icon>
+        </div>
+        <div class="help-item-text margin-r margin-l">
+            <div class="help-item-title">Telehealth Institute</div>
+            <div class="help-item-subtitle">Become a PresenceLearning expert with case studies, practice exercises, and demonstrations.</div>
+        </div>
+    </div>
+    <div class="help-menu-item" (click)="onComputerSetup()">
+        <div class="help-item-icon margin">
+            <mat-icon>assignment_turned_in</mat-icon>
+        </div>
+        <div class="help-item-text margin-r margin-l">
+            <div class="help-item-title">Tech Check</div>
+            <div class="help-item-subtitle">Confirm your computer and equipment are ready to work with PresenceLearning.</div>
+        </div>
+    </div>
+    <div class="margin">
+        <mat-divider></mat-divider>
+    </div>
+    <div class="margin">
+        Version: {{ version }}
+    </div>
+</div>

@@ -1,0 +1,64 @@
+@import "colors.less";
+
+.pl-camera-check-step {
+    .question-header {
+        font-weight: bold;
+    }
+    .radio-group-answers {
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        .mat-radio-label-content {
+            font-weight: 300 !important;
+        }
+    }
+    .btn-next {
+        width: 120px;
+    }
+    .device-list {
+        width: 40%;
+        min-width: 400px;
+        .full-width {
+            width: 100%;
+        }
+    }
+    .video-timer {    
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        top: 90px;
+        left: 10px;
+        color: white;
+        font-weight: 400;
+        font-size: 25px;
+        width: 400px;
+        .mat-icon {
+            color: @red;
+        }
+
+    }
+    .video-actions {
+        position: relative;
+        left: 10px;
+        top: 290px;
+        z-index: 1;
+        .action-btn {
+            margin-right: 5px;
+        }
+        .btn-red {
+            background-color: @red;
+            color: @white;
+        }
+    }
+    .video-loader { 
+        width: 400px;
+    }
+    .video-player {
+        width: 400px;
+        height: 300px;
+    }
+    .camera-allow-img {
+        border: 1px solid @gray;
+    }
+}

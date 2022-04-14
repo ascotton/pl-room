@@ -1,0 +1,11 @@
+<pl-video-settings-container
+  *ngIf="streamId$ | async as id" [streamId]="id"
+  class="video-form-container"
+>
+  <h3 class="margin-large-tb">Primary Camera</h3>
+  <pl-video-device-select *ngIf="canUpdateVideoDevice$ | async"></pl-video-device-select>
+  <pl-settings-video-box class="margin-large-b"></pl-settings-video-box>
+  <pl-video-label *ngIf="canUpdateVideoLabel$ | async"></pl-video-label>
+  <pl-mirror-video></pl-mirror-video>
+  <pl-cover-video *ngIf="canCover$ | async"></pl-cover-video>
+</pl-video-settings-container>

@@ -1,0 +1,16 @@
+<div class="animations-container">
+  <pl-play-animation
+    *ngFor="let animation of currentAnimations"
+    [animation]="animation"
+  ></pl-play-animation>
+</div>
+<div class="animations-pagination">
+  <mat-paginator
+    [length]="animations.length"
+    [hidePageSize]="true"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage"
+    (page)="onPage($event)"
+  >
+  </mat-paginator>
+</div>

@@ -1,0 +1,34 @@
+<div class="pl-user-menu">
+    <button mat-menu-item (click)="onComputerSetup()">
+        <mat-icon svgIcon="computer"></mat-icon>
+        <span>Computer Setup</span>
+    </button>
+    <button mat-menu-item (click)="onSupportChat()">
+        <mat-icon svgIcon="chat"></mat-icon>
+        <span>Support Chat</span>
+    </button>
+    <button mat-menu-item (click)="onHelpCenter()">
+        <mat-icon svgIcon="help"></mat-icon>
+        <span>Help Center</span>
+    </button>
+    <button mat-menu-item (click)="onChangePassword()">
+        <mat-icon svgIcon="key"></mat-icon>
+        <span>Change Password</span>
+    </button>
+    <button mat-menu-item (click)="onCopyrightPolicy()">
+        <mat-icon svgIcon="copyright-policy"></mat-icon>
+        <span>Copyright Policy</span>
+    </button>
+    <button mat-menu-item (click)="onCodeOfConduct()">
+        <mat-icon svgIcon="code-conduct"></mat-icon>
+        <span>Code of Conduct</span>
+    </button>
+    <button mat-menu-item (click)="onSignOut()">
+        <mat-icon svgIcon="signout"></mat-icon>
+        <span>Sign Out</span>
+    </button>
+    <button mat-menu-item [cdkCopyToClipboard]="gitSha">
+        <mat-icon svgIcon="version"></mat-icon>
+        <span>Version: {{ gitSha }}</span>
+    </button>
+</div>

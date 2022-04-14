@@ -1,0 +1,12 @@
+<div id="{{stampType}}-menu" class="toolbar-btn" pl-dropdown
+    pl-dropdown-content="#menu-content-{{stampType}}">
+    <figure class="emoji-menu-button" id="{{stampType}}" ng-style="{ 'background-image': 'url(' + buttonStamp.png + ')'}"></figure>
+    <label class="stamp-label font-h6">{{menuLabel | capitalize}}</label>
+</div>
+<div id="menu-content-{{stampType}}" class="pl-dropdown-content emoji-menu">
+    <div ng-repeat="stamp in stamps">
+        <button title="{{stamp.name | capitalize}}" id="{{stamp.name}}" ng-click="selectStamp(stamp)">
+            <figure id="{{stamp.name}}" style="background-image: url('{{stamp.png}}')"></figure>
+        </button>
+    </div>
+</div>

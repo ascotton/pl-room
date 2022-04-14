@@ -1,0 +1,33 @@
+.whiteboard-text-editor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: transparent;
+
+
+    /** reverting the invisible text editor, it doesn't work on iPad **/
+    // #whiteboard-editable-text {
+    //     position: absolute;
+    //     border-style: none;
+    //     background-color: transparent;
+    //     outline: none;
+    //     pointer-events: all;
+    //     cursor: text;
+    //     padding: 0;
+    //     &:focus {
+    //         outline: 0;
+    //     }
+    // };
+
+    #whiteboard-editable-text {
+        position: absolute;
+        border: 1px;
+        border-color: #0f0f0f;
+        border-style: line;
+        line-style: normal;
+        pointer-events: all;
+        cursor: text;
+    };
+    
+};

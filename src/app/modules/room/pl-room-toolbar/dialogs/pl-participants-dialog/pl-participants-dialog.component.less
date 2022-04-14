@@ -1,0 +1,45 @@
+@import 'colors.less';
+
+.pl-participants-dialog {
+    font-size: 14px;
+    .waiting-room-header {
+        font-weight: 400;
+    }
+    .participants-list {
+        max-height: 145px;
+        overflow-y: auto;
+        .no-participants {
+            font-size: 14px;
+            font-weight: 300;
+        }
+        .participant {
+            display: flex;
+            justify-content: space-between;
+            .participant-details {
+                .participant-name {
+                    color: @gray-darkest;
+                    font-weight: 300;
+                }
+                .participant-device {
+                    color: @gray-dark;
+                    font-weight: 300;
+                }
+            }
+            .participant-actions {
+                display: flex;
+                align-items: center;
+                .mat-icon {
+                    margin-right: 6px
+                }
+                button {
+                    margin-left: 6px
+                }
+            }
+            .participant-status {
+                font-weight: 300;
+                color: @gray-dark;
+                font-style: italic;
+            }
+        }
+    }
+}

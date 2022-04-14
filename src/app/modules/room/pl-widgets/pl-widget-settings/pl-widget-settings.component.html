@@ -1,0 +1,18 @@
+<div class="widget-settings" [ngSwitch]="widget.type">
+    <pl-dice-settings class="widget-settings" 
+        *ngSwitchCase="'dice-widget'" [paramsModel]="widget.params" 
+        (paramsModelChange)="paramsChanged($event)" >
+    </pl-dice-settings>
+    <pl-spinner-settings class="widget-settings" 
+        *ngSwitchCase="'spinner-widget'" [paramsModel]="widget.params" 
+        (paramsModelChange)="paramsChanged($event)">
+    </pl-spinner-settings>
+    <pl-timer-settings class="widget-settings" 
+        *ngSwitchCase="'timer-widget'" [paramsModel]="widget.params" 
+        (paramsModelChange)="paramsChanged($event)">
+    </pl-timer-settings>
+    <pl-flashcards-settings *ngSwitchCase="'flashcards-widget'"
+        [id]="widget.$id"
+        (paramsModelChange)="paramsChanged($event)">
+    </pl-flashcards-settings>
+</div>

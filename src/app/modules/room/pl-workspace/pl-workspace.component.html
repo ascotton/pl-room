@@ -1,0 +1,12 @@
+<div class="workspace"
+    [hidden]="!shouldShowWorkspace()"
+    [ngClass]="{'non-interactive': isTeamWriteActive(), 'show-assessment-instructions-jumbotron-overlay': showAssessmentInstructionsJumbotronOverlay()}">
+    <pl-youtube-activity *ngIf="(activityType === 'youtube' || activityType === 'instant_youtube') && showActivity"></pl-youtube-activity>
+    <pl-pdf-activity *ngIf="activityType === 'pdfviewer' && showActivity"></pl-pdf-activity>
+    <pl-flashcards-activity *ngIf="activityType === 'flashcards' && showActivity"></pl-flashcards-activity>
+    <pl-memory-activity *ngIf="activityType === 'memory' && showActivity"></pl-memory-activity>
+    <pl-double-assessment-activity *ngIf="activityType === 'doubleassessment' && showActivity"></pl-double-assessment-activity>
+    <pl-wj-audio-assessment *ngIf="activityType === 'wjaudioassessment' && showActivity"></pl-wj-audio-assessment>
+    <pl-guess-who-board *ngIf="activityType === 'whos-that' && showActivity"></pl-guess-who-board>
+    <pl-game *ngIf="(activityType?.slice(0,5) === 'game-') && showActivity"></pl-game>
+</div>

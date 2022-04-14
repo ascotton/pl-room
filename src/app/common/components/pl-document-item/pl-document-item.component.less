@@ -1,0 +1,72 @@
+@import '../less/colors.less';
+
+.pl-document-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+    background-color: @gray-lightest;
+    color: @gray-darker;
+    border-radius: 5px;
+    margin: 5px 10px;
+    &:hover {
+        background-color: @white;
+    }
+
+    &.current {
+        background-color: @blue-lightest;
+    }
+
+    &.disabled {
+        background-color: @gray;
+    }
+
+    .document-properties {
+        display: flex;
+        flex-grow: 2;
+        flex-direction: column;
+        padding: 2px;
+        width: 90%;
+        &.clickable {
+            cursor: pointer;
+        }
+        .doc-name {
+            color: black;
+            overflow-wrap: break-word;
+        }
+        .doc-date {
+            font-size: 12px;
+            overflow-wrap: break-word;
+        }
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        .dropdown-button {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .dropdown-content {
+            position: absolute;
+            background-color: black;
+            color: @gray-lightest;
+            margin-left: -50px;
+            border-radius: 2px;
+            padding: 5px;
+            min-width: 60px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            button {
+                display: block;
+                font-size: 12px;
+                &:hover {
+                    color: @white;
+                }
+                &:disabled {
+                    font-style: italic;
+                    color: @gray;
+                }
+            }
+          }
+    }
+}

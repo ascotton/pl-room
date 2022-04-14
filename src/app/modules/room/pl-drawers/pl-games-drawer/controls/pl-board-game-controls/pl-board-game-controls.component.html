@@ -1,0 +1,63 @@
+<div class="pl-board-games-controls" *ngIf="game">
+    <div class="button-panel new-game">
+        <button pl-button (click)="newGame()" [hidden]="loadingGame">New Game</button>
+
+        <pl-dot-loader [hidden]="!loadingGame"></pl-dot-loader>
+    </div>
+    <div class="control-panels">
+        <pl-drawer-panel #optionsPanel header="Options">
+            <div *ngIf="widget && widget.settings && (widget.type === game.widgetType || widget.type === game.widget.type)" class="widget-options">
+                <div *ngFor="let setting of widget.settings">
+                    <input type="text" [ngModel]="widget.params[setting.param]" (ngModelChange)="paramChanged($event, setting.param, idx)" *ngIf="setting.type === 'input'" />
+                    <pl-slider 
+                        [min]="setting.min" [max]="setting.max" [sliderValue]="widget.params[setting.param]" [minimalLabels]="true"
+                        (sliderValueChange)="paramChanged($event, setting.param, idx)" *ngIf="setting.type === 'range'">
+                    </pl-slider>
+                    <div class="alert-option" *ngIf="setting.type.indexOf('checkbox') !== -1">
+                        <span>{{ setting.desc }}</span>
+                        <pl-input-checkbox [model]="widget.params[setting.param]" (modelChange)="paramChanged($event, setting.param, idx)"></pl-input-checkbox>
+                    </div>
+                </div>
+            </div>
+        </pl-drawer-panel>
+        <pl-drawer-panel #piecesPanel header="Players">
+            <div class="pieces">
+                <div>Click to add player tokens to the board. Click the gray token to remove them.</div>
+                <div class="button-panel">
+                    <button 
+                        [disabled]="!totalUsedPieceCount" 
+                        pl-button class="center" (click)="clearBoard()">Clear Board</button>
+                </div>
+                <div class="pieces-list" *ngIf="game && game.pieceSetups">
+                    <pl-piece-select-button 
+                        *ngFor="let pieceSetup of game.pieceSetups;" 
+                        (pieceClickedEvent)="pieceClicked($event)"
+                        [pieceSetup]="pieceSetup">
+                    </pl-piece-select-button>
+                </div>
+            </div>
+        </pl-drawer-panel>
+        <pl-drawer-panel #instancesPanel header="Games In Progress">
+            <pl-dot-loader [hidden]="!trashingGame"></pl-dot-loader>
+            <div class="instances-list" [hidden]="trashingGame">
+                <div class="document-item-container" *ngFor="let document of instances">
+                    <pl-document-item *ngIf="!document.trashed"
+                        [document]="document"
+                        [allowDeleteCurrent]="true"
+                        (loadDocument)="loadGame($event)" 
+                        (trashDocument)="trashGame($event)" 
+                        (restoreDocument)="restoreGame($event)" 
+                        (deleteDocument)="deleteGame($event)" 
+                        (nameChanged)="gameInstanceNameChanged($event)"
+                        [itemDisabled]="false || loadingDocumentKey"
+                    ></pl-document-item>
+                </div>
+                <div class="instance-placeholder"></div>
+            </div>
+            <!--  Temporarily suppressing Delete Games until future release 
+                <div class="button-panel">
+                <button pl-button class="danger" (click)="clearInstances()">Delete Old Games</button>
+            </div> -->
+        </pl-drawer-panel>
+    </div>
+</div>

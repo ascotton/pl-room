@@ -1,0 +1,42 @@
+<div class="pl-stopwatch draggable-cursor">
+  <div class="pl-stopwatch-spacer" *ngIf="!isClinitian()"></div>
+
+  <div class="pl-stopwatch-time">
+    <div class="minutes">
+      {{ time | date : 'mm' }}
+    </div>
+    <div class="delimiter-1">
+      :
+    </div>
+    <div class="seconds">
+      {{ time | date : 'ss' }}
+    </div>
+  </div>
+
+  <div class="pl-stopwatch-line" *ngIf="isClinitian()">
+  </div>
+
+  <div class="pl-stopwatch-buttons" *ngIf="isClinitian()">
+    <button class="stopwatchStartButton" (click)="!dragging && startStopwatch(false)" [hidden]="status !== 'initial'">
+      Start
+    </button>
+
+    <button class="stopwatchStopButton" (click)="!dragging && stopStopwatch(false)" [hidden]="status !== 'running'">
+      Stop
+    </button>
+
+    <button class="stopwatchResumeButton"
+            (click)="!dragging && startStopwatch(false)"
+            [hidden]="status !== 'suspended' || reachedLimit"
+            width="100">
+      Resume
+    </button>
+
+    <button (click)="!dragging && resetStopwatch(false)" [hidden]="status !== 'suspended'"
+            [ngClass]="{'stopwatchResetButton': !reachedLimit, 'stopwatchResetButton-limit': reachedLimit}"
+            width="100">
+      Reset
+    </button>
+
+  </div>
+</div>

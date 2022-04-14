@@ -1,0 +1,31 @@
+@libBasePath: '../../../lib-components/core/';
+// AOT does not play nice with imports with variables.
+
+@import '../../../lib-components/core/components-defaults/pl-button.less';
+// dialog (inactive timeout) does not get button styles for some reason, so force load the less
+// ahead of time. They will show up after a different component (e.g. documentation) that uses
+// pl-button triggers lazy loading the less.
+@import '../../../lib-components/pl-button/pl-button.component.less';
+
+@import '../../../lib-components/core/reset.less';
+@import '../../../lib-components/core/accessibility.less';
+@import '../../../lib-components/core/colors.less';
+@import '../../../lib-components/core/shapes.less';
+@import '../../../lib-components/core/colors-classes.less';
+@import '../../../lib-components/core/bootstrap-parts.less';
+// Typography has conflicting styles; only take the minimum parts we need.
+// @import '../../../lib-components/core/typography.less';
+
+@import '../../../lib-components/core/decoration.less';
+
+@import '../../../lib-components/core/flexbox.less';
+@import '../../../lib-components/core/layout.less';
+@import '../../../lib-components/core/link.less';
+@import '../../../lib-components/core/spacing.less';
+
+// Put this near the end to ensure it overwrites any others and takes precedence.
+@import './typography-parts.less';
+
+@import './ng1-overrides.less';
+@import './intro-js-overrides.less';
+@import './mat-dialog-overrides.less';

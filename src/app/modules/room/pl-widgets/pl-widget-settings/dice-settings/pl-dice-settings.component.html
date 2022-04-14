@@ -1,0 +1,64 @@
+<pl-loader-overlay [isLoading]="paramsModel.animating" loadingLabel="Dice are rolling">
+    <div class="dice-settings">
+        <div class="flex-between margin-large">
+            <h2>Dice Settings</h2>
+            <button mat-icon-button aria-label="Close Dice Settings">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="margin-large">
+            <div class="option-label">
+                Dice Type
+            </div>
+            <mat-select 
+                (selectionChange)="paramChanged('type', $event.value)" 
+                name="dice-type" [value]="paramsModel.type"
+                (click)="preventClose($event)">
+                <mat-option *ngFor="let type of diceTypes" [value]="type.value">
+                    {{type.label}}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div class="margin-large">
+            <div class="flex-between">
+                <span>Number of dice</span> <label>{{ paramsModel.dices }}</label>
+            </div>
+            <mat-slider thumbLabel (input)="paramChanged('dices', $event.value)" color="primary"
+                class="slider-control" min="1" max="5" step="1" [value]="paramsModel.dices"
+                (click)="preventClose($event)"></mat-slider>
+        </div>
+        <div class="margin-large">
+            <div class="flex-between">
+                <span>Number of sides</span> <label>{{ paramsModel.numberOfSides }}</label>
+            </div>
+            <mat-slider thumbLabel (input)="paramChanged('numberOfSides', $event.value)" color="primary"
+                class="slider-control" 
+                min="2" [max]="maxDiceSides" step="1" [value]="paramsModel.numberOfSides"
+                (click)="preventClose($event)"></mat-slider>
+        </div>
+        <div class="margin-large flex-between">
+            <span>Multi-color dice</span>
+            <mat-slide-toggle
+                color="primary"
+                [disabled]="isCheckboxDisabled('colored')"
+                [checked]="paramsModel.colored"
+                (click)="clickedCheckbox($event, 'colored')">
+            </mat-slide-toggle>
+        </div>
+        <div class="margin-large flex-between">
+            <span> Show dice total</span>
+            <mat-slide-toggle 
+                color="primary"
+                [disabled]="isCheckboxDisabled('counter')" 
+                [checked]="paramsModel.counter"
+                (click)="clickedCheckbox($event, 'counter')">
+            </mat-slide-toggle>
+        </div>
+        <div mat-menu-item  [matMenuTriggerFor]="customizeValues">
+            Customize Values
+        </div>
+        <mat-menu #customizeValues="matMenu">
+            <pl-dice-customize [params]="paramsModel" (sidesChange)="onDiceSidesChanged($event)"></pl-dice-customize>
+        </mat-menu>
+    </div>
+</pl-loader-overlay>

@@ -1,0 +1,92 @@
+#TeamWrite {
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    z-index: 0;
+    width: 100%;
+    height: 95%;
+    &.observer-mode {
+      margin-top: 43px;
+    }
+}
+
+.doc-title {
+    float: right;
+    margin: 5px 10px 0px 0px;
+    font-size: 16px;
+    font-weight: 800;
+}
+#firepad-container {
+    width: 100%;
+    height: 95%;
+}
+
+.firepad-cursor-label {
+  background-color: rgba(192, 192, 192, 0.90);
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: "Roboto",sans-serif;
+  font-weight: 400;
+}
+
+.firepad-toolbar {
+    line-height: inherit;
+    padding: 21px 21px 21px 55px;
+    text-align: center;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+}
+
+.firepad-dropdown-menu a {
+  color: @gray-darker;
+}
+
+.firepad-dropdown-menu a:hover {
+  text-decoration: none;
+  background-color: #eefafe;
+  border-color: #46b1e1;
+  color: @gray-darker;
+}
+
+
+a.firepad-btn, a.firepad-btn:visited, a.firepad-btn:active {
+  border-bottom-width: 1px;
+  height: 32px;
+  padding: 8px;
+  font-family: @headings-font-family;
+  font-size: 14px;
+  font-weight: 400;
+  color: @gray-darker;
+  border-color:  @gray-dark;
+}
+
+a.firepad-btn-disabled {
+  pointer-events: none;
+  color: @gray-darkest;
+  background-color: @gray;
+}
+
+.firepad-btn-group > .firepad-btn:first-child {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-topleft: 3px;
+  margin-left: 0px;
+}
+
+.firepad-btn-group > .firepad-btn:last-child {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-topright: 3px;
+}

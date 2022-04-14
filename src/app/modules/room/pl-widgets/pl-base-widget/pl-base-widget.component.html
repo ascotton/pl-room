@@ -1,0 +1,43 @@
+<div class="positionable"
+    [ngStyle]="{'z-index': widget.zIndex || 1, 'opacity': dragging ? 0.7 : (widget.opacity || 0)}"
+    [style.left.px]="left" [style.top.px]="top"
+    [style.transform]="r_scale && 'scale3d(' + r_scale + ', ' + r_scale + ', ' + r_scale + ')'"
+    cdkDrag
+    [cdkDragDisabled]="isSecondary()"
+    cdkDragBoundary=".widgets-board"
+    (cdkDragEnded)="dropped($event)"
+    (cdkDragStarted)="startDrag()"
+    [ngClass]="{'base-widget-animate': isStudentOrObserver, 'disabled-move': isSecondary() }">
+    <div class="widget interactive"
+        [ngSwitch]="widget.type"
+        [ngClass]="{
+            'animated': widget.added || widget.clicked || moved,
+            'pulse': widget.added,
+            'bounce': widget.clicked,
+            'move': moved,
+            'hidden': widget.hidden,
+            'flashcards': widget.type === 'flashcards-widget'
+        }">
+            <pl-spinner-widget [dragging]="dragging" (changed)="makeSync()" *ngSwitchCase="'spinner-widget'" [params]="widget.params"></pl-spinner-widget>
+            <pl-timer-widget [dragging]="dragging" (changed)="makeSync()" *ngSwitchCase="'timer-widget'" [params]="widget.params"></pl-timer-widget>
+            <pl-stopwatch-widget [dragging]="dragging" (changed)="makeSync()" *ngSwitchCase="'stopwatch-widget'" [params]="widget.params"></pl-stopwatch-widget>
+            <pl-dice-widget [dragging]="dragging" (changed)="makeSync()" *ngSwitchCase="'dice-widget'" [params]="widget.params"></pl-dice-widget>
+            <pl-flashcards-widget [id]="widget.$id" (changed)="makeSync()" [params]="widget.params" [dragging]="dragging" *ngSwitchCase="'flashcards-widget'"></pl-flashcards-widget>
+
+        <div class="control-panel" *plHasPermission="'PERMS_DEFAULT_PROVIDERS'">
+            <div class="button-holder" *ngIf="widget.type !== 'stopwatch-widget'">
+                <button mat-icon-button aria-label="Gear" [matMenuTriggerFor]="menu">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </div>
+            <div class="button-holder">
+                <button mat-icon-button aria-label="Delete" (click)="deleteMe()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <mat-menu #menu="matMenu">
+                <pl-widget-settings [widget]="widget"></pl-widget-settings>
+            </mat-menu>
+        </div>
+    </div>
+</div>

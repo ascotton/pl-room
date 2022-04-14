@@ -1,0 +1,18 @@
+<div class="capture-preview-dialog">
+    <div class="preview-area">
+        <div class="current-image" >
+            <img [src]="nextCaptureUrl"/>
+        </div>
+        <div class="image-list" *ngIf="imageUrls.length > 1">
+            <div class="thumbnail" *ngFor="let url of imageUrls">
+                <img [src]="url"/>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-buttons">
+        <button mat-stroked-button (click)="onCancelClick()">Exit without saving</button>
+        <button mat-stroked-button (click)="onRetakeClick()">Retake</button>
+        <button mat-stroked-button (click)="onTakeMoreClick()">Take More</button>
+        <button mat-flat-button (click)="onSaveClick()" color="primary">Save</button>
+    </div>
+</div>

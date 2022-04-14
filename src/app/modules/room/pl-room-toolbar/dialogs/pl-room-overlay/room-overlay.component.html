@@ -1,0 +1,42 @@
+<div class="bottom-sheet-dialog room-overlay-dialog">
+    <div class="dialog-header margin-b margin-t">
+        <div class="dialog-title">
+            Color Filters
+        </div>
+    </div>
+    <div class="color-list">
+        <div class="color-item" *ngFor="let color of colors">
+            <div class="circle" [class.selected]="color === overlayColor" (click)="onSelectColor(color)">
+                <div class="color-circle" [ngStyle]="getColorStyle(color)"></div>
+            </div>
+            <div class="color-name">
+                {{ color.name }}
+            </div>
+        </div>
+    </div>
+    <div class="opacity-container margin-large-t">
+        <div class="opacity-title">
+            <span>
+                Opacity
+            </span>
+            <span>
+                {{ opacityPercentage }}%
+            </span>
+        </div>
+        <div>
+            <mat-slider 
+                [min]="0.0" 
+                [max]="1.0" 
+                [step]="0.01"
+                [ngModel]="overlayOpacity"
+                (input)="onOverlayOpacityChanged($event)"
+                color="accent"></mat-slider>
+        </div>
+    </div>
+    <div class="filter-toggle margin-t margin-b">
+        Color Filter
+        <mat-slide-toggle [(ngModel)]="overlayEnabled" color="primary">
+            {{ overlayEnabled ? 'On' : 'Off' }}
+        </mat-slide-toggle>
+    </div>
+</div>

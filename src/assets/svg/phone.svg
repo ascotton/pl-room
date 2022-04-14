@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.4.4 (395) - http://www.bohemiancoding.com/sketch -->
+    <title>phone</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Final-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Assets" sketch:type="MSArtboardGroup" transform="translate(-100.000000, -134.000000)" fill="#747678">
+            <path d="M118.823529,146.941176 L114.117647,146.941176 C113.467059,146.941176 112.941176,147.467059 112.941176,148.117647 L112.941176,149.294118 C108.235294,149.294118 104.778824,145.691765 104.705882,141.058824 L105.882353,141.058824 C106.532941,141.058824 107.058824,140.532941 107.058824,139.882353 L107.058824,135.176471 C107.058824,134.525882 106.532941,134 105.882353,134 L101.176471,134 C100.525882,134 100,134.525882 100,135.176471 L100,141.058824 C100,148.205882 105.794118,154 112.941176,154 L118.823529,154 C119.474118,154 120,153.474118 120,152.823529 L120,148.117647 C120,147.467059 119.474118,146.941176 118.823529,146.941176" id="phone" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

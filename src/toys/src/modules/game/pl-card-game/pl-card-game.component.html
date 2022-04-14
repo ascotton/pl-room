@@ -1,0 +1,258 @@
+<div class="pl-card-game">
+    <div class="background" [ngStyle]="styles.background"></div>
+    <div *ngFor="let card of cardsAnimated" class="card-animated" [ngStyle]="card.xStyles">
+        <div class="card" *ngIf="card.imageUrl || card.text">
+            <div class="card-image-wrapper">
+                <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+            </div>
+            <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+        </div>
+        <div class="card" *ngIf="!(card.imageUrl || card.text)">
+            <img class="card-image" [src]="cardBackImageUrl" />
+        </div>
+    </div>
+    <div class="content" [ngStyle]="styles.content">
+        <div class="dealer flexbox" [ngStyle]="styles.dealer">
+            <div [hidden]="showWonCardsScoreboard" class="dealer-decks">
+                <div class="cards-undealt hand padding pointer relative" (click)="drawCardsPlayerId(currentPlayerId)">
+                    <!-- <div>Deck ({{ filterCards(cards, '_dealer', 'hand').length }})</div> -->
+                    <div class="deck-cards-overlay">{{ filterCards(cards, '_dealer', 'hand').length }} Cards</div>
+                    <div class="card">
+                        <img *ngIf="filterCards(cards, '_dealer', 'hand').length > 0" class="card-image" [src]="cardBackImageUrl" />
+                        <div *ngIf="filterCards(cards, '_dealer', 'hand').length <= 0" class="card-placeholder">&nbsp;</div>
+                    </div>
+                    <div *ngIf="((drawCardsMax >= 0 && drawCardsCountPerTurn >= drawCardsMax) || currentPlayerId !== currentTurnPlayerId)" class='draw-disabled'>
+                        <pl-icon class='white' [svg]="'blocked'" [width]="50" [height]="50"></pl-icon>
+                    </div>
+                </div>
+                <div *ngIf="useDiscard" class="cards-discarded discard padding pointer">
+                    <div>Discard ({{ filterCards(cards, '_dealer', 'discard').length }})</div>
+                    <div *ngIf="filterCards(cards, '_dealer', 'discard').length > 0" class="card">
+                        <div class="card-image-wrapper">
+                            <img class="card-image" [src]="filterCards(cards, '_dealer', 'discard')[(filterCards(cards, '_dealer', 'discard').length - 1)].imageUrl" />
+                        </div>
+                        <div class="center card-text">{{ filterCards(cards, '_dealer', 'discard')[(filterCards(cards, '_dealer', 'discard').length - 1)].text }}</div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="useSingleWonAllPlayers" [hidden]="showWonCardsScoreboard" class="single-won padding">
+                <div [hidden]="currentPlayerId !== currentTurnPlayerId" class="card empty-card pointer" [ngClass]="classes.singleWonMatch" (click)="moveToSingleWon()">
+                    <div class="pl-card-game-empty-card center empty-match">
+                        Match
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="useScoreboard" [hidden]="showWonCardsScoreboard" class="scoreboard padding">
+                <!-- <div [hidden]="showWonCardsScoreboard" class="scores"> -->
+                <div class="scores" [ngClass]="classes.singleWonScores">
+                    <!-- <div>Scores</div> -->
+                    <div *ngFor="let player of playersLocal" class="flexbox">
+                        <div class="player-score-name flex1">{{ player.name }}</div>
+                        <div class="player-score margin-small-l">{{ filterCards(cards, player.id, 'won').length }}</div>
+                    </div>
+                </div>
+            </div>
+            <div [hidden]="showWonCardsScoreboard || !showInstructions" class="instructions margin-l padding">
+                Click the dealer <b>Deck</b> to <b>draw a card</b>.<br />
+                Click <b>one or more of your cards</b> to select them, then click <b>another player</b> or one of <b>your decks</b> to <b>move your cards</b> there.
+            </div>
+            <div [hidden]="showWonCardsScoreboard" class="flex1">&nbsp;</div>
+            <div [hidden]="showWonCardsScoreboard" class="end-turn-top margin-l padding">
+                <button *ngIf="((currentTurnPlayerId === currentPlayerId && mayEndSelfTurn) || mayEndAllPlayersTurns)" pl-button class="primary" (click)="nextTurnGetPlayer()">End Turn</button>
+            </div>
+
+            <!-- Spacer for centering. -->
+            <div *ngIf="showWonCardsScoreboard" class="flex1 margin-l">&nbsp;</div>
+            <div *ngIf="showWonCardsScoreboard" class="won-cards-scoreboard flex5 margin-l">
+                <div>{{ wonCardsScoreboard.player.name }} matched {{ wonCardsScoreboard.cards.length }} cards!</div>
+                <div>
+                    <div class="{{ singleWonAllPlayersClass }} inline-block">
+                        <div *ngFor="let card of wonCardsScoreboard.cards" class="card">
+                            <div class="card-image-wrapper">
+                                <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                                <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+                            </div>
+                            <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+                        </div>
+                    </div>
+                    <div *ngIf="mayRejectWonCards()" class="inline-block">
+                        <button pl-button class="primary" (click)="acceptWonCardsScoreboard()">Accept</button>
+                        <br />
+                        <button pl-button class="reverse" (click)="rejectWonCardsScoreboard()">Reject</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Spacer for centering. -->
+            <div *ngIf="showWonCardsScoreboard" class="flex1 margin-l">&nbsp;</div>
+        </div>
+        <div class="players-and-cards" [ngStyle]="styles.players">
+            <div *ngFor="let player of playersLocal; let indexPlayer = index" class="player-and-card padding-large" [ngClass]="player.xClasses" [ngStyle]="player.xStyles" (click)="transferCardsCurrentPlayer(player.id)">
+                <!-- no more bigger avatar and avatar select -->
+                <!-- <div class="player-and-card-inner flexbox">
+                    <div class="player-info margin-large-r">
+                        <div [hidden]="!player.selectingPlayerImage" class="player-image-select">
+                            <img *ngFor="let imageUrl of playerImageUrls" class="player-image pointer margin-small" [src]="imageUrl" (click)="setPlayerImage(player, imageUrl)" />
+                        </div>
+                        <div class="player" (click)="preSelectPlayer(player.id)">
+                            <div *ngIf="player.imageUrl" class="center">
+                                <img [hidden]="player.selectingPlayerImage" class="player-image pointer" [src]="player.imageUrl" (click)="choosePlayerImage(player)" />
+                            </div>
+                            <div class="center player-name"><b>{{ player.name }}</b></div>
+                            <div class="center player-buttons">
+                                <button *ngIf="currentTurnPlayerId === player.id && ((currentTurnPlayerId === currentPlayerId && mayEndSelfTurn) || mayEndAllPlayersTurns)" pl-button class="primary" (click)="nextTurn(indexPlayer)">End Turn</button>
+                                <button *ngIf="currentPlayerId === player.id && player.buttonMayViewAllPlayers" pl-button (click)="toggleMayViewAllPlayers(player)">Peek</button>
+                            </div>
+                        </div>
+                    </div> -->
+                <div class="player-and-card-inner">
+                    <div>
+                        <div class="center inline-block">
+                            <img class="player-image small pointer" [src]="player.imageUrl" />
+                        </div>
+                        <div class="inline-block margin-l player-name-wrapper">
+                            <div class="center player-name">{{ player.name }}</div>
+                        </div>
+                        <pl-icon *ngIf="currentTurnPlayerId === player.id" class="turn-arrow margin-l" [svg]="'go-fish-turn-arrow'" [width]="60" [height]="32"></pl-icon>
+                        <!-- <div class="center player-buttons">
+                            <button *ngIf="currentTurnPlayerId === player.id && ((currentTurnPlayerId === currentPlayerId && mayEndSelfTurn) || mayEndAllPlayersTurns)" pl-button class="primary" (click)="nextTurn(indexPlayer)">End Turn</button>
+                            <button *ngIf="currentPlayerId === player.id && player.buttonMayViewAllPlayers" pl-button (click)="toggleMayViewAllPlayers(player)">Peek</button>
+                        </div> -->
+                    </div>
+                    <div class="cards flex1">
+                        <div class="card-deck new">
+                            <div *ngIf="filterCards(cards, player.id, 'new').length" class="card-deck-name margin-small-l" (click)="transferPlayerDeckCurrentPlayer(player.id, 'new')">New ({{ filterCards(cards, player.id, 'new').length }})</div>
+                            <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && filterCards(cards, player.id, 'new').length" class="card">
+                                <div class="card-image-wrapper">
+                                    <img class="card-image" [src]="cardBackImageUrl" />
+                                </div>
+                                <!-- <div class="center">&nbsp;</div> -->
+                            </div>
+                            <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards) && filterCards(cards, player.id, 'new').length" class="card-deck-cards">
+                                <div *ngFor="let card of filterCards(cards, player.id, 'new', true)" class="card" [ngClass]="card.xClasses">
+                                    <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards)" class="pointer" (click)="toggleSelectCard(player, card.id)">
+                                        <div class="card-image-wrapper">
+                                            <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                                            <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+                                        </div>
+                                        <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+                                    </div>
+                                    <!-- <div *ngIf="player.id !== currentPlayerId">
+                                        <div class="card-image-wrapper">
+                                            <img class="card-image" [src]="cardBackImageUrl" />
+                                        </div>
+                                        <div class="center">&nbsp;</div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="playerDeckTypes.hand" [hidden]="(hideHandIfNewCards && filterCards(cards, player.id, 'new').length)" class="card-deck hand">
+                            <div class="card-deck-name margin-small-l" [hidden]="!showHandText" (click)="transferPlayerDeckCurrentPlayer(player.id, 'hand')">Hand ({{ filterCards(cards, player.id, 'hand').length }})</div>
+                            <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'compact' && filterCards(cards, player.id, 'hand').length" class="card">
+                                <div class="card-image-wrapper">
+                                    <img class="card-image" [src]="cardBackImageUrl" />
+                                </div>
+                                <!-- <div class="center">&nbsp;</div> -->
+                            </div>
+                            <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards || otherPlayerCardLayout === 'full')" class="flexbox">
+                                <!-- <div *ngIf="player.id !== currentPlayerId" class="card empty-card pointer" (click)="transferCardsCurrentPlayer(player.id)"><ng-container *ngTemplateOutlet="plCardGameEmptyCard"></ng-container></div>
+                                <div *ngIf="player.id === currentPlayerId" class="card empty-card pointer" (click)="transferPlayerDeckCurrentPlayer(player.id, 'hand')"><ng-container *ngTemplateOutlet="plCardGameEmptyCard"></ng-container></div> -->
+                                <div class="card-deck-cards flex1">
+                                    <pl-carousel-scroller [items]="filterCards(cards, player.id, 'hand', true)" [checkShowArrows]="checkShowArrows" [styleArrowColor]="'transparent'" [styleArrowContColor]="'#D0021B'">
+                                        <div *ngFor="let card of filterCards(cards, player.id, 'hand', true)" class="card" [ngClass]="card.xClasses">
+                                            <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards)" class="pointer" (click)="toggleSelectCard(player, card.id)">
+                                                <div class="card-image-wrapper">
+                                                    <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                                                    <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+                                                </div>
+                                                <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+                                            </div>
+                                            <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'full'">
+                                                <div class="card-image-wrapper">
+                                                    <img class="card-image" [src]="cardBackImageUrl" />
+                                                </div>
+                                                <!-- <div class="center">&nbsp;</div> -->
+                                            </div>
+                                        </div>
+                                    </pl-carousel-scroller>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="playerDeckTypes.discard" class="card-deck discard">
+                            <div class="card-deck-name margin-small-l" (click)="transferPlayerDeckCurrentPlayer(player.id, 'discard')">Discard ({{ filterCards(cards, player.id, 'discard').length }})</div>
+                            <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'compact' && filterCards(cards, player.id, 'discard').length" class="card">
+                                <div class="card-image-wrapper">
+                                    <img class="card-image" [src]="cardBackImageUrl" />
+                                </div>
+                                <!-- <div class="center">&nbsp;</div> -->
+                            </div>
+                            <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards || otherPlayerCardLayout === 'full')" class="flexbox">
+                                <div *ngIf="player.id === currentPlayerId" class="card empty-card pointer" (click)="transferPlayerDeckCurrentPlayer(player.id, 'discard')"><ng-container *ngTemplateOutlet="plCardGameEmptyCard"></ng-container></div>
+                                <div class="card-deck-cards flex1">
+                                    <div *ngFor="let card of filterCards(cards, player.id, 'discard', true)" class="card" [ngClass]="card.xClasses">
+                                        <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards)" class="pointer" (click)="toggleSelectCard(player, card.id)">
+                                            <div class="card-image-wrapper">
+                                                <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                                                <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+                                            </div>
+                                            <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+                                        </div>
+                                        <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'full'">
+                                            <div class="card-image-wrapper">
+                                                <img class="card-image" [src]="cardBackImageUrl" />
+                                            </div>
+                                            <!-- <div class="center">&nbsp;</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="playerDeckTypes.won" class="card-deck won">
+                            <div>
+                                <div class="card-deck-name margin-small-l inline-block" (click)="transferPlayerDeckCurrentPlayer(player.id, 'won')">Won ({{ filterCards(cards, player.id, 'won').length }})</div>
+                                <div *ngIf="toggleWonDeckVisible" class="inline-block margin-l">
+                                    <button *ngIf="!player.wonDeckVisible" (click)="toggleWonDeck(player)" pl-button class="link">Show</button>
+                                    <button *ngIf="player.wonDeckVisible" (click)="toggleWonDeck(player)" pl-button class="link">Hide</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'compact' && filterCards(cards, player.id, 'won').length" class="card">
+                                    <div class="card-image-wrapper">
+                                        <img class="card-image" [src]="cardBackImageUrl" />
+                                    </div>
+                                    <!-- <div class="center">&nbsp;</div> -->
+                                </div>
+                                <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards || otherPlayerCardLayout === 'full')" class="flexbox">
+                                    <div *ngIf="player.id === currentPlayerId" class="card empty-card pointer" (click)="transferPlayerDeckCurrentPlayer(player.id, 'won')"><ng-container *ngTemplateOutlet="plCardGameEmptyCard"></ng-container></div>
+                                    <div *ngIf="!toggleWonDeckVisible || player.wonDeckVisible" class="card-deck-cards flex1">
+                                        <div *ngFor="let card of filterCards(cards, player.id, 'won', true)" class="card" [ngClass]="card.xClasses">
+                                            <div *ngIf="(player.id === currentPlayerId || mayViewAllPlayerCards)" class="pointer" (click)="toggleSelectCard(player, card.id)">
+                                                <div class="card-image-wrapper">
+                                                    <img *ngIf="(cardDisplay === 'imageOnly' || cardDisplay === 'imageAndText')" class="card-image" [src]="card.imageUrl" />
+                                                    <div *ngIf="cardDisplay === 'textOnly'" class="card-image text-only">{{ card.text }}</div>
+                                                </div>
+                                                <div *ngIf="cardDisplay === 'imageAndText' && card.text" class="center card-text">{{ card.text }}</div>
+                                            </div>
+                                            <div *ngIf="player.id !== currentPlayerId && !mayViewAllPlayerCards && otherPlayerCardLayout === 'full'">
+                                                <div class="card-image-wrapper">
+                                                    <img class="card-image" [src]="cardBackImageUrl" />
+                                                </div>
+                                                <!-- <div class="center">&nbsp;</div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #plCardGameEmptyCard>
+    <div class="pl-card-game-empty-card center">
+        Click to move selected card(s) here.
+    </div>
+</ng-template>

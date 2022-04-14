@@ -1,0 +1,23 @@
+<div class="pl-check-result" 
+    [ngClass]="{'success': result === stepResult.PASSED, 'failed': result === stepResult.FAILED, 'warning': result === stepResult.WARNINGS }">
+    <div class="check-icon">
+        <mat-icon [inline]="true">{{ icon }}</mat-icon>
+    </div>
+    <div class="check-name">
+        {{ checkName }}
+    </div>
+    <div class="check-result" [ngSwitch]="result">
+        <ng-container *ngSwitchCase="stepResult.FAILED">
+            <mat-icon class="failed" [inline]="true">warning</mat-icon> 
+            {{'STEPS.RESULTS.FAILED' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchCase="stepResult.WARNINGS">
+            <mat-icon class="warning" [inline]="true">check_circle</mat-icon>
+            {{'STEPS.RESULTS.PASSED_WARNINGS' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <mat-icon class="success" [inline]="true">check_circle</mat-icon> 
+            {{'STEPS.RESULTS.PASSED' | translate}}
+        </ng-container>
+    </div>
+</div>

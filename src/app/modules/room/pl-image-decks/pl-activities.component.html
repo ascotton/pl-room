@@ -1,0 +1,43 @@
+<div class="pl-activities padding-lr">
+    <div [hidden]="(activityToView || activityToEdit)" class="center margin-b">
+        <div class="margin-t">Choose an activity to update, or
+            <button pl-button class="link" (click)="newActivity()">create a new activity</button>.
+        </div>
+    </div>
+    <div [hidden]="(activityToView || activityToEdit)">
+        <pl-input-text class="form-input" [(model)]="filter.title" [placeholder]="'Search for activities'" [debounceChange]="1000" (onChange)="getActivities($event)"></pl-input-text>
+        <pl-input-select class="form-input" [(model)]="filter.category" [options]="selectOptsCategories" [placeholder]="'Category'" (onChange)="getActivities($event)"></pl-input-select>
+        <pl-input-select class="form-input" [(model)]="filter.activity_type" [options]="selectOptsTypes" [placeholder]="'Activity type'" (onChange)="getActivities($event)"></pl-input-select>
+        <pl-input-multi-select class="form-input" [(model)]="filter.tags" [options]="selectOptsTags" [placeholder]="'Grades, Subjects'" (onChange)="getActivities($event)"></pl-input-multi-select>
+        <pl-input-select class="form-input" [(model)]="sort" [options]="selectOptsSort" [placeholder]="'Sort'" (onChange)="getActivities($event)"></pl-input-select>
+        <div *ngFor="let activity of activities" class="pl-activities-activity padding-tb" [ngClass]="activity.xClasses">
+            <div class='flexbox'>
+                <img class="image" [src]="activity.imageUrl" />
+                <div class="flex1 margin-l">
+                    <div class="title">{{ activity.title }}</div>
+                </div>
+            </div>
+            <div class='flexbox'>
+                <div class='flex1' *ngIf="activity.mayDelete">
+                    <button *ngIf="activity.mayDelete" pl-button class="link" (click)="editActivity(activity)">Edit</button>
+                </div>
+                <div class='flex1' *ngIf="!activity.mayDelete">
+                    <button *ngIf="!activity.mayDelete" pl-button class="link" (click)="viewActivity(activity)">View</button>
+                </div>
+                <div>
+                    <pl-icon class="heart pointer" [svg]="'heart'" (click)="toggleFavorite(activity)"></pl-icon>
+                </div>
+            </div>
+        </div>
+        <pl-dot-loader *ngIf="loading"></pl-dot-loader>
+        <div *ngIf="canLoadMore && !loading" class="center margin-tb">
+            <button pl-button class="link" (click)="loadMore()">Load More</button>
+        </div>
+    </div>
+    <div *ngIf="activityToEdit">
+        <pl-activity-save [activity]="activityToEdit" (onSave)="onSaveActivity($event)" (onCancel)="onCancelActivity($event)"></pl-activity-save>
+    </div>
+    <div *ngIf="activityToView">
+        <pl-activity-view [activity]="activityToView" (onCancel)="onCancelActivity($event)"></pl-activity-view>
+    </div>
+</div>

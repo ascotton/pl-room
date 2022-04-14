@@ -1,0 +1,171 @@
+pdf-viewer {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: block;
+  svg.spinner {
+    position: absolute;
+    display: block;
+  }
+  .pdf-holder {
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    .pageHolder{
+      position : relative;
+      margin : auto;
+      top: 0;
+    }
+    .rendering {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+    }
+    .pdf-offscreen {
+        display: none;
+    }
+    canvas {
+      cursor: -webkit-grab;
+      cursor: -moz-grab;
+      cursor: grab;
+      &:active {
+        cursor: -webkit-grabbing;
+        cursor: -moz-grabbing;
+        cursor: grabbing;
+      }
+    }
+    &.rotate90 {
+      -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+}
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(90deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(90deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+.pdf-activity-drawer {
+
+
+  svg {
+    &.specialSvg {
+      position : relative;
+      left : -2px;
+      top : 3px;
+      fill : #2f96b4;
+    }
+    position: absolute;
+    left: 10px;
+  }
+  #rotateText {
+    width: 94px;
+  }
+  main {
+    .thumbnails {
+      button {
+        padding: 11px 7px 0 7px;
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        .canvasContainer {
+          max-height: 100px;
+        }
+        .thumbContainer {
+            display: flex;
+            justify-content: center;
+        }
+        .dualThumbContainer {
+            display: flex;
+            justify-content: center;
+            img {
+                max-width: 50%;
+            }
+        }
+
+
+        svg {
+          width: 72px;
+          height: 97px;
+          margin-left: 26%;
+        }
+        .pageNumbers {
+          display: inline-flex;
+          .pageNum {
+            padding-left: 30px;
+            padding-right: 30px;
+            color: @gray-light;
+            text-align: center;
+            padding-bottom: 6px;
+          }
+        }
+        &.active {
+          background-color: @gray-darkest;
+        }
+        &:hover {
+          background-color: darken(@gray-darker, 7%);
+        }
+
+        div.rotate90 {
+          -ms-transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+        }
+      }
+
+    }
+  }
+  footer {
+    button {
+      &.disabled svg {
+        fill: @gray-dark;
+        cursor: default;
+      }
+      &.disabled span {
+        color: @gray-dark;
+        cursor: default;
+      }
+    }
+    .page-input {
+      flex: none;
+      height: 44px;
+      color: @gray-lighter;
+      line-height: 2em;
+      padding: 6px 3px 0 11px;
+    }
+    .jumpToInput {
+      text-align: center;
+      width: 30px;
+      background-color: #4C4F52;
+      border-color: #3C3F43;
+      margin-right: 4px;
+      border-style: solid;
+      border-width: 1px;
+      -moz-user-modify: read-write;
+      -webkit-user-modify: read-write;
+    }
+  }
+}

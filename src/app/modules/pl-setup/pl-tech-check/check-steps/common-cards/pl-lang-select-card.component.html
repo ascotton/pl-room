@@ -1,0 +1,29 @@
+<mat-card class="margin-large-b">
+    <mat-card-header>
+        <mat-card-title>
+            <div class="margin-b">
+                {{ 'LANG_CARD.TITLE' | translate }}
+            </div>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="padding-large">
+        <div class="flexbox">
+            <div class="">
+                <mat-icon>
+                    language
+                </mat-icon>
+            </div>
+            <div class="padding-large-l">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{ 'LANG_CARD.SELECT_LANGUAGE' | translate }}</mat-label>
+                    <mat-select [value]="selectedLang" (selectionChange)="onLangChanged($event)">
+                        <mat-option *ngFor="let lang of languageList" [value]="lang">
+                            {{ 'LANGS.' + lang.toUpperCase() | translate }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

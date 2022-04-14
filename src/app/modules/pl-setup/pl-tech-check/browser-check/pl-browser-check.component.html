@@ -1,0 +1,262 @@
+<div class="pl-browser-check">
+    <div class="wrapper">
+        <div class="header">
+            <div class="header-content">
+                <img src="/assets/tech-check/pl_logo.png" class="pl_logo"/>
+                <div class="header-label header-title">
+                    {{ 'GENERAL.TECH_CHECK' | translate }}
+                </div>
+                <div class="header-label">
+                    {{ 'BROWSER_CHECK.HEADER.SUBHEADER' | translate }}
+                </div>
+                <div class="header-label link" *ngIf="isMultiLangEnabled()" (click)="onSwitchLang()">
+                    {{ 'BROWSER_CHECK.HEADER.OTHER_LANG' | translate }}
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="flex-2">
+            <mat-card class="card" *ngIf="isCompatibleBrowser">
+                <mat-card-header>
+                    <mat-card-title>
+                        {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.BROWSERS_TITLE' | translate }}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="padding-large">
+                    <div class="padding-large-b">
+                        {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.BROWSERS_SUBTITLE' | translate }}
+                    </div>
+                    <ng-container *ngTemplateOutlet="browsers"></ng-container>
+                    <mat-divider [inset]="true" class="padding-large-b"></mat-divider>
+                    <div class="padding-large-b">
+                        {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.BROWSERS_FOOTER' | translate }}
+                    </div>
+                    <!-- Temporarily disabled feature -->
+                    <ng-container *ngIf="false">
+                        <div class="padding-large-b">
+                            {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.HAS_CODE' | translate }}
+                        </div>
+                        <div class="padding-large-b flexbox">
+                            <mat-form-field appearance="fill">
+                                <mat-label>
+                                    {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.CODE' | translate }}
+                                </mat-label>
+                                <input matInput (change)="onValidateCode()" name="code" [(ngModel)]="code">
+                                <mat-icon color="primary" *ngIf="code && codeValidated && validCode" matSuffix matTooltip="Valid Code">check_circle</mat-icon>
+                                <mat-icon color="warn" *ngIf="code && codeValidated && !validCode" matSuffix matTooltip="Invalid Code">warning</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                    <div>
+                        <button color="accent" mat-raised-button (click)="onStart()">
+                            {{ 'BROWSER_CHECK.COMPATIBLE_BROWSER.START_BUTTON' | translate }}
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card" *ngIf="!isCompatibleBrowser">
+                <mat-card-header>
+                    <mat-card-title>
+                        {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.TITLE' | translate }}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="padding-large">
+                    <div class="flexbox padding-large-b">
+                        <div>
+                            <span class="step">
+                                1
+                            </span>
+                        </div>
+                        <div class="margin-large-l margin-small-t">
+                            <div class="padding-large-b">
+                                {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.STEP1_HEADER' | translate }}
+                            </div>
+                            <div class="flexbox">
+                                <span class="link-container" #setupLink>
+                                    https://setup.presencelearning.com/
+                                </span>
+                                <button (click)="onCopyURL()" mat-flat-button color="accent" class="copy-button">
+                                    {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.STEP1_COPY_BUTTON' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexbox padding-large-b">
+                        <div>
+                            <span class="step">
+                                2
+                            </span>
+                        </div>
+                        <div class="margin-large-l">
+                            <div>
+                                {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.STEP2_HEADER' | translate }}
+                            </div>
+                            <div class="subtitle">
+                                {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.STEP2_SUBHEADER' | translate }}
+                            </div>
+                            <div>
+                                <ng-container *ngTemplateOutlet="browsers"></ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexbox">
+                        <div>
+                            <span class="step">
+                                3
+                            </span>
+                        </div>
+                        <div class="margin-large-l margin-small-t">
+                            {{ 'BROWSER_CHECK.NON_COMPATIBLE_BROWSER.STEP3_HEADER' | translate }}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            </div>
+            <div class="flex-1 margin-large-l">
+                <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+                <mat-card class="card">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <div class="margin-b font-h4">
+                                {{ 'BROWSER_CHECK.SUPPORT.TITLE' | translate }}
+                            </div>
+                            <mat-divider></mat-divider>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="padding">
+                        <div class="tech-content">
+                            <div class="tech-icon">
+                                <mat-icon>
+                                    help
+                                </mat-icon>
+                            </div>
+                            <div class="tech-contact">
+                                <div>
+                                    {{ 'BROWSER_CHECK.SUPPORT.SUBTITLE' | translate }}
+                                </div>
+                                <a [href]="'mailto:' + ('BROWSER_CHECK.SUPPORT.EMAIL' | translate)">
+                                    {{ 'BROWSER_CHECK.SUPPORT.EMAIL' | translate }}
+                                </a>
+                            </div>
+                            <div class="tech-action">
+                                <a [href]="'mailto:' + ('BROWSER_CHECK.SUPPORT.EMAIL' | translate)">
+                                    <mat-icon>
+                                        chevron_right
+                                    </mat-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #browsers>
+        <div class="browsers padding-large-b">
+            <div class="browser-item">
+                <div class="browser-title">
+                    <div class="browser-icon">
+                        <img [class.big]="!isCompatibleBrowser" src="/assets/tech-check/browser-chrome.svg" >
+                    </div>
+                    <div class="browser-name">
+                        <h5>{{ 'BROWSER_CHECK.BROWSER_LIST.CHROME' | translate }}</h5>
+                        <div *ngIf="!isCompatibleBrowser">
+                            <a href="https://www.google.com/chrome/" target="_blank">
+                                {{ 'BROWSER_CHECK.BROWSER_LIST.DOWNLOAD' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="browser-description">
+                    <ul>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.CHROME_LINE1' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.CHROME_LINE2' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.CHROME_LINE3' | translate }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="browser-item">
+                <div class="browser-title">
+                    <div class="browser-icon">
+                        <img [class.big]="!isCompatibleBrowser" src="/assets/tech-check/browser-firefox.svg" >
+                    </div>
+                    <div class="browser-name">
+                        <h5>{{ 'BROWSER_CHECK.BROWSER_LIST.FIREFOX' | translate }}</h5>
+                        <div *ngIf="!isCompatibleBrowser">
+                            <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">
+                                {{ 'BROWSER_CHECK.BROWSER_LIST.DOWNLOAD' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="browser-description">
+                    <ul>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.FIREFOX_LINE1' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.FIREFOX_LINE2' | translate }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="browser-item">
+                <div class="browser-title">
+                    <div class="browser-icon">
+                        <img [class.big]="!isCompatibleBrowser" src="/assets/tech-check/browser-edge.svg" >
+                    </div>
+                    <div class="browser-name">
+                        <h5>{{ 'BROWSER_CHECK.BROWSER_LIST.EDGE' | translate }}</h5>
+                        <div *ngIf="!isCompatibleBrowser">
+                            <a href="https://www.microsoft.com/en-us/edge" target="_blank">
+                                {{ 'BROWSER_CHECK.BROWSER_LIST.DOWNLOAD' | translate }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="browser-description">
+                    <ul>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.EDGE_LINE1' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.EDGE_LINE2' | translate }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="browser-item">
+                <div class="browser-title">
+                    <div class="browser-icon">
+                        <img [class.big]="!isCompatibleBrowser" src="/assets/tech-check/browser-safari.svg" >
+                    </div>
+                    <div class="browser-name">
+                        <h5>{{ 'BROWSER_CHECK.BROWSER_LIST.SAFARI' | translate }}</h5>
+                        <div *ngIf="!isCompatibleBrowser">
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.SAFARI_PREINSTALLED' | translate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="browser-description">
+                    <ul>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.SAFARI_LINE1' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.SAFARI_LINE2' | translate }}
+                        </li>
+                        <li>
+                            {{ 'BROWSER_CHECK.BROWSER_LIST.SAFARI_LINE3' | translate }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ng-template>

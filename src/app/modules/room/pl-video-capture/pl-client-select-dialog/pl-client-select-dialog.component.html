@@ -1,0 +1,25 @@
+<div class="client-select-dialog">
+    <mat-toolbar color="primary" class="toolbar">
+        <span>Select a Client</span>
+        <button mat-icon-button class="" aria-label="Close Client Select" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon>
+          </button>
+    </mat-toolbar>
+    <div class="content">
+        <div class="subheader">
+            <span>Clients Scheduled For {{todaysDateDisplay}}</span>
+        </div>
+        <div class="selector">
+            <pl-client-appointments-select
+                (clientAppointmentSelected)="clientAppointmentSelected($event)"
+                [currentUser]="currentUser"
+                [loadClients]="loadClients"
+                [dialogMode]="true">
+            </pl-client-appointments-select>
+        </div>
+        <div class="bottom-buttons">
+            <button mat-stroked-button (click)="onCloseClick()">Cancel</button>
+            <button mat-flat-button [disabled]="disableConfirm" color="primary" [mat-dialog-close]="data">Confirm</button>
+        </div>
+    </div>
+</div>

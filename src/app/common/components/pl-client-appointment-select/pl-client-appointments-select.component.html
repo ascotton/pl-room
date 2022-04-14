@@ -1,0 +1,18 @@
+<div class="client-appointments-select">
+    <div [ngClass]="{'dialog-links-row': dialogMode }">
+        <div *ngIf="currentUser" class="center margin-large-tb">
+            <a [ngClass]="linkClass" (click)="openSchedule()">Add Clients</a>
+        </div>
+        <div *ngIf="loadingAppointments" class="margin-large-t loading-refresh">
+            <pl-dot-loader></pl-dot-loader>
+        </div>
+        <div *ngIf="!loadingAppointments" (click)="refreshClientAppointments()" class="pointer center margin-large-t heap-refresh-clients loading-refresh">
+            <a [ngClass]="linkClass"><pl-icon [svg]="'rotate'" [scale]="0.6" [verticalAlign]="'-1px'" class="{{linkIconColor}}"></pl-icon> Refresh</a>
+        </div>
+    </div>
+
+    <pl-input-select *ngIf="clientAppointments.length"
+        [placeholderColor]="inputPlaceholderColor"
+        class="margin-t form-input" [placeholder]="'Select Clients'" [(model)]="selectedClientAppointmentId" 
+        [options]="selectOptsClientAppointments" (onChange)="clientAppointmentSelectionChange()" [disabled]="isRecording"></pl-input-select>
+</div>

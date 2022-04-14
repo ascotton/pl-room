@@ -1,0 +1,117 @@
+<div class="pl-gametable-trio-drawer" *ngIf="initialized">
+    <div
+        class="section-header players"
+        (click)="onClickSection('players')">
+        <pl-icon 
+            *ngIf="sectionVisible.players"
+            class="white"
+            [svg]="'chevron-down'"
+            [scale]="0.7"
+            [verticalAlign]="'-3px'">
+        </pl-icon>
+        <pl-icon
+            *ngIf="!sectionVisible.players"
+            class="white"
+            [svg]="'chevron-right'"
+            [scale]="0.7"
+            [verticalAlign]="'-3px'">
+        </pl-icon>
+        <span>Players</span>
+    </div>
+    <div
+        class="section-body players form"
+        [ngClass]="{'disabled': enableEndGameBtn$ | async}">
+        Number of players
+        <br/>
+        <pl-input-select
+            class="form-input"
+            [(model)]="formData.model.numPlayers"
+            [options]="formData.numPlayersOpts"
+            (onChange)="onChangeNumPlayers($event)"
+            [disabled]="enableEndGameBtn$ | async"
+            ></pl-input-select>
+        <br/>
+        <div *ngFor="let player of formData.model.players">
+            <ng-container
+                *ngIf="formData.model.numPlayers >= player.position">
+                Player {{player.position}}
+                <pl-input-select
+                    class="form-input heap-player{{player.position}}"
+                    [(model)]="player.value"
+                    [options]="formData.playerOpts"
+                    [placeholder]="'Select Player ...'"
+                    (onChange)="onChangePlayerCheck(player.position, player.value)"
+                    [disabled]="enableEndGameBtn$ | async">
+                </pl-input-select>
+            </ng-container>
+        </div>
+        <div class="align-center">
+            <button
+                *ngIf="!(enableEndGameBtn$ | async)"
+                pl-button
+                class="pl-button bare heap-button-refresh-players"
+                (click)="onClickRefreshPlayers()">
+                <ng-container *ngTemplateOutlet="refreshPlayers"></ng-container>
+            </button>
+            <div
+                *ngIf="enableEndGameBtn$ | async"
+                class="refresh-button-disabled">
+                <ng-container *ngTemplateOutlet="refreshPlayers"></ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="actions align-center">
+        <button
+            pl-button
+            class="pl-button button-new-game gray-lightest"
+            [ngClass]="{'disabled': !(enableStartGameBtn$ | async), 'enabled': enableStartGameBtn$ | async}"
+            (click)="onClickStartNewGame()"
+            [disabled]="!(enableStartGameBtn$ | async)">
+            New Game
+        </button>
+        <button
+            pl-button
+            class="pl-button button-end-game gray-outline gray-lightest margin-small-l"
+            [ngClass]="{'disabled': !(enableEndGameBtn$ | async), 'enabled': enableStartGameBtn$ | async}"
+            (click)="onClickEndGame()"
+            [disabled]="!(enableEndGameBtn$ | async)">
+            End Game
+        </button>
+    </div>
+
+    <div class="checkbox-mute">
+        <pl-input-checkbox
+            class="checkbox-mute"
+            [(model)]="formData.model.mute"
+            (onChange)="onChangeMute()">
+        </pl-input-checkbox>
+        <span> Mute Game Sounds </span>
+    </div>
+
+    <div [style.padding-bottom.px]="15"></div>
+
+    <div class="text-center">
+        <button
+            [ngClass]="{'disableBtn': showExample, 'view-instructions-btn': true }"
+            (click)="toggleInstruction()"
+            [disabled]="showExample">
+            {{ showInstruction ? 'Close' : 'View' }} Instructions
+        </button>
+        <button
+            [ngClass]="{'disableBtn': showInstruction, 'view-instructions-btn': true }"
+            (click)="toggleExample()"
+            [disabled]="showInstruction">
+            {{ showExample ? 'Close' : 'View' }} Examples
+        </button>
+    </div>
+
+    <ng-template #refreshPlayers>
+        <pl-icon
+            class="refresh-icon"
+            [svg]="'refresh'"
+            [scale]="0.8"
+            [verticalAlign]="'-4px'">
+        </pl-icon>
+        <span class="gray-light">&nbsp;Refresh Players</span>
+    </ng-template>
+</div>

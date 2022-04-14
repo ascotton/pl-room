@@ -1,0 +1,78 @@
+<div class="guesswho-board"
+     ng-class="{ 'therapist': guessWhoBoardController.isClinician() && !guessWhoBoardController.xray,
+     'student': !guessWhoBoardController.isClinician() || guessWhoBoardController.xray }">
+
+    <div class="guesswho-scale-wrapper">
+
+        <div class="overlay overlay-load" ng-show="guessWhoBoardController.showOverlay && guessWhoBoardController.imagesLoadded < 24">
+            <spinner active="true"></spinner>
+        </div>
+
+        <div class="main"
+             ng-class="{ 'expand-mode': guessWhoBoardController.shiftPressed }">
+            <div class="alert-container">
+                <div class="alert" ng-if="guessWhoBoardController.xray || (guessWhoBoardController.myModel().face < 0) || (guessWhoBoardController.opponentModel().face < 0)">
+                    <span>{{ guessWhoBoardController.getAlertText() }}</span>
+                </div>
+            </div>
+
+
+            <div class="overlay overlay-zoom" ng-show="guessWhoBoardController.showMyAvatar">
+                <div class="card">
+                    <img class="image" ng-if="!!guessWhoBoardController.getMyAvatarFilename()" ng-src="/assets/guess_who/{{ guessWhoBoardController.getMyAvatarFilename() }}">
+                    <div class="title">{{ guessWhoBoardController.getMyAvatarName() }}</div>
+                    <div class="close" ng-click="guessWhoBoardController.showMyAvatar = false"></div>
+                </div>
+            </div>
+
+            <div class="overlay overlay-zoom" ng-show="guessWhoBoardController.expandCardMode">
+                <div class="card">
+                    <img class="image" ng-if="!!guessWhoBoardController.clickedCardFilename" ng-src="/assets/guess_who/{{ guessWhoBoardController.clickedCardFilename }}">
+                    <div class="title">{{ guessWhoBoardController.clickedCardName }}</div>
+                    <div class="close" ng-click="guessWhoBoardController.expandCardMode = false"></div>
+                </div>
+            </div>
+
+            <div class="rect"
+                 ng-class="{'game-running': guessWhoBoardController.myModel().face >= 0 && guessWhoBoardController.opponentModel().face >= 0,
+                            'whait-for-opponent': (guessWhoBoardController.myModel().face >= 0) && (guessWhoBoardController.opponentModel().face < 0),
+                            'x-ray': guessWhoBoardController.xray}">
+                <div class="card"
+                     ng-repeat="face in guessWhoBoardController.currentModel().faces track by $index"
+                     ng-class="{ cross: face.cross }"
+                     ng-click="guessWhoBoardController.click($index)">
+                    <div class="popup"
+                         ng-class="{ visible : guessWhoBoardController.shiftPressed }"></div>
+                    <img class="image" ng-if="!!face.filename" ng-src="/assets/guess_who/{{ face.filename }}" image-on-load="guessWhoBoardController.imagesLoadded = guessWhoBoardController.imagesLoadded + 1" />
+                    <div class="title">{{ face.name }}</div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="side">
+
+            <div class="name">
+                My Person
+            </div>
+
+            <div class="card">
+                <img ng-if="!!guessWhoBoardController.getMyAvatarFilename()" class="image" ng-src="/assets/guess_who/{{ guessWhoBoardController.getMyAvatarFilename() }}" ng-click="guessWhoBoardController.showMyAvatar = true" />
+                <div class="title">{{ guessWhoBoardController.getMyAvatarName() }}</div>
+                <div class="popup"></div>
+            </div>
+
+            <div class="name">
+                <span ng-show="guessWhoBoardController.isClinician() && !guessWhoBoardController.xray">Client</span>
+                <span ng-show="!guessWhoBoardController.isClinician() || guessWhoBoardController.xray">Therapist</span>
+            </div>
+
+            <div class="card cover">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

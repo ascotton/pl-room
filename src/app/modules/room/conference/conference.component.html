@@ -1,0 +1,12 @@
+<div
+  [class.full-screen]="isFullScreen$ | async"
+  [class.is-host]="isHost$ | async"
+  [class.is-observer]="isObserver$ | async"
+  [class.right-drawer-open]="isDrawerOpen$ | async"
+  class="conference"
+>
+  <pl-conference-stream
+    *ngFor="let stream of streams$ | async; trackBy: trackByStreams"
+    [streamId]="stream.id"
+  ></pl-conference-stream>
+</div>

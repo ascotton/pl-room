@@ -1,0 +1,40 @@
+<div class="pl-documentation-metric-point">
+    <div class="flexbox">
+        <div (click)="toggleDescription()" class="pointer name flex1" [ngClass]="classMetricName">
+            {{ metricPoint.metric.name }}
+        </div>
+        <div class="goal-description-icon">
+            <pl-icon [svg]="'metrics'" class="white pointer" [scale]="1" (click)="toggleGoalDescription()"></pl-icon>
+        </div>
+    </div>
+    <!-- <div [hidden]="!showDescription" class="description">{{ metricPoint.metric.description }}</div> -->
+    <div [hidden]="!showGoal" class="goal-description padding-small">{{ metricPoint.metric.goal.description }}</div>
+    <div class="flexbox">
+        <div class="correct" [class.disabled]="!isEditable()" (click)="incrementCorrect()">
+            <pl-icon [svg]="'check'" class="white" [scale]="0.8"></pl-icon>
+        </div>
+        <div class="wrong" [class.disabled]="!isEditable()" (click)="incrementWrong()">
+            <pl-icon [svg]="'cross'" class="white" [scale]="0.8"></pl-icon>
+        </div>
+        <div class="flex1 metric-ratio">
+            <div class="metric-ratio-inputs">
+                <div class="metric-ratio-correct">
+                    <!-- <span (click)="showInput('correct')" [hidden]="!show.correct.text">{{ metricPoint.correct }}</span>
+                    <span #inputCorrect [hidden]="!show.correct.input"> -->
+                        <pl-input-text class="input documentation-no-border" [type]="'number'" [(model)]="metricPoint.correct" [min]="0" [disabled]="!isEditable()" (keyup)="keyInput($event, 'correct')" (onBlur)="blurInput($event, 'correct')"></pl-input-text>
+                    <!-- </span> -->
+                </div>
+                <div class="metric-ratio-slash">/</div>
+                <div class="metric-ratio-trials">
+                    <!-- <span (click)="showInput('trials')" [hidden]="!show.trials.text">{{ metricPoint.trials }}</span>
+                    <span #inputTrials [hidden]="!show.trials.input"> -->
+                        <pl-input-text class="input documentation-no-border" [type]="'number'" [(model)]="metricPoint.trials" [min]="0" [disabled]="!isEditable()" (keyup)="keyInput($event, 'trials')" (onBlur)="blurInput($event, 'trials')"></pl-input-text>
+                    <!-- </span> -->
+                </div>
+            </div>
+            <div class="metric-percent">
+                {{ metricPoint.percent_correct }}%
+            </div>
+        </div>
+    </div>
+</div>

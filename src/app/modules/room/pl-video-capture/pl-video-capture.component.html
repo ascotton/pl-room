@@ -1,0 +1,20 @@
+<div class="video-capture" *ngIf="clientSelected && _activated">
+    <div class="loading" *ngIf="waitingForCapture">
+        <div class="early-preview">
+            <mat-spinner [diameter]="50" color="warn"></mat-spinner>
+            <div class="early-preview-image" [style.background-image]="'url(' + earlyCaptureDataUrl + ')'"></div>
+            <label *ngIf="!earlyCaptureDataUrl">Generating Image...</label>
+            <label *ngIf="earlyCaptureDataUrl">Processing Image...</label>
+        </div>
+        <button mat-raised-button (click)="requestCancelCapture()">Cancel</button>
+    </div>
+    <div class="close-button" *ngIf="!waitingForCapture">
+        <button mat-raised-button aria-label="Cancel Screenshot" (click)="cancelClicked()">
+            <mat-icon>close</mat-icon>
+            <span>Cancel</span>
+        </button>
+    </div>
+    <div class="pii-warning">
+        Verify there are no faces or full names visible in the capture zone
+    </div>
+</div>

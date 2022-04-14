@@ -1,0 +1,21 @@
+/*
+This is a generated file, do NOT edit it (your changes will be overwritten).
+*/
+// tslint:disable:max-line-length
+
+module.exports = angular.module('room.config', [])
+    .constant('flavor', '<%= flavor %>')
+    .constant('remoteHQSrc', '<%= remoteHQSrc %>')
+    .constant('sha', '<%= sha.toString() %>')
+    .constant('lastCommit', '<%= lastCommit.toString() %>')
+    .constant('liveagent_conf', JSON.parse('<%= JSON.stringify(liveagent) %>'))
+    .constant('analytics_conf', {
+        heap: '<%= heapKey %>',
+        sentry: '<%= sentryKey %>',
+    })
+    .constant('applicationDefaults', JSON.parse('<%= JSON.stringify(applicationsDefaults) %>'))
+    .constant('versions', {
+        pdfjs: '<%= versions.pdfjs %>'
+    })
+    .constant('envRoom', JSON.parse('<%= JSON.stringify(envRoom) %>'))
+;

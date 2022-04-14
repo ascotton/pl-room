@@ -1,0 +1,44 @@
+header.page-title {
+    color: white;
+    background-color: @slate;
+    > .container {
+        display: flex;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 36px;
+        background-color: @blue-light;
+        margin-right: 16px;
+        svg {
+            fill: white;
+            width: 32px;
+            height: 32px;
+            margin: 20px;
+        }
+    }
+    .info {
+        flex: 1;
+        h1, h6, label {
+            color: white;
+        }
+        .item {
+            float: left;
+            margin-right: 12px;
+            h6 {
+                font-size: 11px;
+                text-transform: uppercase;
+                margin: 12px 0 5px 0;
+            }
+            p {
+                font-size: 11px;
+            }
+        }
+    }
+    .actions {
+        width: 125px;
+        text-align: right;
+    }
+}

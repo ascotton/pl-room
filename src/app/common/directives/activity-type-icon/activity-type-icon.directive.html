@@ -1,0 +1,20 @@
+<div ng-class="activity.activity_type">
+    <div ng-if="activity.activity_type === 'youtube'" class="video">
+        <pl-icon class="white" [svg]="'video'"></pl-icon>
+    </div>
+    <div ng-if="activity.activity_type === 'pdfviewer'" class="document">
+        <pl-icon class="white" [svg]="'pdf-doc'"></pl-icon>
+    </div>
+    <div ng-if="activity.activity_type === 'doubleassessment' || activity.activity_type === 'assessment'" class="assessment">
+        <pl-icon class="white" [svg]="'assessments'"></pl-icon>
+    </div>
+    <div ng-if="activity.activity_type === 'flashcards'" class="flashcards">
+        <pl-icon class="white" [svg]="'flashcard'"></pl-icon>
+    </div>
+    <div ng-if="activity.activity_type === 'memory'" class="memory">
+        <pl-icon class="white" [svg]="'head-gears'"></pl-icon>
+    </div>
+    <div ng-if="activity.activity_type === 'whos-that'" class="whos-that">
+        <pl-icon class="white" [svg]="'games'"></pl-icon>
+    </div>
+</div>

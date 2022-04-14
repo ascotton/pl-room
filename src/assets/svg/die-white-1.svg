@@ -1,0 +1,16 @@
+<svg viewBox="0 0 45 44" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient fx="50%" fy="50%" r="90.998%" id="a">
+            <stop stop-color="#FFF" offset="0%">
+</stop>
+            <stop stop-color="#EDEEEF" offset="100%">
+</stop>
+        </radialGradient>
+    </defs>
+    <g transform="translate(.25 .06)" fill="none" fill-rule="evenodd">
+        <rect stroke="#D2D3D5" fill="url(#a)" width="44" height="43.7" rx="4">
+</rect>
+        <circle fill="#4C4F52" cx="22" cy="22" r="4">
+</circle>
+    </g>
+</svg>

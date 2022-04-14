@@ -1,0 +1,4 @@
+<ng-container *ngIf="{ isMuted: isMuted$ | async } as vm">
+  <mat-icon *ngIf="!vm.isMuted">mic</mat-icon>
+  <mat-icon *ngIf="vm.isMuted">mic_off</mat-icon>
+</ng-container>

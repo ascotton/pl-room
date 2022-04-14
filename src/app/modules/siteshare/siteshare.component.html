@@ -1,0 +1,14 @@
+<div id="Siteshare">
+    <div  ng-if="$ctrl.remoteHQActive">
+        <div id="loading">
+            <h1>Loading</h1>
+            <pl-dot-loader></pl-dot-loader>
+        </div>
+        <div>
+            <iframe id="remoteHQFrame" class="browseFrame" 
+                allow="clipboard-read; clipboard-write self ${URL}"
+                ng-show="$ctrl.remoteHQActive && $ctrl.trustedRemoteHQUrl && $ctrl.trustedRemoteHQUrl !== ''"
+                ng-src="{{$ctrl.trustedRemoteHQUrl}}"></iframe>
+        </div>
+    </div>
+</div>

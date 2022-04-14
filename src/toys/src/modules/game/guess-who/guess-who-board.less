@@ -1,0 +1,357 @@
+// That's a temporary fix to parent container
+// It's adding unnecessary borders and position shifts
+.central-content .aspect-ratio-constriction {
+    border: none !important;
+    left: 0 !important;
+}
+
+// Board layout
+//
+.guesswho-board {
+
+    width: 100%;
+    height: 100%;
+
+    .main {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 934px;
+        height: 768px;
+
+        .rect {
+            position: absolute;
+            left: unit((1024 - 90) / 2 , px);
+            top: unit(768 / 2, px);
+            margin: unit(-1 * (4 * 130 * 168 / 145 + 3 * 10) / 2, px) 0 0 unit(-1 * (6 * 130 + 5 * 10) / 2, px);
+            width: unit(6 * 130 + 6 * 10, px);
+            height: unit(4 * 130 * 168 / 145 + 4 * 10, px);
+            font-size: 0;
+
+            &.whait-for-opponent .card:hover {
+                border-color: @gray-lightest !important;
+                &:after {
+                    opacity: 0;
+                }
+            }
+
+            .card:hover {
+                border-color: @brand-blue-medium;
+            }
+
+            &.game-running .card:hover{
+                border-color: @gray-lightest !important;
+
+                &:after {
+                    opacity: 0.2;
+                }
+            }
+        }
+    }
+
+    .side {
+        position: absolute;
+        left: 934px;
+        top: 0;
+
+        width: 90px;
+        height: 768px;
+
+        .card .image{
+            width: unit((145 - 10 - 2) / 145, em);
+            height: unit((145 - 10 - 2) / 145, em);
+            padding: unit(10 / 145, em) 0 0 0;
+        }
+    }
+}
+
+// Scale wrapper
+//
+.guesswho-scale-wrapper {
+    position: absolute;
+    transform-origin: left top;
+}
+
+
+// Card overlay
+//
+.guesswho-board .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+
+    transition: opacity 250ms ease-in-out;
+
+    &.ng-hide-add {opacity: 1;}
+    &.ng-hide-add.ng-hide-add-active {opacity: 0;}
+    &.ng-hide-remove {opacity: 0;}
+    &.ng-hide-remove.ng-hide-remove-active {opacity: 1;}
+
+
+    &.overlay-zoom {
+        background-color: rgba(255, 255, 255, 0.8);
+
+        .card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 298px;
+            margin-top: unit(-1 * 168 / 145 / 2, em);
+            margin-left: -0.5em;
+            cursor: default;
+
+            .image{
+                width: 1em;
+                height: 1em;
+                left: 5px;
+            }
+
+            .close {
+                width: 54px;
+                height: 54px;
+                background-repeat: no-repeat;
+                background-size: 50% 50%;
+                background-position: center center;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='cross' viewBox='0 0 36 36'%3E%3Cpath fill='%23747678' fill-rule='evenodd' d='M29.873.85l-12.02 12.02L5.83.85C5.05.067 3.785.067 3.004.85L.88 2.97C.1 3.753.1 5.02.88 5.8l12.022 12.02L.882 29.84C.1 30.623.1 31.89.88 32.67L3 34.79c.782.782 2.048.782 2.83 0l12.02-12.02 12.02 12.02c.782.782 2.048.782 2.83 0l2.12-2.12c.782-.782.782-2.048 0-2.83L22.8 17.82 34.822 5.8c.782-.782.782-2.048 0-2.83L32.702.85c-.782-.782-2.048-.782-2.83 0'/%3E%3C/svg%3E");
+
+                border-radius: 27px;
+                background-color: #ffffff;
+                border: solid 1px #979797;
+
+                opacity: 1;
+                position: absolute;
+                top: -20px;
+                right: -20px;
+
+                z-index: 1200;
+
+            }
+        }
+
+    }
+
+    &.overlay-load {
+
+        width: 1024px;
+        height: 768px;
+
+        background-color: rgba(255, 255, 255, 1);
+
+        .spinner {
+            width: 200px;
+            height: 200px;
+            min-width: auto;
+            min-height: auto;
+            z-index: 1200;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -100px;
+        }
+    }
+
+
+}
+
+
+// Generic card markup
+//
+.guesswho-board .card {
+    display: inline-block;
+    position: relative;
+    font-size: 130px;
+    width: 1em;
+    height: unit(168 / 145, em);
+
+    // We can't use FireFox border hack with rounded corners, so I'll disable it
+    // Also, we're now consistent with flashcards look and feel
+    // border-radius: 4px;
+
+    border: 1px solid #edeeef;
+    background: #ffffff;
+    cursor: pointer;
+
+    &:before, &:after {
+        display: none;
+        position: absolute;
+        content: '';
+        top: 5px;
+        right: 5px;
+        bottom: 5px;
+        left: 5px;
+    }
+
+    .image {
+        position: absolute;
+        left: 1px;
+        right: 5px;
+        top: 5px;
+        z-index: 100;
+        //width: unit((145 - 10 - 2) / 145, em);
+        //height: unit((145 - 10 - 2) / 145, em);
+        //padding: unit(10 / 145, em) 0 0 0;
+    }
+
+    .title {
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+        z-index: 100;
+        font-size: unit(15 / 145, em);
+        line-height: 2em;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .popup {
+        position: absolute;
+        left: 7px;
+        top: 8px;
+        width: 14px;
+        height: 14px;
+
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M21-1.998H-1.962v22.962H21z'/%3E%3Cg fill='%23FFF'%3E%3Cpath d='M11.433 5.653V3.74h5.74c1.055 0 1.913.858 1.913 1.913v11.48c0 1.057-.858 1.915-1.913 1.915H5.693c-1.057 0-1.914-.858-1.914-1.914v-5.74h1.91v5.74h11.48V5.654h-5.74z'/%3E%3Cpath d='M.91.87h6.696v1.913h-3.43L14.98 13.588l-1.354 1.353L2.82 4.137l.002 3.43H.91'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+
+    }
+}
+
+// Sidebar styling
+//
+.guesswho-board .side {
+    border-left: 1px solid #edeeef;
+    background-color: #fafafa;
+    text-align: center;
+}
+
+// Card styling
+//
+.guesswho-board {
+
+    .main {
+
+        .card {
+
+            margin: 0 10px 10px 0;
+
+            &:before {
+                display: block;
+            }
+
+            &:after {
+                display: block;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath fill-rule='evenodd' d='M23.897 2.095L21.967.163l-9.96 9.96-9.96-9.96L.114 2.095l9.96 9.96-9.96 9.96 1.93 1.93 9.96-9.96 9.96 9.96 1.932-1.93-9.96-9.96'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-size: 85%;
+                background-position: center 10px;
+                z-index: 200;
+                opacity: 0;
+
+                transition: opacity .1s ease-in-out;
+            }
+
+        }
+
+        .alert-container {
+            text-align: center;
+            .alert {
+                display: inline-block;
+                width: unset;
+                min-width: 150px;
+                background: @gray-darker;
+                margin: 3px auto;
+                height: 60px;
+                line-height: 30px;
+                position: static;
+
+                left: 50%;
+                min-height: 60px;
+                z-index: 1000;
+                background-color: rgba(76, 79, 82, .7);
+                border-radius: 50px;
+                font-size: 17px;
+                text-align: center;
+                color: #FFFFFF;
+                opacity: 0.7;
+
+                span {
+                    opacity: 1;
+                }
+            }
+        }
+
+    }
+
+    .side {
+
+        .name {
+            margin-top: 12px;
+            line-height: 32px;
+            font-size: 15px;
+            color: #b6b8ba;
+        }
+
+        .card {
+            font-size: 75px;
+
+            &:before {
+                display: block;
+                background-color: #9ed099;
+            }
+
+            &:after {
+                background-image: url('data:image/png;base64,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');
+                background-size: 50%;
+                z-index: 200;
+            }
+
+            &.cover:after {
+                display: block;
+            }
+        }
+    }
+
+    &.therapist .card:before {
+        background-color: #9ed099;
+    }
+
+    &.student .card:before {
+        background-color: #fcbb74;
+    }
+
+    .main .card {
+        .popup {
+            opacity: 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        &:hover {
+            .popup.visible {
+                opacity: 1;
+            }
+        }
+    }
+
+    .main.expand-mode .card:hover:not(.cross) {
+        &:after {
+            opacity: 0;
+        }
+    }
+
+    .main .card.cross{
+        &:hover:after {
+            opacity: .35 !important;
+        }
+
+        &:after {
+            opacity: .35;
+        }
+
+    }
+
+}

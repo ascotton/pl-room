@@ -1,0 +1,9 @@
+<div class="stream-box" [class.is-promoted]="isPromoted$ | async" [ngStyle]="styles$ | async">
+  <pl-stream-display-name></pl-stream-display-name>
+
+  <pl-stream-video-box></pl-stream-video-box>
+
+  <div class="toolbar" #toolbar>
+    <ng-content></ng-content>
+  </div>
+</div>

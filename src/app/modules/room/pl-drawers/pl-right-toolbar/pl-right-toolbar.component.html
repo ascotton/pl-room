@@ -1,0 +1,63 @@
+<nav class="right-toolbar">
+  <div class="app-btns">
+    <button id="drawer-toggle" *plHasPermission="'PERMS_DEFAULT_PROVIDERS'" class="toolbar-btn drawer-toggle" (click)="toggleDrawer()">
+      <figure class="toggle" [ngClass]="{ rtl: isDrawerOpen }">
+        <pl-icon svg="toggle" [width]="20" [height]="20"></pl-icon>
+      </figure>
+    </button>
+
+    <ng-container *ngFor="let item of items">
+      <button
+        class="toolbar-btn"
+        [id]="item.id"
+        *plHasPermission="item.permissions;uiFlag:item.uiFlag"
+        [ngClass]="{
+          'active': isDrawerActive(item.drawerName),
+          'student-chat': item.drawerName === 'chat' && isStudent,
+          'unread-chats': item.drawerName === 'chat' && unreadChatCount > 0
+        }"
+        [ngSwitch]="item.drawerName"
+        (click)="openDrawer(item.drawerName)"
+      >
+        <figure>
+          <pl-icon
+            [svg]="item.iconProps.icon"
+            [width]="item.iconProps.size || 20"
+            [height]="item.iconProps.size || 20"
+            [ngClass]="getItemIconClass(item.drawerName)"
+          ></pl-icon>
+        </figure>
+
+        <div *ngSwitchCase="'chat'" class="unread-messages" [hidden]="unreadChatCount === 0">
+          {{ unreadChatCount }}
+        </div>
+
+        <span
+          *ngSwitchCase="'sessionRecord'"
+          class="recording-light-on"
+          [hidden]="!isTokboxRecording"
+        ></span>
+
+        <div *ngIf="item.tooltip" class="btn-tooltip">
+          {{item.tooltip}}
+        </div>
+      </button>
+    </ng-container>
+    <button
+      class="toolbar-btn help-drawer-btn"
+      [ngClass]="{'active': isHelpDrawerActive}"
+      [matMenuTriggerFor]="helpMenu"
+      (menuClosed)="toggleHelpActive(false)"
+      (menuOpened)="toggleHelpActive(true)"
+    >
+      <mat-icon>help</mat-icon>
+
+      <div class="btn-tooltip">
+        Help
+      </div>
+    </button>
+    <mat-menu #helpMenu="matMenu" class="help-menu">
+        <pl-help-drawer></pl-help-drawer>
+    </mat-menu>
+  </div>
+</nav>

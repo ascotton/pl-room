@@ -1,0 +1,4 @@
+<ng-container *ngIf="{ val: isLocal$ | async } as isLocal">
+  <pl-local-stream *ngIf="isLocal.val"></pl-local-stream>
+  <pl-remote-stream *ngIf="!isLocal.val"></pl-remote-stream>
+</ng-container>

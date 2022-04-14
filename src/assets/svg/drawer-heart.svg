@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="19px" height="17px" viewBox="0 0 19 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>heart</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Iconography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="New-Icons---Gold-Release" transform="translate(-986.000000, -219.000000)">
+            <g id="heart" transform="translate(984.000000, 216.000000)">
+                <g id="Group">
+                    <g id="Frame_-_24px">
+                        <rect id="Rectangle-path" x="0" y="0.000984107143" width="23.6185714" height="23.6185714"></rect>
+                    </g>
+                    <g id="Filled_Icons" transform="translate(2.952321, 3.936429)" fill="#000000">
+                        <path d="M12.7933929,0.000984107143 C11.2247261,0.000984107143 9.77218393,0.824681786 8.85696429,2.04792696 C7.94174464,0.824681786 6.4892025,0.000984107143 4.92053571,0.000984107143 C2.20735232,0.000984107143 0,2.20833643 0,4.92151982 C0,10.3252521 7.99488643,15.384547 8.33637161,15.5971141 C8.49579696,15.6965089 8.67687268,15.7466984 8.85696429,15.7466984 C9.03705589,15.7466984 9.21813161,15.6965089 9.37755696,15.5971141 C9.71904214,15.384547 17.7139286,10.3252521 17.7139286,4.92151982 C17.7139286,2.20833643 15.5065763,0.000984107143 12.7933929,0.000984107143 L12.7933929,0.000984107143 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

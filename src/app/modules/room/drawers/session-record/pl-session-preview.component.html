@@ -1,0 +1,7 @@
+<video
+  *ngIf="mediaStream$ | async as src"
+  [muted]="true"
+  [srcObject]="src"
+  autoplay="true"
+  playsinline="true"
+></video>

@@ -1,0 +1,17 @@
+<button
+  mat-flat-button
+  class="control"
+  (click)="prev()"
+  [disabled]="disablePrev$ | async"
+>
+  <mat-icon>chevron_left</mat-icon>
+</button>
+<pl-giphy-preview class="preview"></pl-giphy-preview>
+<button
+  mat-flat-button
+  class="control"
+  (click)="next()"
+  [disabled]="disableNext$ | async"
+>
+  <mat-icon>chevron_right</mat-icon>
+</button>

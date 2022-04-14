@@ -1,0 +1,3 @@
+<div class="widgets-container" (window:resize)="onResize($event)">
+    <pl-base-widget *ngFor="let widget of widgets; trackBy: getId" [widget]="widget"></pl-base-widget>
+</div>

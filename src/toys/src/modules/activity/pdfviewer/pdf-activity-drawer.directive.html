@@ -1,0 +1,206 @@
+<div class="activity-drawer pdf-activity-drawer">
+    <nav class="controls">
+        <button id="pdfRotateControl" ng-show="bookMode === 1"  ng-click="rotate90()">
+            <figure class="rotateButton">
+                <pl-icon [svg]="'flip-down'"></pl-icon>
+            </figure>
+            <span id="rotateText" class="font-h6">Rotate</span>
+        </button>
+
+        <div id="bookModeControl" ng-if="totalPages > 1" class="activityBookModeControl" pl-dropdown pl-dropdown-content="#book-list"
+             multiclick="false">
+            <form class="customZoomInputForm" autocomplete="off">
+                <div class="comboBox">
+                    <div class="customModeField"> {{ getDisplayMode() }}</div>
+                    <div class="comboDownArrowContainer">
+                        <div class="comboBoxDownArrow"></div>
+                    </div>
+                </div>
+            </form>
+            <span class="activitySpan">Views</span>
+        </div>
+
+        <div id="book-list" class="pl-dropdown-content">
+            <a href="#" ng-click="switchModeTo(1)">
+                <svg class="specialSvg" width="23px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Older-Concepts" stroke="none" stroke-width="1">
+                        <g id="Document-View-Start-Page-2" transform="translate(-1083.000000, -91.000000)">
+                            <g id="Group-6" transform="translate(1063.000000, 74.550781)">
+                                <g id="Group-2" transform="translate(16.909120, 15.322266)">
+                                    <g id="file-new-2-copy" transform="translate(0.319384, 0.567707)">
+                                        <g id="Group">
+
+                                            <g id="Line_Icons" transform="translate(2.819393, 1.409696)">
+                                                <g id="Group">
+                                                    <path d="M8.04513703,0 L1.40969634,0 C0.63224881,0 0,0.632953658 0,1.40969634 L0,12.6872671 C0,13.4647146 0.63224881,14.0969634 1.40969634,14.0969634 L9.8678744,14.0969634 C10.6453219,14.0969634 11.2775707,13.4647146 11.2775707,12.6872671 L11.2775707,3.23243371 L8.04513703,0 L8.04513703,0 Z M9.86857925,12.6872671 L1.40969634,12.6872671 L1.40969634,1.40969634 L7.04848171,1.40969634 L7.04848171,4.22908903 L9.8678744,4.22908903 L9.86857925,12.6872671 L9.86857925,12.6872671 Z"
+                                                          id="Shape"></path>
+                                                    <rect id="Rectangle-path" x="2.81939269" y="6.34363354"
+                                                          width="4.22908903" height="1.40969634"></rect>
+                                                    <rect id="Rectangle-path" x="2.81939269" y="9.16302623"
+                                                          width="5.63878537" height="1.40969634"></rect>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                Single</a>
+            <a href="#" ng-click="switchModeTo(3)">
+                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                <svg class="specialSvg" width="23px" height="16px" viewBox="0 0 23 16" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg"
+                     xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>double-pages</title>
+                    <defs></defs>
+                    <g id="Book-View" stroke="none" stroke-width="1" fill-rule="evenodd">
+                        <g id="assets" transform="translate(-94.000000, -132.000000)">
+                            <g id="Group-3" transform="translate(94.000000, 132.000000)">
+                                <g id="Group" transform="translate(10.231843, 0.778258)">
+                                    <g id="Line_Icons" transform="translate(0.297783, 0.148892)">
+                                        <g id="Group" transform="translate(0.000000, 0.000000)">
+                                            <path d="M8.35699874,1.42108547e-14 L1.46434182,1.42108547e-14 C0.656757304,1.42108547e-14 0,0.657489475 0,1.46434182 L0,13.1790763 C0,13.9866609 0.656757304,14.6434182 1.46434182,14.6434182 L10.2503927,14.6434182 C11.0579772,14.6434182 11.7147345,13.9866609 11.7147345,13.1790763 L11.7147345,3.35773578 L8.35699874,1.42108547e-14 L8.35699874,1.42108547e-14 Z M10.2511249,13.1790763 L1.46434182,13.1790763 L1.46434182,1.46434182 L7.32170908,1.46434182 L7.32170908,4.39302545 L10.2503927,4.39302545 L10.2511249,13.1790763 L10.2511249,13.1790763 Z"
+                                                  id="Shape"></path>
+                                            <rect id="Rectangle-path" x="2.92868363" y="6.58953817" width="4.39302545"
+                                                  height="1.46434182"></rect>
+                                            <rect id="Rectangle-path" x="2.92868363" y="9.5182218" width="5.85736726"
+                                                  height="1.46434182"></rect>
+                                        </g>
+                                    </g>
+                                </g>
+                                <path d="M1.71933127,0.934746864 C0.911746758,0.934746864 0.254989453,1.59223634 0.254989453,2.39908868 L0.254989453,14.1138232 C0.254989453,14.9214077 0.911746758,15.578165 1.71933127,15.578165 L10.5053822,15.578165 C11.3129667,15.578165 11.969724,14.9214077 11.969724,14.1138232 C11.969724,14.1138232 11.9697234,3.86343035 11.9697234,2.39908861 C11.9697234,0.934746864 10.7219879,0.934746864 10.7219879,0.934746864 L1.71933127,0.934746864 Z M1.71933127,14.1138232 L1.71933127,2.39908868 L10.506114,2.39908868 L10.5061143,14.1138232 L1.71933127,14.1138232 Z"
+                                      id="Shape"></path>
+                                <rect id="Rectangle-path" x="3.18367308" y="7.52428503" width="4.39302545"
+                                      height="1.46434182"></rect>
+                                <rect id="Rectangle-path" x="3.18367308" y="10.4529687" width="5.85736726"
+                                      height="1.46434182"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                Double (start pg 1)</a>
+            <a href="#" ng-click="switchModeTo(2)">
+                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                <svg class="specialSvg" width="23px" height="16px" viewBox="0 0 23 16" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg"
+                     xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>double-pages</title>
+                    <defs></defs>
+                    <g id="Book-View" stroke="none" stroke-width="1" fill-rule="evenodd">
+                        <g id="assets" transform="translate(-94.000000, -132.000000)">
+                            <g id="Group-3" transform="translate(94.000000, 132.000000)">
+                                <g id="Group" transform="translate(10.231843, 0.778258)">
+                                    <g id="Line_Icons" transform="translate(0.297783, 0.148892)">
+                                        <g id="Group" transform="translate(0.000000, 0.000000)">
+                                            <path d="M8.35699874,1.42108547e-14 L1.46434182,1.42108547e-14 C0.656757304,1.42108547e-14 0,0.657489475 0,1.46434182 L0,13.1790763 C0,13.9866609 0.656757304,14.6434182 1.46434182,14.6434182 L10.2503927,14.6434182 C11.0579772,14.6434182 11.7147345,13.9866609 11.7147345,13.1790763 L11.7147345,3.35773578 L8.35699874,1.42108547e-14 L8.35699874,1.42108547e-14 Z M10.2511249,13.1790763 L1.46434182,13.1790763 L1.46434182,1.46434182 L7.32170908,1.46434182 L7.32170908,4.39302545 L10.2503927,4.39302545 L10.2511249,13.1790763 L10.2511249,13.1790763 Z"
+                                                  id="Shape"></path>
+                                            <rect id="Rectangle-path" x="2.92868363" y="6.58953817" width="4.39302545"
+                                                  height="1.46434182"></rect>
+                                            <rect id="Rectangle-path" x="2.92868363" y="9.5182218" width="5.85736726"
+                                                  height="1.46434182"></rect>
+                                        </g>
+                                    </g>
+                                </g>
+                                <path d="M1.71933127,0.934746864 C0.911746758,0.934746864 0.254989453,1.59223634 0.254989453,2.39908868 L0.254989453,14.1138232 C0.254989453,14.9214077 0.911746758,15.578165 1.71933127,15.578165 L10.5053822,15.578165 C11.3129667,15.578165 11.969724,14.9214077 11.969724,14.1138232 C11.969724,14.1138232 11.9697234,3.86343035 11.9697234,2.39908861 C11.9697234,0.934746864 10.7219879,0.934746864 10.7219879,0.934746864 L1.71933127,0.934746864 Z M1.71933127,14.1138232 L1.71933127,2.39908868 L10.506114,2.39908868 L10.5061143,14.1138232 L1.71933127,14.1138232 Z"
+                                      id="Shape"></path>
+                                <rect id="Rectangle-path" x="3.18367308" y="7.52428503" width="4.39302545"
+                                      height="1.46434182"></rect>
+                                <rect id="Rectangle-path" x="3.18367308" y="10.4529687" width="5.85736726"
+                                      height="1.46434182"></rect>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                Double (start pg 2)</a>
+        </div>
+
+
+        <div id="pdfZoomControl" class="activityZoomControl" pl-dropdown pl-dropdown-content="#zoom-list"
+             multiclick="false">
+            <form class="customZoomInputForm" ng-submit="fixCustomZoomDisplayValueAndUpdateScale()" autocomplete="off">
+                <div class="comboBox">
+                    <input id="customZoomInputField" type="text" ng-model="customZoomDisplayValue"
+                           ng-keydown="restrictToNumericEntry($event)"
+                           ng-blur="zoomInputFieldOnBlur($event)"
+                           maxlength="3"
+                           tabindex="0"/>%
+                    <div class="comboBoxDownArrowContainer">
+                        <div class="comboBoxDownArrow"></div>
+                    </div>
+                </div>
+            </form>
+            <span class="activitySpan zoom-label font-h6">Zoom</span>
+        </div>
+
+        <div id="zoom-list" class="pl-dropdown-content">
+            <a href="#" ng-repeat="(zoomLevel, zoomInt) in zoomOptions" ng-click="zoomTo(zoomInt)">{{zoomLevel}}</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="thumbnails">
+            <button ng-if="bookMode === 1" ng-repeat="page in pages"
+                    ng-click="gotoPage(page)"
+                    ng-class="getThumbnailClasses(page)"
+                    style="height: 142px">
+                <div ng-if="!hasThumbs" class="loader{{page}}">
+                    <pl-icon [svg]="'loader'"></pl-icon></inject>
+                </div>
+                <div ng-if="hasThumbs" class="thumbContainer">
+                    <img ng-src="{{thumbs[page-1]}}" ng-style="getThumbStyle(page)"/>
+                </div>
+                <div ng-if="!hasThumbs" class="canvasContainer">
+                    <canvas id="pageCanvas{{page}}" width="140" height="97"></canvas>
+                </div>
+                <div class="pageNum">{{page}}</div>
+            </button>
+
+            <button ng-if="bookMode !== 1" ng-repeat="page in doublePages"
+                    ng-click="gotoPage(page[0])"
+                    ng-class="getThumbnailClasses(page[0])"
+                    style="height: 142px">
+                <div  ng-if="!hasThumbs" class="loader{{page[0]}}">
+                    <pl-icon [svg]="'loader'"></pl-icon></inject>
+                </div>
+                <div ng-if="hasThumbs" class="dualThumbContainer">
+                    <img ng-src="{{thumbs[page[0]-1]}}" ng-style="getThumbStyle(page[0])"/>
+                    <img ng-src="{{thumbs[page[1]-1]}}" ng-style="getThumbStyle(page[1])"/>
+                </div>
+                <div ng-if="!hasThumbs" class="canvasContainer">
+                    <canvas id="pageCanvas{{page[0]}}" width="140" height="97"></canvas>
+                    <canvas ng-if="page[1]" id="pageCanvas{{page[1] ? page[1] : ''}}" width="140" height="97"></canvas>
+                </div>
+                <div class="pageNumbers">
+                    <div class="pageNum">{{page[0]}}</div>
+                    <div ng-if="page[1]" class="pageNum">{{page[1]}}</div>
+                </div>
+            </button>
+        </div>
+    </main>
+
+    <footer>
+
+        <div class="page-input">
+            <input ng-keyup="$event.keyCode === 13 && gotoPage($index)"
+                   ng-blur="currentPage !== selectedPage && (currentPage = selectedPage)"
+                   class="jumpToInput" type="text"
+                   ng-model="currentPage"/>
+            <span>/ {{ totalPages }}</span>
+        </div>
+        <button ng-click="prev()" class="prevBtn">
+            <figure>
+                <pl-icon [svg]="'chevron-up'"></pl-icon>
+            </figure>
+            <span class="font-h6">Previous</span>
+        </button>
+        <button ng-click="next()" class="nextBtn">
+            <figure>
+                <pl-icon [svg]="'chevron-down'"></pl-icon>
+            </figure>
+            <span class="font-h6">Next</span>
+        </button>
+    </footer>
+</div>

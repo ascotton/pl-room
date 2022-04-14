@@ -1,0 +1,47 @@
+<div class="pl-documentation-clients">
+    <div *ngIf="loading" class="margin-large-t">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+    <div *ngIf="!loading">
+
+        <div *ngIf="isBlackoutDay" class="pl-non-service-day margin padding center">
+            <mat-icon inline>
+                warning
+            </mat-icon>
+            This is a Non-Service day at the school. Please make sure you're authorized to work for this school today.
+        </div>
+        <div *ngIf="!clientAppointments.length" class="center margin-large-tb">
+            <a href="{{ urls.scheduleFE }}/calendar" target="_blank" class="heap-add-clients">Add Clients</a>
+        </div>
+        <div (click)="refreshClientAppointments()" class="pointer center margin-large-t heap-refresh-documentation-panel">
+            <pl-icon [svg]="'rotate'" [scale]="0.6" [verticalAlign]="'-1px'" class="gray-light"></pl-icon> Refresh
+        </div>
+
+        <div *ngIf="clientAppointments.length" class="margin-t">
+            <div class="margin-lr">
+                <pl-input-multi-select class="form-input" [placeholder]="'Select Clients'" [(model)]="selectedClientAppointmentIds" [options]="selectOptsClientAppointments" (change)="selectClientAppointments()" [forceChange]="clientAppointmentsForceChange"></pl-input-multi-select>
+            </div>
+
+            <div>
+                <div *ngFor="let clientAppointment of selectedClientAppointments; let index=index;" class="client-appointment">
+                    <div class="client-header pointer flexbox padding padding-large-lr" (click)="toggleClientAppointment(clientAppointment, index)">
+                        <div class="margin-small-r">
+                            <pl-icon *ngIf="!clientAppointment.xExpanded" [svg]="'chevron-right'"  [scale]="0.6" [verticalAlign]="'1px'" class="gray-light"></pl-icon>
+                            <pl-icon *ngIf="clientAppointment.xExpanded" [svg]="'chevron-down'"  [scale]="0.6" [verticalAlign]="'1px'" class="gray-light"></pl-icon>
+                        </div>
+                        <div class="flex1">
+                            <div class="name">{{ clientAppointment.first_name}} {{ clientAppointment.last_name }}</div>
+                            <div class="flexbox">
+                                <div class="time flex1">{{ clientAppointment.xTime }}</div>
+                                <button pl-button class="link" (click)="removeSelectedClientAppointment(formClientAppointmentId(clientAppointment))">Hide</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="clientAppointment.xExpanded" class="client-expanded padding">
+                        <pl-documentation-client [client]="clientAppointment" [provider]="currentUser" [instanceId]="clientAppointment.xInstanceId"></pl-documentation-client>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

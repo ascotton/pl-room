@@ -1,0 +1,16 @@
+@import 'colors.less';
+:host {
+    display: block;
+    .pl-audio-level-indicator {
+        display: flex;
+        .level-square {
+            height: 20px;
+            border: 1px solid @gray;
+            border-radius: 10%;
+            background-color: @gray-light;
+            &.filled {
+                background-color: @orange;
+            }
+        }
+    }
+}

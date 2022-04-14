@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <script>
+            let db = window.parent['PLGameDb'];
+            const ref1 = db.ref('test');
+
+            ref1.set('abcabc');
+
+            setTimeout(() => {
+                ref1.onValue(
+                    (value) => {
+                        console.log('--- on...', value);
+                    },
+                    (error) => {
+                        console.error('--- on error...', error)
+                    }
+                )
+
+            }, 2000);
+
+            setTimeout(() => {
+                console.log('--- setting chocolate')
+                ref1.set(
+                    'chocolate',
+                    () => { },
+                    (error) => { console.error('--- set chocolate error...', error) }
+                )
+            }, 2500);
+
+            setTimeout(() => {
+                console.log('--- setting beer')
+                ref1.set(
+                    'beer',
+                    () => {  },
+                    (error) => { console.error('--- set beer error', error) }
+                )
+            }, 3000)
+
+            setTimeout(() => {
+                const x = ref1.get((value) => {
+                    console.log('--- get', value)
+                });
+            }, 3500)
+
+        </script>
+
+        <!-- <script src="bundle.gtb"></script> -->
+    </head>
+    <body>
+        <h1>Gametable Checkers iframe</h1>
+    </body>
+</html>

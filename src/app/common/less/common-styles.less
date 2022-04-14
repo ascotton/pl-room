@@ -1,0 +1,38 @@
+// import framework styles (bootstrap / fonts / hotkeys)
+@import "../../../../node_modules/bootstrap/less/bootstrap";
+// @import (inline) "node_modules/angular-hotkeys/hotkeys.css";
+
+// common styles
+@import "./constants";
+@import "./alerts";
+@import "./animation";
+@import "./centralContent";
+@import "./colors";
+@import "./drawers";
+@import "./global";
+// @import "./grid";
+@import "./page-title";
+@import "./patterns-override";
+// @import "./responsive-utilities";
+// @import "./tab-nav";
+@import "./tags";
+@import "./typography";
+
+// component styles
+@import "../directives/dot-loader/dot-loader.component.less";
+
+// directive styles
+@import "../directives/activity-type-icon/activity-type-icon.directive.less";
+// @import "../directives/notify/notify";
+@import "../directives/pl-dropdown/pl-dropdown";
+@import "../directives/plWindowWarning/pl-window-warning.directive.less";
+@import "../directives/slider/slider.directive.less";
+@import "../directives/takeover/takeover.directive.less";
+@import "../directives/notify/notify";
+// @import "../directives/activityTypeIcon/activityTypeIcon";
+// @import "../directives/radioInput/radio-input";
+// @import "../directives/spinner/spinner";
+@import "../directives/sortable/sortable";
+
+// Set default so apps using pl-core other than lightyear/toychest will not break on build
+@appName: "";

@@ -1,0 +1,69 @@
+<div id="session-record-controls">
+    <div class="margin">
+        <div>
+            <div class="info">Recording of assessments is available if you have obtained consent to record the student.</div>
+            <div class="center margin-large-t">
+                <a target="_blank" href="https://presencelearning.helpjuice.com/record-the-room">
+                    Read About Session Recording in the Help Center
+                </a>
+            </div>
+        </div>
+        <pl-client-appointments-select
+            (clientAppointmentSelected)="clientAppointmentSelected($event)"
+            [currentUser]="currentUser"
+            [evaluationBillingCode]="evaluationBillingCode"
+            [loadClients]="loadClients"
+        ></pl-client-appointments-select>
+
+        <div *ngIf="showConsentFormMessage" class="consent-message margin-large-tb">
+            <div class="margin-tb info">No recording consent form found. If you have obtained a recording consent form, please upload it to the student profile, refresh, and select the student again.</div>
+            <div class=" margin-large-t center" >
+                <a href="https://presencelearning.helpjuice.com/record-the-room" target="_blank" class="heap-update-client-service">
+                    Read About Uploading Recording Consent Forms in the Help Center
+                </a>
+            </div>
+            <div class=" margin-large-t center">
+                <a href="{{ urls.eduClientsFE }}/client/{{ selectedClient.id }}/services" target="_blank" class="heap-update-client-service">
+                    View Client Services
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="margin-large-t center">
+        <button class="screenshare-toggle" ng-class="{'screenshare': isScreensharing}"
+                permissions="Therapist || Administrator"
+                (click)="toggleScreenshare()">
+            <span ng-class *ngIf="!isScreensharing" >
+                Screen Capture Room
+            </span>
+            <span ng-class *ngIf="isScreensharing" >
+                Stop Screen Capture
+            </span>
+        </button>
+    </div> -->
+    <div class="margin-large-t center">
+        <div class="recording-message" *ngIf="isRecording">You are currently recording.</div>
+        <button class="record-toggle" ng-class="{'recording': isRecording}"
+                permissions="Therapist || Administrator"
+                (click)="toggleRecording()"
+                [disabled]="!canRecordSelectedClient">
+            <span ng-class *ngIf="!isRecording" >
+                Start Recording
+            </span>
+            <span ng-class *ngIf="isRecording" >
+                Stop Recording
+            </span>
+        </button>
+        <div class="margin-large-t" *ngIf="postRecording">
+            <div>Recording saved to</div>
+            <div><a href="{{ urls.eduClientsFE }}/client/{{ selectedClient.id }}/reports" target="_blank" class="heap-add-clients">{{selectedClient.firstName}}'s event tab.</a></div>
+        </div>
+    </div>
+    <div  class="margin-large-t" [hidden]="!isScreensharing">
+        <label class="margin-lr">Screen Capture Preview</label>
+        <div class="margin-t" id="screenshare-preview" #screensharepreview>
+          <pl-session-preview></pl-session-preview>
+        </div>
+        <!-- <div class="warning margin-lr">This screen capture will be included in the recorded video archive, but is not visible to your student</div> -->
+    </div>
+</div>

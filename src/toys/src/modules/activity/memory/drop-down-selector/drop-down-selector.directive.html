@@ -1,0 +1,27 @@
+<div class="drop-down-selector">
+    <div
+        class="main-element"
+        ng-click="toggleContent($event)"
+        ng-class="{'active': showContent, 'disabled': !collection.length}">
+
+        <div class="main-label">
+            <span class="text">{{mainTitle}}</span>
+            <inject src="chevron-down.svg">
+        </div>
+    </div>
+
+    <div class="content" ng-show="showContent" ng-class="{'top-27px': removeBorderRadius}">
+        <div class="items">
+            <div
+                class="item"
+                ng-repeat="item in collection track by $index"
+                ng-class="{ selected: item.selected }"
+                ng-click="select(item)">
+
+                <div class="right-coll">
+                    {{item.text}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

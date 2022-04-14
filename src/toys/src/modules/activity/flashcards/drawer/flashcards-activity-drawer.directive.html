@@ -1,0 +1,89 @@
+<div class="activity-drawer flashcard-drawer" pl-drop="cancelDrag" pl-dragcancel="cancelDrag">
+	<main>
+		<div class="subtitle toggle" ng-click="toggleViewSwitcher()" ng-class="{true:'toggle-open', false:'toggle-closed'}[showViewSwitcher]">
+			<button><pl-icon [svg]="'chevron-down'"></pl-icon></button>
+			<h5>Flashcard settings</h5>
+		</div>
+
+		<div class="subgroup" ng-class="{true:'toggle-open', false:'toggle-closed'}[showViewSwitcher]">
+			<ul class="flashcard-grid clearfix">
+				<li ng-click="setFlashcardsMode('grid')"
+                    ng-class="{active:flashcardsModel.mode === 'grid'}">
+					<div class="icon"><pl-icon [svg]="'display-grid'" [width]="60" [height="50"]></pl-icon></div>
+					<div class="text">Grid</div>
+				</li>
+				<li ng-click="setFlashcardsMode('bottom')"
+                    ng-class="{active:flashcardsModel.mode === 'bottom'}">
+					<div class="icon"><pl-icon [svg]="'display-bottom'" [width]="60" [height="50"]></pl-icon></div>
+					<div class="text">Bottom Grid</div>
+				</li>
+				<li ng-click="setFlashcardsMode('presentation')"
+                    ng-class="{active:flashcardsModel.mode === 'presentation'}">
+					<div class="icon"><pl-icon [svg]="'display-presentation'" [width]="60" [height="50"]></pl-icon></div>
+					<div class="text">Presentation</div>
+				</li>
+				<li ng-click="setFlashcardsMode('collage')"
+                    ng-class="{active:flashcardsModel.mode === 'collage'}">
+					<div class="icon"><pl-icon [svg]="'display-collage'" [width]="60" [height="50"]></pl-icon></div>
+					<div class="text">Collage</div>
+				</li>
+				<li ng-click="setFlashcardsMode('singlestack')"
+                    ng-class="{active:flashcardsModel.mode === 'singlestack'}">
+					<div class="icon"><pl-icon [svg]="'display-singlestack'" [width]="60" [height="50"]></pl-icon></div>
+					<div class="text">Single Stack</div>
+				</li>
+			</ul>
+            <div class="show-title-switch clearfix">
+                <span class="show-title-label">Show all cards</span>
+                <!-- <pl-input-switch change="setFlashcardsNone()" model="showCards" class="show-title-right"></pl-input-switch> -->
+                <pl-input-checkbox [(model)]="showCards" (on-change)="setFlashcardsNone()"></pl-input-checkbox>
+            </div>
+            <div class="show-title-switch clearfix">
+                <span class="show-title-label" ng-class="{italic: (showTitleGrayed || !flashcardsOnBoard.length)}">Show card title</span>
+                <!-- <pl-input-switch change="onShowTitleChange()" model="showTitle" class="show-title-right" disabled="(flashcardsOnBoard.length ? false : true)"></pl-input-switch> -->
+                <pl-input-checkbox [(model)]="showTitle" (on-change)="onShowTitleChange()"></pl-input-checkbox>
+            </div>
+		</div>
+	</main>
+	<footer>
+
+		<div class="subtitle">
+			<h5>Flashcards</h5>
+		</div>
+
+		<div class="subgroup">
+			<script>
+				function drag(ev) {
+				    ev.dataTransfer.setData("text/html", ev.target.outerHTML);
+				}
+			</script>
+			<span>Cards can be dragged from the<br> drawer onto the stage.</span>
+
+            <button
+                    class="add-all-button"
+                    ng-class="{disabled:!getCards().length}"
+                    ng-click="addAllCards()">
+                Add all cards
+            </button>
+            <button
+                    class="remove-all-button"
+                    ng-class="{disabled:!flashcardsOnBoard.length}"
+                    ng-click="deleteAllCards()">
+                Remove all cards
+            </button>
+
+			<ul class="flashcard-list">
+				<li ng-repeat="card in getCards()" pl-drag="startDrag" pl-drag-data="card">
+					<div class="icon">
+						<figure style="background-image: url({{card.thumbnail_url}})" ng-if="card.type !== 'title'"></figure>
+						<div class="card-text-image" ng-if="card.type === 'title'">Text Only</div>
+					</div>
+					<div class="text" pl-text-overflow>
+                        <div>{{ card.title }}</div>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</footer>
+</div>

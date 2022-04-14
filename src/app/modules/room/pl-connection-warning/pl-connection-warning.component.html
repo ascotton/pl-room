@@ -1,0 +1,15 @@
+<takeover activated="$ctrl.appIsOffline || $ctrl.firebaseDisconnected">
+    <h2>Connection Problem</h2>
+    <div ng-if="$ctrl.appIsOffline">It seems like your internet isn't working. Check to see if you're online.</div>
+    <div ng-if="!$ctrl.appIsOffline && $ctrl.firebaseDisconnected &&  !$ctrl.recovering">
+        <div>We’ve detected a problem with your connection.</div>
+        <div>Please 
+            <a ng-href="{{$ctrl.getFirebaseEmailHref()}}" target=“_blank”>
+                <span class="click-here">click here</span>
+            </a>
+            to contact Support.
+        </div>
+        <hr>
+        <div>Error: Cannot connect to firebase</div>
+    </div>
+</takeover>

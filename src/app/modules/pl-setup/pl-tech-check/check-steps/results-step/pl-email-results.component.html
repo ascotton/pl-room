@@ -1,0 +1,86 @@
+<div mat-dialog-title class="dialog-header">
+    {{ 'STEPS.EMAIL_RESULTS.TITLE' | translate }}
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+</div>
+<form [formGroup]="emailForm" (ngSubmit)="sendEmail(emailForm.value)" autocomplete="off" novalidate>
+<mat-dialog-content>
+        <div class="pl-email-results margin-b margin-t">
+            <div>
+                * {{ 'STEPS.EMAIL_RESULTS.REQUIRED_FIELD_INDICATION' | translate }}
+            </div>
+            <div class="margin-large-t">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>
+                        {{ 'STEPS.EMAIL_RESULTS.NAME_PLACEHOLDER' | translate }}
+                    </mat-label>
+                    <input matInput formControlName="name"/>
+                    <mat-error>
+                        {{ 'STEPS.EMAIL_RESULTS.REQUIRED_FIELD' | translate }}
+                    </mat-error>
+                    <mat-icon matSuffix color="warn" *ngIf="emailForm.controls['name'].invalid && (emailForm.controls['name'].touched || emailForm.controls['name'].dirty)">error</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="margin-large-t">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>
+                        {{ 'STEPS.EMAIL_RESULTS.EMAIL_PLACEHOLDER' | translate }}
+                    </mat-label>
+                    <input matInput formControlName="email"/>
+                    <mat-error>
+                        {{ 'STEPS.EMAIL_RESULTS.INVALID_EMAIL' | translate }}
+                    </mat-error>
+                    <mat-icon matSuffix color="warn" *ngIf="emailForm.controls['email'].invalid && (emailForm.controls['email'].touched || emailForm.controls['email'].dirty)">error</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="margin-large-t">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>
+                        {{ 'STEPS.EMAIL_RESULTS.CC_PLACEHOLDER' | translate }}
+                    </mat-label>
+                    <textarea rows="5" matInput formControlName="cc"></textarea>
+                    <mat-error *ngIf="emailForm.controls.cc.hasError('invalidCC') && (emailForm.touched || emailForm.dirty)">
+                        {{ 'STEPS.EMAIL_RESULTS.INVALID_EMAIL_LIST' | translate }}
+                    </mat-error>
+                    <mat-hint>
+                        {{ 'STEPS.EMAIL_RESULTS.SEPARATED_BY_COMMA' | translate }}
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="margin-large-t">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>
+                        {{ 'STEPS.EMAIL_RESULTS.COMMENTS_PLACEHOLDER' | translate }}
+                    </mat-label>
+                    <textarea rows="5" matInput formControlName="comments"></textarea>
+                    <mat-hint>
+                        {{ 'STEPS.EMAIL_RESULTS.COMMENTS_HINT' | translate }}
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="margin-large-t">
+                <mat-checkbox (change)="onSentToSupportChanged()" formControlName="sendToSupport">
+                    {{ 'STEPS.EMAIL_RESULTS.EMAIL_TO_SUPPORT' | translate }}
+                </mat-checkbox>
+            </div>
+            <div class="margin-large-t">
+                <mat-checkbox [disabled]="!emailForm.controls.sendToSupport.value" formControlName="scheduleMeeting">
+                    {{ 'STEPS.EMAIL_RESULTS.SCHEDULE_MEETING' | translate }}
+                </mat-checkbox>
+            </div>
+        </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="margin-large-b padding-t flexbox">
+        <button [disabled]="!emailForm.valid" type="submit" mat-raised-button color="accent">
+            {{ 'STEPS.EMAIL_RESULTS.BTN_EMAIL' | translate }}
+        </button>
+        <div class="margin-large-l">
+            <button type="button" (click)="onClose()" mat-stroked-button>
+                {{ 'STEPS.EMAIL_RESULTS.BTN_CANCEL' | translate }}
+            </button>
+        </div>
+    </div>
+</mat-dialog-actions>
+</form>

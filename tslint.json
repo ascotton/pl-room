@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "tslint-config-pl"
+  ],
+  "rules": {
+    "no-require-imports": false,
+    "import-name": false
+  }
+}

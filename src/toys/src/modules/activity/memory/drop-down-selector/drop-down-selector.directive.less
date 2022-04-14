@@ -1,0 +1,133 @@
+.drop-down-selector {
+  position: relative;
+
+  .main-element {
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid @gray;
+
+    &:hover {
+      cursor: pointer;
+      background-color: @gray-darker;
+      border-color: white;
+
+      .main-label {
+        z-index : 8801;
+        .text {
+          color: white;
+        }
+
+        .chevron-down {
+          fill: white;
+        }
+      }
+    }
+
+    &.active {
+      cursor: pointer;
+      background-color: @gray-dark;
+      border-color: @gray-dark;
+
+      &:hover {
+        .text {
+          color: @gray-light;
+        }
+
+        .chevron-down {
+          fill: @gray-light;
+        }
+      }
+    }
+
+    .main-label {
+      height: 28px;
+      padding: 8px 11px 8px 10px;
+      z-index : 8801;
+
+      .text {
+        float: left;
+        color: @gray-light;
+        font-size: 12px;
+        overflow: hidden;
+        vertical-align: middle;
+        line-height: 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 86%;
+      }
+
+      .chevron-down {
+        width: 9px !important;
+        height: 11px;
+        fill: @gray-light;
+        float: right;
+        margin: 0 !important;
+      }
+    }
+
+    &.disabled {
+      border-color: @gray-dark;
+
+      &:hover,
+      &.active {
+        cursor: default;
+        background-color: transparent;
+        border-color: @gray-dark;
+      }
+
+      .main-label {
+         z-index : 8801;
+        .chevron-down {
+          fill: @gray-dark;
+        }
+        .text {
+          color: @gray-dark;
+        }
+      }
+    }
+  }
+
+  .content {
+    position: absolute;
+    background-color: #ffffff;
+    width: 100%;
+    z-index: 8808;
+
+    &.top-27px {
+      top: 27px;
+    }
+
+    .items {
+      max-height: 120px;
+      overflow-y: auto;
+      background-color: #ffffff;
+
+      .item {
+        background-color: #ffffff;
+        height: 30px;
+        border-bottom: 1px solid @gray-lightest;
+
+        &:hover {
+          background-color: @gray-lightest;
+        }
+        &.selected {
+          background-color: #e9eaeb;
+        }
+
+        .right-coll {
+          display: inline-block;
+          margin: 6px 8px 0 0;
+          float: left;
+          line-height: 16px;
+          font-size: 12px;
+          font-weight: normal;
+          color: @gray-darker;
+          padding-left: 21px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}

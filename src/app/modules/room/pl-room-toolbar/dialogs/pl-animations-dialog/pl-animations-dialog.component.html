@@ -1,0 +1,35 @@
+<div class="bottom-sheet-dialog animations-dialog">
+  <h5>Animation Sounds</h5>
+  <div class="sound-control">
+    <h6>Animations with <mat-icon>volume_up</mat-icon> include sound when played</h6>
+    <mat-slide-toggle
+      [(ngModel)]="soundOn"
+      (ngModelChange)="setSoundOn($event)"
+    >
+      {{ soundOn ? 'On' : 'Off' }}
+    </mat-slide-toggle>
+  </div>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Rewards">
+      <ng-template matTabContent>
+        <div class="margin-t">
+          <pl-common-animations [animations]="rewardAnimations"></pl-common-animations>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Alerts">
+      <ng-template matTabContent>
+        <div class="margin-t">
+          <pl-common-animations [animations]="alertAnimations"></pl-common-animations>
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Custom">
+      <ng-template matTabContent>
+        <div class="margin-t">
+          <pl-giphy-animations></pl-giphy-animations>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

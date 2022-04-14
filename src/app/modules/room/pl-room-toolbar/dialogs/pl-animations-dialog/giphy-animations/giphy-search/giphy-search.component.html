@@ -1,0 +1,19 @@
+<mat-form-field class="w-100" appearance="outline">
+  <mat-icon matPrefix>search</mat-icon>
+  <input
+    #input
+    matInput
+    placeholder="Search Giphy for animated GIFs"
+    [(ngModel)]="term"
+    (ngModelChange)="search($event)"
+  />
+  <button
+    *ngIf="term"
+    matSuffix
+    mat-icon-button
+    aria-label="clear giphy search"
+    (click)="clear($event)"
+  >
+    <mat-icon>cancel</mat-icon>
+  </button>
+</mat-form-field>

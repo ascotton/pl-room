@@ -1,0 +1,16 @@
+<button class="room-toolbar-btn"
+    [class.active]="active"
+    [matBadge]="showBadge ? '0' : null"
+    matBadgeColor="warn"
+    matBadgeSize="small"
+    (click)="onClick()"
+    [disabled]="disabled"
+  >
+    <div class="room-toolbar-btn-icon">
+        <mat-icon *ngIf="!isSvgIcon" [inline]="true">{{ icon }}</mat-icon>
+        <mat-icon *ngIf="isSvgIcon" [svgIcon]="icon" ></mat-icon>
+    </div>
+    <div>
+        <ng-content></ng-content>
+    </div>
+  </button>

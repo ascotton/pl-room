@@ -1,0 +1,13 @@
+<div class="pl-vendor-game" *ngIf="initialized">
+    <div class="h-100 w-100 text-center" *ngIf="showTrioExample || showTrioInstruction">
+        <img
+            *ngIf="!showTrioExample && showTrioInstruction"
+            class="text-center h-100"
+            src="/assets/board-games/trio_game_instructions.svg">
+        <img
+            *ngIf="showTrioExample && !showTrioInstruction"
+            class="text-center h-100"
+            src="/assets/board-games/trio_game_examples.svg">
+    </div>
+    <iframe *ngIf="iframeSrc" id="vendorGameIframe" [src]="iframeSrc"></iframe>
+</div>

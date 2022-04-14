@@ -1,0 +1,17 @@
+<svg viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Single-Icon-Export-View" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-2.000000, -2.000000)">
+            <g id="alert-triangle" transform="translate(2.000000, 2.000000)">
+                <g id="Group">
+                    <g id="Line_Icons">
+                        <g id="Group">
+                            <path d="M19,20 L1,20 C0.653,20 0.332,19.82 0.149,19.526 C-0.034,19.23 -0.049,18.863 0.105,18.552 L9.105,0.552 C9.444,-0.125 10.555,-0.125 10.894,0.552 L19.894,18.552 C20.048,18.863 20.033,19.229 19.85,19.526 C19.668,19.821 19.347,20 19,20 L19,20 Z M2.618,18 L17.382,18 L10,3.237 L2.618,18 L2.618,18 Z" id="Shape"></path>
+                            <rect id="Rectangle-path" x="9" y="8" width="2" height="6"></rect>
+                            <circle id="Oval" cx="10" cy="16" r="1.25"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

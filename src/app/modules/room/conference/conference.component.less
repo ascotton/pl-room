@@ -1,0 +1,36 @@
+@import "constants.less";
+@import "colors.less";
+@import "animation.less";
+
+.conference {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: @gray-darkest;
+    min-width: @video-drawer-width;
+    height: 100%;
+    z-index: 999;
+    transition: width 350ms;
+
+    &.is-host {
+        top: @top-toolbar-height;
+        height: calc(100% - @top-toolbar-height);
+    }
+
+    &.is-observer {
+        top: 64px;
+        height: calc(100% - 64px);
+    }
+
+    &.full-screen {
+        width:  ~"calc(100% - 44px)";
+        border-right: 0;
+        &.right-drawer-open {
+            width:  ~"calc(100% - 44px - 192px)";
+        }
+    }
+
+}

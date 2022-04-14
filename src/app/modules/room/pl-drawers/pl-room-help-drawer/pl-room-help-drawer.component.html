@@ -1,0 +1,49 @@
+<div class="drawer drawer-right drawer-room-help" [ngClass]="{'in': active}">
+    <header>
+        <h4>Help</h4>
+    </header>
+
+    <main>
+      <pl-accordion>
+        <pl-drawer-panel #linkPanel header="Room Link">
+          <div>
+              Invite students to join by sharing your Room URL:
+          </div>
+          <div>
+              <textarea readonly>https://room.presencelearning.com/{{username}}</textarea>
+          </div>
+          <button class="confirm" (click)="copyUrl()">
+              {{copyButtonText}}
+          </button>
+        </pl-drawer-panel>
+
+        <pl-drawer-panel header="Room Tips">
+          <div>Take a tour of the Room to get an overview of its main features.</div>
+          <button class="confirm" (click)="startTour()">
+              Start
+          </button>
+        </pl-drawer-panel>
+
+        <pl-drawer-panel header="Help and Training">
+          <div>
+            <div>
+                <a class="item grey" href="https://presencelearning.helpjuice.com/" target="_blank">
+                    Help Center
+                </a>
+            </div>
+            <div>
+                <a class="item grey" href="https://apps.presencelearning.com/c/landing/launch-coassemble" target="_blank">
+                    Telehealth Institute
+                </a>
+            </div>
+            <div *ngIf="isSSP">
+                <a class="item grey" href="https://apps.presencelearning.com/c/landing-home" target="_blank">
+                    Live Training and Workshops
+                </a>
+            </div>
+          </div>
+        </pl-drawer-panel>
+      </pl-accordion>
+    </main>
+
+</div>

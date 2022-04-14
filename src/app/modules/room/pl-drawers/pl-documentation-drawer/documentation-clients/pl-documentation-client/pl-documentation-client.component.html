@@ -1,0 +1,127 @@
+<div class="pl-documentation-client">
+    <div *ngIf="loading" class="margin-large-t">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+    <div *ngIf="!loading && !selectOptsClientServices.length && clientServiceRequired" class="center margin-large-tb">
+        <a href="{{ urls.eduClientsFE }}/client/{{ client.uuid }}/services" target="_blank" class="heap-add-service">Add a Service</a>
+        <div (click)="getClientServices()" class="pointer center margin-large-t heap-refresh-documentation-service-panel">
+            <pl-icon [svg]="'rotate'" [scale]="0.6" [verticalAlign]="'-1px'" class="gray-light"></pl-icon> Refresh
+        </div>
+    </div>
+    <div *ngIf="!loading && shouldShowBillingCode()">
+        <pl-input-select
+            class="form-input"
+            [(model)]="selectedBillingCode"
+            [options]="billingCodesOpts"
+            [disabled]="!isEditable()"
+            (onChange)="selectBillingCode($event)">
+        </pl-input-select>
+    </div>
+    <div *ngIf="!loading && selectOptsClientServices.length > 1">
+        <pl-input-select
+            class="form-input"
+            [(model)]="selectedClientServiceId"
+            [options]="selectOptsClientServices"
+            [placeholder]="'Select a Service'"
+            [disabled]="!isEditable()"
+            (onChange)="selectClientService()">
+        </pl-input-select>
+    </div>
+    <div *ngIf="!loading && isDocumentationSignoffAllowed() && selectedBillingCode && isLocationTrackingRequired()">
+        <pl-input-select
+            class="form-input"
+            [(model)]="selectedTrackingType"
+            [options]="getLocationTrackingOpts()"
+            [disabled]="!isEditable()"
+            (onChange)="selectTrackingType()">
+        </pl-input-select>
+    </div>
+    <div *ngIf="!loading && (selectedClientServiceId || !clientServiceRequired)">
+        <!-- Even though all have notes, hide BOTH if hide one (metrics) since only 1 button so nothing to toggle -->
+        <div class="flexbox" *ngIf="shouldShowMetrics() && iepGoals.length">
+            <button pl-button class="toggle-button room-gray flex1" [ngClass]="classesMode.metrics" (click)="toggleNotesMetrics('metrics')">
+                <pl-icon [svg]="'metrics'" [scale]="1" class="gray-light"></pl-icon> Progress
+            </button>
+            <button pl-button class="toggle-button room-gray flex1" [ngClass]="classesMode.notes" (click)="toggleNotesMetrics('notes')">
+                <pl-icon [svg]="'notes'" [scale]="1" class="gray-light"></pl-icon> Notes
+            </button>
+        </div>
+        <div *ngIf="shouldShowMetrics() && !iepGoals.length" class="center margin-large-tb">
+            <a href="{{ urls.eduClientsFE }}/client/{{ client.uuid }}/iep-goals" target="_blank" class="heap-add-iep-goal">Add Therapy Goal</a>
+            <div (click)="getIepAndInfo()" class="pointer center margin-large-t heap-refresh-documentation-iep-goal">
+                <pl-icon [svg]="'rotate'" [scale]="0.6" [verticalAlign]="'-1px'" class="gray-light"></pl-icon> Refresh
+            </div>
+        </div>
+        <div [hidden]="viewMode !== 'notes'">
+            <pl-documentation-notes
+                [record]="client.record"
+                [clientId]="client.uuid"
+                [event]="client.appointment.event"
+                [providerUserId]="provider.uuid"
+                [noteSchema]="noteSchema"
+                [instanceId]="instanceId"
+                [haveNewMetrics]="haveNewMetrics"
+                [clientServiceId]="selectedClientServiceId"
+                [metrics]="metrics"
+                (onNotesSaving)="onNotesSaving($event)"
+                (onNotesEditing)="onNotesEditing($event)">
+            </pl-documentation-notes>
+        </div>
+        <div [hidden]="viewMode !== 'metrics'">
+            <div *ngIf="loadingGoals" class="margin-large-t">
+                <pl-dot-loader></pl-dot-loader>
+            </div>
+            <div *ngIf="!loadingGoals && shouldShowMetrics()">
+                <div *ngIf="iepGoals.length && (selectedClientServiceId || !clientServiceRequired)">
+                    <div [hidden]="(!clientServiceRequired)">
+                        <pl-documentation-metrics [clientServiceId]="selectedClientServiceId" [clientId]="client.uuid" [record]="client.record" [event]="client.appointment.event" [providerUserId]="provider.uuid" [instanceId]="instanceId" [metrics]="metrics" (onMetricsUpdated)="onMetricsUpdated()" (refreshMetrics)="refreshMetrics()"></pl-documentation-metrics>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isRecordSignOff && !notesAreValid()" class="error">
+            * {{ getSignoffError() }}
+        </div>
+        <div *ngIf="!loading && isDocumentationSignoffAllowed() && !isNotDirectService" >
+            <div class="doc-sign-off pointer margin-small-t" (click)="toggleSignoffExpanded()">
+                <div class="margin-small-r">
+                    <pl-icon *ngIf="!isSignoffExpanded" [svg]="'chevron-right'" [scale]="0.6" [verticalAlign]="'1px'" class="gray-light"></pl-icon>
+                    <pl-icon *ngIf="isSignoffExpanded" [svg]="'chevron-down'" [scale]="0.6" [verticalAlign]="'1px'" class="gray-light"></pl-icon>
+                </div>
+                <div>
+                    Sign-off - <span class="link">{{client.record.signed ? 'Signed' : 'Unsigned'}}</span>
+                </div>
+            </div>
+            <div *ngIf="isSignoffExpanded">
+                <div class="margin-small-t">
+                    <div class="signoff">
+                        <fieldset [class.signed]="client.record.signed">
+                            <pl-input-checkbox
+                                [(model)]="isRecordSignOff"
+                                [noPadding]="false"
+                                [label]="'I verify that this event occurred, as reported'"
+                                [disabled]="isDisabledSignoff()">
+                            </pl-input-checkbox>
+                            <div class="flexbox">
+                                <button
+                                    pl-button
+                                    class="flex1"
+                                    [class.confirm]="!client.record.signed"
+                                    [class.room-gray]="client.record.signed"
+                                    (click)="signOffAndSave()"
+                                    [disabled]="isDisabledSave() || isSavingNotes || isEditingNotes || isLoadingSignOff">
+                                    <span *ngIf="!isSavingNotes && !isLoadingSignOff && !client.record.signed">Sign-off</span>
+                                    <span *ngIf="!isSavingNotes && !isLoadingSignOff && client.record.signed">Unsign</span>
+                                    <pl-dot-loader *ngIf="isSavingNotes || isLoadingSignOff"></pl-dot-loader>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div *ngIf="client.record.signed" class="error">
+                    * This appointment has been signed. To make changes, first unsign.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

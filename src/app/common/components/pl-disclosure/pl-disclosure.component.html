@@ -1,0 +1,13 @@
+<div class="disclosure" [ngClass]="{ 'active': active }">
+    <button class="disclosure-name" ng-click="onClick()">
+        <figure class="chevron">
+            <div>
+                <pl-icon 
+                    class="icon"
+                    [ngClass]="{'icon-active' : active}" 
+                    [width]="12" [height]="12" [svg]="'chevron-right'"></pl-icon>
+            </div>
+        </figure>
+        <div class="disclosure-label">{{label}}</div>
+    </button>
+</div>

@@ -1,0 +1,28 @@
+<pl-giphy-search></pl-giphy-search>
+<ng-container *ngIf="showContent$ | async">
+  <mat-card>
+    <pl-giphy-carousel></pl-giphy-carousel>
+    <mat-form-field class="message">
+      <mat-label>
+          Custom message
+      </mat-label>
+      <input matInput [(ngModel)]="message">
+    </mat-form-field>
+  </mat-card>
+  <div class="giphy-footer">
+    <div class="powered-by">
+      <span>POWERED BY</span>
+      <img src="assets/images/giphy-logo.png" />
+    </div>
+    <ng-container *ngIf="{ url: url$ | async, playing: playing$ | async } as vm">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="vm.playing"
+        (click)="play(vm.url, message)"
+      >
+        Play
+      </button>
+    </ng-container>
+  </div>
+</ng-container>

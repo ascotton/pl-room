@@ -1,0 +1,21 @@
+<pl-expansion-panel #panel (opened)="onPanelOpened()" (closed)="onPanelClosed()">
+  <pl-expansion-panel-header class="section-header">
+    <pl-icon
+      *ngIf="!noExpand"
+      class="white toggle-icon"
+      [class.expanded]="panel.expanded"
+      svg="chevron-right"
+      [scale]="0.7"></pl-icon>
+    <span [class.no-icon]="noExpand">{{header}}</span>
+    <button class="right-icon">
+    <pl-icon
+        *ngIf="rightIcon"
+        (click)="onRightIconClick()"
+        [svg]="rightIcon"
+        [scale]="0.7"></pl-icon>
+    </button>
+  </pl-expansion-panel-header>
+  <div class="section-body">
+    <ng-content></ng-content>
+  </div>
+</pl-expansion-panel>

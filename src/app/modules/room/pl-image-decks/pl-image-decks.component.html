@@ -1,0 +1,51 @@
+<div class="pl-image-decks">
+    <div [hidden]="(deckToView || deckToEdit)" class="center margin-b">
+        <div *ngIf="showCancel" class="center margin-b">
+            <button pl-button class="link" (click)="cancel()">Cancel</button>
+        </div>
+        <!-- <div>Choose a deck of cards, or
+            <button pl-button class="link" (click)="newDeck()">create a new deck</button>.
+        </div> -->
+    </div>
+    <div [hidden]="(deckToView || deckToEdit)">
+        <pl-input-text class="form-input" [(model)]="filter.title" [placeholder]="'Search for decks'" [debounceChange]="1000" (onChange)="getDecks($event)"></pl-input-text>
+        <pl-input-select class="form-input" [(model)]="filter.category" [options]="selectOptsCategories" [placeholder]="'Category'" (onChange)="getDecks($event)"></pl-input-select>
+        <pl-input-multi-select class="form-input" [(model)]="filter.tags" [options]="selectOptsTags" [placeholder]="'Grades, Subjects'" (onChange)="getDecks($event)"></pl-input-multi-select>
+        <pl-input-select class="form-input" [(model)]="sort" [options]="selectOptsSort" [placeholder]="'Sort'" (onChange)="getDecks($event)"></pl-input-select>
+
+        <div *ngFor="let deck of decks" class="deck padding-tb" [ngClass]="deck.xClasses">
+            <div class='flexbox'>
+                <img class="image" [src]="deck.imageUrl" />
+                <div class="flex1 margin-l">
+                    <div class="title">{{ deck.title }}</div>
+                </div>
+            </div>
+            <div class='flexbox'>
+                <div class='flex2'>{{ deck.imageCopyCount }} Images</div>
+                <div class='flex1'>
+                    <button pl-button class="link" (click)="useDeck(deck)">Use</button>
+                </div>
+                <div class='flex1' *ngIf="!deck.mayDelete">
+                    <button *ngIf="!deck.mayDelete" pl-button class="link" (click)="viewDeck(deck)">View</button>
+                </div>
+                <div class='flex1' *ngIf="deck.mayDelete">
+                    <button *ngIf="deck.mayDelete" pl-button class="link" (click)="editDeck(deck)">Edit</button>
+                </div>
+                <div>
+                    <pl-icon class="heart pointer" [svg]="'heart'" (click)="toggleFavorite(deck)"></pl-icon>
+                </div>
+            </div>
+        </div>
+
+        <pl-dot-loader *ngIf="loading"></pl-dot-loader>
+        <div *ngIf="canLoadMore && !loading" class="center margin-tb">
+            <button pl-button class="link" (click)="loadMore()">Load More</button>
+        </div>
+    </div>
+    <div *ngIf="deckToEdit">
+        <pl-image-deck-save [deck]="deckToEdit" (onSave)="onSaveImageDeck($event)" (onCancel)="onCancelImageDeck($event)"></pl-image-deck-save>
+    </div>
+    <div *ngIf="deckToView">
+        <pl-image-deck-view [deck]="deckToView" (onCancel)="onCancelImageDeck($event)"></pl-image-deck-view>
+    </div>
+</div>

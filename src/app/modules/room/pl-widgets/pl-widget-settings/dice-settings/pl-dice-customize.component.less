@@ -1,0 +1,31 @@
+@import 'colors.less';
+
+.pl-dice-customize {
+    .full-width {
+        width: 170px;
+    }
+    .option-container {
+        margin-top: 10px;
+    }
+    .right {
+        float: right;
+    }
+    .error {
+        color: @red;
+    }
+    .option {
+        margin: 3px !important;
+        cursor: pointer !important;
+        &.monospaced {
+            padding: 0;
+            .option-label {
+                width: 32px;
+                text-align: center;
+                line-height: 32px !important;
+            }
+        }
+        .option-label {
+            text-transform: capitalize;
+        }
+    }
+}

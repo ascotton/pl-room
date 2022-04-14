@@ -1,0 +1,5 @@
+<pl-primary-video-settings></pl-primary-video-settings>
+<ng-container *ngIf="canShowSecondary$ | async">
+  <mat-divider class="margin-large-tb"></mat-divider>
+  <pl-secondary-video-settings></pl-secondary-video-settings>
+</ng-container>

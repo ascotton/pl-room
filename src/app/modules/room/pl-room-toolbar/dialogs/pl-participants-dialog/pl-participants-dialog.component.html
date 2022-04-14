@@ -1,0 +1,71 @@
+<div class="bottom-sheet-dialog pl-participants-dialog">
+    <div class="dialog-header margin-b">
+        <div class="dialog-title">
+            Room
+        </div>
+    </div>
+    <div class="participants-list margin-t margin-b">
+        <div class="no-participants" *ngIf="!participantList.length">
+            There are currently no clients in your room.
+        </div>
+        <div class="participant margin-b" *ngFor="let participant of participantList; trackBy: getId">
+            <div class="participant-details">
+                <div class="participant-name">
+                    {{ participant.displayName }}
+                </div>
+                <div class="participant-device">
+                    {{ getParticipantDevice(participant) }}
+                </div>
+            </div>
+            <div class="participant-actions">
+                <pl-participant-muted-status [participantId]="participant.id"></pl-participant-muted-status>
+                <button mat-flat-button class="margin-large-l" color="warn" (click)="onDismissParticipant(participant)">
+                    DISMISS
+                </button>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="waiting-room-header margin-t">
+        Waiting Room
+    </div>
+    <div class="participants-list margin-t margin-b">
+        <div class="no-participants" *ngIf="!waitingRoomList.length">
+            There are currently no clients in your waiting room.
+        </div>
+        <div class="participant margin-b" *ngFor="let participant of waitingRoomList; trackBy: getId">
+            <div class="participant-details">
+                <div class="participant-name">
+                    {{ participant.displayName }}
+                </div>
+                <div class="participant-device">
+                    {{ getParticipantDevice(participant) }}
+                </div>
+            </div>
+            <div class="participant-actions" [ngSwitch]="participant.status">
+                <ng-container *ngSwitchCase="'entering'">
+                    <span class="participant-status margin-large-r">
+                        Entering
+                    </span>
+                    <pl-dot-loader class="margin-large-r" *ngSwitchCase="'entering'"></pl-dot-loader>
+                </ng-container>
+                <ng-container *ngSwitchCase="'entering-timeout'">
+                    <span class="participant-status margin-large-r">
+                        Not responding
+                    </span>
+                    <button mat-flat-button color="warn" (click)="onDenyAdmission(participant)">
+                        DISMISS
+                    </button>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <button mat-stroked-button color="primary" (click)="onDenyAdmission(participant)">
+                        DENY
+                    </button>
+                    <button mat-flat-button color="primary" (click)="onAdmit(participant)">
+                        ADMIT
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

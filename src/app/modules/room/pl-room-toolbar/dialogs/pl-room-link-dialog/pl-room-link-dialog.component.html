@@ -1,0 +1,18 @@
+<div class="bottom-sheet-dialog">
+    <div class="margin-t">
+        Share this URL with clients to invite them to your therapy Room.
+    </div>
+    <div class="margin-t link-sharing">
+        <mat-form-field appearance="outline" class="margin-r link-container">
+            <input readonly matInput [value]="roomUrl">
+        </mat-form-field>
+        <button [cdkCopyToClipboard]="roomUrl" mat-stroked-button (click)="onCopyLink()">
+            <ng-container *ngIf="!copyingLink">
+                COPY LINK
+            </ng-container>
+            <ng-container *ngIf="copyingLink">
+                LINK COPIED!
+            </ng-container>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<pl-stream-box>
+  <pl-stream-mic-action *ngIf="canMute$ | async"></pl-stream-mic-action>
+  <pl-stream-video-action></pl-stream-video-action>
+  <pl-stream-settings-action
+    *ngIf="participantId$ | async as participantId"
+    [participantId]="participantId"
+  ></pl-stream-settings-action>
+</pl-stream-box>

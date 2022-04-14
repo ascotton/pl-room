@@ -1,0 +1,23 @@
+
+.overlay-container {
+    position: relative;
+    .loader-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2000;
+        .loader-container {
+            position: absolute;
+            top: calc(50% - 18px);
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    &.is-loading .overlay-content {
+        filter: opacity(0.2);
+    }
+}

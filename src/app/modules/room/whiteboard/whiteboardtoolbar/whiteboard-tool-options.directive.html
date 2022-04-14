@@ -1,0 +1,165 @@
+<nav class="whiteboard-tool-options" ng-class="{'in':$ctrl.firebaseAppModel.app.whiteboardActive}">
+    <colorpicker
+            label="Outline"
+            ng-show="toolIn('RectTool', 'EllipseTool')"
+            color="whiteboardModel.whiteboard.selectedTool.settings.outline"
+            change="whiteboardModel.setToolbarProperty('outline', whiteboardModel.whiteboard.selectedTool.settings.outline)"
+            class="toolbar-btn">
+    </colorpicker>
+
+    <!-- ng-show="toolIn('RectTool', 'EllipseTool', 'TextTool')" -->
+    <colorpicker
+            label="Color"
+            ng-show="toolIn('RectTool', 'EllipseTool', 'TextTool', 'PencilTool', 'LineTool')"
+            color="whiteboardModel.whiteboard.selectedTool.settings.color"
+            change="whiteboardModel.setToolbarProperty('color', whiteboardModel.whiteboard.selectedTool.settings.color)"
+            class="toolbar-btn">
+    </colorpicker>
+
+    <!-- POINTER TOOLS -->
+    <button
+            ng-if="whiteboardModel.whiteboard.selectedElements.length > 0 && whiteboardModel.whiteboard.selectedTool.name == 'LassoTool'"
+            class="duplicate toolbar-btn"
+            ng-click="whiteboardModel.deleteSelectedShapes();">
+        <figure>
+            <div class="">
+                <pl-icon [svg]="'rounded-x'" [width]="24" [height]="24"></pl-icon>
+            </div>
+        </figure>
+        <label class="font-h6">Delete</label>
+    </button>
+    <button
+            ng-if="whiteboardModel.whiteboard.selectedElements.length === 1 && whiteboardModel.whiteboard.selectedTool.name == 'LassoTool' && whiteboardModel.selectedItemIsText()"
+            class="duplicate toolbar-btn"
+            ng-click="whiteboardModel.editSelectedTextShape();">
+        <figure>
+            <div class="">
+                <pl-icon [svg]="'pencil'" [width]="24" [height]="24"></pl-icon>
+            </div>
+        </figure>
+        <label class="font-h6">Edit</label>
+    </button>
+    <button
+            ng-if="whiteboardModel.whiteboard.selectedElements.length > 0 && whiteboardModel.whiteboard.selectedTool.name == 'LassoTool'"
+            class="duplicate toolbar-btn"
+            ng-click="whiteboardModel.copySelection(); whiteboardModel.pasteSelection()">
+        <figure>
+            <div class="doc-1">
+                <pl-icon [svg]="'document'" [width]="18" [height]="38"></pl-icon>
+            </div>
+            <div class="doc-2">
+                <pl-icon [svg]="'document'" [width]="18" [height]="38"></pl-icon>
+            </div>
+        </figure>
+        <label class="font-h6">Duplicate</label>
+    </button>
+    <button
+            ng-if="whiteboardModel.whiteboard.selectedElements.length > 0 && whiteboardModel.whiteboard.selectedTool.name == 'LassoTool'"
+            class="forward toolbar-btn"
+            ng-click="whiteboardModel.moveSelectionForward()"
+            ng-disabled="whiteboardModel.isSelectionOnTop() || whiteboardModel.hasMultipleSelected()">
+        <figure>
+            <pl-icon [svg]="'chevron-up'"></pl-icon>
+        </figure>
+        <label class="font-h6">Forward</label>
+    </button>
+    <button
+            ng-if="whiteboardModel.whiteboard.selectedElements.length > 0 && whiteboardModel.whiteboard.selectedTool.name == 'LassoTool'"
+            class="back toolbar-btn"
+            ng-click="whiteboardModel.moveSelectionBackward()"
+            ng-disabled="whiteboardModel.isSelectionOnBottom() || whiteboardModel.hasMultipleSelected()">
+        <figure>
+            <pl-icon [svg]="'chevron-down'"></pl-icon>
+        </figure>
+        <label class="font-h6">Back</label>
+    </button>
+
+    <button
+            pl-dropdown
+            pl-dropdown-content="#thickness-menu"
+            multiclick="true"
+            ng-show="hasActiveProperty('strokeWidth')"
+            class="slider-thickness toolbar-btn">
+        <figure ng-style="{width: whiteboardModel.whiteboard.selectedTool.settings.strokeWidth+'px'}">
+        </figure>
+        <label class="font-h6">Thickness</label>
+    </button>
+    <slider
+            id="thickness-menu"
+            min="1" max="36" steps="36"
+            value="whiteboardModel.whiteboard.selectedTool.settings.strokeWidth"
+            change="whiteboardModel.setToolbarProperty('strokeWidth', whiteboardModel.whiteboard.selectedTool.settings.strokeWidth)"
+            class="pl-dropdown-content">
+    </slider>
+
+    <div class="slider-transparency toolbar-btn"
+         pl-dropdown
+         pl-dropdown-content="#transparency-menu"
+         ng-show="hasActiveProperty('opacity')">
+        <figure ng-style="{opacity: whiteboardModel.whiteboard.selectedTool.settings.opacity}">
+        </figure>
+        <label class="font-h6">Transparency</label>
+    </div>
+
+    <slider
+            id="transparency-menu"
+            min="0.1" max="1" steps="10"
+            value="whiteboardModel.whiteboard.selectedTool.settings.opacity"
+            change="whiteboardModel.setToolbarProperty('opacity', whiteboardModel.whiteboard.selectedTool.settings.opacity)"
+            class="pl-dropdown-content">
+    </slider>
+
+    <button class="line-style toolbar-btn" pl-dropdown pl-dropdown-content="#line-style-menu"
+            ng-show="hasActiveProperty('dasharray')">
+        <figure>
+            <svg width="50" height="10" >
+                <line x1="0" y1="3" x2="50" y2="3" stroke="#4c4f52" stroke-width="6" ng-attr-stroke-dasharray="{{ whiteboardModel.whiteboard.selectedTool.settings.dasharray }}"></line>
+            </svg>
+        </figure>
+        <label class="font-h6">Line Style</label>
+    </button>
+    <div id="line-style-menu" class="pl-dropdown-content">
+        <button
+                class="line-style-option"
+                ng-repeat="dasharray in linestyles"
+                ng-click="whiteboardModel.setToolbarProperty('dasharray',dasharray)">
+            <svg width="50" height="10">
+                <line x1="0" y1="3" x2="50" y2="3" stroke="#4c4f52" stroke-width="6" stroke-dasharray="{{ dasharray }}"></line>
+            </svg>
+        </button>
+    </div>
+
+    <div class="font-family toolbar-btn" pl-dropdown pl-dropdown-content="#font-menu"
+         ng-show="hasActiveProperty('fontFamily')">
+        <figure>
+            <svg width="125" height="15" >
+                <!-- this needs to be on a long line, svg doesn't collapse white space -->
+                <text x="50%" y="12" text-anchor="middle" fill="#747678" ng-attr-font-family="{{ getActiveProperty('fontFamily') }}">{{ getActiveProperty('fontFamily').split(',')[0] }}</text>
+            </svg>
+        </figure>
+        <label class="font-h6">Font</label>
+    </div>
+    <div id="font-menu" class="pl-dropdown-content">
+        <button ng-repeat="font in fonts"
+                ng-click="whiteboardModel.setToolbarProperty('fontFamily', font.family)">
+            <svg width="125" height="20">
+                <!-- this needs to be on a long line, svg doesn't collapse white space -->
+                <text x="0" y="15" font-family="{{ font.family }}">{{ font.name }}</text>
+            </svg>
+        </button>
+    </div>
+
+    <!-- STAMP SELECTION -->
+    <stamp-skin-tone-menu ng-show="showStampMenu()"></stamp-skin-tone-menu>
+
+    <stamp-menu ng-show="showStampMenu()" stamp-type="people" button-stamp-id="1f467" button-skintone="1f3fd"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="activity" menu-label="activities" button-stamp-id="1f3c2" button-skintone="1f3fd"></stamp-menu>
+    
+    <stamp-menu ng-show="showStampMenu()" stamp-type="food" button-stamp-id="1f34f" offset-x="44"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="faces" button-stamp-id="1f600"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="nature" button-stamp-id="1f331"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="objects" button-stamp-id="2699"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="symbols" button-stamp-id="2049"></stamp-menu>
+    <stamp-menu ng-show="showStampMenu()" stamp-type="travel" button-stamp-id="1f698"></stamp-menu>
+
+</nav>

@@ -1,0 +1,16 @@
+<div class="activity-drawer">
+    <pdf-activity-drawer ng-if="activityType === 'pdfviewer' && showActivity"></pdf-activity-drawer>
+    <youtube-activity-drawer ng-if="activityType === 'youtube' && showActivity"> </youtube-activity-drawer>
+    <flashcards-activity-drawer ng-if="activityType === 'flashcards' && showActivity"></flashcards-activity-drawer>
+    <memory-activity-drawer ng-if="activityType === 'memory' && showActivity"></memory-activity-drawer>
+    <assessment-pdf-drawer ng-if="activityType === 'doubleassessment' && showActivity"></assessment-pdf-drawer>
+    <assessment-pdf-drawer ng-if="activityType === 'wjaudioassessment' && showActivity"></assessment-pdf-drawer>
+    <guess-who-drawer ng-if="activityType === 'whos-that' && showActivity"></guess-who-drawer>
+    <pl-game-drawer ng-if="(activityType.slice(0,5) === 'game-') && showActivity" class="game-drawer"></pl-game-drawer>
+    <div ng-if="unavailable" class="padding italicized">
+        Sorry, the selected item is no longer available.
+    </div>
+    <div ng-if="assessmentAccessDenied" class="padding italicized">
+        You currently do not have access to this content because there are no relevant evaluation services on your caseload at this time.
+    </div>
+</div>

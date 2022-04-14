@@ -1,0 +1,63 @@
+<div class="pl-permissions-step flexbox">
+    <div class="flex2 padding-large-r">
+        <div>
+            {{ 'STEPS.PERMISSIONS.HEADER' | translate }}
+        </div>
+        <div class="margin-large-t">
+            {{ 'STEPS.PERMISSIONS.CLICK_PERMS' | translate }}
+        </div>
+        <div>
+            {{ 'STEPS.PERMISSIONS.ALLOW_PERMS' | translate }}
+        </div>
+        <div class="margin-large-t">
+            <button [disabled]="isLoading" mat-stroked-button (click)="onRequestPermissions()">
+                {{ 'STEPS.PERMISSIONS.BTN_REQUEST' | translate }}
+            </button>
+        </div>
+        <div class="permission-list margin-large-t">
+            <div class="permission-item">
+                <pl-permission-indicator [status]="results.camera.status"></pl-permission-indicator>
+                <span class="margin-l">{{ 'STEPS.PERMISSIONS.PERMISSION_CAMERA' | translate }}</span>
+            </div>
+            <div class="permission-item">
+                <pl-permission-indicator [status]="results.microphone.status"></pl-permission-indicator>
+                <span class="margin-l">{{ 'STEPS.PERMISSIONS.PERMISSION_MICROPHONE' | translate }}</span>
+            </div>
+            <div class="permission-item">
+                <pl-permission-indicator [status]="results.network.status"></pl-permission-indicator>
+                <span class="margin-l">{{ 'STEPS.PERMISSIONS.PERMISSION_NETWORK' | translate }}</span>
+            </div>
+        </div>
+        <div class="margin-large-t">
+            <button [disabled]="!checksCompleted" mat-raised-button color="accent" matStepperNext>
+                {{ 'STEPS.PERMISSIONS.BTN_CONTINUE' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="flex1">
+        <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="margin-b">
+                        {{ 'GENERAL.TROUBLESHOOTING' | translate }}
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="padding-large">
+                <div class="flexbox">
+                    <div class="">
+                        <mat-icon>
+                            help
+                        </mat-icon>
+                    </div>
+                    <div class="padding-large-l">
+                        {{ 'STEPS.PERMISSIONS.TROUBLESHOOTING' | translate }}
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <pl-tech-support-card class="margin-large-t"></pl-tech-support-card>
+    </div>
+</div>

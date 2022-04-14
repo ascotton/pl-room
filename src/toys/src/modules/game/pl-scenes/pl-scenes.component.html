@@ -1,0 +1,45 @@
+<div *ngIf="angularCommunicator" class="pl-scenes">
+    <div>
+        <div class="preview-message" *ngIf="showPreview">
+            <h1>PREVIEW</h1>
+        </div>
+        <div class="background">
+            <img *ngIf="backgroundSrc && !showPreview && showBackground" [src]="backgroundSrc"/>
+            <img *ngIf="previewSrc && showPreview" [src]="previewSrc"/>
+            <div #tray class="tray"
+                [ngClass]="{'trayHighlighted': isOverTray}">
+                <h4 class="sticker-tray-label">Sticker Tray</h4>
+                <div class="control-buttons" *ngIf="isProvider">
+                    <!-- <button pl-button (click)="clearTrayStickers()">Clear Tray</button> -->
+                    <button pl-button (click)="resetSceneStickers()">Clear Scene Stickers</button>
+                </div>
+            </div>
+        </div>
+        <div #scene class="foreground" *ngIf="!showPreview">
+
+            <div  *ngIf="showStickers">
+                <div *ngFor="let sticker of stickers">
+                    <div 
+                        class="sticker"
+                        [ngClass]="{'selectedSticker': sticker.selected, 'remoteChange': sticker.remoteChange, 'draggedSticker': sticker.dragging && !sticker.selected,
+                            'fadeOut': sticker.fadeOut}"
+                        [ngStyle]="{'left': sticker.x + '%', 'top':  sticker.y + '%', 'width': sticker.scaledWidth + '%'}"
+                        [id]="sticker.name"
+                        (mousedown)="selectSticker(sticker)"
+                        (mouseup)="deselectSticker(sticker)"
+                        (touchstart)="selectSticker(sticker)"
+                        (touchend)="deselectSticker(sticker)"
+                        cdkDrag
+                        (cdkDragStarted) = "stickerDragStarted($event, sticker)"
+                        (cdkDragEnded) = "stickerDragEnded($event, sticker)"
+                        (cdkDragMoved) = "stickerDragMoved($event, sticker)"
+                        [cdkDragDisabled]="sticker.dragging && !sticker.selected"
+                    >
+                        <img [src]="sticker.imageSrc"/>
+                        <div class="image-copy-block">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

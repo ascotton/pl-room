@@ -1,0 +1,26 @@
+@import 'colors.less';
+@import 'core/spacing.less';
+
+:host {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        .padding-tb;
+        .padding-xlarge-lr;
+        padding: 10px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .mat-dialog-title {
+            margin: 0;
+        }
+    }
+
+    mat-dialog-content {
+        padding: 0;
+        margin: 0;
+    }
+}

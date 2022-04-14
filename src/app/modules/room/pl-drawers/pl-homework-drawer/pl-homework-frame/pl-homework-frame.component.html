@@ -1,0 +1,10 @@
+<div class="loader-container" *ngIf="!isLoaded">
+  <pl-dot-loader ></pl-dot-loader>
+</div>
+<iframe
+  #homeworkFrame
+  style="width: 100%; height: 100%"
+  title="homework-assign"
+  [src]="homeworkFrameUrl | safe: 'resourceUrl'"
+  [style.visibility]="!isLoaded ? 'hidden' : 'visible'"
+></iframe>

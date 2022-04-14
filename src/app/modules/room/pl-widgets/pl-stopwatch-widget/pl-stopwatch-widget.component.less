@@ -1,0 +1,214 @@
+@import '../../../../common/less/colors.less';
+@import '../../../../common/less/typography.less';
+
+.pl-stopwatch {
+    z-index: 1;
+    border-radius: 20px;
+    border: 1px solid white;
+    background: #E2F6F9;
+    width: 170px;
+    height: 125px;
+    box-shadow: 0px 1px 4px grey;
+  
+    .pl-stopwatch-time {
+      //position: absolute;
+      padding-bottom: 5px;
+      z-index:0;
+    }
+  
+    .pl-stopwatch-spacer {
+      height: 10px;
+    }
+  
+    .pl-stopwatch-buttons {
+      width: 170px;
+      position: absolute;
+      top: 68%;
+      font-weight: 300;
+  
+      .stopwatchStartButton, .stopwatchStopButton, .stopwatchResumeButton, .stopwatchResetButton,
+      .stopwatchResetButton-limit {
+        border: none;
+        background: none;
+        font-family: @headings-font-family;
+        font-size: 20px;
+      }
+  
+      .stopwatchResetButton,
+      .stopwatchResetButton-limit{
+        color: @brand-blue;
+      }
+  
+      .stopwatchStopButton {
+        color: @brand-red;
+      }
+  
+      .stopwatchStartButton, .stopwatchResumeButton {
+        color: @brand-green;
+      }
+  
+      .stopwatchStartButton, .stopwatchStopButton {
+        margin-left: 40%;
+      }
+  
+      .stopwatchResumeButton, .stopwatchResetButton  {
+        float: left;
+      }
+  
+      .stopwatchResumeButton {
+        margin-left: 8%;
+      }
+  
+      .stopwatchResetButton-limit {
+        margin-left: 38%;
+      }
+  
+      .stopwatchResetButton {
+        float: right;
+        padding-right: 20px;
+      }
+  
+      button {
+        font-family: Roboto;
+        font-size: 20pt;
+      }
+    }
+  
+    .pl-stopwatch-line {
+      color: #A7E4EA;
+      width: 150px;
+      border-top: 1px solid;
+      position: relative;
+      top: 65%;
+      left: 5%;
+    }
+  }
+  
+  .minutes, .seconds, .milliseconds {
+    display: inline-block;
+    color: @gray-darkest;
+  }
+  
+  .minutes, .seconds {
+    letter-spacing: -3px;
+  }
+  
+  .minutes {
+    padding-top: 0;
+    padding-left: 6%;
+    float: left;
+    font-family: @headings-font-family;
+    font-size: 64px;
+    font-weight: 100;
+  }
+  
+  .delimiter-1 {
+    padding-top: 4%;
+    padding-left: 1%;
+    float: left;
+    font-family: @headings-font-family;
+    font-size: 48px;
+    font-weight: 100;
+  }
+  
+  .delimiter-2 {
+    padding-left: 1%;
+    padding-top: 8%;
+    float: left;
+    font-family: @headings-font-family;
+    font-size: 48px;
+    font-weight: 100;
+  }
+  
+  .seconds {
+    float: left;
+    padding-top: 0;
+    font-family: @headings-font-family;
+    font-size: 64px;
+    font-weight: 200;
+  }
+  
+  .milliseconds {
+    padding-left: 1%;
+    padding-top: 22%;
+    float: left;
+    font-family: @headings-font-family;
+    font-size: 23px;
+    font-weight: 100;
+    letter-spacing: 1px;
+  }
+  
+  .timer {
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    top: -1px;
+  }
+  
+  .cell {
+    width: 0.6em;
+    height: 32px;
+    font-size: 23px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+  }
+  
+  .numbers {
+    width: 0.6em;
+    line-height: 40px;
+    font-family: @headings-font-family;
+    text-align: center;
+    color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .disabled-move {
+    .pl-stopwatch {
+      cursor: default;
+    }
+  }
+  
+  #timer_controls {
+    margin-top: -5px;
+  }
+  
+  #timer_controls label {
+    cursor: pointer;
+    padding: 5px 10px;
+    background: #efefef;
+    font-family: arial, verdana, tahoma;
+    font-size: 11px;
+    border-radius: 0 0 3px 3px;
+  }
+  
+  input[name="controls"] {display: none;}
+  
+  .active.timer .numbers {animation-play-state: running;}
+  
+  .moveten {
+    animation: moveten 1s steps(10, end) infinite;
+    animation-play-state: paused;
+  }
+  .moveten:before {content: '0 1 2 3 4 5 6 7 8 9';}
+  .milisecond {animation-duration: 1s;}
+  .tenmilisecond {animation-duration: 0.1s;}
+  
+  @keyframes moveten {
+    0% {top: 0;}
+    100% {top: -400px;}
+  }
+  
+  .d-0:before {content: '0 1 2 3 4 5 6 7 8 9';}
+  .d-1:before {content: '1 2 3 4 5 6 7 8 9 0';}
+  .d-2:before {content: '2 3 4 5 6 7 8 9 0 1';}
+  .d-3:before {content: '3 4 5 6 7 8 9 0 1 2';}
+  .d-4:before {content: '4 5 6 7 8 9 0 1 2 3';}
+  .d-5:before {content: '5 6 7 8 9 0 1 2 3 4';}
+  .d-6:before {content: '6 7 8 9 0 1 2 3 4 5';}
+  .d-7:before {content: '7 8 9 0 1 2 3 4 5 6';}
+  .d-8:before {content: '8 9 0 1 2 3 4 5 6 7';}
+  .d-9:before {content: '9 0 1 2 3 4 5 6 7 8';}
+  

@@ -1,0 +1,32 @@
+// all tag related styles
+
+.tag-item {
+  display: inline-block;
+  padding-right: 1.75em;
+  line-height: 40px;
+  .icon, span {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+  }
+  .icon {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin: -10px 3px 0 0;
+    .tag-dismiss { display: none; }
+    &:hover {
+      .tag-icon { display: none; }
+      .tag-dismiss { display: block; }
+    }
+  }
+  svg { fill: @blue; }
+  &.tag-toggle {
+    cursor: pointer;
+    &:hover span,
+    &.active {
+      color: @blue;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<pl-stream-action
+  *ngIf="(showButton$ | async) && { screenshotting: isScreenshotting$ | async, capturing: isCapturing$ | async } as state"
+  [disabled]="state.capturing"
+  [svgIcon]="state.screenshotting? 'capture' : 'screenshot'"
+  [label]="state.screenshotting ? 'Capture' : 'Screenshot'"
+  (action)="state.screenshotting ? capture() : startScreenshotting()"
+>
+<div>capturing:{{state.capturing}}</div>
+</pl-stream-action>

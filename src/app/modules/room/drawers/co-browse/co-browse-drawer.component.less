@@ -1,0 +1,96 @@
+.drawer-cobrowse {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    header {
+        width : 100%;
+    }
+    main {
+        padding-top: 20px;
+        line-height: 16px;
+
+        .controls {
+            text-align: center;
+            margin: 0 5px 25px 5px;
+            .message {
+                margin-top: 20px;
+            }
+            .expiration-message {
+                margin: 0px 5px 0px 5px;
+            }
+            .start-button  {
+                border-style: solid;
+                border-color: @brand-green;
+                border-width: 1px;
+                border-radius: 4px;
+                padding: 0px 12px 0px 12px;
+                font-size: 13px;
+                margin-bottom: 18px;
+                width: 90%;
+                height: 24px;
+                &:hover:enabled {
+                    background-color: #4c4f52;
+                }
+                &:disabled {
+                    border-color: @gray-darkest;
+                    color: @gray-darkest;
+                }
+            }
+            .link-button {
+                margin: 5px;
+                color: @blue-lighter;
+                border: none;
+                &:hover {
+                    color: @blue-light;
+                }
+                &:disabled {
+                    color: @gray-darkest;
+                }
+            }
+
+            .info {
+                font-size: 13px;
+                .info-button-show {
+                    span {
+                        text-decoration: underline;
+                        margin-right: 5px;
+                        color: @gray-light;
+                    }
+                    svg {
+                        vertical-align:top;
+                        fill: @gray-light;
+                    }
+                }
+                .info-button-hide {
+                    span {
+                        text-decoration: underline;
+                        margin-right: 5px;
+                        color: @slate-lightest;
+                    }
+                    svg {
+                        vertical-align:top;
+                        fill: @slate-lightest;
+                    }
+                }
+                .info-view {
+                    text-align: left;
+                    padding: 10px;
+                    margin-left: 10px;
+                    color: @slate-lightest;
+                    ul {
+                        list-style-type: disc;
+                        padding-left: 15px;
+                    }
+                    div {
+                        margin-bottom: 15px;
+                    }
+                }
+                .warning {
+                    font-style: italic;
+                    color: @gray;
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<div class="widgets-overlay">
+    <div class="overlay"
+        #dropZone
+        [hidden]="!isActive"
+        (mouseup)="cancelDrag()"
+        (cdkDropListDropped)="dropCallback($event)"
+        cdkDropList
+        [cdkDropListData]="widgets"
+        id="pl-widgets-overlay">
+    </div>
+</div>

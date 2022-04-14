@@ -1,0 +1,65 @@
+<div class="drawer drawer-right drawer-chat" [class.in]="isDrawerOpen">
+  <header>
+    <h4>Chat</h4>
+    <button
+      class="chat-toggle"
+      [class.muted]="isChatMuted"
+      *plHasPermission="'PERMS_DEFAULT_PROVIDERS'"
+      (click)="setChatMuted(!isChatMuted)"
+    >
+      <figure>
+          <pl-icon id="chat-on" *ngIf="!isChatMuted" [svg]="'chat-bubble-three-dots'" [width]="20" [height]="21"></pl-icon>
+          <pl-icon id="chat-off" *ngIf="isChatMuted" [svg]="'chat-bubble-off'" [width]="20" [height]="21"></pl-icon>
+      </figure>
+      <div class="mute-chat-btn-tooltip">
+          Mute Student Chat
+      </div>
+    </button>
+    <button
+      *plHasPermission="'PERMS_DEFAULT_PROVIDERS'"
+      class="heap-clear-chat-messages"
+      (click)="clearMessages()"
+      tabindex="-1"
+    >
+      <pl-icon [svg]="'cross'" [width]="10" [height]="10"></pl-icon>
+      <label>Clear</label>
+    </button>
+  </header>
+  <main #messagesContainer>
+    <blockquote
+      *ngFor="let group of groupedMessages"
+      [class.author]="group.userUuid === user.uuid"
+    >
+      <div class="content">
+        <pl-chat-message
+          #message
+          *ngFor="let msg of group.messages"
+          [message]="msg.message"
+        ></pl-chat-message>
+      </div>
+      <cite>
+        <div class="name">{{ group.userName }}</div>
+        <time>{{ group.time | timeFormatter }}</time>
+      </cite>
+    </blockquote>
+  </main>
+
+  <footer>
+    <div class="embargo" *ngIf="preventStudentType"></div>
+    <textarea
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage($event)"
+      (keyup)="sendChatInteraction()"
+      (ngModelChange)="onModelChange()"
+      tabindex="{{ isDrawerOpen ? 1 : -1 }}"
+      [disabled]="preventStudentType">
+    </textarea>
+    <button
+      class="heap-send-chat-message"
+      (click)="sendMessage($event)"
+      [class.active]="newMessage !== ''"
+      tabindex="{{ isDrawerOpen ? 2 : -1 }}">
+      Send
+    </button>
+  </footer>
+</div>

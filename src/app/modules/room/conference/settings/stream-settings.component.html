@@ -1,0 +1,12 @@
+<ng-container *ngIf="{ isLocal: isLocal$ | async } as vm">
+  <div class="header">
+    <h1 mat-dialog-title>{{ vm.isLocal ? 'Personal' : 'Client' }} Settings</h1>
+    <button mat-dialog-close mat-icon-button aria-label="Close settings dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+      <pl-local-settings *ngIf="vm.isLocal"></pl-local-settings>
+      <pl-remote-settings *ngIf="!vm.isLocal"></pl-remote-settings>
+  </mat-dialog-content>
+</ng-container>

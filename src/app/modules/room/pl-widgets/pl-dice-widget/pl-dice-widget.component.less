@@ -1,0 +1,491 @@
+@import '../../../../common/less/colors.less';
+@import '../../../../common/less/typography.less';
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  
+  @-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  
+  @-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  
+  
+  @keyframes spinDice {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(3600deg);
+    }
+  }
+  
+  @keyframes orbit {
+    from {
+      transform: translateY(-4px) rotate(0deg) translateY(4px) rotate(0deg);
+    }
+    to {
+      transform: translateY(-4px) rotate(-3600deg) translateY(4px) rotate(3600deg);
+    }
+  }
+  
+  
+  .dice-widget-container {
+     border-radius: 50%;
+  
+    .dice-background-stroke {
+      top: 0px;
+      left: 0px;
+      width: 199px;
+      height: 197px;
+      border-radius: 102px;
+      box-shadow: 0px 0px 4px 0 rgba(0,0,0,0.5);
+      background-color: transparent;
+      position: absolute;
+    }
+  
+    .dice-background {
+      background-size: 209px 209px;
+      background-image: url('/assets/widgets/dice/dice-background.png');
+      background-repeat: no-repeat;
+    }
+  
+    @media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+    only screen and (-moz-min-device-pixel-ratio: 1.5),
+    only screen and (-o-min-device-pixel-ratio: 3/2),
+    only screen and (min-device-pixel-ratio: 1.5) {
+      .dice-background {
+        background-size: 209px 209px;
+        background-image: url('/assets/widgets/dice/dice-background-large.png');
+      }
+    }
+  
+  
+    .dice-glow {
+      background: radial-gradient(rgba(255, 255, 255, 0.11) 50%, transparent 106%);
+    }
+  
+    .dice-background, .dice-glow {
+      width: 209px;
+      height: 209px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+    }
+  
+    .dice-counter {
+      border-radius: 5px;
+      background-color: rgba(214, 214, 214, 0.3);
+      color: rgb(255, 255, 255);
+      width: 32px;
+      height: 27px;
+      font-size: 21px;
+      top: 167px;
+      left: 91px;
+      position: absolute;
+      text-align: center;
+      font-family: @font-family-sans-serif, sans-serif;
+      font-weight: 700;
+      vertical-align: middle;
+      line-height: 27px;
+    }
+  
+  
+    .dice-container {
+      position: relative;
+  
+      .dice-number {
+        &.c-1 {
+          .die:nth-child(1) {
+            top: 78px;
+            left: 80px;
+            display: block;
+          }
+  
+          .die:nth-child(n+2) {
+            display: none;
+          }
+        }
+  
+        &.c-2 {
+          .die:nth-child(1) {
+            top: 80px;
+            left: 49px;
+            display: block;
+          }
+  
+          .die:nth-child(2) {
+            top: 80px;
+            left: 113px;
+            display: block;
+          }
+  
+          .die:nth-child(n+3) {
+            display: none;
+          }
+        }
+  
+        &.c-3 {
+          .die:nth-child(1) {
+            top: 108px;
+            left: 46px;
+            display: block;
+          }
+  
+          .die:nth-child(2) {
+            top: 108px;
+            left: 116px;
+            display: block;
+          }
+  
+          .die:nth-child(3) {
+            top: 46px;
+            left: 81px;
+            display: block;
+          }
+  
+          .die:nth-child(n+4) {
+            display: none;
+          }
+        }
+  
+        &.c-4 {
+          .die:nth-child(1) {
+            top: 48px;
+            left: 48px;
+            display: block;
+          }
+  
+          .die:nth-child(2) {
+            top: 110px;
+            left: 48px;
+            display: block;
+          }
+  
+          .die:nth-child(3) {
+            top: 48px;
+            left: 113px;
+            display: block;
+          }
+  
+          .die:nth-child(4) {
+            top: 110px;
+            left: 113px;
+            display: block;
+          }
+  
+          .die:nth-child(n+5) {
+            display: none;
+          }
+        }
+  
+        &.c-5 {
+          .die {
+            display: block;
+          }
+  
+          .die:nth-child(1) {
+            top: 34px;
+            left: 32px;
+          }
+  
+          .die:nth-child(2) {
+            top: 121px;
+            left: 32px;
+          }
+  
+          .die:nth-child(3) {
+            top: 34px;
+            left: 127px;
+          }
+  
+          .die:nth-child(4) {
+            top: 121px;
+            left: 127px;
+          }
+  
+          .die:nth-child(5) {
+            top: 78px;
+            left: 80px;
+          }
+        }
+      }
+  
+      &.animated {
+        .c-1 {
+          .die:nth-child(1), .die:nth-child(1) .die-shadow {
+            animation-duration: 3000ms;
+          }
+        }
+  
+        .c-2 {
+          .die:nth-child(1), .die:nth-child(1) .die-shadow {
+            animation-duration: 2500ms;
+          }
+  
+          .die:nth-child(2), .die:nth-child(2) .die-shadow {
+            animation-duration: 3000ms;
+          }
+        }
+  
+        .c-3 {
+          .die:nth-child(1), .die:nth-child(1) .die-shadow {
+            animation-duration: 2000ms;
+          }
+  
+          .die:nth-child(2), .die:nth-child(2) .die-shadow {
+            animation-duration: 2500ms;
+          }
+  
+          .die:nth-child(3), .die:nth-child(3) .die-shadow {
+            animation-duration: 3000ms;
+          }
+        }
+  
+        .c-4 {
+          .die:nth-child(1), .die:nth-child(1) .die-shadow {
+            animation-duration: 1500ms;
+          }
+  
+          .die:nth-child(2), .die:nth-child(2) .die-shadow {
+            animation-duration: 2000ms;
+          }
+  
+          .die:nth-child(3), .die:nth-child(3) .die-shadow {
+            animation-duration: 2500ms;
+          }
+  
+          .die:nth-child(4), .die:nth-child(4) .die-shadow {
+            animation-duration: 3000ms;
+          }
+        }
+  
+        .c-5 {
+          .die:nth-child(1), .die:nth-child(1) .die-shadow {
+            animation-duration: 1000ms;
+          }
+  
+          .die:nth-child(2), .die:nth-child(2) .die-shadow {
+            animation-duration: 1500ms;
+          }
+  
+          .die:nth-child(3), .die:nth-child(3) .die-shadow {
+            animation-duration: 2000ms;
+          }
+  
+          .die:nth-child(4), .die:nth-child(4) .die-shadow {
+            animation-duration: 2500ms;
+          }
+  
+          .die:nth-child(5), .die:nth-child(5) .die-shadow {
+            animation-duration: 3000ms;
+          }
+        }
+  
+        .die {
+          animation-name: spinDice;
+          animation-iteration-count: 1;
+          animation-timing-function: cubic-bezier(0,1,1,1);
+        }
+        
+        .die .die-shadow {
+          animation-name: orbit;
+          animation-iteration-count: 1;
+          animation-timing-function: cubic-bezier(0,1,1,1);
+        }
+  
+        animation-name: none;
+        animation-duration: 3000ms;
+      }
+  
+      .die {
+        width: 52px;
+        height: 52px;
+        position: absolute;
+      }
+  
+      .die-image {
+        top: 4px;
+        left: 4px;
+        width: 44px;
+        height: 44px;
+        position: absolute;
+        background-size: 44px 44px;
+      }
+
+      .die-content { 
+        border-radius: 4px;
+        -moz-box-shadow:    inset 0 0 2px #000000;
+        -webkit-box-shadow: inset 0 0 2px #000000;
+        box-shadow:         inset 0 0 2px #000000;
+        text-align: center;
+        line-height: 44px;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: @headings-font-family;
+        &:not(.colors) {
+          background-color: @white;
+        }
+        &.colors {
+          color: white;
+          &.bg-red {
+            background-color: @red;
+          }
+          &.bg-yellow {
+            background-color: @yellow;
+          }
+          &.bg-blue {
+            background-color: @blue;
+          }
+          &.bg-green {
+            background-color: @green;
+          }
+          &.bg-orange {
+            background-color: @orange;
+          }
+          &.bg-purple {
+            background-color: @purple;
+          }
+        }
+
+      }
+  
+      .die-shadow {
+        position: absolute;
+  
+        top: 4px;
+        left: 0;
+  
+        width: 52px;
+        height: 52px;
+  
+        background: no-repeat url('/assets/widgets/dice/dice-shadow.svg')
+      }
+
+
+      .die-1 {
+        .die-1-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 26C25.2091 26 27 24.2091 27 22C27 19.7909 25.2091 18 23 18C20.7909 18 19 19.7909 19 22C19 24.2091 20.7909 26 23 26Z" fill="@{dotcolor}"></path></svg>');
+        }
+        &.colored .die-image {
+          .die-1-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-1-image-bg(black)
+        }
+      }
+  
+      .die-2 {
+        .die-2-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z" fill="@{dotcolor}"/><path d="M37 40C39.2091 40 41 38.2091 41 36C41 33.7909 39.2091 32 37 32C34.7909 32 33 33.7909 33 36C33 38.2091 34.7909 40 37 40Z" fill="@{dotcolor}"/></svg>');
+        }
+        &.colored .die-image {
+          .die-2-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-2-image-bg(black)
+        }
+      }
+  
+  
+      .die-3 {
+        .die-3-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 26C25.2091 26 27 24.2091 27 22C27 19.7909 25.2091 18 23 18C20.7909 18 19 19.7909 19 22C19 24.2091 20.7909 26 23 26Z" fill="@{dotcolor}"/><path d="M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z" fill="@{dotcolor}"/><path d="M37 40C39.2091 40 41 38.2091 41 36C41 33.7909 39.2091 32 37 32C34.7909 32 33 33.7909 33 36C33 38.2091 34.7909 40 37 40Z" fill="@{dotcolor}"/></svg>');
+        }
+        &.colored .die-image {
+          .die-3-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-3-image-bg(black)
+        }
+      }
+  
+      .die-4 {
+        .die-4-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 13C39.2091 13 41 11.2091 41 9C41 6.79086 39.2091 5 37 5C34.7909 5 33 6.79086 33 9C33 11.2091 34.7909 13 37 13Z" fill="@{dotcolor}"/><path d="M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z" fill="@{dotcolor}"/><path d="M9 41C11.2091 41 13 39.2091 13 37C13 34.7909 11.2091 33 9 33C6.79086 33 5 34.7909 5 37C5 39.2091 6.79086 41 9 41Z" fill="@{dotcolor}"/><path d="M37 40C39.2091 40 41 38.2091 41 36C41 33.7909 39.2091 32 37 32C34.7909 32 33 33.7909 33 36C33 38.2091 34.7909 40 37 40Z" fill="@{dotcolor}"/></svg>');
+        }
+        &.colored .die-image {
+          .die-4-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-4-image-bg(black)
+        }
+      }
+  
+      .die-5 {
+        .die-5-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23 26C25.2091 26 27 24.2091 27 22C27 19.7909 25.2091 18 23 18C20.7909 18 19 19.7909 19 22C19 24.2091 20.7909 26 23 26Z" fill="@{dotcolor}"/><path d="M37 13C39.2091 13 41 11.2091 41 9C41 6.79086 39.2091 5 37 5C34.7909 5 33 6.79086 33 9C33 11.2091 34.7909 13 37 13Z" fill="@{dotcolor}"/><path d="M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z" fill="@{dotcolor}"/><path d="M9 41C11.2091 41 13 39.2091 13 37C13 34.7909 11.2091 33 9 33C6.79086 33 5 34.7909 5 37C5 39.2091 6.79086 41 9 41Z" fill="@{dotcolor}"/><path d="M37 40C39.2091 40 41 38.2091 41 36C41 33.7909 39.2091 32 37 32C34.7909 32 33 33.7909 33 36C33 38.2091 34.7909 40 37 40Z" fill="@{dotcolor}"/></svg>');
+        }
+        &.colored .die-image {
+          .die-5-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-5-image-bg(black)
+        }
+      }
+  
+      .die-6 {
+        .die-6-image-bg(@dotcolor) {
+          background-size: contain;
+          background-image: url('data:image/svg+xml;charset=utf-8,<svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 26C39.2091 26 41 24.2091 41 22C41 19.7909 39.2091 18 37 18C34.7909 18 33 19.7909 33 22C33 24.2091 34.7909 26 37 26Z" fill="@{dotcolor}"/><path d="M9 26C11.2091 26 13 24.2091 13 22C13 19.7909 11.2091 18 9 18C6.79086 18 5 19.7909 5 22C5 24.2091 6.79086 26 9 26Z" fill="@{dotcolor}"/><path d="M37 13C39.2091 13 41 11.2091 41 9C41 6.79086 39.2091 5 37 5C34.7909 5 33 6.79086 33 9C33 11.2091 34.7909 13 37 13Z" fill="@{dotcolor}"/><path d="M9 13C11.2091 13 13 11.2091 13 9C13 6.79086 11.2091 5 9 5C6.79086 5 5 6.79086 5 9C5 11.2091 6.79086 13 9 13Z" fill="@{dotcolor}"/><path d="M9 41C11.2091 41 13 39.2091 13 37C13 34.7909 11.2091 33 9 33C6.79086 33 5 34.7909 5 37C5 39.2091 6.79086 41 9 41Z" fill="@{dotcolor}"/><path d="M37 40C39.2091 40 41 38.2091 41 36C41 33.7909 39.2091 32 37 32C34.7909 32 33 33.7909 33 36C33 38.2091 34.7909 40 37 40Z" fill="@{dotcolor}"/></svg>');
+        }
+        &.colored .die-image {
+          .die-6-image-bg(white)
+        }
+        &.bw .die-image {
+          .die-6-image-bg(black)
+        }
+      }
+    }
+  
+    .interactive {
+       border-radius: 50%;
+     }
+     .dice-widget {
+       border-radius: 50%;
+  
+       canvas {
+         pointer-events: none;
+       }
+  
+       .counter-fading-out {
+         -webkit-animation: fadeout 0.3s;
+         -moz-animation: fadeout 0.3s;
+         animation: fadeout 0.3s;
+       }
+  
+       .counter-fading-in {
+         -webkit-animation: fadein 0.3s;
+         -moz-animation: fadein 0.3s;
+         animation: fadein 0.3s;
+       }
+     }
+  }
+  
+  

@@ -1,0 +1,65 @@
+<div class="pl-documentation-notes">
+    <div *ngIf="noteSchema.code == 'soap'">
+        <div class="toggle-buttons">
+            <button pl-button class="toggle-button room-gray" [ngClass]="classesView.subjective" (click)="toggleView('subjective')">
+                S
+            </button>
+            <button pl-button class="toggle-button room-gray" [ngClass]="classesView.objective" (click)="toggleView('objective')">
+                O
+            </button>
+            <button pl-button class="toggle-button room-gray" [ngClass]="classesView.assessment" (click)="toggleView('assessment')">
+                A
+            </button>
+            <button pl-button class="toggle-button room-gray" [ngClass]="classesView.plan" (click)="toggleView('plan')">
+                P
+            </button>
+            <button pl-button class="toggle-button room-gray general" [ngClass]="classesView.notes" (click)="toggleView('notes')">
+                General
+            </button>
+        </div>
+
+        <div class="notes-view">
+            <div class="saving">{{ savingMessage }}</div>
+            <div [hidden]="view !== 'subjective'" #notesSubjective>
+                <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.subjective" [placeholder]="'Add subjective note'" (click)="onEditingNotes()" (onBlur)="saveNote('subjective')" (onChange)="saveNote('subjective')" [debounceChange]="'1000'"></pl-input-textarea>
+            </div>
+            <div [hidden]="view !== 'objective'" #notesObjective>
+                <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.objective" [placeholder]="'Add objective note'" (click)="onEditingNotes()" (onBlur)="saveNote('objective')" (onChange)="saveNote('objective')" [debounceChange]="'1000'"></pl-input-textarea>
+                <div [hidden]="!haveNewMetrics" class="center">
+                    <button pl-button class="room-gray" (click)="importMetrics()" [disabled]="!isEditable()">
+                        <pl-icon [svg]="'download'"></pl-icon> Import Metrics
+                    </button>
+                </div>
+            </div>
+            <div [hidden]="view !== 'assessment'" #notesAssessment>
+                <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.assessment" [placeholder]="'Add assessment note'" (click)="onEditingNotes()" (onBlur)="saveNote('assessment')" (onChange)="saveNote('assessment')" [debounceChange]="'1000'"></pl-input-textarea>
+            </div>
+            <div [hidden]="view !== 'plan'" #notesPlan>
+                <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.plan" [placeholder]="'Add plan note'" (click)="onEditingNotes()" (onBlur)="saveNote('plan')" (onChange)="saveNote('plan')" [debounceChange]="'1000'"></pl-input-textarea>
+            </div>
+            <div [hidden]="view !== 'notes'" #notesNotes>
+                <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.notes" [placeholder]="'Add general note'" (click)="onEditingNotes()" (onBlur)="saveNote('notes')" (onChange)="saveNote('notes')" [debounceChange]="'1000'"></pl-input-textarea>
+            </div>
+        </div>
+    </div>
+    <div class="notes-view" *ngIf="noteSchema.code == 'general'" #notesNotes>
+        <div *ngIf="savingMessage" class="saving">{{ savingMessage }}</div>
+        <pl-input-textarea [disabled]="!isEditable()" [(model)]="notes.notes" [placeholder]="'Add general note'" (click)="onEditingNotes()" (onBlur)="saveNote('notes')" (onChange)="saveNote('notes')" [debounceChange]="'1000'"></pl-input-textarea>
+    </div>
+    <div *ngIf="speechRecognition" class="margin-small-t pointer speech">
+        <div [hidden]="speaking">
+            <button pl-button class="room-gray" (click)="startSpeaking()" [disabled]="!isEditable()">
+                <pl-icon class="margin-small-r" [svg]="'microphone'"></pl-icon> Dictate Notes
+            </button>
+        </div>
+        <div [hidden]="!speaking">
+            <button pl-button class="primary stop-speaking" (click)="stopSpeaking()" [disabled]="!isEditable()">
+                <pl-icon class="margin-small-r" [svg]="'microphone-on'"></pl-icon> Stop Dictation
+            </button>
+        </div>
+        <div *ngIf="!hideDictationDisclaimer" class="margin-small-t">
+             <pl-icon [svg]="'caution'" class="white" [scale]="1"></pl-icon> Please avoid using any PII (personally-identifiable-information) such as student names while utilizing the dictation feature. You can certainly add PII to your notes by typing directly into the text box above.
+            <button pl-button class="link" (click)="dictationDisclaimerSeen()">I understand</button>
+        </div>
+    </div>
+</div>

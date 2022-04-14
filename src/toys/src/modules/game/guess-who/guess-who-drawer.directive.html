@@ -1,0 +1,35 @@
+<div class="drawer-guesswho">
+    <main>
+        <div class="subtitle toggle" ng-click="showViewSwitcher = !showViewSwitcher" ng-class="{true:'toggle-open', false:'toggle-closed'}[showViewSwitcher]">
+            <button><pl-icon [svg]="'chevron-down'" [height]="13" width="18"></pl-icon></button>
+            <h5>Settings</h5>
+        </div>
+
+        <div class="subgroup" ng-class="{true:'toggle-open', false:'toggle-closed'}[showViewSwitcher]">
+            <div class="settings-button" >
+                <button ng-click="guessWhoDrawerController.reset()">
+                    <pl-icon [svg]="'refresh'" [width]="18" [height]="18"></pl-icon>
+                    <label>Replay Game</label>
+                </button>
+            </div>
+            <div class="settings-button">
+                <div class="text">
+                    X-Ray View
+                </div>
+                <div class="">
+                    <pl-input-checkbox [(model)]="guessWhoDrawerController.xRay" (on-change)="guessWhoDrawerController.setXRay()"></pl-input-checkbox>
+                </div>
+            </div>
+            <div class="settings-button">
+                <div class="text">
+                    Auto Select Card
+                </div>
+                <div class="">
+                    <pl-input-checkbox [(model)]="guessWhoDrawerController.autoSelect" (on-change)="guessWhoDrawerController.setAutoSelect()"></pl-input-checkbox>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</div>

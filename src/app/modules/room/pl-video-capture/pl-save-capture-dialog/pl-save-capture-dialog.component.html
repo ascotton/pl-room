@@ -1,0 +1,30 @@
+<div class="save-capture-dialog">
+    <mat-toolbar color="primary" class="toolbar">
+        <span *ngIf="data.saveMode==='default'">Save</span>
+        <span *ngIf="data.saveMode==='existing'">Unsaved Images Found</span>
+        <span *ngIf="data.saveMode==='on_exit'">User Exited</span>
+        <span *ngIf="data.saveMode==='interrupted'">You Exited Jumbotron</span>
+        <button mat-icon-button class="" aria-label="Close Save Screenshot Session" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon>
+          </button>
+    </mat-toolbar>
+    <div class="content">
+        <div class="subheader">
+            <span *ngIf="data.saveMode==='default'">Saving to {{data.clientName}}'s Events</span>
+            <span *ngIf="data.saveMode==='existing'">Would you like to save images to {{data.clientName}}'s Events?</span>
+            <span *ngIf="data.saveMode==='on_exit'">User exited. Would you like to save images to {{data.clientName}}'s Events?</span>
+            <span *ngIf="data.saveMode==='interrupted'">Would you like to save images to {{data.clientName}}'s Events?</span>
+        </div>
+        <div class="name-form">
+            <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="data.sessionName" maxlength="254">
+            </mat-form-field>
+        </div>
+        <div class="bottom-buttons">
+            <button mat-stroked-button (click)="onCloseClick()" *ngIf="data.saveMode==='default'">Cancel</button>
+            <button mat-stroked-button *ngIf="data.saveMode!=='default'"[mat-dialog-close]="{discard: true}">Discard</button>
+            <button mat-flat-button [disabled]="disableSave()" color="primary" [mat-dialog-close]="data">Save & Submit</button>
+        </div>
+    </div>
+</div>

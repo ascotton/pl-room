@@ -1,0 +1,35 @@
+<div class="pl-activity-save">
+    <div>
+        <pl-dot-loader *ngIf="loading"></pl-dot-loader>
+        <button *ngIf="!loading" pl-button class="primary" [disabled]="!formValid()" (click)="save()">Save</button>
+        <button pl-button class="reverse" (click)="cancel()">Cancel</button>
+        <button *ngIf="mayDelete" pl-button class="danger" (click)="delete()">Delete</button>
+    </div>
+    <div class="margin-b">
+        <pl-input-select class="form-input" [(model)]="activity.activity_type" [options]="selectOptsType" [label]="'Type'" (onChange)="changeActivityType()"></pl-input-select>
+    </div>
+    <div *ngIf="(activity.activity_type === 'memory' || activity.activity_type === 'flashcards')">
+        <!-- <pl-input-text class="form-input" [(model)]="activity.title" [label]="'Title'"></pl-input-text> -->
+        <div *ngIf="activity.imageDeck.id">
+            <div>Image Deck</div>
+            <div class="flexbox image-deck">
+                <img class="image" [src]="activity.imageDeck.imageUrl" />
+                <div class="flex1 margin-l">
+                    <div>{{ activity.imageDeck.title }}</div>
+                </div>
+            </div>
+            <button pl-button class="" (click)="toggleChooseImageDeck()">Change Image Deck</button>
+        </div>
+        <div *ngIf="choosingImageDeck">
+            <pl-image-decks (onUseDeck)="onUseDeck($event)" [showCancel]="0"></pl-image-decks>
+        </div>
+    </div>
+    <div *ngIf="(activity.activity_type === 'youtube')">
+        Youtube TODO
+        <pl-image-deck-save [deck]="activity" [showSave]="0" [showImages]="0"></pl-image-deck-save>
+    </div>
+    <div *ngIf="(activity.activity_type === 'pdfviewer')">
+        PDF TODO
+        <pl-image-deck-save [deck]="activity" [showSave]="0" [showImages]="0"></pl-image-deck-save>
+    </div>
+</div>

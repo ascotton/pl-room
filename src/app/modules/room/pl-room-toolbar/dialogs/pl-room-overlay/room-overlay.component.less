@@ -1,0 +1,52 @@
+@import 'colors.less';
+
+.room-overlay-dialog {
+    .dialog-title {
+        font-size: 16px;
+    }
+    .color-list {
+        display: flex;
+        flex-wrap: wrap;
+        .color-item {
+            margin-top: 15px;
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .circle {
+                border-radius: 50%;
+                width: 46px;
+                height: 46px;
+                padding: 3px;
+                cursor: pointer;
+                &.selected {
+                    border: 2px solid @royal-blue;
+                }
+                .color-circle {
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .color-name {
+                font-weight: 300;
+                margin-top: 10px;
+            }
+        }
+    }
+    .opacity-container {
+        display: flex;
+        flex-direction: column;
+        .opacity-title {
+            display: flex;
+            justify-content: space-between;
+        }
+        .mat-slider {
+            width: 100%;
+        }
+    }
+    .filter-toggle {
+        display: flex;
+        justify-content: space-between;
+    }
+}

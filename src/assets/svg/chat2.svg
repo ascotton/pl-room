@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="21px" height="19px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: sketchtool 3.4.4 (395) - http://www.bohemiancoding.com/sketch -->
+    <title>chat</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Final-Flow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Assets" sketch:type="MSArtboardGroup" transform="translate(-50.000000, -137.000000)" fill="#777777">
+            <path d="M58.6025615,151.156863 L54.5723434,155.748746 C54.4294577,155.913361 54.2361417,156 54.0428257,156 C53.9461677,156 53.8453072,155.97834 53.7528517,155.930689 C53.4712828,155.796398 53.2905743,155.475832 53.2905743,155.124943 L53.2905743,151.148199 C51.458275,151.022572 50,149.259462 50,147.102143 L50,141.05472 C50,138.815093 51.5675405,137 53.5007004,137 L67.4992996,137 C69.4324595,137 71,138.815093 71,141.05472 L71,147.102143 C71,149.341769 69.4324595,151.156863 67.4992996,151.156863 L58.6025615,151.156863 Z" id="chat" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

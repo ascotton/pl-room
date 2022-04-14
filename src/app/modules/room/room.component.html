@@ -1,0 +1,104 @@
+<div ng-class="$ctrl.mainClasses()" class="right-toolbar-mode" guess-who-communicator pl-queue-communicator>
+    <pl-app-global></pl-app-global>
+    <pl-room-toolbar permissions="PERMS_DEFAULT_PROVIDERS"></pl-room-toolbar>
+    <!-- Angular 2 root component -->
+    <pl-inactive></pl-inactive>
+    <pl-common-overlays></pl-common-overlays>
+    <pl-profile-menu></pl-profile-menu>
+
+    <div class='room-cursor-blocked'>
+        <pl-icon [svg]="'blocked'" class="red"></pl-icon>
+    </div>
+
+    <!-- left side drawer -->
+    <pl-conference></pl-conference>
+
+    <!-- central work area -->
+    <div class="central-content" ng-click="$ctrl.centralContentClick($event)">
+        <whiteboard-tool-select></whiteboard-tool-select>
+        <div class="embargo whiteboard-tools" ng-if="$ctrl.isMouseMuted && $ctrl.user.isInGroup('student') && !$ctrl.isYoutubeInteractionPending"></div>
+        <div class="aspect-ratio-constriction"
+            ng-style="$ctrl.getAspectRatioConstrictionStyles()"
+            shared-cursor-panel="{{ $ctrl.sharedCursorOn.toString() }}"
+            ng-class="$ctrl.classes"
+            >
+            <!--widgets-board></widgets-board-->
+            <pl-widgets-board class="widgets-board"></pl-widgets-board>
+            <pl-widgets-overlay></pl-widgets-overlay>
+            <pl-room-overlay></pl-room-overlay>
+            <whiteboard widgets-click></whiteboard>
+            <pl-reward-animations></pl-reward-animations>
+            <pl-team-write></pl-team-write>
+            <pl-games></pl-games>
+            <siteshare></siteshare>
+            <pl-screenshare></pl-screenshare>
+            <pl-workspace></pl-workspace>
+            <div class="embargo" ng-if="$ctrl.isMouseMuted && $ctrl.user.isInGroup('student') && !$ctrl.isYoutubeInteractionPending"></div>
+            <div class="white-screen" ng-if="$ctrl.firebaseAppModel.app.whiteScreenActive && $ctrl.user.isInGroup('student')"></div>
+            <div class="white-screen-non-student" ng-if="$ctrl.firebaseAppModel.app.whiteScreenActive && !$ctrl.user.isInGroup('student')">
+                <div class="flex1">&nbsp;</div>
+                <div class="center">
+                    <pl-icon [svg]="'circle-no-view'" [scale]="5"></pl-icon>
+                </div>
+                <div class="flex1">&nbsp;</div>
+            </div>
+        </div>
+        <whiteboard-tool-options></whiteboard-tool-options>
+    </div>
+
+
+
+    <!-- right side drawers -->
+    <pl-queue permissions="PERMS_DEFAULT_PROVIDERS"></pl-queue>
+    <session-record-drawer permissions="Therapist || Administrator"></session-record-drawer>
+    <co-browse-drawer permissions="PERMS_DEFAULT_PROVIDERS"></co-browse-drawer>
+
+    <pl-right-drawers></pl-right-drawers>
+    <!-- <right-toolbar></right-toolbar> -->
+
+    <!-- takeover modals -->
+    <pl-window-warning></pl-window-warning>
+    <pl-connection-warning></pl-connection-warning>
+
+    <pl-confirm class="confirm-exit"
+                activated="$ctrl.showExitFromRoom"
+                header="'Exit Room'"
+                body-text="'Are you sure you want to exit the Room?'"
+                confirm-text="'Exit Room'"
+                on-confirm="$ctrl.confirm"
+                on-cancel="$ctrl.closeConfirm"
+    ></pl-confirm>
+
+    <!-- observer embargo -->
+    <div class="embargo observer" permissions="Observer">
+        <pl-notify
+            message="In observation mode you are not visible to the participants of the session and are not able to make any changes to the session.">
+        </pl-notify>
+        <nav class="toolbar">
+            <button class="menu profile-menu-button" ng-click="$ctrl.toggleProfileMenu()">
+                MENU
+                <span class="padding-t margin-small-l">
+                    <pl-icon class="white" [svg]="'menu-icon'" [scale]="0.75"></pl-icon>
+                </span>
+            </button>
+
+            <span class="observation-label padding-t">
+                <pl-icon class="white" [svg]="'observation-mode'" [width]="210" [height]="50"></pl-icon>
+            </span>
+        </nav>
+    </div>
+
+    <div class="embargo-status" ng-show="$ctrl.firebaseAppModel.app.status !== 'ready'">
+        <div class="centering">
+            <div class="text center">
+                <div ng-show="$ctrl.firebaseAppModel.app.status === 'moved'">
+                    <div>Room updated, please refresh your browser.</div>
+                </div>
+                <div ng-show="$ctrl.firebaseAppModel.app.status !== 'moved'">
+                    <div>Room is updating, this should only take a few seconds.</div>
+                    <div>We apologize for the inconvenience.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

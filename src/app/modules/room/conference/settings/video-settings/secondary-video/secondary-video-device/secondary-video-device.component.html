@@ -1,0 +1,13 @@
+<ng-container *ngIf="devices$ | async as devices">
+  <mat-form-field>
+    <mat-label>Select a camera</mat-label>
+    <mat-select [formControl]="formControl">
+        <mat-option *ngIf="showNoneOption$ | async">
+          None
+        </mat-option>
+        <mat-option *ngFor="let device of devices" [value]="device.deviceId">
+            {{ device.label }}
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>

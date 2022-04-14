@@ -1,0 +1,26 @@
+<takeover activated="windowTooSmall">
+    <h2 class="heading-2">Your window is too small</h2>
+    <p>This app needs a minimum of {{width}}x{{height}} pixels to work correctly. Currently your screen is {{windowWidth}}x{{windowHeight}} pixels.</p>
+    <p>First, <b>maximize your window.</b></p>
+    <div id="maximize-window"></div>
+    <p>If that doesn’t work, you may need to adjust your <b>browser’s zoom to 100%.</b></p>
+    <div id="browser-zoom"></div>
+    <hr>
+    <p>Still having trouble? <a href="#" ng-click="liveagent.startChat()">Contact Tech Support</a></p>
+</takeover>
+
+<takeover activated="windowPortraitMode">
+    <h2 class="heading-2">Please switch to landscape mode</h2>
+    <p>This app works best in landscape mode. Please rotate the device back to landscape.</p>
+    <div class="examples">
+        <div class="example" id="incorrect-ipad">
+        </div>
+        <div>
+            <div class="separator"></div>
+        </div>
+        <div class="example" id="correct-ipad">
+        </div>
+    </div>
+    <hr>
+    <p>Still having trouble? <a href="#" ng-click="liveagent.startChat()">Contact Tech Support</a></p>
+</takeover>

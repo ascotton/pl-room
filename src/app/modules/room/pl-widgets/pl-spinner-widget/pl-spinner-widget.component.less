@@ -1,0 +1,22 @@
+.spinner-widget-container {
+    z-index: 1;
+    border-radius: 50%;
+      .widget {
+          border-radius: 50%;
+      }
+  
+    .spinner-widget {
+      border-radius: 50%;
+      position:relative;
+      width:155px;
+      height:155px;
+  
+      canvas {
+          border-radius: 50%;
+          position:absolute;
+        top:0;
+        left:0;
+        pointer-events: none;
+      }
+    }
+}

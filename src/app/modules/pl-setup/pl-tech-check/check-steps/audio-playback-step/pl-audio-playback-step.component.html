@@ -1,0 +1,61 @@
+<div class="pl-audio-playback-step flexbox">
+    <div class="flex2 padding-large margin-large-r">
+        <audio [src]="audioFile" #audioPlayer></audio>
+        <div class="padding-large-b">
+            {{ 'STEPS.AUDIO.HEADER' | translate }}
+        </div>
+        <div class="margin-large-b">
+            <button (click)="onTestSpeaker()" mat-stroked-button>{{ 'STEPS.AUDIO.BTN_TEST' | translate }}</button>
+        </div>
+        <div class="margin-large-b flexbox">
+            <pl-audio-level-indicator [level]="currentLevel"></pl-audio-level-indicator>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="question-header margin-large-t">
+            {{ 'STEPS.AUDIO.HEAR_QUESTION' | translate }}
+        </div>
+        <mat-radio-group color="primary" class="radio-group-answers"  (change)="onAnswerChanged($event)">
+            <mat-radio-button class="margin-large-t radio-answer" [value]="true">{{ 'GENERAL.YES' | translate }}</mat-radio-button>
+            <mat-radio-button class="margin-large-t radio-answer" [value]="false">{{ 'GENERAL.NO' | translate }}</mat-radio-button>
+        </mat-radio-group>
+        <div class="margin-large-t">
+            <button class="btn-next" [disabled]="!isCheckCompleted()" mat-raised-button color="accent" matStepperNext>{{ 'GENERAL.BTN_NEXT' | translate }}</button>
+        </div>
+    </div>
+    <div class="flex1">
+        <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="margin-b">
+                        Troubleshooting
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="padding-large">
+                <div class="flexbox">
+                    <div class="margin-r">
+                        <mat-icon>
+                            help
+                        </mat-icon>
+                    </div>
+                    <div class="padding-large-l">
+                        <ul>
+                            <li>
+                                {{ 'STEPS.AUDIO.TROUBLESHOOTING_LINE1' | translate }}
+                            </li>
+                            <li>
+                                {{ 'STEPS.AUDIO.TROUBLESHOOTING_LINE2' | translate }}
+                            </li>
+                            <li>
+                                {{ 'STEPS.AUDIO.TROUBLESHOOTING_LINE3' | translate }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <pl-tech-support-card class="margin-large-t"></pl-tech-support-card>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="pl-snackbar-dialog">
+    {{ data?.message }}
+    <div class="actions margin-large-l">
+        <button class="action" mat-button (click)="onAction()">{{ data?.actionText }}</button>
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+<pl-dot-loader *ngIf="!initialized" class="tech-check-loader"></pl-dot-loader>
+<pl-browser-check [code]="code" *ngIf="!techCheckStarted && initialized"></pl-browser-check>
+<pl-tech-check-steps *ngIf="techCheckStarted && initialized" [initialStep]="initialStep"></pl-tech-check-steps>

@@ -1,0 +1,35 @@
+<div class="bottom-sheet-dialog pl-controls-dialog">
+    <div class="settings-list margin-large-t">
+        <div class="control-setting">
+            <div class="setting-title margin-b">
+                Shared cursor viewing
+            </div>
+            <img src="/assets/images/shared-cursor.png" />
+            <div class="margin-t">
+                <mat-slide-toggle 
+                *ngIf="{ shared: isCursorShared$ | async, disabled: isCursorSharingToggleDisabled$ | async } as cursorSharing"
+                color="primary"
+                [checked]="cursorSharing.shared"
+                [disabled]="cursorSharing.disabled"
+                (change)="!cursorSharing.disabled && onCursorSharedChanged(!cursorSharing.shared)">
+                    {{ cursorSharing.shared ? 'On' : 'Off' }}
+                </mat-slide-toggle>
+            </div>
+        </div>
+        <div class="control-setting">
+            <div class="setting-title margin-b">
+                Client mouse clicking
+            </div>
+            <img src="/assets/images/client-mouse-click.png" />
+            <div class="margin-t">
+                <mat-slide-toggle
+                    *ngIf="{ val: isClientClickMuted$ | async } as isClientClickMuted"
+                    color="primary"
+                    [checked]="!isClientClickMuted.val"
+                    (change)="onClientClickChange(!isClientClickMuted.val)">
+                    {{ !isClientClickMuted.val ? 'On' : 'Off' }}
+                </mat-slide-toggle>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="audio-player-item" ng-class="{ collapsed: collapsed }">
+    <div class="audio-player-item-content" ng-class="{ collapsed: collapsed }">
+        <div class="track-name"  ng-class="{ collapsed: collapsed }">{{audiotrack.name}}</div>
+        <div class="controls">
+            <button ng-class="{ 'play-pause': true, playing: playing, collapsed: collapsed  }" ng-click="playbackToggle(!playing, audiotrack.id);">
+                <svg class="play-btn" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs></defs>
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g transform="translate(-794.000000, -170.000000)">
+                            <g id="audio-control-play" transform="translate(792.000000, 168.000000)">
+                                <g id="Group">
+                                    <g id="Frame_-_24px">
+                                        <rect id="Rectangle-path" x="0" y="0" width="24" height="24"></rect>
+                                    </g>
+                                    <g id="Filled_Icons" transform="translate(1.000000, 2.000000)" fill="#80bbeb">
+                                        <path d="M10.995,0.003 C5.481,0.003 0.995,4.489 0.995,10.003 C0.995,15.516 5.481,20.003 10.995,20.003 C16.509,20.003 20.995,15.516 20.995,10.003 C20.995,4.489 16.509,0.003 10.995,0.003 L10.995,0.003 Z M7.995,15.003 L7.995,6.003 L16.995,10.503 L7.995,15.003 L7.995,15.003 Z" id="Shape"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <svg class="pause-btn" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs></defs>
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g transform="translate(-842.000000, -170.000000)">
+                            <g id="audio-control-pause" transform="translate(840.000000, 168.000000)">
+                                <g id="Group">
+                                    <g id="Frame_-_24px">
+                                        <rect id="Rectangle-path" x="0" y="0" width="24" height="24"></rect>
+                                    </g>
+                                    <g id="Filled_Icons" transform="translate(2.000000, 2.000000)" fill="#4d8bbe">
+                                        <path d="M10,0.003 C4.486,0.003 0,4.489 0,10.003 C0,15.516 4.486,20.003 10,20.003 C15.514,20.003 20,15.516 20,10.003 C20,4.489 15.514,0.003 10,0.003 L10,0.003 Z M9,15.003 L5,15.003 L5,6.003 L9,6.003 L9,15.003 L9,15.003 Z M15,15.003 L11,15.003 L11,6.003 L15,6.003 L15,15.003 L15,15.003 Z" id="Shape"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+
+            <input class="seekbar-{{audiotrack.id}}"
+                   ng-class="{ 'seekbar': true, collapsed: collapsed }"
+                   ng-model="rangeValue"
+                   ng-change="seekControlChange(audiotrack.id)"
+                   type="range"
+                   step="any"
+                   value="0">
+        </div>
+        <div class="timers" ng-class="{ collapsed: collapsed }">
+            <div class="current-timer">{{current}}</div>
+            <div class="duration-timer">{{duration}}</div>
+        </div>
+
+        <audio class="audio-{{audiotrack.id}}" title="{{audiotrack.name}}" ng-src="{{getTrustedUrl(audiotrack.protected_url)}}" preload="auto"></audio>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,25 @@
+<div class="pl-dice-customize">
+    <div class="option-container margin-large">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Select Dice Sides</mat-label>
+            <mat-hint align="end" [class.error]="selectedOptions.length < 2">
+                {{ selectedOptions.length }} sides selected
+            </mat-hint>
+            <mat-chip-list>
+                <mat-chip 
+                [class.monospaced]="params.type === 'letters' || params.type === 'numbers'"
+                class="option"
+                [class.selected]="item.selected"
+                *ngFor="let item of options"
+                [color]="item.selected ? 'primary' : '#2d3a45'"
+                selected
+                (click)="toggleSelection(item)"
+                [removable]="false">
+                    <div class="option-label">
+                        {{item.label}}
+                    </div>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-form-field>
+    </div>
+</div>

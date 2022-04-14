@@ -1,0 +1,24 @@
+<div class="drawer drawer-right drawer-homework" [class.in]="active">
+  <header>
+      <h4>Homework</h4>
+  </header>
+  <main>
+    <pl-dot-loader [hidden]="!loading"></pl-dot-loader>
+    <pl-accordion [hidden]="loading">
+      <pl-expansion-panel #permissionPanel>
+        <pl-expansion-panel-header>
+          <pl-drawer-panel-header [expanded]="permissionPanel.expanded">
+            Students w/ Permission
+          </pl-drawer-panel-header>
+        </pl-expansion-panel-header>
+        <pl-students-w-permission></pl-students-w-permission>
+      </pl-expansion-panel>
+      <pl-drawer-panel header="Students w/o Permission">
+        <pl-students-wo-permission></pl-students-wo-permission>
+      </pl-drawer-panel>
+    </pl-accordion>
+    <button *ngIf="!loading" (click)="refresh()" [disabled]="loading">
+      <mat-icon>refresh</mat-icon> Refresh
+    </button>
+  </main>
+</div>

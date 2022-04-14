@@ -1,0 +1,28 @@
+<div class="bottom-sheet-dialog pl-widgets-dialog">
+    <div class="dialog-header margin-b">
+        <div class="instructions">
+            Drag and drop widgets to the shared workspace. Widgets on the workspace can be individually configured by clicking on the gear icon.
+        </div>
+    </div>
+    <div class="widget-toolbar-list"
+        id="pl-widgets-toolbar"
+        [cdkDropListConnectedTo]="['pl-widgets-overlay']"
+        cdkDropList
+        cdkDropListSortingDisabled
+        [cdkDropListData]="widgets"
+    >
+        <div class="widget-toolbar-element" *ngFor="let widget of widgets">
+            <div class="widget-icon-holder">
+                <div class="widget-icon"
+                    cdkDrag
+                    [cdkDragData]="widget"
+                    (cdkDragReleased)="cancelDrag()"
+                    (mousedown)="startDrag($event)"
+                    (mouseup)="cancelDrag()">
+                    <img src="{{'assets/widgets/'+widget.icon+'.svg'}}"/>
+                </div>
+            </div>
+            <p class="widget-caption">{{widget.name}}</p>
+        </div>
+    </div>
+</div>

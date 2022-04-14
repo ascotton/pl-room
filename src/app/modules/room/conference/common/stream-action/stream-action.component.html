@@ -1,0 +1,6 @@
+<button mat-flat-button (click)="onClick()" [class.toggled]="toggled" [disabled]="disabled">
+  <div class="content">
+    <mat-icon [svgIcon]="svgIcon">{{ icon }}</mat-icon>
+    <span>{{ label }}</span>
+  </div>
+</button>

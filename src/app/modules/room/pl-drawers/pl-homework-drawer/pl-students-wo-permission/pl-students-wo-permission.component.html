@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let student of students$ | async">
+    <a [href]="student.profile_link" target="_blank" rel="noopener">
+      {{ student.display_name }}
+    </a>
+  </li>
+</ul>

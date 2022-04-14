@@ -1,0 +1,246 @@
+<div ng-attr-id="{{ $ctrl.user.guid }}" ng-class="$ctrl.getPersonaClasses()" class="persona-container">
+        <div class="animation-frame" ng-mouseover="$ctrl.mouseover()" ng-mouseleave="$ctrl.mouseleave()" 
+            ng-click="$ctrl.personaClicked()"
+            ng-show="$ctrl.tokboxService.connected">
+            <div class="vid-wrapper"
+                 ng-class="{ 'horizontal-mirrored': $ctrl.shouldMirror(), 'rotate180': $ctrl.user.flipped}"
+                 ng-hide="$ctrl.user.showScreenshot || $ctrl.user.hideVideo && $ctrl.isStudent && $ctrl.user.state === 'streaming'">
+            </div>
+            <div class="video-hidden"
+                 ng-show="$ctrl.user.hideVideo && $ctrl.isStudent && $ctrl.user.state === 'streaming'">
+                 <h5>{{ $ctrl.name() }}</h5>
+            </div>
+            <nav class="not-viewing-container" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="not-viewing-message" ng-if="!$ctrl.user.viewingPage">
+                    <h4>Student Not Viewing Room</h4>
+                </div>
+            </nav>
+            <nav class="admission" ng-show="$ctrl.user.state === 'waiting'" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }} wants to join this room</h5>
+
+                    <div class="video-buttons">
+                        <button class="control-btn admit-user" ng-click="$ctrl.user.admit()">
+                            <pl-icon [svg]="'check'"></pl-icon>
+                            <figcaption>Admit</figcaption>
+                        </button>
+                        <button class="control-btn deny-user" ng-click="$ctrl.user.deny()">
+                            <pl-icon [svg]="'cross'"></pl-icon>
+                            <figcaption>Deny</figcaption>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="entering"  ng-show="$ctrl.user.state === 'admit-attempted'" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="vertical-alignment-container">
+                    <div class="video-buttons">
+                        <pl-dot-loader></pl-dot-loader>
+                    </div>
+                </div>
+            </nav>
+            <nav class="entering"  ng-show="$ctrl.user.state === 'entering'" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }} is entering</h5>
+                    <div class="video-buttons">
+                        <pl-dot-loader></pl-dot-loader>
+                    </div>
+                </div>
+            </nav>
+            <nav class="entering"  ng-show="$ctrl.user.state === 'departed'" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }} has left</h5>
+                </div>
+            </nav>
+            <nav class="entering"  ng-show="$ctrl.user.state === 'not-entering'" permissions="PERMS_DEFAULT_PROVIDERS">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }} is not responding</h5>
+                    <div class="video-buttons">
+                        <button class="control-btn deny-user" ng-click="$ctrl.user.deny()">
+                            <pl-icon [svg]="'cross'"></pl-icon>
+                            <figcaption>Dismiss</figcaption>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="no-video-local" ng-show="$ctrl.user.state == 'admitted' && $ctrl.localuser && $ctrl.user.video !== 'publishing'">
+                <button class="start-video" ng-click="$ctrl.user.startVideo()">
+                    Start your video
+                </button>
+            </nav>
+            <nav class="no-video-user" ng-show="$ctrl.user.state === 'admitted' && !$ctrl.localuser">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }}</h5>
+                    <h5 ng-show="$ctrl.isIPadUser()">(iPad)</h5>
+                    <div class="video-buttons">
+                        <button class="control-btn boot-user" ng-click="$ctrl.user.dismiss()"
+                                permissions="PERMS_DEFAULT_PROVIDERS">
+                            <pl-icon [svg]="'cross'"></pl-icon>
+                            <figcaption>Dismiss</figcaption>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <nav class="streaming" ng-show="$ctrl.showHoverTools()">
+                <div class="vertical-alignment-container">
+                    <h5>{{ $ctrl.name() }}</h5>
+                    <h5 ng-show="$ctrl.isIPadUser()">(iPad)</h5>
+                    <div ng-class="{'video-buttons': !$ctrl.isWidescreen(), 'widescreen-video-buttons': $ctrl.isWidescreen()}">
+                        <button class="control-btn" ng-class="{selected: $ctrl.screenshotting}" 
+                                ng-click="$ctrl.beginScreenshotting()" ng-if="$ctrl.showScreenshotButton()"
+                                permissions="Therapist || Administrator">
+                            <pl-icon [svg]="'screenshot'"></pl-icon>
+                            <figcaption>Screenshot</figcaption>
+                        </button>
+                        <button class="control-btn"
+                                ng-click="$ctrl.captureNext()" ng-if="$ctrl.user.bighead && $ctrl.captureVideoOn && !$ctrl.user.capturing && !$ctrl.otherScreenshotting"
+                                permissions="Therapist || Administrator">
+                            <pl-icon [svg]="'capture'"></pl-icon>
+                            <figcaption>Capture</figcaption>
+                        </button>
+                        <button class="control-btn promote-user" ng-click="$ctrl.promote()" ng-if="!$ctrl.user.bighead"
+                                permissions="PERMS_DEFAULT_PROVIDERS">
+                            <pl-icon [svg]="'chevron-up'"></pl-icon>
+                            <figcaption>Promote</figcaption>
+                        </button>
+                        <button class="control-btn" ng-click="$ctrl.demote()" ng-if="$ctrl.user.bighead && !$ctrl.captureVideoOn"
+                                permissions="PERMS_DEFAULT_PROVIDERS">
+                            <pl-icon [svg]="'chevron-down'"></pl-icon>
+                            <figcaption>Demote</figcaption>
+                        </button>
+                        <button class="control-btn toggle-mute" ng-click="$ctrl.user.toggleMute()"
+                                permissions="PERMS_DEFAULT_PROVIDERS" ng-show="!$ctrl.user.secondary">
+                            <div ng-hide="$ctrl.user.muted">
+                                <pl-icon [svg]="'mute'"></pl-icon>
+                                <figcaption>Mute</figcaption>
+                            </div>
+                            <div ng-show="$ctrl.user.muted">
+                                <pl-icon [svg]="'mute-active'"></pl-icon>
+                                <figcaption>Muted</figcaption>
+                            </div>
+                        </button>
+                        <button class="control-btn" ng-show="$ctrl.user.hideVideo" permissions="student || Student">
+                            <pl-icon [svg]="'video-off'"></pl-icon>
+                            <figcaption>No Video</figcaption>
+                        </button>
+                        <button class="control-btn toggle-mute" ng-show="$ctrl.user.muted && !$ctrl.user.secondary" permissions="student || Student">
+                            <pl-icon [svg]="'mute-active'"></pl-icon>
+                            <figcaption>Muted</figcaption>
+                        </button>
+                        <button class="control-btn boot-user" ng-click="$ctrl.user.dismiss()"
+                                permissions="PERMS_DEFAULT_PROVIDERS"
+                                ng-hide="$ctrl.localuser">
+                            <pl-icon [svg]="'cross'"></pl-icon>
+                            <figcaption>Dismiss</figcaption>
+                        </button>
+                        <button class="control-btn stop-video" ng-click="$ctrl.user.stopVideo();$ctrl.hideMore()" ng-show="$ctrl.localuser && !$ctrl.captureVideoOn">
+                            <pl-icon [svg]="'stop'"></pl-icon>
+                            <figcaption>Stop</figcaption>
+                            </figure>
+                        </button>
+                        <button class="control-btn" ng-click="$ctrl.user.toggleHideVideo()"
+                                permissions="PERMS_DEFAULT_PROVIDERS" ng-hide="$ctrl.localuser">
+                            <div ng-hide="$ctrl.user.hideVideo">
+                                <pl-icon [svg]="'video-on'"></pl-icon>
+                                <figcaption>Hide</figcaption>
+                            </div>
+                            <div ng-show="$ctrl.user.hideVideo">
+                                <pl-icon [svg]="'video-off'"></pl-icon>
+                                <figcaption>Hidden</figcaption>
+                            </div>
+                        </button>
+                        <button ng-hide="$ctrl.user.hideVideo && $ctrl.isStudent" class="control-btn more-video" ng-click="$ctrl.toggleMore()">
+                            <pl-icon [svg]="'ellipsis'" [width]="20" [height]="10"></pl-icon>
+                            <figcaption>More</figcaption>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="mute-persist"  ng-show="true">
+                <button class="mute-btn" ng-if="$ctrl.user.muted && !$ctrl.isHovering && $ctrl.user.state === 'streaming'">
+                    <div>
+                        <pl-icon [svg]="'mute-active'"></pl-icon>
+                    </div>
+                </button>
+                <button class="mute-btn" ng-if="$ctrl.user.hideVideo && !$ctrl.isHovering && $ctrl.user.state === 'streaming'">
+                    <div>
+                        <pl-icon [svg]="'video-off'"></pl-icon>
+                    </div>
+                </button>
+            </div>
+
+            <div class="audio-levels">
+                <div class="bar" ng-style="{ 'right': (100 - $ctrl.audioLevelPercent) + '%'}"></div>
+            </div>
+            <!-- <div ng-if="$ctrl.audioLevelsReady && $ctrl.user.state === 'streaming'" class="audio-level-controls">
+                <pl-icon ng-if="$ctrl.audioLevelsOn" class="pointer white" [svg]="'check'" [scale]="0.6" ng-click="$ctrl.toggleAudioLevels()"></pl-icon>
+                <pl-icon ng-if="!$ctrl.audioLevelsOn" class="pointer white" [svg]="'cross'" [scale]="0.6" ng-click="$ctrl.toggleAudioLevels()"></pl-icon>
+            </div> -->
+        </div>
+        <div class="more-options" ng-class="{moreshowing : true}" ng-if="$ctrl.showMoreVideoOptions && $ctrl.user.state == 'streaming' && !($ctrl.user.hideVideo && $ctrl.isStudent)">
+            <button class="control-btn mirror-video" ng-click="$ctrl.user.mirrorVideo()">
+                <pl-icon [svg]="'mirror-vertical'" [width]="20" [height]="20"></pl-icon>
+                <figcaption>Mirror</figcaption>
+            </button>
+            <button class="control-btn rotate-video" ng-click="$ctrl.user.rotateVideo()">
+                <pl-icon [svg]="'rotate'" [width]="20" [height]="20"></pl-icon>
+                <figcaption>Rotate</figcaption>
+            </button>
+            <!-- Disabling screenshot feature for now -->
+            <!-- <button class="control-btn screenshot-video" ng-click="$ctrl.user.screenshotVideo()" ng-show="!$ctrl.user.haveScreenshot">
+                <pl-icon [svg]="'computer'" [width]="20" [height]="20"></pl-icon>
+                <figcaption>Screenshot</figcaption>
+            </button>
+            <a href="#" id="{{$ctrl.user.screenshotDownloadId}}" download="screenshot.png" ng-click="$ctrl.user.downloadScreenshot()" class="control-btn screenshot-download" ng-show="$ctrl.user.haveScreenshot">
+                <pl-icon [svg]="'download'" [width]="20" [height]="20"></pl-icon>
+                <figcaption>Download</figcaption>
+            </a> -->
+            <button class="control-btn next-video" ng-click="$ctrl.user.nextVideo()" ng-show="$ctrl.showNextCameraButton() && !$ctrl.captureVideoOn">
+                <pl-icon [svg]="'video-arrow-right'" [width]="20" [height]="20"></pl-icon>
+                <figcaption>Next</figcaption>
+            </button>
+
+            <button class="close-more" ng-click="$ctrl.toggleMore()">
+                <pl-icon [svg]="'x-small'"></pl-icon>
+            </button>
+            <!--<div class="network-stats">-->
+                <!--Video: {{videoPacketsLost}}   Audio: {{audioPacketsLost}}-->
+            <!--</div>-->
+        </div>
+        <div ng-if="$ctrl.user.canShowAnotherLocalVideo()">
+            <button class="start-another-video" ng-class="{pulse: $ctrl.user.pulseSecondCamera}"
+                ng-click="$ctrl.startSecondaryVideo()">
+                <pl-icon [svg]="'add-camera'"></pl-icon>
+                <figcaption>Start another camera</figcaption>
+            </button>
+        </div>
+        <div ng-if="$ctrl.user.showPulseSecondCameraButtonFn()">
+            <button class="start-another-video"
+                ng-click="$ctrl.user.startPulseSecondCamera()">
+                <pl-icon [svg]="'add-camera'"></pl-icon>
+                <figcaption>Pulse camera button</figcaption>
+            </button>
+        </div>
+        <div ng-if="$ctrl.user.showStopPulseSecondCameraButtonFn()">
+            <button class="start-another-video pulse"
+                ng-click="$ctrl.user.stopPulseSecondCamera()">
+                <pl-icon [svg]="'add-camera'"></pl-icon>
+                <figcaption>Stop pulsing button</figcaption>
+            </button>
+        </div>
+        <!-- TODO - temproarily disabling persona-spacer. Restore it when we fix persona sorting. -->
+        <div class="persona-spacer" ng-if="false && $ctrl.showPersonaSpacer() && $ctrl.user.state == 'streaming'" ></div>
+        <div class="quality-alert" ng-if="$ctrl.qosIndicatorEnabled && $ctrl.showQualityAlert() && !$ctrl.localuser"
+             permissions="PERMS_DEFAULT_PROVIDERS"
+             ng-click="$ctrl.closeAlert()"
+             ng-class="{qualityfail: $ctrl.qualityFail}">
+            <div class="alert-icon" ng-class="{qualityfail: $ctrl.qualityFail}"> </div>
+            <p class="alert-label slow" ng-show="!$ctrl.qualityFail">This connection is slow</p>
+            <p class="alert-label fail" ng-show="$ctrl.qualityFail">Poor Connection!</p>
+            <div class="close-icon" ng-class="{qualityfail: $ctrl.qualityFail}"> </div>
+        </div>
+        <pl-video-capture [activated]="$ctrl.screenshotting" [video-guid]="$ctrl.user.guid" 
+            (current-jumbotron-target)="$ctrl.setJumbotronTarget($event)"
+            (video-capture-complete)="$ctrl.videoCaptureComplete()"
+            (cancel-capture)="$ctrl.cancelCapture($event)"></pl-video-capture>
+    </div>

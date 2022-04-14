@@ -1,0 +1,90 @@
+.invalid-activity-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  background-image: url('/assets/images/login_background.jpg');
+  background-size: cover;
+  background-position: center;
+  .invalid-activity-content {
+    height: 100%;
+    margin-bottom: 500px;
+  };
+  .error-panel {
+    margin-top: 250px;
+    position: relative;
+    color: @gray-darkest;
+    text-align: center;
+    padding: 42px 20px 23px 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.18);
+    background-color: rgb(250, 250, 250);
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+    .logo {
+      margin-top: 0px;
+      width: 200px;
+      height: 33.3px;
+      margin-bottom: 0px;
+      margin-left: 20%;
+    };
+    h2 {
+      background-color: unset;
+      padding: 0;
+    };
+    .header {
+      height: 28px;
+      font-family: Roboto;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: #5b5e62;
+    };
+    .sub-header {
+      width: 360px;
+      height: 21px;
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 300;
+      text-align: center;
+      color: #5b5e62;
+      margin-top: 13px;
+    };
+    .back-button {
+      position: relative;
+      width: 132px;
+      height: 32px;
+      color: white;
+      border: 0;
+      border-radius: 4px;
+      padding: 0;
+      font-size: 20px;
+      font-family: @headings-font-family;
+      background-color: @brand-orange;
+      margin-top: 23px;
+      outline: none;
+      cursor: pointer;
+      overflow: hidden;
+      .back-label {
+        font-family: @headings-font-family;
+        text-align: center;
+        font-size: 15px;
+        color: #ffffff;
+      };
+    };
+    .divider {
+       width: 300px;
+       height: 2px;
+       border: solid 1px #eeeeee;
+       margin-top: 33px;
+       margin-bottom: 17px;
+       margin-left: 27px;
+       align-items: center;
+       flex-flow: column;
+       justify-content: center;
+    };
+  }
+}

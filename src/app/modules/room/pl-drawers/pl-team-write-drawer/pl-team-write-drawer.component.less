@@ -1,0 +1,100 @@
+@import '../../../../common/less/colors.less';
+
+.drawer-team-write {
+
+
+    .new-doc-button { 
+        width: 100%;
+        color: @gray-lighter;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        &:hover {
+            color: @white;
+        }
+        pl-icon {
+            margin-top: -6px
+        }
+        span {
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 16px;
+            margin-left: 5px;
+        }
+    }
+
+    .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+    }
+
+    .exit-button {
+        padding-top: 11px;
+        height: 42px;
+        padding-bottom: 11px;
+    }
+
+    main {
+        #controls {
+            padding-top: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+
+            button {
+                border-style: solid;
+                border-color: @brand-green;
+                border-width: 1px;
+                border-radius: 4px;
+                padding: 0px 12px 0px 12px;    
+                font-size: 12px;
+                margin-bottom: 3px;
+                &:hover:enabled {
+                    background-color: #4c4f52;
+                }
+                &:disabled {
+                    border-color: @gray-darkest;
+                    color: @gray-darkest;
+                }
+            }
+        }
+
+        .doc-name-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            .doc-name {
+                font-size: 16px;
+                font-weight: 600;
+                text-overflow: ellipsis;
+                color: @white;
+            }
+        }
+
+        .documents-list {
+            border-top: 1px solid @gray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 5px;
+            // height: 100%;
+            transition: height 200ms;
+            .document-item-container {
+                width: 100%;
+                pl-document-item {
+                    width: 100%;
+                }
+            }
+        }
+        .documents-hidden {
+            height: 0px;
+            overflow: hidden;
+            transition: height 200ms;
+        }
+    }
+}

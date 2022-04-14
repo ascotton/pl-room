@@ -1,0 +1,18 @@
+<svg viewBox="0 0 45 44" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <radialGradient fx="50%" fy="50%" r="90.998%" id="a">
+            <stop stop-color="#FFF" offset="0%">
+</stop>
+            <stop stop-color="#EDEEEF" offset="100%">
+</stop>
+        </radialGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <rect stroke="#D2D3D5" fill="url(#a)" x=".45" y=".061" width="44" height="43.7" rx="4">
+</rect>
+        <circle fill="#4C4F52" cx="11.55" cy="11.007" r="4">
+</circle>
+        <path d="M33.45 36.884c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" fill="#4C4F52">
+</path>
+    </g>
+</svg>

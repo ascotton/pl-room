@@ -1,0 +1,12 @@
+<div [ngSwitch]="showNotHiddenStates$ | async">
+  <ng-container *ngSwitchCase="true">
+    <span *ngIf="isOffline$ | async">Not Connected</span>
+    <span *ngIf="isConferenceConnecting$ | async">Connecting to Video</span>
+    <span *ngIf="isConferenceDisconnected$ | async">Not Connected to Video</span>
+    <span *ngIf="isNotViewingPage$ | async">Client Not Viewing Room</span>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <span *ngIf="isHidden$ | async">Video Off</span>
+    <span *ngIf="isVideoStarting$ | async">Starting Video</span>
+  </ng-container>
+</div>

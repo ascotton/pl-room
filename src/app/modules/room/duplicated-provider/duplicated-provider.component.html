@@ -1,0 +1,23 @@
+<div class="login-background"></div>
+<div class="duplicated-provider">
+  <div class="announcement row">
+    <div class="col-xs-12 col-sm-10 col-sm-push-1 col-md-8 col-md-push-2">
+      <div class="alert alert-primary">
+        <span class="welcome-banner">It looks like you have an open session!</span>
+      </div>
+    </div>
+  </div>
+  <div class="login-content">
+    <p class="margin-b">You already have an instance of the Room open in another browser tab or window.</p>
+    <div class="form-group">
+      <a [href]="landingUrl" class="btn cancel btn-lg">Cancel</a>
+      <button
+        (click)="continueHere()"
+        class="btn btn-lg margin-l"
+        [disabled]="loading"
+      >
+        Continue Here
+      </button>
+    </div>
+  </div>
+</div>

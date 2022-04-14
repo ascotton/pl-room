@@ -1,0 +1,105 @@
+@import 'main.less';
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .mat-toolbar {
+        background-color: @slate-darkest;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .mat-dialog-content {
+        flex-grow: 2;
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        a {
+            color: @blue;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .input {
+            margin: 10px 0px 10px 0px;
+            display: flex;
+            width: 100%;
+            .mat-form-field {
+                flex-grow: 2;
+                margin-right: 20px;
+                .mat-label {
+                    font-weight: 700;
+                }
+            }
+        }
+        .youtube-preview {
+            flex-grow: 2;
+            min-height: 10px;
+            display: flex;
+            .error-message {
+                color: @orange;
+                width: 100;
+                text-align: center;
+                font-size: 18px;
+                font-weight: 700;
+            }
+            .preview {
+                overflow: visible !important;
+                .details-container {
+                    position: relative;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    margin: 0 auto;
+                    padding: 0 10px;
+                    .video, .text {
+                        padding-top: 11px;
+                        padding-bottom: 11px;
+                        vertical-align: middle;
+                    }
+                    .video {
+                        flex: 2;
+                        overflow: hidden;
+                        max-width: 624px;
+                        .player {
+                            position: relative;
+                            padding-bottom: 56.25%;
+                            height: 0;
+                            iframe {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                            }
+                        }
+                    }
+                    .text {
+                        flex: 1;
+                        padding-left: 11px;
+                        h6 {
+                            font-weight: 300;
+                            margin-bottom: 0.75em;
+                        }
+                        h3 {
+                            font-weight: 300;
+                            margin-bottom: 0.25em;
+                        }
+                        p {
+                            font-size: 13px;
+                            line-height: 1.5em;
+                            margin-bottom: 2.5em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .mat-dialog-actions {
+        border-top: @gray-lighter solid 1px;
+        margin: 5px;
+    }
+}

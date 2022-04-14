@@ -1,0 +1,16 @@
+<div class="piece-button">
+    <div class="button"
+        [ngClass]="{ disabled: isDisabled() }"
+        (click)="clickedPiece()">
+        <div class="icon">
+            <!-- <div class="checkbox" *ngIf="sticker.buttonSelected">
+                <pl-icon [svg]="'check-circle'" class="check-icon"></pl-icon>
+            </div> -->
+            <img
+                class="piece-button-img"
+                [src]="pieceSetup.type.imageSrc" [id]="pieceSetup.type.name"
+            />
+        </div>
+        <!-- <span class="text">{{pieceSetup.usedCount}}</span> -->
+    </div>
+</div>

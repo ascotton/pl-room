@@ -1,0 +1,342 @@
+@import '../../../../../app/common/less/main.less';
+
+@cardHeight: 100px;
+@cardWidth: 100px;
+@dealerHeight: 150px;
+@avatarWidth: 75px;
+@noCardsWidth: 200px;
+
+:host, .pl-card-game {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.pl-card-game {
+    color: @white;
+
+    .flashIt {
+        -webkit-animation: flash linear 0.5s infinite;
+        animation: flash linear 0.5s infinite;
+    }
+    @-webkit-keyframes flash {
+        0% { opacity: 1; } 
+        50% { opacity: .1; } 
+        100% { opacity: 1; }
+    }
+    @keyframes flash {
+        0% { opacity: 1; } 
+        50% { opacity: .1; } 
+        100% { opacity: 1; }
+    }
+
+    .bounceIt .turn-arrow {
+        -webkit-animation: bounce linear 1s infinite;
+        animation: bounce linear 1s infinite;
+    }
+    @-webkit-keyframes bounce {
+        0% { transform: translateX(0px); } 
+        50% { transform: translateX(20px); } 
+        100% { transform: translateX(0px); }
+    }
+    @keyframes bounce {
+        0% { transform: translateX(0px); } 
+        50% { transform: translateX(20px); } 
+        100% { transform: translateX(0px); }
+    }
+
+
+    .background, .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    .background {
+        // opacity: 0.5;
+        // Hardcoded now..
+        background-color: @slate-darker;
+    }
+    .content {
+        z-index: 1;
+    }
+
+    .card {
+        display: inline-block;
+        vertical-align: top;
+        width: @cardWidth;
+        padding: 3px;
+        &:not(.empty-card) {
+            background-color: @white;
+            border: solid 1px @gray-darkest;
+        }
+        .margin-r;
+
+        .card-placeholder {
+            height: @cardHeight;
+            width: @cardWidth;
+        }
+
+        .card-image-wrapper {
+            text-align: center;
+
+            background-color: @white;
+        }
+        .card-image {
+            // width: @cardWidth;
+            height: @cardHeight;
+
+            // Prevent browser click image to drag ghost version of it, which
+            // makes selecting cards a bit more difficult.
+            pointer-events: none;
+
+            // .card-image {
+            //     width: 100%;
+            // }
+
+            &.text-only {
+                // background-color: @white;
+                // border: solid 1px @gray-dark;
+                // border-radius: 5px;
+                color: @gray-darkest;
+                text-align: center;
+                .font-h4;
+                .padding-t;
+                white-space: normal;
+            }
+        }
+
+        .card-text {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: @gray-darkest;
+        }
+    }
+
+    .dealer {
+        // Fixed height so always visible. Also helps with timing issues around
+        // getting height of this element to subtract from total.
+        height: @dealerHeight;
+        overflow: hidden;
+        background-color: @slate-darkest;
+
+        .dealer-decks {
+            text-align: center;
+
+            .cards-undealt, .cards-discarded {
+                display: inline-block;
+                vertical-align: top;
+                position: relative;
+            }
+            .draw-disabled {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: -20px;
+                background-color: rgba(0,0,0,1);
+                padding-top: 35px;
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .deck-cards-overlay {
+                position: absolute;
+                // bottom: 9px;
+                // background: rgba(0,0,0,0.8);
+                bottom: -18px;
+                // width: 100%;
+                left: 9px;
+                // Extra 8px for card margin right.
+                right: 17px;
+                .padding-small-tb;
+            }
+        }
+
+        .instructions {
+            overflow-y: auto;
+        }
+
+        .scoreboard {
+            .scores {
+                // border-radius: 5px;
+                // border: solid 1px @gray-dark;
+                .padding;
+                // background-color: @gray-lightest;
+                overflow-y: auto;
+            }
+            .player-score-name, .player-score {
+                display: inline-block;
+                vertical-align: top;
+            }
+            .player-score-name {
+                width: 125px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+        .won-cards-scoreboard {
+            // overflow-x: scroll;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            // width: 100%;
+            // For flexbox to not have flex1 be wider than parent.
+            min-width: 0;
+            // max-width: 300px;
+            white-space: nowrap;
+        }
+    }
+
+    .players-and-cards {
+        position: relative;
+        background-color: @slate-dark;
+
+        .player-and-card-inner {
+            width: 100%;
+        }
+        .player-buttons button {
+            width: 80px;
+        }
+        .player-and-card {
+            position: absolute;
+            overflow-y: auto;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            // border: solid 1px @gray-lightest;
+            &.currentTurn {
+                // border-color: @gray-light;
+                // background: rgba(200, 200, 200, 0.5);
+                // border: solid 1px @gray-lightest;
+                border: solid 1px @green;
+            }
+
+            &.selfPlayer {
+                background-color: @slate;
+            }
+
+            // &:not(.selfPlayer) {
+            &.compactPlayer {
+                .card-deck {
+                    display: inline-block;
+                    vertical-align: top;
+                    .margin-lr;
+                }
+            }
+
+            &.preselected .player {
+                background-color: @yellow;
+            }
+
+            .player, .cards {
+                margin: 0 auto;
+            }
+            .cards {
+                // For flexbox to not have flex1 be wider than parent.
+                min-width: 0;
+            }
+            .player-info {
+                max-width: 100px;
+            }
+            .player {
+                max-width: @noCardsWidth;
+            }
+            .player-name-wrapper {
+                vertical-align: middle;
+            }
+            .player-name {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .turn-arrow {
+            }
+
+            &.displayNoCards {
+                .cards {
+                    overflow-x: scroll;
+                    width: 100%;
+                    max-width: @noCardsWidth;
+                    white-space: nowrap;
+                }
+
+                .card {
+                    width: 50px;
+                    .card-image {
+                        height: 50px;
+                    }
+                }
+                .pl-card-game-empty-card {
+                    height: 50px;
+                    overflow: hidden;
+                    padding-top: 0;
+                }
+            }
+
+            .player-image {
+                width: @avatarWidth;
+                height: @avatarWidth;
+
+                &.small {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+            .player-image-select {
+                overflow-x: scroll;
+                width: 100%;
+                white-space: nowrap;
+
+                .player-image {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .card {
+            &.selected {
+                // border: solid 1px @gray;
+                background-color: @yellow;
+            }
+        }
+
+        // .deck-name {
+        //     display: inline-block;
+        //     .margin-r;
+        // }
+        .card-deck-cards {
+            // display: inline-block;
+            // vertical-align: top;
+
+            // overflow-x: scroll;
+            overflow-y: hidden;
+            max-height: @dealerHeight;
+            width: 100%;
+            white-space: nowrap;
+        }
+    }
+
+    .card-animated {
+        position: absolute;
+        z-index: 2;
+        // transition: left 5s, top 5s;
+    }
+}
+
+.pl-card-game-empty-card {
+    border: dashed 5px @gray;
+    height: @cardHeight;
+    white-space: normal;
+    .padding-small;
+    .padding-nl-t;
+    line-height: 16px;
+
+    &.empty-match {
+        padding-top: 36px;
+    }
+}

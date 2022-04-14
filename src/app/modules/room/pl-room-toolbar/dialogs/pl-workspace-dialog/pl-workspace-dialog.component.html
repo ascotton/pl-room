@@ -1,0 +1,12 @@
+<div class="bottom-sheet-dialog pl-workspace-dialog">
+    <mat-radio-group [value]="currentLayoutMode" color="primary">
+        <div class="margin-t layout-options">
+            <div (click)="onLayoutChange(layoutModesOption.value)" class="layout-option" [ngClass]="{'selected': currentLayoutMode === layoutModesOption.value}" *ngFor="let layoutModesOption of layoutModesOptions">
+                <img [src]="'/assets/images/' + layoutModesOption.image" />
+                <mat-radio-button color="primary" [value]="layoutModesOption.value">
+                    {{ layoutModesOption.label }}
+                </mat-radio-button>
+            </div>
+        </div>
+    </mat-radio-group>
+</div>

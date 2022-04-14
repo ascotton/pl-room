@@ -1,0 +1,32 @@
+@import "constants.less";
+
+
+.stream-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    transition: all .5s linear;
+    max-width: @video-drawer-width;
+    .toolbar {
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex: 0 0 58px;
+        z-index: 2;
+
+        & > :not(:last-child) {
+            margin-right: 4px;
+        }
+        .is-promoted &:empty {
+            background: transparent;
+            opacity: 0%;
+        }
+        &:empty {
+            opacity: 0%;
+        }
+    }
+}

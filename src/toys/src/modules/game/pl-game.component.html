@@ -1,0 +1,6 @@
+<div class="pl-game" [class]="activity.type">
+    <pl-go-fish *ngIf="activity.type === 'game-go-fish'" [activity]="activity"></pl-go-fish>
+    <pl-scenes *ngIf="activity.type === 'game-scenes'" [activity]="activity"></pl-scenes>
+    <pl-scenes *ngIf="activity.type === 'game-potato-head'" [activity]="activity"></pl-scenes>
+    <pl-vendor-game *ngIf="isVendorGame(activity)" [activity]="activity"></pl-vendor-game>
+</div>

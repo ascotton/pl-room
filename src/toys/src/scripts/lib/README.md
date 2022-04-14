@@ -1,0 +1,1 @@
+This lib folder is for dependencies that are custom, monkeypatches or not supported via bower or npm. 

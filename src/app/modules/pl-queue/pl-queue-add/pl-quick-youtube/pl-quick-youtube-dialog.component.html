@@ -1,0 +1,49 @@
+<div class="dialog">
+    <mat-toolbar cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+        <button mat-icon-button color="white" (click)="onNoClick()">
+            <mat-icon>highlight_off</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-dialog-content>
+        <h1>Instant Video</h1>
+        <mat-label>
+            Search for a video on 
+            <a href="https://www.youtube.com/" target="”_blank”">YouTube</a> 
+            and paste the URL below.
+        </mat-label>
+        <div class="input">
+            <mat-form-field>
+                <mat-label>Paste YouTube URL here</mat-label>
+                <input matInput [(ngModel)]="data.youTubeUrl">
+                <button *ngIf="data.youTubeUrl" matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
+                    <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+            <button mat-raised-button (click)="selectVideo()">PREVIEW VIDEO</button>
+        </div>
+        <div class="youtube-preview">
+            <div *ngIf="emptyResults" class="error-message">
+                Video Not Found
+            </div>
+            <div *ngIf="searchError" class="error-message">
+                Error Finding Video
+            </div>
+            <div class="preview">
+                <div class="details-container">
+                    <div #videoPlayer class="video">
+                        <div class="player"></div>
+                    </div>
+                    <div class="text" *ngIf="data.youTubeData">
+                        <h6>{{ data.youTubeData.duration._data.minutes }}:{{ data.youTubeData.duration._data.seconds }} | {{ data.youTubeData.snippet.publishedAt | date : format : longDate }}</h6>
+                        <h3>{{ data.youTubeData.snippet.title }}</h3>
+                        <p>{{ data.youTubeData.snippet.description | slice:0:300 }}{{ data.youTubeData.snippet.description.length > 300 ? '...' : '' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button (click)="onNoClick()">CANCEL</button>
+        <button mat-raised-button color="accent" [mat-dialog-close]="data" [disabled]="!videoFound">PLAY IN ROOM</button>
+    </mat-dialog-actions>
+</div>

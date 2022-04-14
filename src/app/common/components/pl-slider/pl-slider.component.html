@@ -1,0 +1,16 @@
+<div class="slider-div">
+    <input [(ngModel)]="sliderValue" (ngModelChange)="sliderValueChange.emit(sliderValue)" type="range" [max]="max" [min]="min"/>
+
+    <div *ngIf="!minimalLabels" class="slider-values-container">
+        <span class="slider-values" *ngFor="let n of values">
+            <label class="slider-value-label" [ngClass]="{ 'slider-highlighted': (sliderValue == n) }">{{ n }}</label>
+        </span>
+    </div>
+    <div *ngIf="minimalLabels" class="slider-current-value-container">
+        <span class="simple-slider-values">
+            <label class="simple-slider-value-label">{{ values[0] }}</label>
+            <label class="simple-slider-value-label simple-slider-highlighted">{{ sliderValue }}</label>
+            <label class="simple-slider-value-label">{{ values[values.length-1] }}</label>
+        </span>
+    </div>
+</div>  

@@ -1,0 +1,458 @@
+@import '../../../../common/less/colors.less';
+@import '../../../../common/less/typography.less';
+
+@pl-countdown-border-radius: 20px;
+@pl-countdown-main-border: 1px solid white;
+@pl-countdown-background: #E8FAEC;
+@pl-countdown-shadow: 0px 1px 4px grey;
+
+.pl-countdown-timer {
+  z-index: 1;
+
+  border-radius: @pl-countdown-border-radius;
+  border: @pl-countdown-main-border;
+  background: @pl-countdown-background;
+  width: 200px;
+  height: 125px;
+  box-shadow: @pl-countdown-shadow;
+
+  .pl-countdown-z-index {
+    z-index: 0;
+  }
+}
+
+.disabled-move {
+  .pl-countdown-timer {
+    cursor: default;
+  }
+}
+
+@-webkit-keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+}
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.pl-countdown-timer-time {
+  width: 100%;
+  height: 100%;
+
+  .pl-countdown-timer-spacer {
+    height: 15px;
+  }
+
+  .pl-time-border,
+  .pl-time-border-invisible,
+  .borderColorEdit-running,
+  .borderColorEdit-none {
+    width: 180px;
+    height: 70px;
+    position: relative;
+    top: 10px;
+    left: 4.5%;
+    outline: none;
+  }
+
+  .pl-time-border {
+    border: 1px solid lightgray;
+  }
+
+  .pl-time-border-invisible {
+    border: 0px solid transparent;
+  }
+
+  .pl-timer-buttons {
+    width: 200px;
+    height: 125px;
+  }
+
+  .minutes, .seconds, .milliseconds {
+    display: inline-block;
+  }
+
+  input {
+    border: none;
+    background: none;
+  }
+
+  .minutes, .seconds {
+    position: absolute;
+    font-weight: 100;
+    letter-spacing: -3px;
+    font-size: 64px;
+    font-family: @headings-font-family;
+    float: left;
+    top: -20%;
+  }
+
+  .minutes-1, .minutes-2, .seconds-1, .seconds-2 {
+    min-width: 35px;
+    font-size: 64px;
+    font-family: @headings-font-family;
+    top: -20%;
+    position: absolute;
+  }
+
+  .minutes-1 {
+    padding-left: 4px;
+  }
+
+  .minutes-2 {
+    padding-left: 36px;
+  }
+
+  .seconds-1 {
+    padding-left: 96px;
+  }
+
+  .seconds-2 {
+    padding-left: 128px;
+  }
+
+  .delimiter-1 {
+    position: absolute;
+    margin-left: 66px;
+    top: 19%;
+    font-size: 32px;
+  }
+
+  .delimiter-2 {
+    position: absolute;
+    left: 89%;
+    top: 8%;
+    font-size: 32px;
+  }
+
+  .minutes {
+    left: -3%;
+  }
+
+  .seconds {
+    left: 54%;
+  }
+
+  .minutesColorEdit-none {
+    color: #4c4f52;
+  }
+
+  .secondsColorEdit-none {
+    color: #4c4f52;
+  }
+
+  .borderColorEdit-none {
+    border: 1px solid lightgray;
+  }
+
+  .borderColorEdit-running {
+    border: 1px solid transparent;
+  }
+
+  .minutesColorEdit-seconds {
+    color: #b6b8ba;
+  }
+
+  .secondsColorEdit-seconds {
+    color: #4c4f52
+  }
+
+  .minutesLabelColorEdit-none {
+    color: #4c4f52;
+  }
+
+  .secondsLabelColorEdit-none {
+    color: #4c4f52;
+  }
+
+  .minutesLabelColorEdit-seconds, .minutesLabelColorEdit-minutes {
+    color: #b6b8ba;
+  }
+
+  .secondsLabelColorEdit-seconds, .secondsLabelColorEdit-minutes {
+    color: #b6b8ba;
+  }
+
+  .borderColorEdit-seconds {
+    border: 1px solid #4d8bbe;
+  }
+
+  .minutesColorEdit-minutes {
+    color: #4c4f52;
+  }
+
+  .secondsColorEdit-minutes {
+    color: #b6b8ba
+  }
+
+  .borderColorEdit-minutes {
+    border: 1px solid #4d8bbe;
+  }
+
+  .delimiter-2-left-70 {
+    left: 70%;
+  }
+
+  .seconds-left-30 {
+    padding-left: 40px;
+  }
+
+  .seconds-1-left-30 {
+    padding-left: 55px;
+  }
+
+  .seconds-2-left-30 {
+    padding-left: 85px;
+  }
+
+  .seconds-2-left-one-digit {
+    padding-left: 75px;
+  }
+
+  .pl-countdown-cursor {
+    position: absolute;
+    left: 90%;
+    top: 10%;
+    width: 1px;
+    height: 55px;
+    border: 1px solid black;
+  }
+
+  .pl-countdown-cursor-minutes {
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    width: 1px;
+    height: 55px;
+    border: 1px solid black;
+  }
+
+}
+
+.pl-timer-line {
+  color: #C0D6C5;
+  width: 180px;
+  border-top: 1px solid;
+  position: absolute;
+  top: 85px;
+  left: 4.5%;
+}
+
+.pl-timer-buttons {
+
+  .timerStartButton, .timerStopButton, .timerResumeButton, .timerResetButton {
+    border: none;
+    background: none;
+    font-family: @headings-font-family;
+    font-size: 20px;
+    color: green;
+    font-weight: 300;
+  }
+
+  .timerStartButton, .timerResumeButton {
+    color: @brand-green;
+  }
+
+  .timerStartButton, .timerStopButton, .timerResumeButton, .timerResetButton {
+    border: none;
+    background: none;
+    font-family: @headings-font-family;
+    font-size: 20px;
+    color: green;
+    font-weight: 300;
+  }
+
+  .timerStartButton {
+    position: absolute;
+    top: 88px;
+    left: 40%;
+  }
+
+  .timerResumeButton, .timerResetButton, .timerStopButton {
+    position: absolute;
+    top: 70%;
+    float: left;
+  }
+
+  .timerResumeButton, .timerStopButton {
+    left: 10%;
+  }
+
+  .timerResetButton {
+    right: 10%;
+  }
+
+  .timerStopButton {
+    color: @brand-red;
+  }
+
+  .timerResetButton {
+    color: @brand-blue;
+  }
+}
+
+.minutes, .seconds, .milliseconds {
+  display: inline-block;
+  color: @gray-darkest;
+}
+
+.minutes, .seconds {
+  letter-spacing: -3px;
+}
+
+.minutes {
+  padding-top: 0;
+  padding-left: 6%;
+  float: left;
+  font-family: @headings-font-family;
+  font-size: 64px;
+  font-weight: 100;
+}
+
+.delimiter-1 {
+  padding-top: 4%;
+  padding-left: 1%;
+  float: left;
+  font-family: @headings-font-family;
+  font-size: 48px;
+  font-weight: 100;
+}
+
+.delimiter-2 {
+  padding-left: 1%;
+  padding-top: 8%;
+  float: left;
+  font-family: @headings-font-family;
+  font-size: 48px;
+  font-weight: 100;
+}
+
+.seconds {
+  float: left;
+  padding-top: 0;
+  font-family: @headings-font-family;
+  font-size: 64px;
+  font-weight: 200;
+}
+
+.milliseconds {
+  padding-left: 1%;
+  padding-top: 22%;
+  float: left;
+  font-family: @headings-font-family;
+  font-size: 23px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.timer {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  top: -1px;
+}
+
+.cell {
+  width: 0.6em;
+  height: 32px;
+  font-size: 23px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+}
+
+.numbers {
+  width: 0.6em;
+  line-height: 40px;
+  font-family: @headings-font-family;
+  text-align: center;
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.disabled-move {
+  .pl-stopwatch {
+    cursor: default;
+  }
+}
+
+#timer_controls {
+  margin-top: -5px;
+}
+
+#timer_controls label {
+  cursor: pointer;
+  padding: 5px 10px;
+  background: #efefef;
+  font-family: arial, verdana, tahoma;
+  font-size: 11px;
+  border-radius: 0 0 3px 3px;
+}
+
+input[name="controls"] {display: none;}
+
+.active.timer .numbers {animation-play-state: running;}
+
+.moveten {
+  animation: moveten 1s steps(10, end) infinite;
+  animation-play-state: paused;
+}
+.moveten:before {content: '0 1 2 3 4 5 6 7 8 9';}
+.milisecond {animation-duration: 1s;}
+.tenmilisecond {animation-duration: 0.1s;}
+
+@keyframes moveten {
+  0% {top: 0;}
+  100% {top: -400px;}
+}
+
+.d-0:before {content: '0 1 2 3 4 5 6 7 8 9';}
+.d-1:before {content: '1 2 3 4 5 6 7 8 9 0';}
+.d-2:before {content: '2 3 4 5 6 7 8 9 0 1';}
+.d-3:before {content: '3 4 5 6 7 8 9 0 1 2';}
+.d-4:before {content: '4 5 6 7 8 9 0 1 2 3';}
+.d-5:before {content: '5 6 7 8 9 0 1 2 3 4';}
+.d-6:before {content: '6 7 8 9 0 1 2 3 4 5';}
+.d-7:before {content: '7 8 9 0 1 2 3 4 5 6';}
+.d-8:before {content: '8 9 0 1 2 3 4 5 6 7';}
+.d-9:before {content: '9 0 1 2 3 4 5 6 7 8';}

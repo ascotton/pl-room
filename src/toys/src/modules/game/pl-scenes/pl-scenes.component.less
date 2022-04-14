@@ -1,0 +1,94 @@
+@import '../../../../../app/common/less/main.less';
+
+.pl-scenes {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    .preview-message {
+        position: absolute;
+        top: 10;
+        left: 0;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        h1 {
+            color: @red;
+        }
+    }
+    .background {
+        z-index: 10;
+        display: flex;
+        background-color: @gray;
+        .tray {    
+            background-color: @gray-lighter;
+			border: 2px solid @gray-darker;
+            width: 20%;
+            height: 100%;
+            right: 0;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            &.trayHighlighted {
+                border: 2px solid red;
+            }
+            .sticker-tray-label {
+                text-align: center;
+                z-index: 21;
+            }
+            .control-buttons {
+                display: flex;
+                flex-direction: column;
+                z-index: 21;
+                background-color: @gray;
+                opacity: 0.8;
+            }
+        }
+        img {
+            width: 80%;
+            height: 100%;
+            position: absolute;
+        }
+    }
+    .foreground {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        z-index: 20;
+        overflow: visible;
+        .sticker {
+            height: auto;
+            position: absolute;
+            cursor: pointer;
+            @media (pointer: fine) {
+                filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .7));
+                &.selectedSticker {
+                    filter: drop-shadow( 12px 12px 8px rgba(0, 0, 0, .7));
+                }
+            }
+            &.remoteChange {
+                transition: top 300ms, left 300ms;
+            }
+            &.draggedSticker {
+                opacity: 0.5;
+            }
+            &.fadeOut {
+                opacity: 0;
+                transition: opacity 200ms linear;
+                -webkit-transition: opacity 200ms linear;
+            }
+
+            .image-copy-block {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0;
+                z-index: 1;
+            }
+        }
+    }
+}

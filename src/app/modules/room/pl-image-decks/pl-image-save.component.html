@@ -1,0 +1,7 @@
+<div class="pl-image-save">
+    <pl-input-text class="form-input" [(model)]="imageData.url" [label]="'Image URL'"></pl-input-text>
+    <img class="image" [src]="imageData.url" crossorigin="anonymous" />
+    <pl-input-text class="form-input" [(model)]="imageData.title" [label]="'Title'"></pl-input-text>
+    <pl-dot-loader *ngIf="loading"></pl-dot-loader>
+    <button *ngIf="!loading" pl-button class="primary" [disabled]="!imageData.title || !imageData.url" (click)="save()">Save</button>
+</div>

@@ -1,0 +1,49 @@
+.sharedCursorBigHand {
+    shared-cursor {
+        background-image: url('/assets/cursors/pointer-outlined-128@1x.png');
+        width: 128px;
+        height : 128px;
+    }
+    .display-name {
+        display: none;
+    }
+}
+
+shared-cursor {
+  display: block;
+  background-image: url('/assets/cursors/blue-cursor.png');
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 22px;
+  top : 0;
+  position : absolute;
+  // Put above widgets board.
+  z-index: 9999;
+  pointer-events : none;
+  transition: x 1s, y 1s;
+
+  &.animate {
+    transition: all 1s;
+  }
+
+  .display-name {
+    width: 100px;
+    margin-top: 20px;
+    margin-left: -42px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    .name {
+        background-color: rgba(74,74,74,0.4);
+        border-radius: 2px;
+        display: inline-block;
+        text-align: center;
+        color: #f8f8f9;
+        padding: 1px 5px;
+        // font-family: SourceSansPro-Regular;
+        // font-size: 11px;
+    }
+  }
+
+}

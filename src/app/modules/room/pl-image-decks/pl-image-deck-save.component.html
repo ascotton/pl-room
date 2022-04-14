@@ -1,0 +1,59 @@
+<div class="pl-image-deck-save">
+    <div *ngIf="showSave">
+        <pl-dot-loader *ngIf="loading"></pl-dot-loader>
+        <button *ngIf="!loading" pl-button class="primary" [disabled]="!formValid()" (click)="save()">Save</button>
+        <button pl-button class="reverse" (click)="cancel()">Cancel</button>
+        <button *ngIf="mayDelete" pl-button class="danger" (click)="delete()">Delete</button>
+    </div>
+    <div class="margin-b">
+        <pl-input-text class="form-input" [(model)]="deck.title" [label]="'Title'"></pl-input-text>
+        <div [hidden]="!showImages">
+            <pl-input-text class="form-input" [(model)]="deck.imageUrl" [label]="'Image URL'"></pl-input-text>
+        </div>
+        <!-- Need a 2nd copy of the image with crossorigin set for canvas writing to save. The crossorigin
+            version will often NOT display. -->
+        <!-- <div class="image-wrapper">
+            <img class="image" [src]="deck.imageUrl" />
+            <img class="image-save" [src]="deck.imageUrl" crossorigin="anonymous" />
+        </div> -->
+        <!-- Update: crossorigin anonymous must be used to save images (but still will not always work, depending
+        on server sent headers we do not control) BUT sometimes for display, images will NOT display WITH
+        crossorigin set but WILL display with it (but even if they display, cannot be saved via canvas
+        without crossorigin?). So neither way works reliably. -->
+        <img class="image" [src]="deck.imageUrl" crossorigin="anonymous" />
+        <pl-input-checkbox class="form-input" [label]="'Private'" [(model)]="deck.private"></pl-input-checkbox>
+
+        <!-- <button pl-button class="link" (click)="toggleMoreFields()"><span [hidden]="showMoreFields">Show</span><span [hidden]="!showMoreFields">Hide</span> More Fields</button> -->
+        <div [hidden]="!showMoreFields">
+            <pl-input-textarea class="form-input" [(model)]="deck.description" [label]="'Description'" [placeholder]="'Enter a description'"></pl-input-textarea>
+
+            <pl-input-multi-select class="form-input" [(model)]="models.tags.grade" [options]="selectOptsTags.grade" [placeholder]="'Age / grade level'" [label]="'Age / grade level'" (onChange)="selectTags('grade')"></pl-input-multi-select>
+            <pl-input-multi-select class="form-input" [(model)]="models.tags.slt" [options]="selectOptsTags.slt" [placeholder]="'Speech'" [label]="'Speech Tags'" (onChange)="selectTags('slt')"></pl-input-multi-select>
+            <pl-input-multi-select class="form-input" [(model)]="models.tags.ot" [options]="selectOptsTags.ot" [placeholder]="'Occupational'" [label]="'Occupational Tags'" (onChange)="selectTags('ot')"></pl-input-multi-select>
+            <pl-input-multi-select class="form-input" [(model)]="models.tags.bmh" [options]="selectOptsTags.bmh" [placeholder]="'BMH'" [label]="'Behavioral & Mental Health Tags'" (onChange)="selectTags('grade')"></pl-input-multi-select>
+            <pl-input-multi-select class="form-input" [(model)]="models.tags.sped" [options]="selectOptsTags.sped" [placeholder]="'SPED Instruction'" [label]="'SPED Tags'" (onChange)="selectTags('sped')"></pl-input-multi-select>
+            <pl-input-text class="form-input" [(model)]="models.customTagText" (onChange)="addCustomTag()" [label]="'Other custom tags'" [debounceChange]="'1000'"></pl-input-text>
+            <div *ngFor="let tag of models.tags.custom" class="custom-tag inline-block margin-r pointer" (click)="removeCustomTag(tag)">
+                <pl-icon class="icon" [svg]="'cross'" [scale]="0.6"></pl-icon> {{ tag }}
+            </div>
+        </div>
+
+    </div>
+    <div [hidden]="!showImages">
+        <div>{{ deck.images.length }} Images. Add Image:</div>
+        <!-- <pl-input-text class="form-input" [(model)]="copiesDefault" [label]="'Copies'"></pl-input-text> -->
+        <pl-image-save (onSave)="onSaveImage($event)"></pl-image-save>
+        <div *ngFor="let image of deck.images" class="image-item flexbox padding-tb">
+            <img class="image" [src]="image.url" />
+            <div class="flex1 margin-l">
+                <div class="image-title">{{ image.title }}</div>
+                <div>
+                    <!-- <div class="copies">
+                        <pl-input-text class="copies-input" [type]="'number'" [(model)]="image.copies" [min]="1"></pl-input-text> copies
+                    </div> -->
+                    <button pl-button class="link" (click)="removeImageFromDeck(image)">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

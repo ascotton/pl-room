@@ -1,0 +1,35 @@
+@import '../../../../../common/less/main.less';
+
+:host {
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 50px;
+}
+
+.pl-documentation-clients {
+    .client-header {
+        background-color: darken(@gray-darkest, 8%);
+        .font-h5;
+
+        .name {
+            color: @white;
+        }
+        .time {
+            .font-h6;
+        }
+    }
+    .client-expanded {
+        background-color: @gray-darkest;
+    }
+    .client-appointment {
+        border-bottom: solid 1px @gray-darker;
+    }
+    .pl-non-service-day {
+        border: 2px dashed @white;
+        border-radius: 5px;
+        mat-icon {
+            color: @white;
+            vertical-align: bottom;
+        }
+    }
+}

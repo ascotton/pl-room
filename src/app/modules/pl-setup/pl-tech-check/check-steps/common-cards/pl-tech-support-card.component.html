@@ -1,0 +1,25 @@
+<mat-card class="margin-large-t">
+    <mat-card-header>
+        <mat-card-title>
+            <div class="margin-b">
+                {{ 'TECH_SUPPORT_CARD.TITLE' | translate }}
+            </div>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="padding-large">
+        <div class="flexbox">
+            <div class="">
+                <mat-icon>
+                    help
+                </mat-icon>
+            </div>
+            <div class="padding-large-l">
+                {{ 'TECH_SUPPORT_CARD.CONTACT_US' | translate }}
+                <a [href]="'mailto:' + ('BROWSER_CHECK.SUPPORT.EMAIL' | translate)">
+                    {{ 'BROWSER_CHECK.SUPPORT.EMAIL' | translate }}
+                </a>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

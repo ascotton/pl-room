@@ -1,0 +1,9 @@
+<label for="students-filter" class="box">
+  <pl-icon svg="magnifier" [width]="18" [height]="18"></pl-icon>
+  <input
+    id="students-filter"
+    placeholder="Search Students"
+    [(ngModel)]="filter"
+    (ngModelChange)="filterChanged()"
+  />
+</label>

@@ -1,0 +1,12 @@
+<h3 class="margin-large-tb">Speakers</h3>
+<p class="margin-large-b">Test yout speakers and volume level</p>
+<button
+  mat-stroked-button
+  (click)="test()"
+>
+  PLAY CHIME
+</button>
+<pl-audio-level-indicator
+  class="margin-large-t"
+  [level]="level$ | async"
+></pl-audio-level-indicator>

@@ -1,0 +1,85 @@
+<div class="activity-drawer pdf-activity-drawer assessment-drawer">
+    <nav class="controls">
+
+        <!-- Instructions toggle -->
+        <div class="instructionsToggleContainer">
+            <button id="instructionsToggleButton"
+                    ng-click="toggleInstructions($event)"
+                    ng-class="{ disabled : !isDoubleSided, enabled : isDoubleSided,
+                                selected : assessmentModel.getShowInstructions() }">
+                <figure class="instructionsButton instructions-svg"><pl-icon [svg]="'instructions'"></pl-icon></figure>
+                <span id="instructionsText" class="font-h6">Instructions</span>
+            </button>
+        </div>
+
+        <!-- Opacity Slider -->
+        <div class="opacitySliderContainer" pl-dropdown pl-dropdown-content="#assessment-transparency-menu"
+             ng-class="{ disabled : !isDoubleSided, enabled : isDoubleSided }" multiclick="true" autoclose="3500">
+            <div class="figureContainer" tabindex="-1">
+                <figure class="opacityBackground"></figure>
+                <figure class="opacityFigure" ng-style="{opacity: assessmentModel.instructionOpacity}"></figure>
+                <span class="font-h6 opacityLabel">Opacity</span>
+            </div>
+        </div>
+
+        <slider
+                id="assessment-transparency-menu"
+                class="pl-dropdown-content"
+                min="0.0" max="1.0" steps="20"
+                value="assessmentModel.instructionOpacity"
+                change="updateOpacity(assessmentModel.instructionOpacity)">
+        </slider>
+
+        <!-- Zoom controls -->
+        <div id="pdfZoomControl" class="assessmentZoomControl" pl-dropdown pl-dropdown-content="#zoom-list" multiclick="false"
+             ng-class="{ standalone : !isDoubleSided }">
+            <form id="customZoomInputForm" ng-submit="submitZoomManually($event)" autocomplete="off">
+                <div class="comboBox">
+                    <input id="customZoomInputField"
+                           type="text"
+                           ng-model="options.customZoomDisplayValue"
+                           ng-keydown="restrictToNumericEntry($event)"
+                           ng-blur="zoomInputFieldOnBlur($event)"
+                           maxlength="3"
+                           tabindex="0"/>%
+                    <div class="comboBoxDownArrowContainer">
+                        <div class="comboBoxDownArrow"></div>
+                    </div>
+                </div>
+            </form>
+            <span class="font-h6 zoom-label">Zoom</span>
+        </div>
+
+        <div id="zoom-list" class="pl-dropdown-content">
+            <a href="#" ng-repeat="(zoomLevel, zoomInt) in zoomOptions" ng-click="submitZoom(zoomInt)">{{zoomLevel}}</a>
+        </div>
+    </nav>
+
+    <main id="documentThumbnails">
+        <div id="pdfThumbnails">
+            <div  ng-repeat="page in studentPages track by $index" >
+                <assessment-thumbnail pagenum="$index" isDouble="isDoubleSided" 
+                    ng-click="jump($index+1, $event)" thumb="thumbs[page-1]"></assessment-thumbnail>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="page-input">
+            <input class="jumpToInput" type="text" ng-model="currentPage" ng-keypress="$event.keyCode === 13 ?  jumpTo(currentPage) : null">
+            <span>/ {{ studentPages.length }}</span>
+        </div>
+        <button ng-click="prev()" class="prevBtn">
+            <figure class="chevron-up-two">
+                <pl-icon [svg]="'chevron-up'"></pl-icon>
+            </figure>
+            <span>Previous</span>
+        </button>
+        <button ng-click="next()" class="nextBtn">
+            <figure>
+                <pl-icon [svg]="'chevron-down'"></pl-icon>
+            </figure>
+            <span>Next</span>
+        </button>
+    </footer>
+</div>

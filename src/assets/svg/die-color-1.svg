@@ -1,0 +1,20 @@
+<svg viewBox="0 0 45 44" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <radialGradient fx="50%" fy="50%" r="89.208%" id="b">
+            <stop stop-color="#FFF" stop-opacity="0" offset="0%">
+</stop>
+            <stop stop-opacity=".35" offset="100%">
+</stop>
+        </radialGradient>
+        <rect id="a" width="44" height="43.7" rx="4">
+</rect>
+    </defs>
+    <g transform="translate(.75 .06)" fill="none" fill-rule="evenodd">
+        <use stroke="#ED8000" fill="#ED8000" xlink:href="#a">
+</use>
+        <use fill="url(#b)" xlink:href="#a">
+</use>
+        <ellipse fill="#FFF" cx="22" cy="22" rx="4" ry="4">
+</ellipse>
+    </g>
+</svg>

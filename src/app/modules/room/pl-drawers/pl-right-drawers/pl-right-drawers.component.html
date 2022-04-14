@@ -1,0 +1,9 @@
+<pl-documentation-drawer *plHasPermission="'PERMS_DEFAULT_PROVIDERS'" [active]="isDrawerActive('document')"></pl-documentation-drawer>
+<pl-chat-drawer></pl-chat-drawer>
+<pl-team-write-drawer *plHasPermission="'PERMS_DEFAULT_PROVIDERS'" [active]="isDrawerActive('teamWrite')"></pl-team-write-drawer>
+
+<!-- <pl-widgets-drawer *plHasPermission="'PERMS_DEFAULT_PROVIDERS'" [active]="isDrawerActive('widget')"></pl-widgets-drawer> -->
+
+<pl-games-drawer permissions="PERMS_DEFAULT_PROVIDERS"></pl-games-drawer>
+<pl-homework-drawer *plHasPermission="'PERMS_PL_SLP_PROVIDERS';uiFlag:'homework-app'" [active]="isDrawerActive('homework')"></pl-homework-drawer>
+<pl-right-toolbar></pl-right-toolbar>

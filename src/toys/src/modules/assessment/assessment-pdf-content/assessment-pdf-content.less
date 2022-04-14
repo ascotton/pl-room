@@ -1,0 +1,58 @@
+.sharedCursorOn {
+    .assessment-pdf-content-viewer {
+        cursor: none;
+
+        .pdf-holder {
+            canvas {
+                cursor: none !important;
+            }
+        }
+    }
+}
+
+.assessment-pdf-content-viewer {
+    width: 100%;
+    height: 100%;
+    //text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg.spinner {
+        position: absolute;
+        display: block;
+    }
+
+    pdf-viewer {
+        height: 100%;
+    }
+    .offscreenInstructionsCanvas {
+        display: none;
+    }
+    .rendering {
+        position: absolute;
+        z-index: 99;
+    }
+
+    .pdf-holder {
+        overflow-y: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        canvas {
+            margin: 0 auto auto auto;
+        }
+    }
+    .instructions-holder {
+        //  overflow-y: auto;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        canvas {
+            position: absolute;
+            left: 13%;
+        }
+    }
+}

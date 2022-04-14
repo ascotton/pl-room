@@ -1,0 +1,52 @@
+.animation-button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: #D7E2EA;
+    border-radius: 2px 2px 0px 0px;
+    box-shadow: 0px 0.25px 1px rgba(0, 0, 0, 0.039), 0px 0.85px 3px rgba(0, 0, 0, 0.19);
+
+    &.isSelectable {
+        cursor: pointer;
+    }
+
+    .animation-figure {
+        height: 50px;
+        img {
+            height: 100%;
+        }
+    }
+    .has-sound {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 2;
+    }
+
+    .play-btn {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left : 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: rgba(76, 79, 81, 0.70);
+
+        &.selected {
+            border: 1px solid #A7E4EA;
+        }
+
+        mat-icon {
+            color : #A7E4EA;
+            width : 35px;
+            height : 35px;
+        }
+    }
+}

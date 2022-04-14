@@ -1,0 +1,264 @@
+@import '../../../../common/less/colors.less';
+@import '../../../../common/less/typography.less';
+
+.drawer-widget {
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    main {
+
+        flex: 0 1 auto !important;
+
+        /**/
+        @track-color: #8F9194;
+        @thumb-color: @brand-blue-light;
+        @thumb-radius: 4px;
+        @thumb-height: 28px;
+        @thumb-width: 20px;
+        @thumb-shadow-size: 1px;
+        @thumb-shadow-blur: 1px;
+        @thumb-shadow-color: @brand-blue;
+        @thumb-border-width: 0px;
+        @thumb-border-color: @brand-blue;
+        @track-width: 100%;
+        @track-height: 10px;
+        @track-shadow-size: 1px;
+        @track-shadow-blur: 1px;
+        @track-shadow-color: @gray-darker;
+        @track-border-width: 0px;
+        @track-border-color: black;
+        @switch-border-width: 1px;
+        @switch-border-radius: 5px;
+        @switch-signs-shadow-color: rgba(0, 0, 0, 0.5);
+        @keyframes pl-input-switch-enabling {
+            from {
+                left: 0px;
+            }
+            to {
+                left: 30px;
+            }
+        }
+
+        @track-radius: 36px;
+        @contrast: 5%;
+
+        .widget-control {
+            &.active {
+                .text {
+                    font-weight: bold;
+                }
+            }
+            display: block;
+            border-bottom: 1px solid darken(@gray-darkest, 7%);
+            .pl-expansion-panel-content {
+                overflow: hidden;
+            }
+            .widget-header {
+                min-height: 44px;
+                background-color: @gray-darkest;
+                .widget-name {
+                    line-height: 44px;
+                    width: 120px;
+                    text-align: left;
+                    .chevron {
+                        float: left;
+                        width: 12px;
+                        margin: 0 5px 0 7px;
+                        transition: transform 150ms;
+                        pl-icon {
+                            vertical-align: -4px;
+                            &,
+                            path {
+                                transform: rotate(0);
+                                fill: @gray;
+                            }
+                        }
+                    }
+                }
+                .delete {
+                    width: 44px;
+                    height: 44px;
+                    float: right;
+                    figure {
+                        width: 16px;
+                        height: 16px;
+                        margin: 14px;
+                    }
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                        fill: @gray;
+                    }
+                }
+            }
+            .section-body {
+                padding: 0;
+            }
+            .widget-options {
+                overflow: hidden;
+                > div {
+                    padding: 7px 11px;
+                }
+                .alert-option {
+                    padding: 7px 11px;
+                    display: flex;
+                    justify-content: space-between;
+                    span {
+                        line-height: 32px;
+                    }
+                    &.block {
+                        display: block;
+                    }
+                    .option-label { 
+                        line-height: 32px;
+                    }
+                    .slider-value {
+                        float: right;
+                    }
+                    .slider-control {
+                        width: 100%;
+                        padding: 0;
+                        margin: 0;
+                    }
+                }
+            }
+            .widget-name:hover {
+                color: white;
+                .chevron {
+                    pl-icon {
+                        &,
+                        path {
+                            fill: white !important;
+                        }
+                    }
+                }
+            }
+            .delete:hover svg { fill: white; }
+            &.active {
+                .widget-header {
+                    color: white;
+                    .chevron {
+                        transform: rotate(90deg);
+                        pl-icon {
+                            &,
+                            path {
+                                fill: white !important;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+    footer {
+
+        border: none;
+        flex: 1 0 220px;
+
+        .widget-toolbar-caption {
+            text-align: center;
+            font-size: 12px;
+            color: @gray-lighter;
+            margin: 1em 0;
+            line-height: 1.25;
+        }
+        .widget-toolbar-list {
+            padding: 0 14px;
+            display: flex;
+            flex-flow: row wrap;
+
+            .widget-toolbar-element {
+                width: 85px;
+                text-align: center;
+                padding: 11px 0 7px 0;
+                font-size: 12px;
+                float: left;
+                flex: 1;
+                .widget-icon {
+                    cursor: move; /* fallback if grab cursor is unsupported */
+                    cursor: grab;
+                    cursor: -moz-grab;
+                    cursor: -webkit-grab;
+                    width: 55px;
+                    height: 44px;
+                    fill: @gray-lightest;
+                    margin: 0 auto;
+
+                    figure {
+                        width: 55px;
+                        height: 44px;
+                    }
+                }
+
+                /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+                .widget-icon:active, .widget-icon:focus {
+                    background-color : transparent;
+                    cursor: grabbing;
+                    cursor: -moz-grabbing;
+                    cursor: -webkit-grabbing;
+                }
+            }
+
+            .widget-toolbar-element:nth-child(1n) {
+                border-right: 1px solid @gray-darkest;
+                border-bottom: 1px solid @gray-darkest;
+            }
+
+            .widget-toolbar-element:nth-child(2n) {
+                border-right: none;
+            }
+
+            .widget-toolbar-element:nth-last-child(1),
+            .widget-toolbar-element:nth-last-child(2):nth-child(2n + 1) {
+                border-bottom: none;
+            }
+
+            .widget-toolbar-element:first-child:last-child {
+                border-right: none;
+            }
+
+            .widget-toolbar-element:last-child {
+                border-right: none;
+            }
+
+            .widget-caption {
+                margin: 4px 0 0 0;
+                cursor: move; /* fallback if grab cursor is unsupported */
+                cursor: grab;
+                cursor: -moz-grab;
+                cursor: -webkit-grab;
+            }
+        }
+    }
+    &.subdrawer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    
+        .header {
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            text-align: center;
+            color: @gray-lighter;
+            padding: 12px 5px;
+            border-bottom: solid 1px @gray-lighter;
+        }
+
+        .content {
+            padding: 7px 11px;
+        }
+    }
+    &.hidden {
+        display: none;
+    }
+}

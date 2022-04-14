@@ -1,0 +1,123 @@
+<div class="drawer drawer-left drawer-videos" id="drawer-videos">
+    <header>
+        <button class="menu" ng-click="$ctrl.showProfileMenu = !$ctrl.showProfileMenu">
+            <pl-icon [svg]="'menu-icon'" [height]="20"></pl-icon>
+        </button>
+
+        <button class="video-mode-dropdown video-mode" pl-dropdown pl-dropdown-content="#video-mode-menu"
+                permissions="PERMS_DEFAULT_PROVIDERS">
+                <pl-icon [height]="11" [width]="20" [svg]="'new-compact'" ng-show="$ctrl.layoutMode==='normal'"></pl-icon>
+                <pl-icon [height]="11" [width]="20" [svg]="'jumbotron-2'" ng-show="$ctrl.layoutMode==='wide'"></pl-icon>
+                <pl-icon [height]="11" [width]="20" [svg]="'grid'" ng-show="$ctrl.layoutMode==='grid'"></pl-icon>
+                <pl-icon [height]="11" [svg]="'chevron-down'"></pl-icon>
+        </button>
+        <div id="video-mode-menu" class="pl-dropdown-content">
+            <button class="video-option" ng-click="$ctrl.setLayoutMode('normal')">
+                <figure>
+                    <pl-icon [svg]="'compact'"></pl-icon>
+                </figure>
+                <label>Compact</label>
+            </button>
+            <button class="video-option" ng-click="$ctrl.setLayoutMode('wide')">
+                <figure>
+                    <pl-icon [svg]="'jumbotron-2'"></pl-icon>
+                </figure>
+                <label>Jumbotron</label>
+            </button>
+            <button class="video-option" ng-click="$ctrl.setLayoutMode('grid')">
+                <figure>
+                    <pl-icon [svg]="'grid'"></pl-icon>
+                </figure>
+                <label>Grid</label>
+            </button>
+        </div>
+
+        <button class="video-mode-dropdown video-options" pl-dropdown pl-dropdown-content="#video-toggle-dropdown"
+                multiclick="$ctrl.isClinician">
+                <pl-icon [svg]="'filter'"></pl-icon>
+                <pl-icon [height]="11" [svg]="'chevron-down'"></pl-icon>
+        </button>
+        <div id="video-toggle-dropdown" class="pl-dropdown-content video-toggle-dropdown">
+            <div class="pointer video-dropdown-item font-h6 padding-small-lr" ng-click="$ctrl.toggleAudioLevels()"
+                permissions="PERMS_DEFAULT_PROVIDERS">
+                <div title="Audio Levels Off" ng-class ng-if="!$ctrl.firebaseAppModel.app.audioLevelsOn" >
+                    <pl-icon [svg]="'mute-active'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Audio Levels Off</div>
+                </div>
+                <div title="Audio Levels On" ng-class ng-if="$ctrl.firebaseAppModel.app.audioLevelsOn" >
+                    <pl-icon [svg]="'mute'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Audio Levels On</div>
+                </div>
+            </div>
+
+            <div class="mouse-toggle pointer video-dropdown-item font-h6 padding-small-lr" ng-class="{'muted':$ctrl.firebaseAppModel.app.mouseIsMuted}"
+                    permissions="PERMS_DEFAULT_PROVIDERS"
+                    ng-click="$ctrl.setMouseMuted(!$ctrl.firebaseAppModel.app.mouseIsMuted)">
+                <div title="Mouse Disabled" ng-if="$ctrl.firebaseAppModel.app.mouseIsMuted" >
+                    <pl-icon [svg]="'mouse-mute'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Disabled</div>
+                </div>
+                <div title="Mouse Enabled" ng-if="!$ctrl.firebaseAppModel.app.mouseIsMuted" >
+                    <pl-icon [svg]="'mouse'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Enabled</div>
+                </div>
+            </div>
+
+            <div class="shared-cursor-toggle pointer video-dropdown-item font-h6 padding-small-lr"
+                    ng-class="{'disabled':$ctrl.firebaseAppModel.app.sharedCursorToggleDisabled}"
+                    permissions="PERMS_DEFAULT_PROVIDERS"
+                    ng-click="$ctrl.toggleSharedCursor()"
+                    ng-disabled="$ctrl.firebaseAppModel.app.sharedCursorToggleDisabled">
+                <div title="Cursor Shared" ng-if="$ctrl.firebaseAppModel.app.sharedCursorOn" >
+                    <pl-icon [svg]="'pointer-share'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Shared</div>
+                </div>
+                <div title="Cursor Not Shared" ng-if="!$ctrl.firebaseAppModel.app.sharedCursorOn" >
+                    <pl-icon [svg]="'pointer-share-null'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Unshared</div>
+                </div>
+            </div>
+
+            <div class="video-reset video-dropdown-item font-h6 padding-small-lr" ng-click="$ctrl.refreshTokbox()">
+                <div title="Reset video" >
+                    <pl-icon [svg]="'refresh'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Reset video</div>
+                </div>
+            </div>
+            <div class="pointer video-dropdown-item font-h6 padding-small-lr" ng-click="$ctrl.toggleBackgroundBlur()" ng-if="$ctrl.rosterModel.canBlur">
+                <div title="Background Blur Off" ng-class ng-if="!$ctrl.appModel.app.backgroundBlurOn" >
+                    <pl-icon [svg]="'user-outline'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Enable Blur</div>
+                </div>
+                <div title="Background Blur On" ng-class ng-if="$ctrl.appModel.app.backgroundBlurOn" >
+                    <pl-icon [svg]="'user-outline'" [scale]="0.8" [verticalAlign]="'-2px'" class="gray-darkest"></pl-icon>
+                    <div class="margin-small-l video-toggle-text">Disable Blur</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div ng-if="!$ctrl.firebaseModel.connected">
+            <span ng-class="$ctrl.firebaseModel.longDisconnect ? 'red' : 'yellow'">⚠</span>
+        </div> -->
+    </header>
+    <profile-menu show="$ctrl.showProfileMenu"></profile-menu>
+    <main id="drawer-main">
+        <div ng-show="!$ctrl.tokboxService.connected" class="loading">
+            <pl-dot-loader></pl-dot-loader>
+        </div>
+        <div ng-show="$ctrl.tokboxService.connected">
+            <persona ng-repeat="persona in $ctrl.rosterModel.localPersonas" user="persona" localuser="true"></persona>
+            <persona ng-repeat="persona in $ctrl.rosterModel.waitingPersonas" user="persona" class="waiting"></persona>
+            <persona ng-repeat="persona in $ctrl.rosterModel.personas" user="persona"></persona>
+        </div>
+    </main>
+    <footer>
+        <div class="left-icons">
+            <pl-icon [svg]="'logo-white-no-tm'" [width]="72" [height]="48"></pl-icon>
+        </div>
+
+        <div class="recording-light-container" ng-if="$ctrl.firebaseAppModel.app.tokboxIsRecording">
+            <div class="recording-light-on"></div>
+            <div>REC</div>
+        </div>
+    </footer>
+</div>

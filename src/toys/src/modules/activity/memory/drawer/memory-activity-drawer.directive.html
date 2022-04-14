@@ -1,0 +1,165 @@
+<div class="activity-drawer memory-drawer"
+     ng-if="memoryDrawerController.isInitialized"
+     pl-drop="memoryDrawerController.handleDragCardCancel"
+     pl-dragcancel="memoryDrawerController.handleDragCardCancel"
+>
+
+    <main>
+        <div class="subtitle toggle"
+             ng-click="memoryDrawerController.togglePlayersSwitcher()"
+             ng-class="{true:'toggle-open', false: 'toggle-closed'}[memoryDrawerController.showPlayersSwitcher]">
+
+            <button><pl-icon [svg]="'chevron-down'"></pl-icon></button>
+            <h5>Players</h5>
+        </div>
+
+        <div class="subgroup toggle"
+             ng-class="{true:'toggle-open', false:'toggle-closed'}[memoryDrawerController.showPlayersSwitcher]">
+
+            <div ng-repeat="player in memoryDrawerController.cards.players track by $index"
+                 pl-drop="memoryDrawerController.handlePlayerDragStop"
+                 pl-drag-data="$index">
+
+                <div class="player-field active"
+                     pl-drag="memoryDrawerController.handlePlayerDragStart"
+                     pl-drag-data="$index">
+
+                    <input type="text" value="{{ player.name }}" readonly placeholder="Enter Name" />
+                    <span class="cross-button" ng-click="memoryDrawerController.removePlayer($index)">
+                        <pl-icon [svg]="'cross'"></pl-icon>
+                    </span>
+                </div>
+            </div>
+
+            <form ng-submit="memoryDrawerController.addPlayer(playerName); playerName = '';"
+                  ng-if="memoryDrawerController.cards.players.length < 4">
+
+                <div class="player-field">
+                    <input type="text" placeholder="Enter Name" ng-model="playerName" />
+                    <span class="cross-button">
+                        <pl-icon [svg]="'cross'"></pl-icon>
+                    </span>
+                </div>
+            </form>
+        </div>
+
+        <div class="subtitle toggle"
+             ng-click="memoryDrawerController.toggleSettingsSwitcher()"
+             ng-class="{true:'toggle-open', false: 'toggle-closed'}[memoryDrawerController.showSettingsSwitcher]">
+
+            <button><pl-icon [svg]="'chevron-down'"></pl-icon></button>
+            <h5>Settings</h5>
+        </div>
+
+        <div class="subgroup settings"
+             ng-class="{true:'toggle-open', false:'toggle-closed'}[memoryDrawerController.showSettingsSwitcher]">
+            <div class="settings-button" ng-click="memoryDrawerController.handleRefreshDeck()">
+                <div class="icon">
+                    <pl-icon [svg]="'refresh'" [height]="18" [width]="18"></pl-icon>
+                </div>
+                <div class="text">
+                    Refresh Deck
+                </div>
+            </div>
+            <div class="settings-button" ng-click="memoryDrawerController.handleShuffleDeck()">
+                <div class="icon">
+                    <pl-icon [svg]="'shuffle'" [height]="18" [width]="18"></pl-icon>
+                </div>
+                <div class="text">
+                    Shuffle Deck
+                </div>
+            </div>
+            <div class="settings-button dd-selector">
+                <div class="text">
+                    Incorrect flips per turn
+                </div>
+                <div class="selector">
+                    <drop-down-selector collection="maxFlipsCollection" force-update="forceUpdate"></drop-down-selector>
+                </div>
+            </div>
+            <div class="settings-button">
+                <div class="text margin-large-l" style="margin-top: -2px;">
+                    Clinician X-Ray
+                </div>
+                <pl-input-checkbox [(model)]="memoryDrawerController.xRay" (on-change)="memoryDrawerController.setXRay()"></pl-input-checkbox>
+            </div>
+            <div class="type-cards-buttons">
+                <div class="button"
+                     ng-class="{ active: memoryDrawerController.cards.cardType === 'both' }"
+                     ng-click="memoryDrawerController.setCardType('both')">
+
+                    <div class="icon">
+                        <div class="checkbox" ng-show="memoryDrawerController.cards.cardType === 'both'">
+                            <pl-icon [svg]="'check-circle'"></pl-icon>
+                        </div>
+                        <pl-icon [svg]="'image-text'" [width]="50" height="50"></pl-icon>
+                    </div>
+                    <div class="text">
+                        Text & Image
+                    </div>
+                </div>
+
+                <div class="button" ng-class="{ active: memoryDrawerController.cards.cardType === 'image' }"
+                     ng-click="memoryDrawerController.setCardType('image')">
+
+                    <div class="icon">
+                        <div class="checkbox" ng-show="memoryDrawerController.cards.cardType === 'image'">
+                            <pl-icon [svg]="'check-circle'"></pl-icon>
+                        </div>
+                        <pl-icon [svg]="'image-only'" [width]="50" height="50"></pl-icon>
+                    </div>
+                    <div class="text">
+                        Image Only
+                    </div>
+                </div>
+
+                <div class="button" ng-class="{ active: memoryDrawerController.cards.cardType === 'title' }"
+                     ng-click="memoryDrawerController.setCardType('title')">
+
+                    <div class="icon">
+                        <div class="checkbox" ng-show="memoryDrawerController.cards.cardType === 'title'">
+                            <pl-icon [svg]="'check-circle'"></pl-icon>
+                        </div>
+                        <pl-icon [svg]="'text-only'" [width]="50" height="50"></pl-icon>
+                    </div>
+                    <div class="text">
+                        Text Only
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="subtitle">
+            <h5>Memory Card Pairs</h5>
+        </div>
+
+        <div class="subgroup">
+            <button class="add-all-button"
+                    ng-class="{ disabled: !memoryDrawerController.cardsToMove }"
+                    ng-click="memoryDrawerController.addAllCards()">
+                {{memoryDrawerController.addAllCardsTitle()}}
+            </button>
+
+            <ul class="memory-list">
+                <li ng-repeat="card in memoryDrawerController.getDrawerCards() | exclude :
+                        memoryDrawerController.getExcludeCards() track by $index"
+                    ng-class="{ dragged: memoryDrawerController.inDrag === card.id }"
+                >
+                    <div class="dragbox" pl-drag="memoryDrawerController.handleDragCardStart" pl-drag-data="card">
+                        <div class="icon">
+                            <figure style="background-image: url({{card.thumbnail_url}})"
+                                    ng-if="card.type !== 'title'"
+                            ></figure>
+                            <div class="card-text-image" ng-if="card.type === 'title'">Text Only</div>
+                        </div>
+                        <div class="text" pl-text-overflow>
+                            <div>{{ card.title }}</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</div>

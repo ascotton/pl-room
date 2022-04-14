@@ -1,0 +1,8 @@
+<div class="pl-audio-level-indicator">
+    <div
+      class="level-square"
+      [class.filled]="square.isFilled"
+      [style.width]="squareWidth + '%'"
+      *ngFor="let square of levelSquares"
+    ></div>
+</div>

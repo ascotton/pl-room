@@ -1,0 +1,17 @@
+<div class="login-background"></div>
+<div class="announcement row">
+    <div class="col-xs-12 col-sm-10 col-sm-push-1 col-md-8 col-md-push-2">
+        <div class="alert alert-primary">
+            <span class="welcome-banner">Room Not Found</span>
+        </div>
+    </div>
+</div>
+<div class="login-content">
+    <pl-icon [svg]="'logo-white-no-tm'" class="white" [width]="'355px'" [height]="'60px'"></pl-icon>
+    <form name="form" novalidate>
+        <p ng-class="{'alert-danger': form.$error.required && form.$submitted, alert: form.$error.required && form.$submitted}">The therapy room you're looking for cannot be found. Please verify the room name at the end of the URL in your address bar and email <a href="mailto:asksupport@presencelearning.com">asksupport@presencelearning.com</a> if you need more assistance.</p>
+        <div class="form-group" ng-hide="$ctrl.submitting">
+            <input type="submit" class="btn btn-lg" ng-click="$ctrl.back()" value="Back">
+        </div>
+    </form>
+</div>

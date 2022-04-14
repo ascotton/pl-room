@@ -1,0 +1,220 @@
+<div class="drawer drawer-right drawer-queue" ng-class="plQueueCtrl.getQueueClasses()">
+    <div class="panel-1">
+        <div ng-if="!plQueueCtrl.angularCommunicator.queueAddDone">
+            <pl-queue-add></pl-queue-add>
+        </div>
+        <div ng-show="plQueueCtrl.angularCommunicator.queueAddDone">
+            <header class="activity-list"
+                    pl-dropdown
+                    pl-dropdown-content="#activity-list-dropdown"
+                    pl-dropdown-prevent-from-close="true">
+                <button>
+                    <h4>{{ plQueueCtrl.activeQueue.name }}</h4>
+                    <pl-icon class="gray" [svg]="'chevron-down'" [scale]="0.6"></pl-icon>
+                </button>
+            </header>
+
+            <div class="activity-list-dropdown pl-dropdown-content"
+                 id="activity-list-dropdown">
+                <div class="header" ng-show="!plQueueCtrl.restoringQueues">
+                    <div class="step-1" ng-hide="plQueueCtrl.popup === 'step-2'">
+                        <figure class="delete"
+                                ng-click="plQueueCtrl.removeActiveQueue()"
+                                ng-show="plQueueCtrl.queues.order.length > 1">
+                            <pl-icon class="gray" [svg]="'trash'"></pl-icon>
+                        </figure>
+
+                        <div class="input-holder"
+                             ng-click="plQueueCtrl.queueName = plQueueCtrl.activeQueue.name; plQueueCtrl.editQueueName($event)">
+                            <div class="name-holder">
+                                {{ plQueueCtrl.activeQueue.name }}
+                            </div>
+                            <figure class="edit">
+                                <pl-icon [svg]="'pencil'"></pl-icon>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="step-2" ng-show="plQueueCtrl.popup === 'step-2'">
+                        <input type="text"
+                               ng-model="plQueueCtrl.queueName"
+                               ng-keydown="plQueueCtrl.handleKeyPress(plQueueCtrl.queueName, $event)"
+                               class="queue-name-edit-input">
+                        <span class="clear" ng-click="plQueueCtrl.queueName = ''">
+                            <figure>
+                                <pl-icon [svg]="'X'"></pl-icon>
+                            </figure>
+                        </span>
+                    </div>
+                </div>
+                <div ng-show="!plQueueCtrl.restoringQueues">
+                    <ul pl-sortable
+                        sortable-list="plQueueCtrl.queues.order"
+                        sortable-type="horizontal"
+                        sortable-on-sort="plQueueCtrl.onSortQueues()"
+                        sortable-insert-pointer-tag="li">
+                        <li pl-sortable-item
+                            ng-repeat="queueKey in plQueueCtrl.queues.order"
+                            ng-click="plQueueCtrl.selectQueue(queueKey)">
+                            {{ plQueueCtrl.queues.items[queueKey].name }}
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show="plQueueCtrl.restoringQueues" class="padding restoring-queues">
+                    <div>{{ plQueueCtrl.hardDeleteTime }} {{ plQueueCtrl.hardDeleteUnit }} to restore queue.</div>
+                    <div class="restore-list margin-t">
+                        <div ng-repeat="queueInfo in plQueueCtrl.restoreQueuesList" class="padding-small-t">
+                            {{ ($index + 1) }}. <span ng-click="plQueueCtrl.restoreQueue(queueInfo)" class="pointer">{{ queueInfo.name }}</span>
+                        </div>
+                        <div ng-show="plQueueCtrl.restoreQueuesList.length < 1" class="padding-t">No Queues to restore.</div>
+                    </div>
+                    <div>
+                        <button ng-click="plQueueCtrl.closeRestore()">
+                            Done
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer" ng-show="!plQueueCtrl.restoringQueues">
+                    <button ng-click="plQueueCtrl.create()"
+                            ng-disabled="plQueueCtrl.queues.order.length >= 50">
+                        <figure class="add">
+                            <pl-icon [svg]="'plus'"></pl-icon>
+                        </figure>
+
+                        <span>{{ plQueueCtrl.queues.order.length >= 50 ? 'Max Number Reached' : 'New Queue' }}</span>
+                    </button>
+                    <button ng-click="plQueueCtrl.showRestore()">
+                        <figure class="add">
+                            <pl-icon [svg]="'refresh-thick'"></pl-icon>
+                        </figure>
+                        <span>Restore Queues</span>
+                    </button>
+                </div>
+            </div>
+
+            <header class="buttons">
+                <button class="open-quick-add" ng-click="plQueueCtrl.addItems()">
+                    <pl-icon [svg]="'plus'"></pl-icon>
+                        <span>Add Items</span>
+                </button>
+                <!-- <button class="clear-all" ng-click="plQueueCtrl.removeActiveQueue(true)" ng-disabled="!plQueueCtrl.activeQueue.order.length">
+                    <pl-icon [svg]="'cross'"></pl-icon>
+                        <span>Clear</span>
+                </button> -->
+            </header>
+
+            <div class="undo-popup" ng-show="plQueueCtrl.originalQueueState.deletes === 1 && !plQueueCtrl.activeQueue.cleared">
+                Deleted Queue.&nbsp;<a ng-click="plQueueCtrl.undoRemoveQueues()">Undo?</a>
+            </div>
+
+            <div class="undo-popup" ng-show="plQueueCtrl.originalQueueState.deletes > 1 && !plQueueCtrl.activeQueue.cleared">
+                Deleted {{ plQueueCtrl.originalQueueState.deletes }} Queues.&nbsp;<a href="#" ng-click="plQueueCtrl.undoRemoveQueues()">Undo?</a>
+            </div>
+
+            <div class="undo-popup" ng-show="plQueueCtrl.activeQueue.cleared && plQueueCtrl.originalQueueState">
+                Cleared Queue.&nbsp; <a href="#" ng-click="plQueueCtrl.undoRemoveQueues()">Undo?</a>
+            </div>
+
+            <div ng-if="plQueueCtrl.activeQueue.order.length > plQueueCtrl.MAX_QUEUE_SIZE">
+                <div class="queue-size-warning" ng-if="!plQueueCtrl.seenQueueWarning">
+                    <span>Queue too large ({{plQueueCtrl.activeQueue.order.length}}), displaying {{plQueueCtrl.MAX_QUEUE_SIZE}} items.</span>
+                </div>
+                <div class="queue-nav">
+                    <button class="left" ng-class="{ 'nav-active': plQueueCtrl.hasQueuePrevious() }" ng-click="plQueueCtrl.queuePrevious()" >
+                        <pl-icon class="flex" [svg]="'chevron-left'" [width]="14" [height]="14"></pl-icon>
+                    </button>
+                    <span class="page-number">{{plQueueCtrl.currentQueuePage+1}}  OF  {{plQueueCtrl.queuePageCount}}</span>
+                    <button class="right" ng-class="{ 'nav-active': plQueueCtrl.hasQueueNext() }" ng-click="plQueueCtrl.queueNext()">
+                        <pl-icon class="flex" [svg]="'chevron-right'" [width]="14" [height]="14"></pl-icon>
+                    </button>
+                </div>
+            </div>
+
+            <main ng-click="plQueueCtrl.popup = false"
+                  pl-sortable
+                  sortable-list="plQueueCtrl.activeQueue.order"
+                  sortable-type="horizontal"
+                  sortable-insert-pointer-tag="div"
+                  sortable-insert-pointer-class="dndPlaceholder"
+                  sortable-insert-pointer-position="false"
+                  sortable-on-sort="plQueueCtrl.editActiveQueueOrdering($firstItem, $secondItem)"
+                  sortable-on-drop="plQueueCtrl.addToActiveQueue($item, $index)"
+                  sortable-on-workspace-drop="plQueueCtrl.openActivity(plQueueCtrl.activeQueue.items[$item])"
+                  sortable-on-canceled="true"
+                  sortable-should-use-angular="true"
+            >
+                <!-- .activity:hover .remove -->
+                <div ng-repeat="activityId in plQueueCtrl.displayQueue"
+                     ng-if="plQueueCtrl.activeQueue.items[activityId]"
+                     ng-class="plQueueCtrl.getQueueItemClasses(plQueueCtrl.activeQueue.items[activityId])"
+                     pl-sortable-item="{{!plQueueCtrl.activeQueue.items[activityId].softDeleted}}"
+                >
+                    <div class="activity-cell"
+                         ng-click="plQueueCtrl.openActivity(plQueueCtrl.activeQueue.items[activityId])"
+                         ng-if="!plQueueCtrl.activeQueue.items[activityId].softDeleted"
+                    >
+                        <div class="icons">
+                            <figure ng-style="{'background-image': 'url(' + plQueueCtrl.activeQueue.items[activityId].thumbnail_url + ')'}"></figure>
+                            <!-- Correcting the activity because the queue inverts activity_type and type -->
+                            <activity-type-icon activity="{ activity_type: plQueueCtrl.activeQueue.items[activityId].type }" class="type"></activity-type-icon>
+                        </div>
+                        <div class="text">
+                            <h4>{{ plQueueCtrl.activeQueue.items[activityId].name }}</h4>
+                        </div>
+                    </div>
+                    <div class="remove" ng-if="!plQueueCtrl.activeQueue.items[activityId].softDeleted">
+                        <div class="remove-background">
+                            <a ng-click="plQueueCtrl.removeFromActiveQueue(activityId)">
+                                <figure class="cross"><pl-icon [svg]="'cross'"></pl-icon></figure>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="undo" ng-show="plQueueCtrl.activeQueue.items[activityId].softDeleted" ng-click="plQueueCtrl.unremoveFromActiveQueue(activityId)">Undo&nbsp;<span ng-click="plQueueCtrl.activityUndeletes[activityId].dismiss()">(dismiss)</span></a>
+                </div>
+
+                <div class="empty"
+                     ng-show="!plQueueCtrl.activeQueue.order.length"
+                     ng-click="plQueueCtrl.addItems()">
+                    <pl-icon [svg]="'plus'"></pl-icon>
+                    <span>Add items</span>
+                </div>
+            </main>
+
+            <footer>
+                <button class="open-quick-add" ng-click="plQueueCtrl.addItems()">
+                    <pl-icon [svg]="'plus'"></pl-icon>
+                    <span>Add Items</span>
+                </button>
+                <button class="clear-all" ng-click="plQueueCtrl.removeActiveQueue(true)" ng-disabled="!plQueueCtrl.activeQueue.order.length">
+                    <pl-icon [svg]="'delete'"></pl-icon>
+                    <span>Clear Queue</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <div class="panel-2">
+        <header class="activity-detail flexbox">
+            <div ng-click="plQueueCtrl.leaveDetail()" class="pointer margin-lr icon-div">
+                <div class="spacer">&nbsp;</div>
+                <pl-icon [svg]="'chevron-left'" [scale]="0.8" class="gray-lightest"></pl-icon>
+            </div>
+            <h4 class="flex1">{{ plQueueCtrl.activeActivity.name }}</h4>
+            <!-- Disabling this for now -->
+            <!-- <div ng-click="plQueueCtrl.setWhiteScreenActive(!$ctrl.firebaseAppModel.app.whiteScreenActive)" class="pointer margin-lr icon-div-white-screen">
+                <div ng-if="!plQueueCtrl.firebaseAppModel.app.whiteScreenActive">
+                    <pl-icon [svg]="'circle-view'" [scale]="0.8" class="gray-lightest"></pl-icon>
+                    <div class="text font-h6">Hide</div>
+                </div>
+                <div ng-if="plQueueCtrl.firebaseAppModel.app.whiteScreenActive">
+                    <pl-icon [svg]="'circle-no-view'" [scale]="0.8" class="gray-lightest"></pl-icon>
+                    <div class="text font-h6">Show</div>
+                </div>
+            </div> -->
+        </header>
+        <main class="drawer-ui">
+            <activity-drawer></activity-drawer>
+        </main>
+    </div>
+</div>

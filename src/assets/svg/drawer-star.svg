@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>star</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Iconography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="New-Icons---Gold-Release" transform="translate(-1034.000000, -218.000000)">
+            <g id="star" transform="translate(1032.000000, 216.000000)">
+                <g id="Group">
+                    <g id="Frame_-_24px">
+                        <rect id="Rectangle-path" x="0" y="0.001" width="24" height="24"></rect>
+                    </g>
+                    <g id="Filled_Icons" transform="translate(2.000000, 2.000000)" fill="#000000">
+                        <path d="M19.924,6.618 C19.77,6.245 19.404,6.001 19,6.001 L13.618,6.001 L10.894,0.554 C10.555,-0.123 9.444,-0.123 9.105,0.554 L6.382,6.001 L1,6.001 C0.596,6.001 0.23,6.245 0.076,6.618 C-0.078,6.991 0.007,7.423 0.293,7.708 L4.877,12.292 L3.039,18.727 C2.924,19.13 3.072,19.562 3.41,19.809 C3.75,20.057 4.207,20.066 4.554,19.833 L10,16.203 L15.445,19.833 C15.613,19.945 15.806,20.001 16,20.001 C16.207,20.001 16.414,19.937 16.59,19.809 C16.928,19.562 17.076,19.13 16.961,18.727 L15.123,12.292 L19.707,7.708 C19.993,7.423 20.078,6.991 19.924,6.618 L19.924,6.618 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

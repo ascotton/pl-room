@@ -1,0 +1,38 @@
+<pl-app-nav #appNavBar [noLogoLink]="true" [userMenuLinks]="userMenuLinks" [user]="currentUser" [showLinks]="true"></pl-app-nav>
+
+<div class="content padding-large-t padding-xlarge-lr">
+    <h2 class="margin-large-t">
+        {{ 'GENERAL.TECH_CHECK' | translate }}
+    </h2>
+    <div class="margin-large-t">
+        <mat-vertical-stepper [selectedIndex]="initialStep" #stepper [linear]="true" class="steps" (selectionChange)="stepChanged($event)">
+            <ng-template matStepperIcon="edit">
+                <mat-icon>check</mat-icon>
+            </ng-template>
+            <mat-step [editable]="false" [completed]="isStepCompleted(steps.Permissions) || isStepsLocked">
+                <ng-template matStepLabel>{{ 'STEPS.STEP_PERMISSIONS' | translate }}</ng-template>
+                <pl-permissions-step [stepNumber]="steps.Permissions"></pl-permissions-step>
+            </mat-step>
+            <mat-step [editable]="false" [completed]="isStepCompleted(steps.AudioPlayback) || isStepsLocked">
+                <ng-template matStepLabel>{{ 'STEPS.STEP_AUDIO' | translate }}</ng-template>
+                <pl-audio-playback-step [stepNumber]="steps.AudioPlayback"></pl-audio-playback-step>
+            </mat-step>
+            <mat-step [editable]="false" [completed]="isStepCompleted(steps.Microphone) || isStepsLocked">
+                <ng-template matStepLabel>{{ 'STEPS.STEP_MIC' | translate }}</ng-template>
+                <pl-mic-test-step [stepNumber]="steps.Microphone"></pl-mic-test-step>
+            </mat-step>
+            <mat-step [editable]="false" [completed]="isStepCompleted(steps.Camera) || isStepsLocked">
+                <ng-template matStepLabel>{{ 'STEPS.STEP_CAMERA' | translate }}</ng-template>
+                <pl-camera-check-step [stepNumber]="steps.Camera"></pl-camera-check-step>
+            </mat-step>
+            <mat-step [editable]="false" [completed]="isStepCompleted(steps.InternetSpeed) || isStepsLocked">
+                <ng-template matStepLabel>{{ 'STEPS.STEP_INTERNET' | translate }}</ng-template>
+                <pl-internet-speed-step [stepNumber]="steps.InternetSpeed"></pl-internet-speed-step>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>{{ 'STEPS.STEP_RESULTS' | translate }}</ng-template>
+                <pl-results-step [stepNumber]="steps.Results"></pl-results-step>
+            </mat-step>
+        </mat-vertical-stepper>
+    </div>
+</div>

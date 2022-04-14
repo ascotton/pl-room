@@ -1,0 +1,77 @@
+@import '../../../../../../common/less/main.less';
+
+.pl-documentation-metric-point {
+    background-color: @gray-darker;
+    .padding-small;
+    .margin-tb;
+
+    .name, .description, .goal-description {
+        .font-h6;
+    }
+    .goal-description, .goal-description-icon {
+        background-color: @gray-darkest;
+    }
+
+    .name.short {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .correct, .wrong {
+        padding: 4px 6px;
+        padding-bottom: 0;
+        margin: 4px;
+        margin-left: 0;
+        border-radius: 4px;
+        cursor: pointer;
+
+        pl-icon {
+            padding-top: 7px;
+        }
+
+        &.disabled {
+            background-color: @gray-dark;
+            cursor: not-allowed;
+        }
+    }
+    .correct {
+        background-color: @green;
+    }
+    .wrong {
+        background-color: @red;
+    }
+    .metric-ratio {
+        margin-left: 4px;
+
+        .metric-ratio-inputs {
+            border: solid 1px @gray;
+            margin-top: 4px;
+            height: 22px;
+        }
+        .metric-ratio-correct, .metric-ratio-slash, .metric-ratio-trials {
+            display: inline-block;
+        }
+        .metric-ratio-slash {
+            vertical-align: 4px;
+            .padding-small-lr;
+        }
+
+        .metric-ratio-correct, .metric-ratio-trials {
+            cursor: pointer;
+
+            .pl-input-text.border {
+                border-width: 0 !important;
+            }
+
+            .input {
+                display: inline-block;
+                vertical-align: 4px;
+                width: 32px;
+            }
+        }
+        .metric-percent {
+            text-align: right;
+            .padding-r;
+        }
+    }
+}

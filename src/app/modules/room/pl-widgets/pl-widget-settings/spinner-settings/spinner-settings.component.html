@@ -1,0 +1,18 @@
+<div class="spinner-settings margin-large">
+    <div class="flex-between">
+        <h2>Spinner Settings</h2>
+        <button mat-icon-button aria-label="Close Spinner Settings">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <div class="margin-large">
+        <div class="flex-between">
+            <span>Spinner Sections</span> <label>{{ paramsModel.numberOfSectors }}</label>
+        </div>
+        <mat-slider thumbLabel (input)="sectorsChanged($event.value)" color="primary"
+            class="slider-control" 
+            min="2" [max]="10" step="1" [value]="paramsModel.numberOfSectors"
+            (click)="preventClose($event)"></mat-slider>
+    </div>
+</div>

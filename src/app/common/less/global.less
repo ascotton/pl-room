@@ -1,0 +1,85 @@
+html, body {
+    position: relative;
+    background: white;
+    height: 100%;
+
+    // ng-animate styles
+    .fadein,
+    .fadeout {
+        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+        -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+        -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    }
+    .fadein.ng-hide-remove,
+    .fadeout.ng-hide-add.ng-hide-add-active {
+        opacity: 0;
+        display: block !important;
+    }
+    .fadeout.ng-hide-add,
+    .fadein.ng-hide-remove.ng-hide-remove-active {
+        opacity: 1;
+        display: block !important;
+    }
+
+    // elements
+    button {
+        margin: 0;
+        padding: 0;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        background: none;
+    }
+    textarea {
+        outline: none;
+        border: 0;
+        box-shadow: inset 0 0 3px @gray-dark;
+        resize: none;
+        overflow: auto;
+    }
+    .hiddendiv {
+        display: none;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        p.lbr {
+            padding: 1.5em;
+        }
+    }
+    a:focus,
+    button::-moz-focus-inner {
+        outline: none;
+    }
+    svg {
+        pointer-events: none;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.draggable {
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+}
+.draggable.dragging {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: grabbing;
+}
+
+.to-be-implemented {
+    display: none !important;
+}
+
+::selection {
+    background: @orange;
+    color: white !important;
+}
+::-moz-selection {
+    background: @orange;
+    color: white !important;
+}

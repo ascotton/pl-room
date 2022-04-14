@@ -1,0 +1,91 @@
+@import '../../../../../app/common/less/main.less';
+@import '../../../../../app/common/less/common-styles.less';
+
+.sticker-button {
+    width: 150px;
+    display: flex;
+    margin: 0px 0px 10px 10px;
+    align-items: center;
+
+    .check-icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 auto;
+        fill: @brand-blue-light;
+
+        g {
+            fill: @brand-blue-light;
+            stroke: none;
+        }
+
+        path {
+            stroke: none;
+        }
+    }
+
+    .button {
+        width: 48px;
+
+        &:hover {
+            color: @gray-lightest;
+
+            .icon {
+                border-color: @gray-lightest;
+            }
+        }
+
+        &.active {
+            color: @brand-blue-light;
+
+            .icon {
+                border-color: @brand-blue-light;
+
+                .checkbox {
+                    display: block;
+                }
+            }
+        }
+
+        &.disabled {
+            color: @gray-lighter;
+            cursor: not-allowed;
+            .icon {
+                border-color: @gray-darker;
+            }
+        }
+
+        .icon {
+            position: relative;
+            flex: 1 0;
+            height: 48px;
+            width: 48px;
+            background-color: @gray-darkest;
+            border: solid 1px @gray-dark;
+
+            .checkbox {
+                position: absolute;
+                right: 13px;
+                top: 3px;
+
+                // display: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 10px;
+            }
+
+            img {
+                width: 44px;
+                height: 44px;
+                padding: 2px;
+                // background-color: @gray-darkest;
+                // border: 1px solid @gray;
+                // margin-right: 10px;
+            }
+        }
+    }
+
+    .text {
+        font-size: 14px;
+        padding-left: 12px;
+    }
+}

@@ -1,0 +1,96 @@
+<div class="profile-menu" [ngClass]="{ 'in': show }" (window:click)="windowClick($event)" #profileMenu>
+    <div class="item header">
+        <div class="margin-l toggle-btn menu-icon" (click)="closeMenu()">
+            <mat-icon>menu</mat-icon>
+        </div>
+        <div class="logo margin-l">
+            <mat-icon svgIcon="logo-color-no-tm"></mat-icon>
+        </div>
+    </div>
+     <div class="user-item"
+        *plHasPermission="'PERMS_ALL_NONSTUDENTS'">
+        <mat-icon svgIcon="avatar"></mat-icon>
+        <label>Hi, {{ username }}</label>
+    </div>
+    <div class="hr" *plHasPermission="'Observer || Therapist || Administrator'"></div>
+      <a class="item"
+        (click)="openUrl(homeUrl(), true)"
+        *plHasPermission="'Observer || Therapist || Administrator || School Staff Providers || School Staff Admins || Private Practice'">
+        <mat-icon svgIcon="user-home"></mat-icon>
+        <label>Home</label>
+    </a>
+    <a class="item"
+      (click)="openUrl(clientsUrl(), true)"
+      *plHasPermission="'Observer || Therapist || Administrator'">
+        <mat-icon svgIcon="clients"></mat-icon>
+        <label>Clients</label>
+    </a>
+    <a class="item"
+      (click)="openUrl(scheduleUrl(), true)"
+      *plHasPermission="'Observer || Therapist || Administrator'">
+        <mat-icon svgIcon="calendar"></mat-icon>
+        <label>Schedule</label>
+    </a>
+    <a class="item"
+      (click)="openUrl(billingUrl(), true)"
+      *plHasPermission="'Observer || Therapist || Administrator'">
+        <mat-icon svgIcon="billing"></mat-icon>
+        <label>Billing</label>
+    </a>
+    <a class="item active"
+      (click)="openUrl(roomUrl())"
+      *plHasPermission="'PERMS_ALL_NONSTUDENTS'">
+		<mat-icon svgIcon="room"></mat-icon>
+		<label>Room</label>
+    </a>
+    <a class="item"
+		(click)="openUrl(libraryUrl(), true)"
+		*plHasPermission="'PERMS_ALL_NONSTUDENTS'">
+		<mat-icon svgIcon="library"></mat-icon>
+		<label>Library</label>
+    </a>
+
+    <div class="hr" *plHasPermission="'PERMS_ALL_NONSTUDENTS'"></div>
+
+    <a class="item grey"
+		(click)="openUrl(helpUrl(), true)"
+		*plHasPermission="'PERMS_ALL_NONSTUDENTS'">
+		<mat-icon svgIcon="help"></mat-icon>
+		<label>Help Docs</label>
+    </a>
+    <a class="item grey"
+		(click)="openUrl(privacyPolicyUrl(), true)"
+		*plHasPermission="'Private Practice'">
+			<mat-icon svgIcon="help"></mat-icon>
+			<label>Privacy Policy</label>
+    </a>
+    <a class="item grey techsupport-chat" href="#"
+		(click)="startChat()"
+		[ngClass]="{ 'inactive': !chatAvailable }">
+			<mat-icon svgIcon="chat"></mat-icon>
+			<label >Tech Support Chat</label>
+    </a>
+		<a class="item grey"
+		(click)="openUrl(setupUrl(), true)">
+			<mat-icon svgIcon="computer"></mat-icon>
+			<label>Computer Setup</label>
+    </a>
+    <a class="item grey"
+		(click)="openUrl(copyrightPolicyUrl(), true)"
+		*plHasPermission="'Observer || Therapist || Administrator'">
+			<mat-icon svgIcon="help"></mat-icon>
+			<label>Copyright Policy</label>
+    </a>
+    <a class="item grey"
+		(click)="openUrl(codeOfConductUrl(), true)"
+		*plHasPermission="'Observer || Therapist || Administrator'">
+			<mat-icon svgIcon="help"></mat-icon>
+			<label>Code of Conduct</label>
+    </a>
+
+    <div class="item grey" (click)="exitFromRoom()">
+        <mat-icon svgIcon="signout"></mat-icon>
+        <label>Sign Out</label>
+    </div>
+
+</div>

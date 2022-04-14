@@ -1,0 +1,7 @@
+<div class="colorpicker">
+    <button class="toolbar-btn colorpicker-{{label}}" ng-click="toggleVisible()">
+        <figure ng-style="{'background-color': color}"></figure>
+        <label class="font-h6">{{ label | capitalize }}</label>
+    </button>
+    <colorwheel ng-if="wheelVisible"></colorwheel>
+</div>

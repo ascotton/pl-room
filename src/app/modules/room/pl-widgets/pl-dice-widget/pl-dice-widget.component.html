@@ -1,0 +1,25 @@
+<div class="dice-widget-container">
+    <div style="position:relative; width:209px; height:209px;" class="dice-widget draggable-cursor" (click)="!dragging && handleDiceClick()">
+        <div class="dice-background">
+        </div>
+        <div class="dice-counter" [ngClass]="{'counter-fading-in': diceCounterVisible, 'counter-fading-out': !diceCounterVisible}" [hidden]="!diceCounterVisible">
+            {{ counterValue }}
+        </div>
+        <div class="dice-container" style="position:absolute; top:0; left:0;" [ngClass]="{'animated': animating}">
+            <div class="dice-number" [ngClass]="'c-' + dices">
+                <div *ngFor="let die of dies; let ix = index" 
+                    class="die" 
+                    [ngClass]="[type === 'dots' ? 'die-' + (randomValues ? selectedSides[randomValues[ix] - 1] : selectedSides[dies[ix] - 1]) : '' ,colored ? 'colored' : 'bw']">
+                    <div class="die-shadow">
+                    </div>
+                    <div class="die-image die-content" 
+                        [ngClass]="[type === 'colors' ? 'colors bg-' + (randomValues ? selectedSides[randomValues[ix] - 1] : selectedSides[dies[ix] - 1]) : '', type !== 'colors' && colored ? ' colors bg-' + (colors[ix]) : '' ]" >
+                        <span *ngIf="type === 'letters' || type === 'numbers'">
+                            {{ randomValues ? selectedSides[randomValues[ix] - 1] : selectedSides[dies[ix] - 1] }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

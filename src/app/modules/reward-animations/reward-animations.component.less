@@ -1,0 +1,70 @@
+#rewardAnimation {
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    z-index: 10002;
+    pointer-events: none;
+}
+
+#reward_canvas_output {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#reward_video_output {
+    width: 100%;
+    height: 100%;
+    z-index: 10002;
+}
+#reward_video_buffer {
+    display: none;
+}
+
+#reward_video {
+    display: none;
+}
+
+.rewardContainer {
+    position:absolute;
+    top:0; bottom:0; left:0; right:0;
+    width:100%;
+    height:100%;
+    z-index:10000;
+    text-align: center;
+}
+.rewardInnerContainer {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#rewardTextContainer {
+    opacity:1.0;
+    z-index:10002;
+}
+.birthdayTextContainer {
+    position: absolute;
+    bottom: 5%;
+    right: 0;
+    left: 0;
+}
+#rewardText {
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+    font-family: "Roboto",sans-serif;
+    font-weight: bold;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+#rewardGifInnerContainer {
+  width:100%;
+  height:100%;
+}
+#rewardGif {
+    opacity:1.0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+}

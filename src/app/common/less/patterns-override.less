@@ -1,0 +1,238 @@
+/**
+Main changes from `patterns` branch are just:
+- removed plInputSelect, plSwitch --> CHANGE
+    - especially test plSwitch on toys (some options changed / removed)
+- styles --> COPIED HERE
+    - removed buttons.less
+    - changed colors.less, global.less, typography.less
+- changed a bunch of svg's --> MANUALLY TEST
+*/
+
+// GLOBAL.LESS
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+
+    //disable selection highlighting app wide
+    //input should be unaffected.
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+// TYPOGRRAPHY.LESS
+@import (css) url("https://fonts.googleapis.com/css?family=Roboto:100,300,700|Source+Sans+Pro:400,700");
+
+@text-color: @gray-darker;
+@headings-color: @gray-darker;
+@link-color: @brand-blue;
+
+@font-family-sans-serif:  "Source Sans Pro", sans-serif;
+
+@headings-font-weight:    bold;
+
+@font-size-h1:            36px;
+@font-size-h2:            28px;
+@font-size-h3:            22px;
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.18px;
+}
+
+body {
+    font-weight: 200;
+}
+
+
+// COLORS.LESS
+@gray-lightest: #edeeef;
+@gray-lighter: #d6d6d6;
+@gray-light: #d2d3d5;
+@gray: #b6b8ba;
+@gray-dark: #8f9194;
+@gray-darker: #747678;
+
+@brand-orange: #ed8000;
+@brand-blue: #4d8bbe;
+@brand-blue-medium: #46b1e1;
+@brand-blue-light: #a7e4ea;
+@brand-green: #78a240;
+@brand-green-light: #9ac61e;
+@brand-yellow: #f9b417;
+@brand-purple: #b665a6;
+@brand-red: #bf253d;
+@brand-red-light: #F74F69;
+@brand-cream: #f8f8e0;
+
+@brand-primary: @brand-orange;
+@brand-success: @brand-green;
+@brand-info: @brand-blue;
+@brand-warning: @brand-yellow;
+@brand-danger: @brand-red;
+
+
+// BUTTONS.LESS
+.btn {
+    &:focus {
+        outline: none;
+    }
+    &:active {
+        outline: none;
+        box-shadow: none;
+        &:focus {
+            outline: none;
+        }
+    }
+    &:hover {
+        outline: none;
+    }
+}
+
+.btn-primary {
+    &:disabled {
+        .toolbar-disabled-mixin();
+    }
+}
+
+.btn-outline {
+    text-align: center;
+    color: @brand-blue;
+    border: 1px solid lighten(@brand-blue, 35%);
+    transition: all 250ms;
+    background-color: transparent;
+    border-radius: 4px;
+    &:hover {
+        border: 1px solid lighten(@brand-blue, 20%);
+        background-color: lighten(@brand-blue, 40%);
+    }
+}
+
+.btn-outline-green {
+    color: @brand-green;
+    border-color: lighten(@brand-green, 35%);
+    &:hover {
+        border-color: lighten(@brand-green, 20%);
+        background-color: lighten(@brand-green, 40%)
+    }
+}
+
+.btn-outline-gray {
+    color: @gray-light;
+    border-color: @gray-light;
+    &:hover {
+        border-color: lighten(@gray-light, 20%);
+        background-color: lighten(@gray-light, 40%);
+    }
+    &:focus {
+        color: @gray-light;
+    }
+}
+
+.btn-outline-cancel {
+    color: @brand-red;
+    border-color: transparent;
+    &:hover {
+        border-color: lighten(@brand-red, 20%);
+        background-color: lighten(@brand-red, 40%)
+    }
+}
+
+.btn-outline-dark {
+    color: @gray-light;
+    border-color: @brand-green;
+    &:hover {
+        border-color: lighten(@brand-green, 10%);
+        background-color: darken(@gray-darker, 10%);
+        color: lighten(@gray-light, 10%);
+    }
+    &:active {
+        color: @gray-light;
+    }
+}
+
+.toolbar-disabled-mixin {
+    color: @gray-lighter;
+    cursor: default;
+    fill: @gray-lighter;
+}
+
+.toolbar-btn {
+    position: relative;
+    display: inline-block;
+    min-width: 44px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 1em;
+    cursor: pointer;
+    color: #777;
+    fill: #777;
+    vertical-align: top;
+    overflow: hidden;
+    figure {
+        position: relative;
+        display: inline-block;
+        > * {
+            display: inline-block;
+            // height: 44px;
+            vertical-align: top;
+        }
+        svg {
+            margin-right: 2px;
+        }
+    }
+    // specific button overrides
+    .shapes {
+        top: -3px;
+        width: 22px;
+        height: 22px;
+        vertical-align: middle;
+        .circle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 7px;
+            background-color: @gray-darker;
+        }
+        .square {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+            background-color: @gray-darker;
+        }
+    }
+    // button states
+    &:hover {
+        fill: darken(@gray-darker, 13%);
+        color: darken(@gray-darker, 13%);
+        .activities .circle {
+            background-color: darken(@gray-darker, 9%);
+        }
+        .shapes div {
+            background-color: darken(@gray-darker, 9%);
+        }
+    }
+    &.active {
+        fill: @brand-blue;
+        color: @brand-blue;
+        .favorite {
+            color: @brand-red;
+        }
+        .activities .circle {
+            background-color: @brand-blue;
+        }
+        .shapes div {
+            background-color: @brand-blue;
+        }
+    }
+    &:disabled {
+        .toolbar-disabled-mixin();
+    }
+}

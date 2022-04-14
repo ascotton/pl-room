@@ -1,0 +1,18 @@
+<div class="pl-hijack-drawer assumed-login-bar" [ngClass]="{'expanded': isExpanded}" *ngIf="isCurrentUserHijacked && !isHijackHidden">
+
+    <div class="assumed-login-bar-tab" (click)="onClickTab()">
+      <div class="assumed-login-bar-tab-visual" [hidden]="!isExpanded">
+        <pl-icon [svg]="'chevron-down'"></pl-icon>
+      </div>
+      <div class="assumed-login-bar-tab-visual" [hidden]="isExpanded">
+        <pl-icon [svg]="'chevron-up'"></pl-icon>
+      </div>
+    </div>
+    <div class="assumed-login-bar-body">
+      <p>You are currently working on behalf of {{ username }}</p>
+      <button class="pl-button reverse inline" (click)="onClickReleaseUser()">
+          Release {{ username }}
+      </button>
+    </div>
+
+</div>

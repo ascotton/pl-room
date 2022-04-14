@@ -1,0 +1,119 @@
+<div class="pl-camera-check-step flexbox">
+    <div class="flex2 padding-large margin-large-r">
+        <section *ngIf="isErrorState">
+            <ng-container [ngSwitch]="result.error">
+                <div class="margin-large-b" *ngSwitchCase="deviceExceptions.NO_PERMISSIONS">
+                    {{ 'STEPS.CAMERA.PERMISSION_HEADER' | translate }}
+                </div>
+                <div class="margin-large-b" *ngSwitchCase="deviceExceptions.NOT_FOUND">
+                    {{ 'STEPS.CAMERA.NOT_FOUND' | translate }}
+                </div>
+                <div class="margin-large-b" *ngSwitchDefault>
+                    {{ 'STEPS.MIC.STEP_ERROR' | translate }}
+                </div>
+            </ng-container>
+            <div class="margin-large-b"
+                *ngIf="result.error === deviceExceptions.NO_PERMISSIONS || result.error === deviceExceptions.NOT_FOUND">
+                <button (click)="getCameraList()" mat-stroked-button>
+                    {{ 'STEPS.CAMERA.BTN_REQUEST' | translate }}
+                </button>
+            </div>
+        </section>
+        <section *ngIf="!isErrorState">
+            <div class="margin-large-b">
+                {{ 'STEPS.CAMERA.HEADER' | translate }}
+            </div>
+            <div class="video-loader">
+                <pl-dot-loader *ngIf="currentVideoStatus === videoStatus.LOADING"></pl-dot-loader>
+            </div>
+            <div class="margin-large-b">
+                <div class="video-timer"  *ngIf="currentVideoStatus === videoStatus.RECORDING">
+                    <mat-icon class="margin-r">radio_button_checked</mat-icon>
+                    00:{{ secondsLeft > 9 ? secondsLeft : '0' + secondsLeft }}
+                </div>
+                <div class="video-actions">
+                    <button class="action-btn" (click)="onRecordVideo()" *ngIf="recordingEnabled && currentVideoStatus === videoStatus.READY" mat-raised-button>
+                        {{ 'STEPS.CAMERA.BTN_RECORD' | translate }}
+                    </button>
+                    <button class="action-btn" (click)="onStopRecording()" *ngIf="currentVideoStatus === videoStatus.RECORDING" mat-raised-button>
+                        <mat-icon>stop</mat-icon>
+                        {{ 'STEPS.CAMERA.BTN_STOP_RECORDING' | translate }}
+                    </button>
+                    <button class="action-btn" (click)="onPlayback()" *ngIf="currentVideoStatus === videoStatus.RECORD_READY" mat-raised-button>
+                        <mat-icon>play_circle_filled</mat-icon>
+                        {{ 'STEPS.CAMERA.BTN_PLAYBACK' | translate }}
+                    </button>
+                    <button class="action-btn" (click)="onPause()" *ngIf="currentVideoStatus === videoStatus.PLAYING" mat-raised-button>
+                        <mat-icon>pause</mat-icon>
+                        {{ 'STEPS.CAMERA.BTN_PAUSE' | translate }}
+                    </button>
+                    <button class="action-btn btn-red" (click)="onDelete()" *ngIf="videoUrl" mat-raised-button>
+                        {{ 'STEPS.CAMERA.BTN_DELETE' | translate }}
+                    </button>
+                </div>
+                <video #videoPlayer class="video-player" [src]="videoUrl" *ngIf="videoUrl"></video>
+                <div id="ot-video" #otVideo></div>
+            </div>
+            <div class="device-list margin-large-b">
+                <mat-form-field class="full-width">
+                    <mat-label>{{ 'STEPS.CAMERA.SELECT_DEVICE' | translate }}</mat-label>
+                    <mat-select [disabled]="currentVideoStatus !== videoStatus.READY" (selectionChange)="selectedCameraChanged($event.value)" name="camera-select" [value]="selectedCamera">
+                        <mat-option *ngFor="let cam of cameras" [value]="cam.deviceId">
+                            {{cam.label}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="question-header margin-large-t">
+                {{ 'STEPS.CAMERA.WORKING_QUESTION' | translate }}
+            </div>
+            <mat-radio-group color="primary" class="radio-group-answers" (change)="onAnswerChanged($event)">
+                <mat-radio-button [disabled]="currentVideoStatus === videoStatus.LOADING" class="margin-large-t radio-answer" [value]="true">
+                    {{ 'GENERAL.YES' | translate }}
+                </mat-radio-button>
+                <mat-radio-button [disabled]="currentVideoStatus === videoStatus.LOADING" class="margin-large-t radio-answer" [value]="false">
+                    {{ 'GENERAL.NO' | translate }}
+                </mat-radio-button>
+            </mat-radio-group>
+        </section>
+        <div class="margin-large-t">
+            <button class="btn-next" [disabled]="(!isCheckCompleted() || currentVideoStatus === videoStatus.LOADING) && !isErrorState" mat-raised-button color="accent" matStepperNext>
+                {{ 'GENERAL.BTN_NEXT' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="flex1">
+        <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="margin-b">
+                        {{ 'GENERAL.TROUBLESHOOTING' | translate }}
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="padding-large">
+                <div class="flexbox">
+                    <div class="margin-r">
+                        <mat-icon>
+                            help
+                        </mat-icon>
+                    </div>
+                    <div class="padding-large-l">
+                        <ul>
+                            <li>
+                                {{ 'STEPS.CAMERA.TROUBLESHOOTING_LINE1' | translate }}
+                            </li>
+                            <li>
+                                {{ 'STEPS.CAMERA.TROUBLESHOOTING_LINE2' | translate }} <a (click)="currentVideoStatus !== videoStatus.LOADING && getCameraList()">{{ 'GENERAL.CLICK_HERE' | translate }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <pl-tech-support-card class="margin-large-t"></pl-tech-support-card>
+    </div>
+</div>

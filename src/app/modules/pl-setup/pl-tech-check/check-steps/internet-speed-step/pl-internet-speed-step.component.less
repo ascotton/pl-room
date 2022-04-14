@@ -1,0 +1,93 @@
+@import 'colors.less';
+
+.pl-internet-speed-step {
+    .header {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 500;
+        width: 350px;
+    }
+    .mbps {
+        font-size: 18px;
+        font-weight: 100;
+    }
+    .ticks {
+        padding-left: 10px;
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: -30px;
+        justify-content: space-between;
+        display: flex;
+        width: 360px;
+    }
+    .test-icon {
+        margin-left: -25px;
+        font-size: 50px;
+    }
+    .reading-block, .reading-label {
+        margin-top: -20px
+    }
+    .results {
+        display: flex;
+        margin-top: 60px;
+        width: 350px;
+        border-top: 1px solid @gray-light;
+        border-bottom: 1px solid @gray-light;
+        .download-result {
+            flex: 1;
+            border-right: 1px solid @gray-light;
+        }
+        .upload-result {
+            flex: 1;
+        }
+        .result-value {
+            font-size: 40px;
+            font-weight: 300;
+        }
+    }
+    .test-actions {
+        margin-top: 24px;
+        display: flex;
+        width: 350px;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        button {
+            width: 100%;
+        }
+    }
+    .hidden {
+        display: none;
+        height: 0;
+    }
+    .result-table {
+        display: flex;
+        flex-direction: column;
+        width: 430px;
+        .result {
+            display: flex;
+            flex-direction: column;
+            .result-summary {
+                display: flex;
+                align-items: center;
+            }
+            ul.detail-list {
+                padding-left: 35px;
+            }
+            .mat-icon {
+                font-size: 20px;
+                margin-right: 5px;
+                &.success {
+                    color: @green;
+                }
+                &.warning {
+                    color: @yellow;
+                }
+                &.info {
+                    color: @gray-darker;
+                    margin-left: 5px
+                }
+            }
+        }
+    }
+}

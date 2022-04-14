@@ -1,0 +1,44 @@
+<div class="pl-countdown-z-index"
+     tabindex="100"
+     (click)="isClinitian() && !dragging && prepareToChanges()"
+     [ngClass]="[isClinitian() ? 'pl-time-border borderColorEdit-' + editingMode : 'borderColorEdit-running', needToPlayShakeAnimation ? 'shake animated' : '']"
+     >
+        <span class="minutes-1"
+            [ngClass]="{ 'minutesColorEdit-minutes' : digitInserted >= 4 || editingMode == 'none' || editingMode == 'running',
+            'minutesColorEdit-seconds' : digitInserted < 4 && editingMode != 'none' && editingMode != 'running' }">
+            {{ minutes1 }}
+        </span>
+
+        <span class="minutes-2"
+            [ngClass]="{ 'minutesColorEdit-minutes' : digitInserted >= 3 || editingMode == 'none'  || editingMode == 'running',
+            'minutesColorEdit-seconds' : digitInserted < 3 && editingMode != 'none' && editingMode != 'running' }">
+            {{ minutes2 }}
+        </span>
+
+        <span class="delimiter-1 {{ 'minutesLabelColorEdit-' + editingMode }}">
+            {{ minutesLabel }}
+        </span>
+
+        <span class="seconds-1"
+            [ngClass]="{
+            'secondsColorEdit-seconds' : digitInserted >= 2 || editingMode == 'none'  || editingMode == 'running',
+            'secondsColorEdit-minutes' : digitInserted < 2 && editingMode != 'none' && editingMode != 'running' }"
+            [hidden]="isShowOnlyOneDigit">
+            {{ seconds1 }}
+        </span>
+
+        <span class="seconds-2"
+            [ngClass]="{
+            'secondsColorEdit-seconds' : digitInserted >= 1 || editingMode == 'none'  || editingMode == 'running',
+            'secondsColorEdit-minutes' : digitInserted < 1 && editingMode != 'none' && editingMode != 'running' }">
+            {{ seconds2 }}
+        </span>
+
+        <span class="delimiter-2 {{ 'secondsLabelColorEdit-' + editingMode }}">
+            s
+        </span>
+
+        <span class="pl-countdown-cursor" [hidden]="editingMode !== 'seconds'"></span>
+
+        <span class="pl-countdown-cursor-minutes" [hidden]="editingMode !== 'minutes'"></span>
+</div>

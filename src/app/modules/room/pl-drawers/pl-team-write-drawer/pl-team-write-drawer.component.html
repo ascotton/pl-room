@@ -1,0 +1,46 @@
+<div class="drawer drawer-right drawer-team-write" [ngClass]="{'in': active}">
+    <header>
+        <h4>Team Write</h4>        
+        <!-- <button class="heap-exit-team-write exit-button" (click)="exit()" *ngIf="teamWriteActive">Exit</button>	 -->
+        <!-- <button class="heap-start-team-write exit-button" (click)="start()" *ngIf="!teamWriteActive">Start</button> -->
+    </header>
+
+    <main>
+        <div *ngIf="teamWriteReady && !loadingDocumentKey"
+            class="reverse new-doc-button" (click)="new()"
+            (mouseenter)="addNewHovering=true" (mouseleave)="addNewHovering=false" >
+            <pl-icon [svg]="'plus'" [width]="12" [height]="12"
+            [ngClass]="addNewHovering ? 'white' : 'gray-lighter'"></pl-icon>
+            <span>Add New Document</span>
+        </div>
+        
+        <div *ngIf="!teamWriteReady || loadingDocumentKey" class="loader-container">
+            <pl-dot-loader></pl-dot-loader>
+        </div>
+
+        <div *ngIf="teamWriteReady">
+            <pl-disclosure [label]="'Documents'" [active]="showDocuments" (click)="showDocumentsClicked()"></pl-disclosure>
+            <div class="documents-list" [ngClass]="{ 'documents-hidden': !showDocuments }">
+                <div class="document-item-container" *ngFor="let document of documents">
+                    <pl-document-item *ngIf="!document.trashed"
+                        [document]="document" (loadDocument)="loadDocument($event)" (trashDocument)="trashDocument($event)" 
+                        (restoreDocument)="restoreDocument($event)" (deleteDocument)="deleteDocument($event)" 
+                        (nameChanged)="nameChanged($event)"
+                        [itemDisabled]="loadingDocumentKey"
+                    ></pl-document-item>
+                </div>
+            </div>
+            <pl-disclosure [label]="'Trash'" [active]="showTrashedDocuments" (click)="showTrashedDocumentsClicked()"></pl-disclosure>
+            <div class="documents-list" [ngClass]="{ 'documents-hidden': !showTrashedDocuments }">
+                <div class="document-item-container" *ngFor="let document of documents">
+                    <pl-document-item *ngIf="document.trashed"
+                        [document]="document" (loadDocument)="loadDocument($event)" (trashDocument)="trashDocument($event)" 
+                        (restoreDocument)="restoreDocument($event)" (deleteDocument)="deleteDocument($event)" 
+                        (nameChanged)="nameChanged($event)"
+                        [itemDisabled]="loadingDocumentKey"
+                    ></pl-document-item>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

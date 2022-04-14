@@ -1,0 +1,44 @@
+<div class="flaschards-widget">
+    <div class="flashcard-card empty-deck" *ngIf="cards.length">
+        <div class="card-label">
+            No more cards
+        </div>
+        <div class="card-actions" *ngIf="isProvider">
+            <button mat-button mat-flat-button color="accent" (click)="onRestack()">
+                Restack Deck
+            </button>
+            <button mat-button mat-stroked-button (click)="onSelectCards()">
+                Choose New Cards
+            </button>
+        </div>
+    </div>
+    <div class="flashcard-card empty-deck" *ngIf="!cards.length && isProvider">
+        <div class="margin-large-b">
+            No deck selected
+        </div>
+    </div>
+    <div 
+        (click)="!dragging && drawCard(i)"
+        *ngFor="let card of cards; let i = index" 
+        [ngStyle]="{
+            'margin-left.px': getCardMargin(i),
+            'margin-top.px': getCardMargin(i),
+            'z-index': getCardZIndex(i)
+        }"
+        class="flashcard-card"
+        [ngClass]="{'drawn': isCardDrawn(i), 'animating': isCardAnimating(i)}"
+        >
+            <div class="flashcard-front">
+                <div class="front-bg"></div>
+            </div>
+            <div class="flashcard-back">
+                <div class="flashcard-image" 
+                    [ngStyle]="{'background-image': 'url(' +  card.url+ ')'}">
+            
+                </div>
+                <div class="flashcard-title">
+                    {{ card.title }}
+                </div>
+            </div>
+    </div>
+</div>

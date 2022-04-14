@@ -1,0 +1,28 @@
+<div #rewardAnimation id="rewardAnimation">
+  <div #rewardTextContainer id="rewardTextContainer" class="rewardContainer" [hidden]="!playingText">
+    <div #rewardTextInnerContainer id="rewardTextInnerContainer" class="rewardInnerContainer">
+      <div #rewardText id="rewardText"></div>
+    </div>
+  </div>
+  <div #rewardGifContainer id="rewardGifContainer" class="rewardContainer" [hidden]="!playingGif">
+    <div #rewardGifInnerContainer id="rewardGifInnerContainer" class="rewardInnerContainer">
+      <div #rewardGif id="rewardGif" [ngStyle]="{ 'background-image': 'url(' + gifPath + ')'}"></div>
+    </div>
+  </div>
+  <div class="" #reward_canvas_output id="reward_canvas_output" [hidden]="!playingVideo">
+    <video
+      #reward_video id="reward_video"
+      *ngIf="playingVideo"
+      crossorigin="anonymous"
+      (loadedmetadata)="loadedMetadata($event)"
+      (canplaythrough)="canPlayThrough($event)"
+      (play)="playOutputVideo($event)"
+      (ended)="videoEnded($event)"
+    >
+      <source #mp4Source id="mp4Source" [src]="mp4Path" type="video/mp4; codecs=&quot;avc1.42E01E&quot;">
+      <source #webmSource id="webmSource" [src]="webmPath" type="video/webm; codecs=&quot;vorbis,vp8&quot;">
+    </video>
+    <canvas width="200" height="400" #reward_video_buffer id="reward_video_buffer"></canvas>
+    <canvas width="200" height="200" #reward_video_output id="reward_video_output"></canvas>
+  </div>
+</div>

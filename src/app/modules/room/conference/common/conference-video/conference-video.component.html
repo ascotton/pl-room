@@ -1,0 +1,10 @@
+<video
+  muted
+  autoplay
+  playsinline
+  [srcObject]="src"
+  [class.mirror]="isMirrored"
+  [class.rotate]="isRotated"
+  (play)="onPlay($event)"
+></video>
+

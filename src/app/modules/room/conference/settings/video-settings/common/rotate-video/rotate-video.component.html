@@ -1,0 +1,6 @@
+<button
+  *ngIf="{ isRotated: isRotated$ | async } as vm"
+  (click)="vm.isRotated ? derotate() : rotate()"
+>
+  <mat-icon>rotate_90_degrees_ccw</mat-icon>
+</button>

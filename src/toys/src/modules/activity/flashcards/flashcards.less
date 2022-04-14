@@ -1,0 +1,723 @@
+.flashcard-drawer {
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    color: #FFFFFF;
+
+    main {
+        flex: 1 0 auto;
+        overflow: visible;
+    }
+
+    footer {
+        display: flex !important;
+        flex: 0 1 100%;
+
+        position: relative;
+
+        .subtitle {
+            position: absolute;
+            width: 100%;
+        }
+
+        .subgroup {
+            position: absolute;
+            margin-top: 32px;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+    }
+
+    .subtitle {
+
+        clear: both;
+        position: relative;
+        display: block;
+        height: 32px;
+        background-color: @gray-darkest;
+
+        &.toggle {
+            cursor: pointer;
+        }
+
+        &.toggle-closed button svg {
+            transform: rotate(-90deg);
+        }
+
+        &.toggle-open button svg {
+            transform: rotate(0deg);
+        }
+
+        svg {
+            path {
+                fill: @gray-lighter;
+            }
+        }
+
+        button {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 36px;
+            display: table-cell;
+            vertical-align: middle;
+            svg {
+                width: 13px;
+                height: 18px;
+                vertical-align: top;
+                transition: all 200ms ease;
+            }
+        }
+
+        h5 {
+            display: table-cell;
+            vertical-align: middle;
+            width: auto;
+            height: 32px;
+            padding-left: 32px;
+            padding-right: 11px;
+            font-size: 13px;
+            font-weight: normal;
+            color: @gray-lighter;
+        }
+    }
+
+    .subgroup {
+
+        clear: both;
+        padding: 0 11px;
+
+        color: #d6d6d6;
+        font-size: 12px;
+        line-height: 1.25;
+        text-align: center;
+
+        overflow: hidden;
+        transition: max-height 200ms ease;
+
+        &.toggle-open {
+            // Should consider container height
+            max-height: 355px;
+        }
+
+        &.toggle-closed {
+            max-height: 0;
+        }
+
+        span {
+            display: inline-block;
+            margin: 1em 0 0 0;
+        }
+
+        .add-all-button, .remove-all-button {
+            width: 100%;
+            border: 2px solid #748760;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            height: 2.8em;
+            margin: 1.2em 0;
+            font-size: 1.1em;
+            cursor: pointer;
+
+            &.disabled, &.disabled:hover {
+                border: 2px solid #616366;
+                color: #616366;
+                cursor: default;
+            }
+        }
+        .remove-all-button {
+            margin-top: 0;
+        }
+
+    }
+
+    .flashcard-list {
+
+        display: block;
+        margin-bottom: 11px;
+        padding: 0;
+        cursor: grab;
+
+        li {
+            display: block;
+            width: 100%;
+            margin-bottom: 11px;
+            cursor: move;
+            .icon {
+                display: table-cell;
+                figure {
+                    width: 75px;
+                    height: 75px;
+                    background-size: 100% 100%;
+                    border: 1px solid #8f9194;
+                }
+
+                .card-text-image{
+                    width: 75px;
+                    line-height: 75px;
+                    border: 1px solid @gray-dark;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-size: 14px;
+                    color: @gray;
+                }
+            }
+            .text {
+                display: table-cell;
+                vertical-align: middle;
+                width: 100%;
+                height: 75px;
+                padding-left: 11px;
+                font-size: 14px;
+                color: @gray-lighter;
+                text-align: left;
+
+                div {
+                    word-break: break-all;
+                    line-height: 1.1em;
+                    max-height: 4.4em;
+                    overflow: hidden;
+                }
+
+                &.overflows:after {
+                    content:'...';
+                }
+            }
+        }
+    }
+
+    .flashcard-grid {
+
+        padding: 0;
+        margin-top: 11px;
+        margin-bottom: 11px;
+
+        li {
+
+            float: left;
+            display: inline-block;
+            cursor: pointer;
+            width: 84px;
+            text-align: center;
+ 
+            padding-top: 8px;
+            padding-bottom: 6px;
+
+            .icon {
+                display: inline-block;
+                width: 60px;
+                font-size: 0;
+            }
+
+            .text {
+                font-size: 13px;
+            }
+
+            &.active {
+                .icon {
+                    svg {
+
+                        path[stroke='#8F9194'] {
+                            stroke: @brand-blue-light;
+                        }
+
+                        g[fill='#D8D8D8'] path,
+                        path[fill='#D6D6D6'],
+                        path[fill='#D2D3D5'],
+                        path[fill='#D8D8D8']
+                        {
+                            fill: @brand-blue-light;
+                        }
+                    }
+                }
+                .text {
+                    color: @brand-blue-light;
+                }
+            }
+        }
+
+        li:hover {
+            .icon {
+                svg {
+
+                    path[stroke='#8F9194'] {
+                        stroke: #ffffff;
+                    }
+
+                    g[fill='#D8D8D8'] path,
+                    path[fill='#D6D6D6'],
+                    path[fill='#D2D3D5'],
+                    path[fill='#D8D8D8']
+                    {
+                        fill: #ffffff;
+                    }
+                }
+            }
+            .text {
+                color: #ffffff;
+            }
+        }
+
+        li:nth-child(1n) {
+            border-right: 1px solid @gray-darkest;
+            border-bottom: 1px solid @gray-darkest;
+        }
+
+        li:nth-child(2n),
+        li:first-child:last-child {
+            border-right: none;
+        }
+
+        li:nth-last-child(1),
+        li:nth-last-child(2):nth-child(2n + 1) {
+            border-bottom: none;
+        }
+
+    }
+
+    .show-title-switch {
+
+        .show-title-label {
+            float:left;
+
+            &.italic {
+                font-style: italic;
+            }
+        }
+
+        .show-title-right {
+            float: right;
+        }
+    }
+}
+
+.flashcard-board {
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    opacity: 0;
+    pointer-events: none;
+    .card {
+        pointer-events: none;
+    }
+    &.is-dragging {
+        opacity: 1;
+        pointer-events: all;
+    }
+    &.fade-in {
+        opacity: 1;
+        pointer-events: all;
+
+        .card {
+            pointer-events: all;
+        }
+    }
+    &.animated {
+        transition: opacity 100ms;
+    }
+
+    &.fast-fade-out {
+        transition: opacity 200ms;
+        opacity: 0 !important;
+
+        .card, .select {
+            transition:all 0s !important;
+        }
+    }
+    &.fade-off {
+        opacity: 0 !important;
+    }
+
+    .flashcard-scale-wrapper {
+        position: absolute;
+        transform-origin: left top;
+    }
+
+    .card {
+
+        display: block;
+        position: absolute;
+        font-size: 212px;
+        line-height: 0;
+
+        // Alternatively we can bind to EMs.
+        // This will allow us to scale and
+        // preserve proportions.
+
+        // width: 212px;
+        // width: 10em;
+        // height: 10em;
+
+        padding: unit(12 / 212, em);
+
+        text-align: center;
+        border: 1px solid #979797;
+        background-color: #FFFFFF;
+
+        // box-shadow: inset 1px 1px 0 0 #979797, 1px 1px 0 0 #979797;
+
+        overflow: hidden;
+        cursor: move;
+
+        img {
+            width: unit(188 / 212, em);
+            height: unit(188 / 212, em);
+            object-fit: contain;
+
+            border-radius: unit(5 / 212, em);
+
+            user-drag: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+
+            pointer-events: none;
+
+            // object-fit: cover;
+        }
+
+        div {
+
+            // We need wrapper to be able to use vertical-align
+            // Probably may remove after enabling em-sizing
+            cursor: inherit;
+            pointer-events: none;
+
+            label {
+                overflow: hidden;
+                line-height: 1.3em;
+                max-height: 2.6em;
+                font-size: unit(14 / 212, em);
+                font-weight: normal;
+                vertical-align: middle;
+                cursor: inherit;
+                pointer-events: none;
+                word-break: break-all;
+            }
+        }
+    }
+
+    .lasso {
+        display: none;
+        position: absolute;
+
+        min-width: 1px;
+        min-height: 1px;
+    }
+
+    .select {
+
+        position: absolute;
+        padding: unit(12 / 212, em);
+
+
+        // Out selection tool can have focus,
+        // but we don't really want that outline...
+        outline: none;
+
+        cursor: move;
+
+        @touch-size: 24;
+        @touch-handle-size: unit(@touch-size, px);
+        @touch-handle-highlight-size: unit(@touch-size - 2, px);
+        @touch-handle-offset: unit(-0.9 * @touch-size, px);
+        @anti-touch-handle-offset: unit(0.9 * @touch-size, px);
+        div {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+
+            @media (pointer: coarse) {
+                width: @touch-handle-size;
+                height: @touch-handle-size;
+            }
+            background: #000000;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .rotate {
+
+            left: 50%;
+            top: unit(-60 / 212, em);
+            margin-left: -3px;
+            @media (pointer: coarse) {
+                margin-left: @touch-handle-offset;
+            }
+            cursor: url("/assets/cursors/rotate-cursor.png") 15 5, pointer;
+
+            &::before {
+                display: block;
+                content: '';
+                width: 1px;
+                height: unit(60 / 212, em);
+                background: #000000;
+                margin-left: 3px;
+                @media (pointer: coarse) {
+                    margin-left: unit(0.5 * @touch-size, px);;
+                }
+            }
+
+        }
+
+        .resize-lt {
+            left: -3px;
+            top: -3px;
+            @media (pointer: coarse) {
+                left: @touch-handle-offset;
+                top: @touch-handle-offset;
+            }
+        }
+
+        .resize-rt {
+            right: -3px;
+            top: -3px;
+            @media (pointer: coarse) {
+                right: @touch-handle-offset;
+                top: @touch-handle-offset;
+            }
+        }
+
+        .resize-lb {
+            left: -3px;
+            bottom: -3px;
+            @media (pointer: coarse) {
+                left: @touch-handle-offset;
+                bottom: @touch-handle-offset;
+            }
+        }
+
+        .resize-rb {
+            right: -3px;
+            bottom: -3px;
+            @media (pointer: coarse) {
+                right: @touch-handle-offset;
+                bottom: @touch-handle-offset;
+            }
+        }
+        
+        // Highlight active handle
+        .active {
+            &::after {
+                position: absolute;
+                left: 1px;
+                top: 1px;
+                display: block;
+                content: '';
+                width: 5px;
+                height: 5px;
+                @media (pointer: coarse) {
+                    width: @touch-handle-highlight-size;
+                    height: @touch-handle-highlight-size;
+                }
+                background: #FFFFFF;
+                opacity: 0.80;
+            }
+        }
+
+        // Multiselect looks a bit different
+        &.multiselect {
+            .rotate {
+                display: none;
+            }
+        }
+    }
+
+    .dragover {
+        display: none;
+        transform: rotate(0rad);
+        z-index: 99999;
+        font-size: 212px;
+        opacity:0.75;
+        cursor: none !important;
+    }
+
+    .card, .select {
+
+        // Please note that in the following code min-width is required.
+        // It's used in JS code to enforce font-size constraints.
+
+        &.card-both {
+
+            width: 1em;
+            height: unit(250 / 212, em);
+
+            min-width: 115.00px;
+            min-height: 135.61320754716981px;
+
+        }
+
+        &.card-image {
+
+            width: 1em;
+            height: 1em;
+
+            min-width: 115px;
+            min-height: 115px;
+
+            .title {
+                opacity: 0;
+            }
+        }
+
+        &.card-title {
+
+            width: 1em;
+            height: 1em;
+
+            min-width: 115px;
+            min-height: 115px;
+
+            img {
+                display: none;
+            }
+            .title {
+                display: flex;
+                height: 100%;
+                padding: 0 0.1em;
+
+                label {
+                    width: 100%;
+                    align-self: center;
+                }
+            }
+        }
+    }
+
+    .animated {
+
+        // Use CSS3 transitions for everything
+        //
+        transition:
+            left 1s,
+            top 1s,
+            width 1s,
+            height 1s,
+            padding 1s,
+            transform 1s,
+            font-size 1s,
+            display 0.001s;
+
+        .title {
+            transition: opacity 1s;
+        }
+    }
+
+    .test {
+        display: block;
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        // border: 1px solid #FFFFFF;
+        background: deepskyblue;
+        // border-radius: 2px;
+        margin: -3px 0 0 -3px;
+
+        z-index: 9999;
+
+        &::before {
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            display: block;
+            width: 1px;
+            height: 1px;
+            background: #FFFFFF;
+            content: '';
+        }
+    }
+
+    .cards-presentation-instruction {
+        border-radius: 20px;
+        text-align: center;
+        padding: 10px;
+        position: absolute;
+        top: 42px;
+        left: 512px;
+        width: 450px;
+        margin-left: -225px;
+        background: #aaa;
+        color: #fff;
+        z-index: 1000;
+        -webkit-transition: opacity 0s;
+        -moz-transition: opacity 0s;
+        transition: opacity 0s;
+        opacity: 1;
+
+        &.hide-slowly {
+            -webkit-transition: opacity 1s;
+            -moz-transition: opacity 1s;
+            transition: opacity 1s;
+            opacity: 0;
+        }
+    }
+
+    .cards-presentation-buttons {
+        position: absolute;
+        left: 512px;
+        width: 200px;
+        text-align: center;
+        z-index: 1000;
+        margin-left: -100px;
+        top: 683px;
+
+        .button {
+            cursor: pointer;
+            display: inline-block;
+            margin-left: 20px;
+            width: 24px;
+            svg {
+                path {
+                    fill: #ccc;
+                }
+            }
+
+            &.disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+        }
+        .button:first-child {
+            margin-left: 0;
+        }
+    }
+
+    .cards-presentation-cursor {
+        cursor: pointer;
+    }
+
+    .card-shadow {
+        filter: drop-shadow( 12px 12px 8px rgba(0, 0, 0, .7));
+    }
+}
+
+
+// This is required by rotate/resize tool.
+//
+.cursor-pointer {
+    * {
+        cursor: pointer !important;
+    }
+}
+
+.cursor-rotate * {
+    cursor: url("/assets/cursors/rotate-cursor.png") 15 5, pointer !important;
+}
+
+.dashed-border {
+
+    background-size: 10px 1px, 10px 1px, 1px 10px, 1px 10px;
+    background-position: 0 0,  0 100%,  0 0,  100% 0;
+    background-repeat: repeat-x,  repeat-x,  repeat-y,  repeat-y;
+    background-image: linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to right, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%), linear-gradient(to bottom, #fff 50%, #444 50%);
+    color: #fff;
+}

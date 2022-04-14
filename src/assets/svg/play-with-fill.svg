@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs></defs>
+    <g id="Room-Layout" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle-22-Copy-+-Oval-19-+-Imported-Layers-Copy-5">
+            <rect id="Rectangle-22-Copy" stroke="#A7E4EA" fill-opacity="0.7" fill="#4C4F52" x="0" y="0" width="48" height="48"></rect>
+            <g id="Oval-19-+-Imported-Layers-Copy-5" transform="translate(11.000000, 11.000000)">
+                <circle id="Oval-19" stroke="#A7E4EA" cx="13" cy="13" r="13"></circle>
+                <path d="M19.6516667,12.9902978 L10.7309524,5.11006927 C10.6002381,4.99471213 10.4159524,4.96726927 10.2580952,5.04085498 C10.1009524,5.11419784 10,5.2742407 10,5.45055498 L10,21.2110121 C10,21.3875693 10.1009524,21.5476121 10.2580952,21.620955 C10.3169048,21.648155 10.3795238,21.6615121 10.4416667,21.6615121 C10.5459524,21.6615121 10.6490476,21.6238693 10.7309524,21.5517407 L19.6516667,13.6715121 C19.7485714,13.5857836 19.8042857,13.4616836 19.8042857,13.3310264 C19.8042857,13.2001264 19.7485714,13.0760264 19.6516667,12.9902978" id="Imported-Layers-Copy-5" fill="#A7E4EA"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,76 @@
+import { CHECK_STATUS, URLCheck } from '../../pl-tech-check.model';
+
+const checks: URLCheck[] = [
+    {
+        name: 'opentok',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://config.opentok.com/',
+        label: '*.opentok.com',
+        isCritical: true,
+        group: 'tokbox',
+    },
+    {
+        name: 'tokbox',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://enterprise-hlg.tokbox.com/',
+        label: '*.tokbox.com',
+        isCritical: true,
+        group: 'tokbox',
+    },
+    {
+        name: 'googleapis',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+        label: '*.googleapis.com',
+        isCritical: true,
+        group: 'tokbox',
+    },
+    {
+        name: 'voxeet',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://api.voxeet.com/',
+        label: '*.voxeet.com',
+        isCritical: true,
+    },
+    {
+        name: 'gstatic',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2',
+        label: '*.gstatic.com',
+        isCritical: true,
+    },
+    {
+        name: 'remotehq',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://rooms.remotehq.com/launcher-icons/launcher-icon-192x192.png',
+        label: '*.remotehq.com',
+        isCritical: false,
+        group: 'siteshare',
+        isImageTest: true,
+    },
+    {
+        name: 'samesurf',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://api.samesurf.com/',
+        label: '*.samesurf.com',
+        isCritical: false,
+        group: 'siteshare',
+    },
+    {
+        name: 'typenetwork',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://cloud.typenetwork.com/',
+        label: 'cloud.typenetwork.com',
+        isCritical: false,
+        group: 'siteshare',
+    },
+    {
+        name: 'webrtc',
+        status: { status: CHECK_STATUS.PENDING },
+        url: 'https://webrtc.github.io/adapter/adapter-latest.js',
+        label: 'webrtc.github.io',
+        isCritical: false,
+        group: 'siteshare',
+    },
+];
+export default checks;

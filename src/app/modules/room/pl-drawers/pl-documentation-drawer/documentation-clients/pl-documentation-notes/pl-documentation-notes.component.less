@@ -1,0 +1,48 @@
+@import '../../../../../../common/less/main.less';
+
+.pl-documentation-notes {
+    // Ensure the saving text does not wrap to the next line.
+    .toggle-buttons {
+        display: flex;
+    }
+    .toggle-button {
+        &.selected {
+            border-color: @blue-light !important;
+            color: @blue-light !important;
+        }
+        &.has-text {
+            background-color: @gray-darker;
+            color: @white;
+        }
+        padding-left: 6.5px;
+        padding-right: 6.5px;
+        margin-left: 2px;
+        margin-right: 2px;
+        &.general {
+            flex: 1;
+            font-size: 12px;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    }
+    .notes-view {
+        position: relative;
+        .saving {
+            position: absolute;
+            top: 80px;
+            right: 0;
+            display: inline-block;
+            width: 60px;
+            color: @blue-light;
+        }
+    }
+    .speech {
+        button {
+            width: 100%;
+            margin: 0;
+        }
+    }
+    .stop-speaking {
+        opacity: 0.8;
+    }
+}

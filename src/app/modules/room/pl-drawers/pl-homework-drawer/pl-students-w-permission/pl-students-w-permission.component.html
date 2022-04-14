@@ -1,0 +1,18 @@
+<pl-students-w-permission-filter></pl-students-w-permission-filter>
+<div class="student-list">
+  <div
+  class="student-item"
+    *ngFor="let student of students$ | async"
+    (click)="studentSelected(student)"
+  >
+    <span class="primary">{{student.display_name}}</span>
+    <div class="info" *ngIf="student.recent_homework.uuid">
+        <span class="secondary">
+          Assigned {{ student.recent_homework.assigned_date | date: "MM/dd" }}
+        </span>
+        <span *ngIf="student.recent_homework.status !== 'assigned'" class="status" [ngClass]="student.recent_homework.status">
+          {{ student.recent_homework.status }}
+        </span>
+    </div>
+  </div>
+</div>

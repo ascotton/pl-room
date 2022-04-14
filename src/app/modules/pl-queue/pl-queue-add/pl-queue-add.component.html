@@ -1,0 +1,70 @@
+<div class="pl-queue-add">
+    <div class="wrapper">
+        <div class="header">
+            <div *ngIf="!showActivities" (click)="done()" class="pointer">
+                <pl-icon [svg]="'chevron-left'" [scale]="0.6" class="white"></pl-icon>
+                Add to {{ angularCommunicator.activeQueueName }}
+            </div>
+            <div *ngIf="showActivities" (click)="toggleShowActivities()" class="pointer">
+                <pl-icon [svg]="'chevron-left'" [scale]="0.6" class="white"></pl-icon>
+                Create Activity
+            </div>
+        </div>
+        <div *ngIf="!showActivities">
+            <div class="filters">
+                <pl-input-select class="form-input" [(model)]="filterOpts.activitySection" [options]="selectOptsSections" (onChange)="setActivityTypesOptions()"></pl-input-select>
+                <pl-input-select class="form-input" [(model)]="filterOpts.activityType" [options]="selectOptsTypes" [placeholder]="'Filter by activity type'" (onChange)="getItems($event)"></pl-input-select>
+                <pl-input-text *ngIf="filterOpts.activityType !== 'game'" class="form-input" [(model)]="filterOpts.search" [placeholder]="'Search'" [iconLeft]="'magnifier'" [clearButton]="true" [debounceChange]="1000" (onChange)="getItems($event)"></pl-input-text>
+                <div>
+                    <div [hidden]="!items.length" class="margin-b">Click one or more items to add them to your queue.</div>
+                    <div class="center">
+                        <!-- <button pl-button class="link" (click)="toggleShowActivities()">Create New Activity</button> -->
+                        <a [href]="libraryUrl" target="_blank">Go to full Library</a>
+                    </div>
+                </div>
+            </div>
+            <div class="record-form-note" *ngIf="filterOpts.activityType === 'assessment'">
+                    Assessment record forms are available to download in the full Library.
+            </div>
+            <div class="quick-youtube" *ngIf="filterOpts.activityType === 'youtube'">
+                <div>Quickly display a video using a YouTube URL</div>
+                <div>
+                    <button pl-button class="link" (click)="youtubeQuickstart()">
+                        <pl-icon class="blue-lightest" [svg]="'new-window'" [scale]="1"></pl-icon>
+                        Play a Video
+                    </button>
+                </div>
+            </div>
+            <div class="results">
+                <div [hidden]="loading">
+                    <div *ngFor="let item of items; let index=index;" class="item pointer" [ngClass]="item.xClasses" (click)="addOrRemoveItem(item, index)">
+                        <div class="flexbox">
+                            <div class="img-wrapper"><div class="img-inner" [ngStyle]="item.xImgStyles"></div></div>
+                            <div class="flex1 name">{{ item.name }}</div>
+                        </div>
+                        <div [hidden]="!item.xOverlayText" class="item-added-overlay center">
+                            <div class="item-added-overlay-text">{{ item.xOverlayText }}</div>
+                        </div>
+                        <div *ngIf="item.xAdded" class="item-overlay-right-added">
+                            <pl-icon [svg]="'check-circle'" [scale]="1" class="white"></pl-icon>
+                        </div>
+                        <div class="item-overlay-right">
+                            <div *ngIf="item.xAdded" class="remove-item">
+                                <pl-icon [svg]="'cross'" [scale]="1.15" class="white"></pl-icon>
+                            </div>
+                            <div *ngIf="!item.xAdded" class="add-item">
+                                <pl-icon [svg]="'plus'" [scale]="1.15" class="white"></pl-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!items.length" class="margin-large-tb center opensans">No results.</div>
+                </div>
+                <pl-dot-loader [hidden]="!loading" class="margin-large-t"></pl-dot-loader>
+            </div>
+        </div>
+        <div *ngIf="showActivities">
+            <pl-activities></pl-activities>
+        </div>
+    </div>
+    <pl-quick-youtube #quickYoutube></pl-quick-youtube>
+</div>

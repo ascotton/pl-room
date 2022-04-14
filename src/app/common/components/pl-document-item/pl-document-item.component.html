@@ -1,0 +1,20 @@
+<div class="pl-document-item" [ngClass]="{'current' : document.current, 'disabled': itemDisabled}">
+    <div class="document-properties" 
+        (click)="onLoadDocument($event)" 
+        [ngClass]="{'clickable' : !itemDisabled && !document.current && !document.trashed}">
+        <div class="doc-name" *ngIf="!editingName">{{document.name && document.name.length ? document.name : 'untitled'}}</div>
+        <input type="text" #docNameEditor id="docNameEditor" *ngIf="editingName" [value]="document.name" (keyup.enter)="onEnter($event)">
+        <div class="doc-date">Last saved: {{document.date}}</div>
+    </div>
+    <div>
+        <div class="dropdown">
+            <button class="dropdown-button" (click)="showDropdown()" [disabled]="itemDisabled">⋮</button>
+            <div *ngIf="dropdownVisible" class="dropdown-content" (click)="hideDropdown()">
+                <button *ngIf="!document.trashed" (click)="startRename()">Rename</button>
+                <button *ngIf="!document.trashed" [disabled]="document.current && !allowDeleteCurrent" (click)="onTrashDocument()">Trash</button>
+                <button *ngIf="document.trashed" (click)="onRestoreDocument()">Restore</button>
+                <button *ngIf="document.trashed" (click)="onDeleteDocument()">Delete</button>
+            </div>
+          </div>
+    </div>
+</div>

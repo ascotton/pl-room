@@ -1,0 +1,12 @@
+<ng-container *ngIf="canShow$ | async">
+  <button
+    *ngIf="{ isPromoted: isPromoted$ | async } as vm"
+    class="rotate-btn"
+    (click)="vm.isPromoted ? demote() : promote()"
+  >
+    <mat-icon
+      [svgIcon]="vm.isPromoted ? 'jumbotron_demote' : 'jumbotron_promote'"
+    >
+    </mat-icon>
+  </button>
+</ng-container>

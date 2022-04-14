@@ -1,0 +1,8 @@
+<pl-stream-action
+  *ngIf="{ val: isHidden$ | async } as isHidden"
+  [toggled]="!isHidden.val"
+  [svgIcon]="!isHidden.val ? 'videocam' : 'videocam_off'"
+  [label]="!isHidden.val ? 'Stop Video' : 'Start Video'"
+  (action)="!isHidden.val ? hide() : show()"
+  [disabled]="disabled$ | async"
+></pl-stream-action>

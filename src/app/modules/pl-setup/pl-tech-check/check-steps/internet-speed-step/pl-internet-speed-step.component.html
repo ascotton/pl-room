@@ -1,0 +1,226 @@
+<div class="pl-internet-speed-step flexbox">
+    <div [hidden]="true" class="flex2 padding-large">
+    </div>
+    <div class="flex2 padding-large">
+        <ng-container>
+            <div>
+                {{ 'STEPS.INTERNET.HEADER' | translate }}
+            </div>
+            <div class="margin-large-t" *ngIf="!checkStarted">
+                <button mat-raised-button color="accent" (click)="onStartTest()">
+                    {{ 'STEPS.INTERNET.BTN_START' | translate }}
+                </button>
+            </div>
+            <div [class.hidden]="!checkStarted" class="margin-large-t">
+                <div [@showHide]="isCheckCompleted(results.internetSpeed.result) ? 'visible' : 'hidden'" class="gauge">
+                    <ngx-gauge thick="15"  type="arch" [value]="currentValues.internetSpeed" foregroundColor="#4D8BBE" size="350" cap="round" [min]="0" [max]="100">
+                        <ngx-gauge-value class="top-margin">
+                            {{ currentValues.internetSpeed ? currentValues.internetSpeed : '-' }}
+                        </ngx-gauge-value>
+                        <ngx-gauge-label class="top-margin">
+                            <div class="mbps">
+                                {{ 'STEPS.INTERNET.MBPS' | translate }}
+                            </div>
+                            <div *ngIf="results.internetSpeed.result.status === checkStatus.LOADING">
+                                <mat-icon class="test-icon">
+                                    {{ currentTest }}
+                                </mat-icon>
+                                <div class="mbps">
+                                    {{ 'STEPS.INTERNET.TESTING' | translate }} {{ 'STEPS.INTERNET.' + currentTest.toUpperCase() | translate }}...
+                                </div>
+                            </div>
+                        </ngx-gauge-label>
+                    </ngx-gauge>
+                    <div class="ticks">
+                        <span>
+                            0
+                        </span>
+                        <span>
+                            100+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        <div class="flexbox" [@showHide]="results.audio.result.status === checkStatus.LOADING ? 'visible' : 'hidden'">
+            <div class="flex1">
+                <div class="header padding-large">
+                    {{ 'STEPS.INTERNET.VIDEO_QUALITY' | translate }}
+                </div>
+                <div class="gauge">
+                    <ngx-gauge thick="15"  type="arch" [value]="currentValues.video" foregroundColor="#4D8BBE" size="350" cap="round" [min]="0" [max]="1000000">
+                        <ngx-gauge-value class="top-margin">
+                            {{ currentValues.video ? (currentValues.video / 1000 | number: '1.0-1') : '-' }}
+                        </ngx-gauge-value>
+                        <ngx-gauge-label class="top-margin">
+                            <div class="mbps">
+                                {{ 'STEPS.INTERNET.KBPS' | translate }}
+                            </div>
+                            <div *ngIf="results.video.result.status === checkStatus.LOADING">
+                                <div class="mbps">
+                                    {{ 'STEPS.INTERNET.TESTING_VIDEO' | translate }}
+                                </div>
+                            </div>
+                        </ngx-gauge-label>
+                    </ngx-gauge>
+                    <div class="ticks">
+                        <span>
+                            0
+                        </span>
+                        <span>
+                            1,000 +
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex1">
+                <div class="header padding-large">
+                    {{ 'STEPS.INTERNET.AUDIO_QUALITY' | translate }}
+                </div>
+                <div class="gauge">
+                    <ngx-gauge thick="15"  type="arch" [value]="currentValues.audio" foregroundColor="#4D8BBE" size="350" cap="round" [min]="0" [max]="50000">
+                        <ngx-gauge-value class="top-margin">
+                            {{ currentValues.audio ? (currentValues.audio / 1000 | number: '1.0-1')  : '-' }}
+                        </ngx-gauge-value>
+                        <ngx-gauge-label class="top-margin">
+                            <div class="mbps">
+                                {{ 'STEPS.INTERNET.KBPS' | translate }}
+                            </div>
+                            <div *ngIf="results.audio.result.status === checkStatus.LOADING">
+                                <div class="mbps">
+                                    {{ 'STEPS.INTERNET.TESTING_AUDIO' | translate }}
+                                </div>
+                            </div>
+                        </ngx-gauge-label>
+                    </ngx-gauge>
+                    <div class="ticks">
+                        <span>
+                            0
+                        </span>
+                        <span>
+                            50 +
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="result-table margin-large-t" [class.hidden]="!isStepCompleted()">
+                <div class="result margin-large">
+                    <div class="result-summary headline-6">
+                        <mat-icon [inline]="true" class="success" *ngIf="results.internetSpeed.downloadSpeed >= networkLimits?.MIN_SPEED">check_circle</mat-icon>
+                        <mat-icon [inline]="true" class="warning" *ngIf="results.internetSpeed.downloadSpeed < networkLimits?.MIN_SPEED">warning</mat-icon>
+                        {{ 'STEPS.INTERNET.DOWNLOAD_SPEED' | translate }} {{ results.internetSpeed.downloadSpeed }} Mbps
+                        <mat-icon [inline]="true" class="info"
+                            matTooltipPosition="right"
+                            [matTooltip]="('STEPS.INTERNET.DOWNLOAD_HELP' | translate)">
+                            help
+                        </mat-icon>
+                     </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="result margin-large">
+                    <div class="result-summary headline-6">
+                        <mat-icon [inline]="true" class="success" *ngIf="results.internetSpeed.uploadSpeed >= networkLimits?.MIN_SPEED">check_circle</mat-icon>
+                        <mat-icon [inline]="true" class="warning" *ngIf="results.internetSpeed.uploadSpeed < networkLimits?.MIN_SPEED">warning</mat-icon>
+                        {{ 'STEPS.INTERNET.UPLOAD_SPEED' | translate }} {{ results.internetSpeed.uploadSpeed }} Mbps
+                        <mat-icon [inline]="true" class="info" 
+                            matTooltipPosition="right"
+                            [matTooltip]="('STEPS.INTERNET.UPLOAD_HELP' | translate)">
+                            help
+                        </mat-icon>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="result margin-large">
+                    <div class="result-summary headline-6">
+                        <mat-icon [inline]="true" class="success" *ngIf="results.video.result.status === checkStatus.SUCCEED">check_circle</mat-icon>
+                        <mat-icon [inline]="true" class="warning" *ngIf="results.video.result.status === checkStatus.FAILED">warning</mat-icon>
+                        {{ 'STEPS.INTERNET.VIDEO_QUALITY' | translate }}: {{ results.video.detail?.mos ? (results.video.detail?.mos | number: '1.0-1') : 'N/A' }} / 4.5
+                        <mat-icon [inline]="true" class="info"
+                            matTooltipPosition="right"
+                            [matTooltip]="('STEPS.INTERNET.VIDEO_HELP' | translate)">
+                            help
+                        </mat-icon>
+                    </div>
+                     <ul class="detail-list margin-t subtitle-1">
+                        <li>
+                            {{ 'STEPS.INTERNET.VIDEO_PACKET_LOSS' | translate }} {{ (results.video.detail?.packetLossRatio * 100) | number: '1.0-0' }} %
+                        </li>
+                        <li>
+                            {{ 'STEPS.INTERNET.VIDEO_BITRATE' | translate }} {{ results.video.detail?.bitrate / 1000 | number: '1.0-0' }} kpbs
+                        </li>
+                     </ul>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="result margin-large">
+                    <div class="result-summary headline-6">
+                        <mat-icon [inline]="true" class="success" *ngIf="results.audio.result.status === checkStatus.SUCCEED">check_circle</mat-icon>
+                        <mat-icon [inline]="true" class="warning" *ngIf="results.audio.result.status === checkStatus.FAILED">warning</mat-icon>
+                            {{ 'STEPS.INTERNET.AUDIO_QUALITY' | translate }}: {{ results.audio.detail?.mos ? (results.audio.detail?.mos | number: '1.0-1') : 'N/A' }} / 4.5
+                        <mat-icon [inline]="true" class="info"
+                            matTooltipPosition="right"
+                            [matTooltip]="('STEPS.INTERNET.VIDEO_HELP' | translate)">
+                            help
+                        </mat-icon>
+                    </div>
+                    <ul class="detail-list margin-t subtitle-1">
+                       <li>
+                            {{ 'STEPS.INTERNET.AUDIO_PACKET_LOSS' | translate }} {{ (results.audio.detail?.packetLossRatio * 100) | number: '1.0-0' }} %
+                       </li>
+                       <li>
+                            {{ 'STEPS.INTERNET.AUDIO_BITRATE' | translate }} {{ results.audio.detail?.bitrate / 1000 | number: '1.0-0' }} kpbs
+                       </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="test-actions margin-large-t" [class.hidden]="!checkStarted">
+                <div class="flex1 padding-large">
+                    <button [disabled]="!isStepCompleted()" class="full-width" mat-raised-button color="accent" matStepperNext>
+                        {{ 'GENERAL.BTN_NEXT' | translate }}
+                    </button>
+                </div>
+                <div class="flex1 padding-large">
+                    <button mat-stroked-button (click)="onTestAgain()" [disabled]="!isStepCompleted()">
+                        {{ 'STEPS.INTERNET.BTN_TEST_AGAIN' | translate }}
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="flex1">
+        <pl-lang-select-card *ngIf="isMultiLangEnabled()"></pl-lang-select-card>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="margin-b">
+                        {{ 'GENERAL.TROUBLESHOOTING' | translate }}
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="padding-large">
+                <div class="flexbox">
+                    <div class="margin-r">
+                        <mat-icon>
+                            help
+                        </mat-icon>
+                    </div>
+                    <div class="padding-large-l">
+                        <ul>
+                            <li>
+                                {{ 'STEPS.INTERNET.TROUBLESHOOTING_LINE1' | translate }}
+                            </li>
+                            <li>
+                                {{ 'STEPS.INTERNET.TROUBLESHOOTING_LINE2' | translate }}
+                            </li>
+                            <li>
+                                {{ 'STEPS.INTERNET.TROUBLESHOOTING_LINE3' | translate }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <pl-tech-support-card class="margin-large-t"></pl-tech-support-card>
+    </div>
+</div>

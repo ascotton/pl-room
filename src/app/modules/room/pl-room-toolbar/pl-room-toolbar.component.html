@@ -1,0 +1,85 @@
+<mat-toolbar class="pl-top-toolbar">
+    <div class="menu-btn">
+        <button class="profile-menu-button" mat-icon-button (click)="showProfileMenu()">
+            <mat-icon class="profile-menu-button">menu</mat-icon>
+        </button>
+    </div>
+    <div class="room-toolbar-btns">
+        <pl-room-toolbar-button
+            class="room-link-button"
+            (action)="onClickOption(toolbarOptions.RoomLink)"
+            icon="link"
+            [active]="currentDialog === toolbarOptions.RoomLink">
+            Room Link
+        </pl-room-toolbar-button>
+        <pl-room-toolbar-button
+            class="margin-large-l participants-button"
+            (action)="onClickOption(toolbarOptions.Participants)"
+            icon="people"
+            [active]="currentDialog === toolbarOptions.Participants"
+            [showBadge]="showWaitingRoomNotification">
+            Participants
+        </pl-room-toolbar-button>
+        <mat-divider class="margin-large-l" [vertical]="true"></mat-divider>
+        <pl-room-toolbar-button
+            [isSvgIcon]="true"
+            class="margin-large-l workspace-button"
+            (action)="onClickOption(toolbarOptions.Workspace)"
+            [icon]="workspaceIcon"
+            [active]="currentDialog === toolbarOptions.Workspace">
+            Workspace
+        </pl-room-toolbar-button>
+        <pl-room-toolbar-button
+            class="margin-large-l mouse-controls-button"
+            (action)="onClickOption(toolbarOptions.Controls)"
+            icon="mouse"
+            [active]="currentDialog === toolbarOptions.Controls">
+            Controls
+        </pl-room-toolbar-button>
+        <mat-divider class="margin-large-l" [vertical]="true"></mat-divider>
+        <pl-room-toolbar-button
+            class="margin-large-l whiteboard-button"
+            (action)="toggleWhiteboard()"
+            icon="draw"
+            [active]="whiteboardActive"
+            [disabled]="isFullscreen$ | async"
+          >
+            Whiteboard
+        </pl-room-toolbar-button>
+        <mat-divider class="margin-large-l" [vertical]="true"></mat-divider>
+        <pl-room-toolbar-button
+            class="margin-large-l widgets-button"
+            (action)="onClickOption(toolbarOptions.Widgets)"
+            icon="casino"
+            [active]="currentDialog === toolbarOptions.Widgets"
+          >
+          Widgets
+        </pl-room-toolbar-button>
+        <pl-room-toolbar-button
+          class="margin-large-l animations-button"
+          (action)="onClickOption(toolbarOptions.Animations)"
+          icon="mood"
+          [active]="currentDialog === toolbarOptions.Animations"
+        >
+          Animations
+        </pl-room-toolbar-button>
+        <pl-room-toolbar-button
+          class="margin-large-l overlays-button"
+          (action)="onClickOption(toolbarOptions.Overlays)"
+          icon="layers"
+          [active]="currentDialog === toolbarOptions.Overlays"
+        >
+          Overlays
+        </pl-room-toolbar-button>
+    </div>
+    <div class="user-container" [matMenuTriggerFor]="sideMenu">
+        <mat-icon class="profile-icon">account_circle</mat-icon>
+        <div class="margin-l margin-r">
+            {{ userName }}
+        </div>
+        <mat-icon>expand_more</mat-icon>
+    </div>
+    <mat-menu #sideMenu="matMenu" xPosition="after">
+        <pl-user-menu></pl-user-menu>
+    </mat-menu>
+</mat-toolbar>

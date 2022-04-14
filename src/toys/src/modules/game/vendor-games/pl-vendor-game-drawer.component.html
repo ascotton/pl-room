@@ -1,0 +1,6 @@
+<div class="pl-vendor-game-drawer">
+    <pl-gametable-checkers-drawer *ngIf="activity.type === 'game-gametable-checkers'" [activity]="activity"></pl-gametable-checkers-drawer>
+    <pl-gametable-dots-and-boxes-drawer *ngIf="activity.type === 'game-gametable-dots-and-boxes'" [activity]="activity"></pl-gametable-dots-and-boxes-drawer>
+    <pl-gametable-blokd-drawer *ngIf="activity.type === 'game-gametable-blokd'" [activity]="activity"></pl-gametable-blokd-drawer>
+    <pl-gametable-trio-drawer *ngIf="activity.type === 'game-gametable-trio'" [activity]="activity"></pl-gametable-trio-drawer>
+</div>

@@ -1,0 +1,6 @@
+<div class="screenshare" *ngIf="isActive$ | async">
+  <pl-conference-video
+    *ngIf="mediaStream$ | async as mediaStream"
+    [src]="mediaStream"
+  ></pl-conference-video>
+</div>

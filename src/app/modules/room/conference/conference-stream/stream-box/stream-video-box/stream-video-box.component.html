@@ -1,0 +1,19 @@
+<ng-container *ngIf="!(isCovered$ | async)">
+  <pl-conference-video
+    *ngIf="mediaStream$ | async as mediaStream"
+    [src]="mediaStream"
+    [isMirrored]="isMirrored$ | async"
+    [isRotated]="isRotated$ | async"
+    (played)="onPlayed()"
+  ></pl-conference-video>
+
+    <pl-video-capture 
+        [activated]="(isScreenshotting$ | async)"
+        [videoGuid]="(id$ | async)" 
+        (videoCaptureComplete)="videoCaptureComplete()">
+    </pl-video-capture>
+
+</ng-container>
+<pl-promote-stream class="promote-btn"></pl-promote-stream>
+
+<pl-stream-status class="status"></pl-stream-status>

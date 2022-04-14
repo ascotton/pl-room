@@ -1,0 +1,187 @@
+@import 'constants.less';
+@border-color: lighten(@gray-darkest, 6%);
+
+.student-mode .drawer {
+    top: 0 !important;
+    height: 100% !important;
+}
+
+.drawer {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    top: @top-toolbar-height;
+    width: @drawer-width;
+    height: ~"calc(100% - @{top-toolbar-height})";
+    background-color: @gray-darker;
+    color: @gray-lighter;
+    overflow: hidden;
+    padding-top: 44px;
+
+    // panel system moves views horizontally within drawer
+    // examples are in the queue and documentation
+    .panel-1,
+    .panel-2,
+    .panel-3,
+    .panel-4{
+        position: absolute;
+        top: 44px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: transform 200ms;
+        transform: translate3d(230px, 0, 0);
+        flex: none;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    .panel-1 { transform: translate3d(0, 0, 0); }
+    &.panel-2-active {
+        .panel-1 { transform: translate3d(-230px, 0, 0); }
+        .panel-2 { transform: translate3d(0, 0, 0); }
+    }
+    &.panel-3-active {
+        .panel-1 { transform: translate3d(-230px, 0, 0); }
+        .panel-2 { transform: translate3d(-230px, 0, 0); }
+        .panel-3 { transform: translate3d(0, 0, 0); }
+    }
+    &.panel-4-active {
+        .panel-1 { transform: translate3d(-230px, 0, 0); }
+        .panel-2 { transform: translate3d(-230px, 0, 0); }
+        .panel-3 { transform: translate3d(-230px, 0, 0); }
+        .panel-4 { transform: translate3d(0, 0, 0); }
+    }
+
+    header,
+    footer {
+        flex: none;
+        min-height: 44px;
+    }
+    main {
+        flex: 1;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    header {
+        display: table;
+        border-bottom: 1px solid @gray;
+        h4, button {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            color: @gray-lighter;
+        }
+        h4 {
+            width: 126px;
+            padding-top: 11px;
+            padding-bottom: 11px;
+            &:first-child {
+                width: 170px;
+                padding-left: 17px;
+                text-align: left;
+                font-size: 14px;
+                font-weight: normal;
+                color: @gray-lightest;
+            }
+            &:last-child {
+                width: 170px;
+                padding-right: 44px;
+            }
+            &:first-child:last-child {
+                width: 214px;
+                padding-right: 11px;
+                padding-left: 11px;
+            }
+        }
+        button {
+            position: relative;
+            width: 80px;
+            height: 100%;
+            font-size: 12px;
+            padding: 0 3px;
+            color: @gray-lighter;
+            figure {
+                display: block;
+                margin: 0 auto;
+                figcaption { display: none; }
+            }
+            svg {
+                display: inline;
+                /* vertical-align: middle; */
+                margin-top: -3px;
+                fill: @gray-lighter;
+            }
+            span { display: none; }
+            &:hover {
+                svg {
+                    fill: #ffffff;
+                }
+                color: #ffffff
+            }
+        }
+    }
+
+    footer {
+        border-top: 1px solid @gray;
+    }
+
+    // shadow
+    &:after {
+        position: absolute;
+        content: ' ';
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background: @gray;
+    }
+}
+
+.drawer-left {
+    left: 0;
+    z-index: 1002;
+    &:after { right: 0; }
+}
+
+.drawer-right {
+    right: 0;
+    transition: visibility, 300ms, transform 300ms;
+    transform: translate3d(230px, 0, 0);
+    z-index: 1002;
+    visibility: hidden;
+    border-right: 1px solid #ffffff;
+    &:after { left: 0; }
+    &.in {
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+        z-index: 1003;
+    }
+}
+
+
+.right-toolbar-mode {
+    .drawer {
+        top: @top-toolbar-height;
+        padding-top: 0;
+        overflow-y: hidden;
+
+        header:not(.activity-detail) {
+            height: 43px;
+        }
+
+        .panel-1,
+        .panel-2,
+        .panel-3,
+        .panel-4{
+            top: 0;
+        }
+    }
+
+    .drawer-right {
+        right: 44px;
+        border-right: none;
+    }
+}

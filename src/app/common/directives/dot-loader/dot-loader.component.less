@@ -1,0 +1,47 @@
+.loader {
+    &.center {
+        text-align: center;
+    }
+    &.left {
+        text-align: left;
+    }
+    &.right {
+        text-align: right;
+    }
+
+    div {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        margin: 0 3px;
+        background-color: white;
+        // arbitrarily large
+        border-radius: 200px;
+        position: relative;
+        top: -3px;
+        background-color: @orange;
+    }
+    .dot-1 {
+        animation: dot-loader-scale-up 1250ms infinite ease-out;
+    }
+    .dot-2 {
+        animation: dot-loader-scale-up 1250ms 150ms infinite ease-out;
+    }
+    .dot-3 {
+        animation: dot-loader-scale-up 1250ms 300ms infinite ease-out;
+    }
+}
+@keyframes dot-loader-scale-up {
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(3.5);
+    }
+    30% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1)
+    }
+}

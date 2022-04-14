@@ -1,0 +1,104 @@
+@import 'colors.less';
+
+.pl-results-step {
+    .results-container {
+        flex-wrap: wrap;
+        pl-check-result:not(:last-child) {
+            margin-right: 4px;
+        }
+    }
+    .cards {
+        margin-right: -15px;
+    }
+    .result-header {
+        font-size: 28px;
+        font-weight: 300;
+    }
+    .show-more {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .link-sharing {
+        display: flex;
+        .link-container {
+            width: 400px;
+        }
+        button {
+            margin-top: 3.5px;
+            height: 51.5px;
+        }
+    }
+    .result-actions {
+        display: flex;
+        flex-wrap: wrap;
+        button {
+            margin-top: 8px;
+            &:not(:last-child) {
+                margin-right: 8px;
+            }
+        }
+    }
+    .detail-header {
+        font-size: 20px;
+        font-weight: 400;
+    }
+    .result-details {
+        font-size: 16px;
+        font-weight: 300;
+        &.hidden {
+            display: none;
+            height: 0;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-top: 5px;
+        }
+    }
+    .permission-list {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px;
+        &.row {
+            flex-direction: row;
+        }
+        .column {
+            flex-direction: column;
+        }
+        .permission-item {
+            &.optional .mat-icon {
+                color: @yellow;
+            }
+            &.info .mat-icon {
+                color: @blue;
+            }
+            &.passed .mat-icon {
+                color: @green-medium;
+            }
+            .mat-icon {
+                &.failed {
+                    color: @red;
+                }
+                &.passed {
+                    color: @green-medium;
+                }
+                &.warning {
+                    color: @yellow;
+                }
+                margin-right: 5px !important;
+            }
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+    }
+    .hidden-link {
+        display: none;
+        user-select: text;
+    }
+    .auto-hide:only-child {
+        display: none;
+    }
+}

@@ -1,0 +1,9 @@
+<div class="preview-container">
+  <ng-container [ngSwitch]="showPreview$ | async">
+    <ng-container *ngSwitchCase="true" [ngSwitch]="hasError">
+      <span *ngSwitchCase="true">Error loading image</span>
+      <img *ngSwitchDefault [src]="img$ | async" (load)="hasError = false" (error)="hasError = true" />
+    </ng-container>
+    <span *ngSwitchDefault>No Preview</span>
+  </ng-container>
+</div>

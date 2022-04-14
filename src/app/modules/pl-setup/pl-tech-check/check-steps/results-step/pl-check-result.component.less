@@ -1,0 +1,46 @@
+@import 'colors.less';
+
+.pl-check-result {
+    width: 145px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+    &.failed {
+        border-color: @red;
+    }
+    &.success {
+        border-color: @green;
+    }
+    &.warning {
+        border-color: @yellow;
+    }
+    .check-icon {
+        font-size: 38px;
+    }
+    .check-name {
+        text-align: center;
+        font-weight: 400;
+        font-size: 18px;
+    }
+    .check-result {
+        .mat-icon {
+            font-size: 13px !important;
+            margin-right: 4px !important;
+            &.failed {
+                color: @red;
+            }
+            &.success {
+                color: @green;
+            }
+            &.warning {
+                color: @yellow;
+            }
+        }
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+    }
+}

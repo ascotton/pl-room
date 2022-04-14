@@ -1,0 +1,41 @@
+<div class="activity-drawer drawer-pl-scenes">
+    <main>
+        <div class= "subgroup">
+            <div>Add stickers to the tray by clicking on select ones for students to place on the background.</div>
+            <button pl-button (click)="resetGame()" class="reverse" >Reset Game</button>
+        </div>
+        <div class="scenes">
+            <h5>Background</h5>
+            <div class= "subgroup">
+                <pl-input-select class="form-input" [(model)]="selectedSceneName" [options]="sceneOptions" [placeholder]="'Select a Scene'"></pl-input-select>
+                <div class="checkbox"
+                    *ngIf="activity.type !== 'game-potato-head'">
+                    <pl-input-checkbox [noPadding]="true" [(model)]="previewSelected" (onChange)="togglePreview()"></pl-input-checkbox>
+                    <span>Preview full scene</span>
+                </div>
+            </div>
+        </div>
+        <div class="stickers">
+            <h5>Stickers</h5>
+            <div class= "subgroup">
+                <pl-input-select 
+                    class="form-input" 
+                    [disabled]="previewSelected" 
+                    [(model)]="selectedStickerPackName" 
+                    [options]="stickerOptions" 
+                    [placeholder]="'Select a Sticker Set'" >
+                </pl-input-select>
+                <div>Click stickers to add to the scene tray.</div>
+                <div class="checkbox">
+                    <pl-input-checkbox [(model)]="hideStickersSelected" (onChange)="toggleHideStickers()"[disabled]="previewSelected"></pl-input-checkbox>
+                    <span>Hide stickers</span>
+                </div>
+                <button (click)="addAll()" pl-button class="reverse" [disabled]="previewSelected || hideStickersSelected || !selectedStickerPackName">Add All</button>
+                <button (click)="clearTrayStickers()" pl-button class="reverse" [disabled]="previewSelected || hideStickersSelected">Clear Tray</button>
+                <div class="sticker-list">
+                    <sticker-select-button *ngFor="let sticker of selectedStickerPackButtons;" [disabled]="previewSelected || hideStickersSelected" [sticker]="sticker" (stickerClicked)="stickerClicked(sticker)"></sticker-select-button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

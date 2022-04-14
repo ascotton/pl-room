@@ -1,0 +1,39 @@
+sonar {
+  @duration: 500ms;
+  position: absolute;
+
+  .sonar {
+    min-width: 10px;
+    min-height: 10px;
+    pointer-events: none;
+    border: solid 1px  @brand-orange;
+    background-color: lighten(@brand-orange, 20%) ;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    transform : translate3d(-50%, -50%, 0);
+    .animation(grow-sonar @duration ease-out 1);
+    transition: 250ms opacity;
+    opacity: .5;
+  }
+
+  .keyframes(grow-sonar, {
+    0% {
+      width : 10px;
+      height : 10px;
+      opacity : .3;
+    }
+    50%{
+      opacity : .3;
+    }
+    80% {
+      width : 100px;
+      height : 100px;
+    }
+    100% {
+      width : 100px;
+      height : 100px;
+      opacity : 0;
+    }
+  });
+}

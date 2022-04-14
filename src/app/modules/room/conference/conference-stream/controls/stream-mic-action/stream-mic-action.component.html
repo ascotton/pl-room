@@ -1,0 +1,8 @@
+<pl-stream-action
+  *ngIf="{ val: isMuted$ | async } as isMuted"
+  [toggled]="isMuted.val"
+  [svgIcon]="isMuted.val ? 'mic_off' : 'mic'"
+  [label]="isMuted.val ? 'Unmute' : 'Mute'"
+  (action)="isMuted.val ? unmute() : mute()"
+  [disabled]="disabled$ | async"
+></pl-stream-action>

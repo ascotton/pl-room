@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    height: 200px;
+    width: 400px;
+
+    .preview {
+        flex: 1 1 auto;
+    }
+
+    .control {
+        min-width: 30px;
+        width: 0 0 30px;
+        background: #E6E6E6;
+        padding: 0;
+        &:disabled {
+            cursor: not-allowed;
+        }
+    }
+}

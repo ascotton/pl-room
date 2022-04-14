@@ -1,0 +1,55 @@
+<div class="memorycard-board"
+     pl-drop="memoryController.dropCard"
+     pl-dragover="memoryController.dragCard"
+>
+    <div class="memory-game-container memorycard-scale-wrapper hide">
+        <div ng-class="memoryController.getContainerClass()">
+            <div class="cards-presentation-instruction"
+                 ng-show="memoryController.presentationMode"
+                 ng-class="{ 'hide-slowly': !memoryController.presentationMode }">
+                Start playing game by entering the names of all the players in the Queue
+            </div>
+
+            <div ng-repeat="card in memoryController.cards.toArray() track by $index"
+                 ng-class="memoryController.getCardClass($index)"
+                 ng-style="memoryController.getCardStyle($index)"
+                 ng-click="memoryController.onCardClick($event, $index)"
+                 pl-dragover="memoryController.dragCard($index)"
+            >
+                <div class="cover"></div>
+                <div class="front">
+                    <img ng-if="card.thumbnail_url" class="image" ng-src="{{card.thumbnail_url}}">
+                    <div class="title"><label>{{card.title}}</label></div>
+                </div>
+            </div>
+            <div class="position-marker" ng-style="memoryController.markerStyle"></div>
+        </div>
+
+        <div class="side">
+            <input type="button"
+                   class="btn end-turn"
+                   ng-class="{ zero: memoryController.turnsLeft === 0 }"
+                   value="{{memoryController.endTurnTitle()}}"
+                   ng-disabled="memoryController.cards.players.length < 1 || !memoryController.cards.hasTurns()"
+                   ng-click="memoryController.endTurn()"
+                   ng-if="memoryController.isClinician()">
+
+            <div class="flips-counter" ng-if="memoryController.cards.players.length">
+                {{memoryController.flipsStatusMessage()}}
+            </div>
+
+            <div class="avatar-container" ng-repeat="player in memoryController.cards.players track by $index">
+                <div class="user-avatar {{player.color}}"
+                     ng-class="{ active: memoryController.cards.turn === $index && memoryController.cards.hasTurns() }">
+                     <div class="box">
+                         <div class="icon"></div>
+                         <div class="name">{{player.name}}</div>
+                         <div class="score">{{memoryController.getPlayerScore($index)}}</div>
+                     </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

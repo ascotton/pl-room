@@ -1,0 +1,26 @@
+<div class="pl-image-deck-view">
+    <div *ngIf="showSave">
+        <button pl-button class="reverse" (click)="cancel()">Cancel</button>
+    </div>
+    <div class="margin-b">
+        <div>Title: {{ deck.title }}</div>
+        <img class="image" [src]="deck.imageUrl" />
+        <div>Private: {{ deck.private }}</div>
+
+        <!-- <button pl-button class="link" (click)="toggleMoreFields()"><span [hidden]="showMoreFields">Show</span><span [hidden]="!showMoreFields">Hide</span> More Fields</button> -->
+        <div [hidden]="!showMoreFields">
+            <div>Description: {{ deck.description }}</div>
+            <div>Tags: {{ deck.xTagsString }}</div>
+        </div>
+
+    </div>
+    <div>
+        <div>{{ deck.images.length }} Images.</div>
+        <div *ngFor="let image of deck.images" class="image-item flexbox padding-tb">
+            <img class="image" [src]="image.url" />
+            <div class="flex1 margin-l">
+                <div class="image-title">{{ image.title }}</div>
+            </div>
+        </div>
+    </div>
+</div>

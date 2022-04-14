@@ -1,0 +1,84 @@
+@import 'colors.less';
+@orange-strong: #ed8000;
+
+.pl-hijack-drawer {
+
+    &.assumed-login-bar {
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        height: 78px;
+        transition: transform 200ms;
+        transform: translateY(~"calc(100% - 30px)");
+        z-index: 999999999;
+        color: white;
+
+        &.expanded {
+        transform: none;
+        }
+
+        .assumed-login-bar-tab {
+            height: 30px;
+            width: 120px;
+            margin: 0 auto;
+            cursor: pointer;
+
+            .assumed-login-bar-tab-visual {
+                background-color: @orange-strong;
+                border-radius: 4px 4px 0 0;
+                height: 20px;
+                position: relative;
+                top: 10px;
+                width: 100px;
+                margin: 0 auto;
+                text-align: center;
+
+                svg {
+                fill: @white;
+                width: 12px;
+                height: 12px;
+                margin-top: 2px;
+                }
+
+            }
+        }
+
+        .assumed-login-bar-body {
+            flex-direction: row-reverse;
+            background-color: @orange-strong;
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px;
+            display: flex;
+            height: 48px;
+
+
+            p {
+            flex: auto;
+            line-height: 32px;
+            order: 2;
+            }
+
+            .pl-button {
+            order: 1;
+            background-color: @orange-strong;
+            border: 1px solid white;
+            position: relative;
+            display: inline-block;
+            text-rendering: auto;
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 30px;
+            height: 32px;
+            letter-spacing: 0.035em;
+            border-radius: 4px;
+            padding: 0 12px;
+            margin: 0 3px;
+            cursor: pointer;
+            }
+        }
+    }
+}
